@@ -50,26 +50,26 @@
       window.addEventListener('beforeunload', function(e) {
       e = e || window.event;
       var localStorageTime = localStorage.getItem('storagetime')
-      if 
-      (localStorageTime!=null && localStorageTime!=undefined) {
+      if(localStorageTime!=null && localStorageTime!=undefined){
       	var currentTime = new Date().getTime(),
-    		timeDifference = currentTime - localStorageTime
-      	if (timeDifference<25) { //Browser Closed
+    		timeDifference = currentTime - localStorageTime;
+      	
+        if(timeDifference<25){//Browser Closed
            localStorage.removeItem('storagetime');
-        } else {//Browser Tab Closed
-           localStorage.setItem('storagetime',new Date().getTime())
+        }else{//Browser Tab Closed
+           localStorage.setItem('storagetime',new Date().getTime());
         }
       
       }else{
-      	localStorage.setItem('storagetime',new Date().getTime())
+      	localStorage.setItem('storagetime',new Date().getTime());
       }
     })
       // tipo de usuario
       this.currentView = auth.getUser().user_type
       /* setTimeout(function () {
-        auth.logout()
-        next({name: 'login'})
-      }, 6000) */
+        auth.logout();
+        next({name: 'login'});
+      }, 6000); */
     }
   }
 </script>
