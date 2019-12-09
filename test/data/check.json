@@ -1,0 +1,412 @@
+
+[{
+  "_id" : "5a4643acbe62a621904ae192",
+  "text" : "Estado de rodillos de descarga Z1 (cota de ingreso)",
+  "extra" : false,
+  "sector" : "APILADORA"
+
+},
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae191",
+    "text" : "Posicionamiento de carro (frenos y bloqueos)",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae193",
+    "text" : "Cota de cinta movil cota con respecto a la bandeja",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae195",
+    "text" : "Estado de rodillos con alineadores",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae196",
+    "text" : "Cota de rodillos con alineador igual a cinta movil",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae197",
+    "text" : "Material sale alineado y parejo de los rodillos alineadores",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae198",
+    "text" : "Desplazamiento de cintas de zona q de empalme",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae194",
+    "text" : "Desplazamiento de cinta movil",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae199",
+    "text" : "Adosamiento de las barreras de zona 1 hacia zona 2 y 6",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae19a",
+    "text" : "Adosamiento de las barreras de zona 2 y 6",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae19b",
+    "text" : "Desplazamiento de cintas de zona 4 y 5",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae19c",
+    "text" : "Adosamiento y alineacion de material en zona 4 y 5",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae19d",
+    "text" : "Desplazamiento de cintas de programación y carrelo",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae19e",
+    "text" : "Centrado de material en los rodillos traductores de zona 4 y 5",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae19f",
+    "text" : "Centrado de material en las cintas de programación zona 4 y 5",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a0",
+    "text" : "Centrado de material en las cintas carrelo",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a1",
+    "text" : "Modulo cargado de 1m x 1m",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a2",
+    "text" : "Control de herramientas",
+    "extra" : false,
+    "sector" : "APILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a3",
+    "text" : "Recorrida del sector (orden y limpieza)",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a4",
+    "text" : "Verificación de las lineas de cocido calidad",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a6",
+    "text" : "Alineado de la madera con respecto al pallet",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a5",
+    "text" : "Verificación del apilado",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a7",
+    "text" : "Vueltas de ambas envolvedoras con respecto a la medida del material",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a8",
+    "text" : "Controlar el peso de ambas envolvedoras que no supere los 150g",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1a9",
+    "text" : "Funcionamiento de la etiquetadora",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1aa",
+    "text" : "Funcionamiento de los rodillos calentadores",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1ac",
+    "text" : "Controlar que la aspiradora este funcionando y limpie las vagonetas",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1ab",
+    "text" : "Controlar la sobre posición de la bañatura",
+    "extra" : false,
+    "sector" : "DESAPILADORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1ad",
+    "text" : "Control del dosificador 1 en uso estado de limpieza"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1ae",
+    "text" : "Verificar estado del L2B, plataforma, tolvas y correas",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1af",
+    "text" : "Controlar cintas",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b0",
+    "text" : "Verificar estados de los L3, 9 y 7, plataformas y correa",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b1",
+    "text" : "Estado de fosa 11",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b2",
+    "text" : "Controlar que el descarte este limpio al igual que la pasarela",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b3",
+    "text" : "Verificar que las maquinas muletos estén en condiciones de uso",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b4",
+    "text" : "Verificar el vacío",
+    "extra" : true,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b5",
+    "text" : "Bomba de vacío en uso",
+    "extra" : true,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b6",
+    "text" : "Tirar plomos y verificar el estado",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b7",
+    "text" : "Controlar la dureza de trompa (24Kg)",
+    "extra" : true,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b9",
+    "text" : "Controlar que esten limpios los rodillos de zona 1",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1ba",
+    "text" : "Controlar la medida del alambre",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1b8",
+    "text" : "Verificar el limpiador de alambre que funcione y limpie bien",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1bb",
+    "text" : "Sacar puntada y verificar el estado de la misma",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1bc",
+    "text" : "Verificar la apertura del material al ingreso de la carga",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1be",
+    "text" : "Controlar que el material en la estantería este bien cargado",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  },
+
+
+  {
+    "_id" : "5a4643acbe62a621904ae1bd",
+    "text" : "Verificar que las cintas pulmón, puentes y móvil estén las tres a nivel",
+    "extra" : false,
+    "sector" : "EXTRUSORA"
+
+  }
+]

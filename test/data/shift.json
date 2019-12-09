@@ -1,0 +1,154 @@
+[
+  {
+    "_id": "5b031930e0389954d01deffa",
+    "value": "T1",
+    "rotative": true,
+    "from": "2017-09-08T09:00:00.000Z",
+    "rules": [
+      {
+        "days": 6,
+        "in": "8",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "14",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "22",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      }
+    ]
+  },
+  {
+    "_id": "5b031930e0389954d01deffb",
+    "value": "T2",
+    "rotative": true,
+    "from": "2017-09-02T09:00:00.000Z",
+    "rules": [
+      {
+        "days": 6,
+        "in": "8",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "14",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "22",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      }
+    ]
+  },
+  {
+    "_id": "5b031930e0389954d01deffc",
+    "value": "T3",
+    "rotative": true,
+    "from": "2017-09-20T09:00:00.000Z",
+    "rules": [
+      {
+        "days": 6,
+        "in": "8",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "14",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "22",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      }
+    ]
+  },
+  {
+    "_id": "5b031930e0389954d01deffd",
+    "value": "T4",
+    "rotative": true,
+    "from": "2017-09-14T09:00:00.000Z",
+    "rules": [
+      {
+        "days": 6,
+        "in": "8",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "14",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      },
+      {
+        "days": 6,
+        "in": "22",
+        "hours": 28800000
+      },
+      {
+        "days": 2,
+        "franco": true
+      }
+    ]
+  },
+  {
+    "_id": "5b031930e0389954d01deffe",
+    "value": "D67",
+    "from": "2017-09-14T09:00:00.000Z",
+    "rotative": false
+  },
+  {
+    "_id": "5b031930e0389954d01defff",
+    "value": "D68",
+    "from": "2017-09-14T09:00:00.000Z",
+    "rotative": false
+  }
+]

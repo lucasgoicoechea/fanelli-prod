@@ -1,0 +1,101 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import 'bootstrap-variable-overrides';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css?family=Roboto Mono');
+@import '~vue-snotify/styles/material.css';
+@import '~vue-croppa/dist/vue-croppa.css';
+
+@import '~flatpickr/dist/flatpickr.css';
+@import '~flatpickr/dist/themes/material_orange.css';
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  height: 100%;
+  overflow-y: auto;
+}
+
+body {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: $secondary-darker;
+  background-color: $primary-darker;
+  background-image: linear-gradient(to bottom, white 0%, white 100%);
+}
+
+input {
+  font-weight: 500;
+  padding: 6px 2px;
+  margin: 15px 0;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid $primary-color;
+}
+
+input:focus {
+  outline-color: $primary-color;
+}
+
+.select-style {
+  border-bottom: 2px solid $primary-color;
+  overflow: hidden;
+  position: relative;
+}
+
+.select-style:before {
+  position: absolute;
+  content: '';
+  right: 5px;
+  z-index: -1;
+  top: 50%;
+  margin-top: -4px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 7.5px 0 7.5px;
+  border-color: $primary-color transparent transparent transparent;
+}
+
+.select-style select {
+  padding: 5px 8px;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+
+.autocomplete {
+  ul {
+    &:before {
+      display: none;
+    }
+    z-index: 100;
+    width: 90%;
+    padding: 0;
+    margin-top: 0;
+  }
+}
+
+a {
+  text-decoration: none !important;
+}
+
+main {
+  text-align: left;
+}
