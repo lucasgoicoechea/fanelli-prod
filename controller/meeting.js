@@ -21,9 +21,13 @@ const controller = {
       collaborators: req.body.meeting.collaborators,
       creator: req.user.id,
       type: req.body.meeting.type,
+      frecuency: req.body.meeting.frecuency,
       date: req.body.meeting.date,
+      dateFrom: req.body.meeting.dateFrom,
       recommendations: req.body.meeting.recommendations,
-      description: req.body.meeting.description
+      weeklys: req.body.meeting.weeklys,
+      description: req.body.meeting.description,
+      time: req.body.meeting.time
     }
     meeting = awaitFor(meetingService.create(meeting))
     res.json({success: true, meeting})
@@ -70,7 +74,10 @@ const controller = {
    * @apiParam {String[]} [meeting.recommendations] meeting recommendations
    * @apiParam {String} [meeting.type] meeting type
    * @apiParam {Date} [meeting.date]  Meeting date
-   *
+   * @apiParam {Date} [meeting.dateFrom]  Meeting dateFrom
+   * @apiParam {Time} [meeting.time]  Meeting time
+   * @apiParam {String} [meeting.frecuency] meeting frecuency
+   * @apiParam {String[]} [meeting.weeklys] meeting weeklys
    */
   edit: async(function (req, res, next) {
     if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !meetingService.isCreator(req.user.id, req.params.id)) {
@@ -82,7 +89,11 @@ const controller = {
       type: req.body.meeting.type,
       date: req.body.meeting.date,
       recommendations: req.body.meeting.recommendations,
-      description: req.body.meeting.description
+      description: req.body.meeting.description,
+      frecuency: req.body.meeting.frecuency,
+      dateFrom: req.body.meeting.dateFrom,
+      weeklys: req.body.meeting.weeklys,
+      time: req.body.meeting.time
     }
 
     meeting = awaitFor(meetingService.edit(req.params.id, meeting))

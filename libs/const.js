@@ -286,13 +286,40 @@ const constants = {
     INDIVIDUAL: 'INDIVIDUAL',
     GROUP: 'GROUP',
     MONTHLY: 'MONTHLY',
-    TRAINING: 'TRAINING'
+    TRAINING: 'TRAINING',
+    FRECUENCY: 'FRECUENCY',
+    SIMPLE: 'SIMPLE'
   },
   READABLE_MEETING_TYPE: {
-    INDIVIDUAL: 'individual',
-    GROUP: 'grupo',
-    MONTHLY: 'mensual',
-    TRAINING: 'capacitación'
+    INDIVIDUAL: 'INDIVIDUAL',
+    GROUP: 'GROUP',
+    MONTHLY: 'MONTHLY',
+    TRAINING: 'TRAINING',
+    FRECUENCY: 'FRECUENCY',
+    SIMPLE: 'SIMPLE'
+  },
+  MEETING_FRECUENCY: {
+    DAILY: 'Diaria',
+    MONTHLY: 'Mensual',
+    WEEKLY: 'Semanal'
+  },
+  WEEKLY_MEETING_FRECUENCY: {
+    SUNDAY: 'Domingo',
+    MONDAY: 'Lunes',
+    TUESDAY: 'Martes',
+    WEDNESDAY: 'Miércoles',
+    THURSDAY: 'Jueves',
+    FRIDAY: 'Viernes',
+    SATURDAY: 'Sábado'
+  },
+  WEEKLY_MEETING_FRECUENCY_DAY: {
+    SUNDAY: 0,
+    MONDAY: 1,
+    TUESDAY: 2,
+    WEDNESDAY: 3,
+    THURSDAY: 4,
+    FRIDAY: 5,
+    SATURDAY: 6
   }
 }
 constants.ROLE = {

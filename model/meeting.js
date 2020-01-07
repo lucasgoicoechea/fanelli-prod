@@ -31,18 +31,36 @@ const meetingSchema = new Schema({
     enum: Object.keys(Const.MEETING_TYPE).map(t => Const.MEETING_TYPE[t]),
     required: true
   },
+  frecuency: {
+    type: String
+  },
   recommendations: [{
     type: String,
     enum: Object.keys(Const.RECOMMENDATION_MEETING).map(t => Const.RECOMMENDATION_MEETING[t]),
     required: true
   }],
+  weeklys: [{
+    type: String
+    //enum: Object.keys(Const.WEEKLY_MEETING_FRECUENCY).map(t => Const.WEEKLY_MEETING_FRECUENCY[t])
+  }],
   description: {
     type: String,
     required: true
   },
+  dateFrom: {
+    type: Date
+  },
   date: {
     type: Date,
     required: true
+  },
+  time: {
+    type: String
+  },
+  _originId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Meeting',
+    required: false
   }
 }, {
   timestamps: {

@@ -368,9 +368,30 @@ export default {
   },
   MEETING_TYPE_READABLE: {
     INDIVIDUAL: 'Individual',
+    FRECUENCY: 'Predeterminada',
+    SIMPLE: 'Común/Capacitación',
     GROUP: 'Diaria de Producción',
     MONTHLY: 'Mensual del Turno/Sector',
     TRAINING: 'Capacitación'
+  },
+  MEETING_TYPE_CREATABLE: {
+    INDIVIDUAL: 'Individual',
+    FRECUENCY: 'Predeterminada',
+    SIMPLE: 'Común/Capacitación'
+  },
+  MEETING_FRECUENCY: {
+    DAILY: 'Diaria',
+    MONTHLY: 'Mensual',
+    WEEKLY: 'Semanal'
+  },
+  WEEKLY_MEETING_FRECUENCY: {
+    MONDAY: 'Lunes',
+    FRIDAY: 'Viernes',
+    TUESDAY: 'Martes',
+    SATURDAY: 'Sábado',
+    WEDNESDAY: 'Miércoles',
+    SUNDAY: 'Domingo',
+    THURSDAY: 'Jueves'
   },
   RECOMMENDATION_MEETING_READABLE: {
     OPERATIVE: 'Operativa',

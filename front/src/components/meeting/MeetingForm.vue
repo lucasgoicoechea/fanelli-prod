@@ -15,7 +15,7 @@
           <div class="row">
             <div
               class="col-md-6"
-              v-for="(label, value) in $constants.MEETING_TYPE_READABLE"
+              v-for="(label, value) in $constants.MEETING_TYPE_CREATABLE"
               :key="value">
               <check-box
                 class="margin"
@@ -24,9 +24,45 @@
                 :val="value"
                 :label="label"></check-box>
             </div>
+            
           </div>
         </div>
-
+        <div class="col-xs-12" v-if="meeting.type && meeting.type ==='FRECUENCY'">
+          <h3>Frecuencia</h3>
+          <div class="row">
+              <div
+              class="col-md-6"
+              v-for="(label, value) in $constants.MEETING_FRECUENCY"
+              :key="value">
+              <check-box
+                class="margin"
+                 type="radio"
+                v-model="meeting.frecuency"
+                :val="value"
+                :label="label"></check-box>
+            </div>
+             <div
+              class="col-md-6" v-show="meeting.frecuency && meeting.frecuency ==='MONTHLY'">
+              Se generá reunión para el día {{datePicker.latestSelectedDateObj.getDate()}} de cada mes hasta la fecha {{datePickerFrom.latestSelectedDateObj.getDate()}}/{{datePickerFrom.latestSelectedDateObj.getMonth()+1}}/{{datePickerFrom.latestSelectedDateObj.getFullYear()}}
+            </div>
+          </div>
+  
+        </div>
+         <div class="col-xs-12" v-show="meeting.frecuency  && meeting.frecuency ==='WEEKLY'">
+          <h3>Días de la Semana</h3>
+          <div class="row">
+              <div
+              class="col-md-6"
+              v-for="(label, value) in $constants.WEEKLY_MEETING_FRECUENCY"
+              :key="value">
+              <check-box
+                class="margin"
+                v-model="meeting.weeklys"
+                :val="value"
+                :label="label"></check-box>
+            </div>
+          </div>
+        </div>
         <div class="col-xs-12">
           <h3>Objetivos</h3>
           <div class="row">
@@ -42,21 +78,40 @@
             </div>
           </div>
         </div>
-
         <div class="col-xs-12">
           <h3>Desde</h3>
-          <div class="calendar">
-            <div class="picker">
-              <flat-pickr
-                v-model="meeting.date"
-                :config="confPicker"
-                ref="_flatpickr"
-                placeholder="Seleccione una fecha"></flat-pickr>
+         <div class="row">
+          <div class="col-md-4">
+            <div class="calendar">
+              <div class="picker">
+                <flat-pickr
+                  v-model="meeting.date"
+                  :config="confPicker"
+                  ref="_flatpickr"
+                  placeholder="Seleccione una fecha"></flat-pickr>
+              </div>
+              <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
             </div>
-            <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
           </div>
+          <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY'">
+              <h3>Hora</h3>
+              <input type="time" v-model="meeting.time">
+          </div>
+          <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY'">
+            <h3>Hasta</h3>
+            <div class="calendar">
+              <div class="picker">
+                <flat-pickr
+                  v-model="meeting.dateFrom"
+                  :config="confPicker"
+                  ref="_flatpickrFrom"
+                  placeholder="Seleccione una fecha"></flat-pickr>
+              </div>
+              <button class="button" @click="clearDatePicker('_flatpickrFrom')">Borrar</button>
+            </div>
+          </div>          
         </div>
-
+        </div>
         <div class="col-xs-12">
           <h3>Resumen/Temas</h3>
           <textarea
@@ -106,11 +161,16 @@
           dateFormat: 'd-m-Y',
           disableMobile: true
         },
-        datePicker: null
+        datePicker: null,
+        datePickerFrom: null,
+        isFrecuency: false
       }
     },
     mounted () {
       this.datePicker = this.$refs._flatpickr.fp
+      this.datePickerFrom = (this.$refs._flatpickrFrom)
+      ? this.$refs._flatpickrFrom.fp
+      : null
       this.$emit('update', {
         validation: this.validate(),
         form: this.meeting
@@ -121,16 +181,34 @@
         return {
           collaborators: this.editable.collaborators || [],
           type: this.editable.type || [],
+          frecuency: this.editable.frecuency || [],
+          weeklys: this.editable.weeklys || [],
           recommendations: this.editable.recommendations || [],
           description: this.editable.description || '',
-          date: this.editable.date || ''
+          date: this.editable.date || new Date(),
+          dateFrom: this.editable.dateFrom || new Date(),
+          time: this.editable.time || this.getTime()
         }
+      },
+      getTime () {
+        const d = new Date()
+        let h = d.getHours()
+        let m = d.getMinutes()
+        if (h < 10) h = '0' + h
+        if (m < 10) m = '0' + m
+        return h + ':' + m
       },
       clearDatePicker (picker) {
         this.$refs[picker].fp.clear()
       },
       initPickers () {
         this.datePicker.setDate(this.editable.date)
+        if (this.datePickerFrom == null && this.$refs._flatpickrFrom) {
+          this.datePickerFrom = this.$refs._flatpickrFrom.fp
+        }
+        if (this.datePickerFrom !== null) {
+          this.datePickerFrom.setDate(this.editable.dateFrom)
+        }
       },
       validate () {
         if (!this.hasSelected) {
@@ -154,6 +232,10 @@
         this.meeting.date =
           (this.datePicker.latestSelectedDateObj)
             ? this.datePicker.latestSelectedDateObj.getTime()
+            : ''
+        this.meeting.dateFrom =
+          (this.datePickerFrom && this.datePickerFrom.latestSelectedDateObj)
+            ? this.datePickerFrom.latestSelectedDateObj.getTime()
             : ''
       },
       prepareMeeting () {
@@ -191,6 +273,9 @@
       }
     },
     computed: {
+      frecuency () {
+        return this.isFrecuency
+      },
       ...mapGetters('collaborators', [
         'hasSelected',
         'getSelectedIds'

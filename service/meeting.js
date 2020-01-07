@@ -4,10 +4,19 @@ const path = require('path')
 const MeetingModel = require(path.join(__dirname, '../model')).meeting
 const notification = require(path.join(__dirname, '/../libs/notification'))
 const pdf = require(path.join(__dirname, '/../libs/pdf'))
+const moment = require('moment')
+const Const = require(path.join(__dirname, '../libs/const'))
 const service = {
 
   create: async(function (meeting) {
-    return awaitFor(MeetingModel.create(meeting))
+    const meetingTmp = meeting;
+    if (meeting.type === 'FRECUENCY') {
+      if (meeting.frecuency !== 'WEEKLY') {
+         meetingTmp = awaitFor(MeetingModel.create(meeting))
+      }
+      createRepetitionsMeeting(meetingTmp)
+    }
+    return meetingTmp
   }),
   getPdf: async(function (meetingId) {
     const meeting = awaitFor(MeetingModel
@@ -84,6 +93,64 @@ const paginateAndSort = function (cursor, options = {}) {
       .limit(options.perPage)
   }
   return cursor
+}
+
+const createRepetitionsMeeting = function (meeting) {
+  if (meeting.frecuency === 'DAILY') {
+     //desde hasta crear reuniones con el meeting_origin
+     var a = moment(meeting.date);
+     var b = moment(meeting.dateFrom);
+     for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) { 
+        cloneWithAnotherDate(meeting,m.format('YYYY-MM-DD'));
+      }
+  } 
+
+  if (meeting.frecuency === 'WEEKLY') {
+    var a = moment(meeting.date);
+    var b = moment(meeting.dateFrom);
+    var firts = true;
+    let meetingT = meeting;
+    //desde hasta crear reuniones con el meeting_origin
+    meeting.weeklys.forEach(dweek => {
+      // Get "next" monday
+        let dday = Const.WEEKLY_MEETING_FRECUENCY_DAY[dweek];
+        let m = a.clone().day(dday);
+        if( m.isAfter(a, 'd') ){ 
+          console.log(m.format('YYYY-MM-DD'));
+        }
+        while( m.isBefore(b) ){ 
+          console.log(m.format('YYYY-MM-DD'));
+          if (firts){
+            meetingT = awaitFor(MeetingModel.create(meeting));
+            firts = false;
+          }
+          cloneWithAnotherDate(meetingT,m.format('YYYY-MM-DD'));
+          m.add(7, 'days'); 
+        }
+        });
+   }
+
+  if (meeting.frecuency === 'MONTHLY') {
+    //desde hasta crear reuniones con el meeting_origin
+  }
+  return meeting
+}
+
+const cloneWithAnotherDate = function (meeting, dateOther) {
+    let meetingRepeat = {
+      collaborators: meeting.collaborators,
+      creator: meeting.creator,
+      type: meeting.type,
+      frecuency: meeting.frecuency,
+      date: dateOther,
+      dateFrom: meeting.dateFrom,
+      recommendations: meeting.recommendations,
+      weeklys: meeting.weeklys,
+      description: meeting.description,
+      time: meeting.time,
+      _originId: meeting._id
+    }
+    return awaitFor(MeetingModel.create(meetingRepeat))
 }
 
 const filter = function (cursor, options = {}) {

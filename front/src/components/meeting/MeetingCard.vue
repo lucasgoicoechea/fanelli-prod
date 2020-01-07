@@ -85,9 +85,12 @@
         return `de ${this.meeting.creator.lastname}`
       },
       meetingType () {
-        return this.meeting.hasOwnProperty('type')
+        return (this.meeting.hasOwnProperty('type')
           ? `Reunión ${this.$constants.MEETING_TYPE_READABLE[this.meeting.type]}`
-          : ''
+          : '') +
+          (this.meeting.frecuency
+          ? ` -  ${this.$constants.MEETING_FRECUENCY[this.meeting.frecuency]}`
+          : '')
       },
       recommendations () {
         return this.meeting.recommendations
