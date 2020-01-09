@@ -74,16 +74,14 @@ Vue.http.interceptors.push(function (request, next) {
       console.error('Server error', res)
     }
     if (res.status === 401) {
-      auth.logout();
+      auth.logout()
       router.go('/login')
     }
     /* if(res.status === 200 ) {
       auth.login(res.headers.get('authorization'))
-    }*/   
+    } */
   })
 })
-
-
 
 Vue.prototype.$constants = Constants
 

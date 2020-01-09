@@ -9,11 +9,11 @@ const Const = require(path.join(__dirname, '../libs/const'))
 const service = {
 
   create: async(function (meeting) {
-    const meetingTmp = meeting;
+    let meetingTmp = meeting;
     if (meeting.type === 'FRECUENCY') {
-      if (meeting.frecuency !== 'WEEKLY') {
+     /* if (meeting.frecuency !== 'WEEKLY') {
          meetingTmp = awaitFor(MeetingModel.create(meeting))
-      }
+      }*/
       createRepetitionsMeeting(meetingTmp)
     }
     return meetingTmp
@@ -62,8 +62,12 @@ const service = {
       .populate('creator', 'name lastname legajo')
     return paginateAndSort(meetings, options)
   }),
-  edit: async(function (id, meeting) {
+  edit: async(function (id, meeting,repeatEdit) {
     awaitFor(MeetingModel.update({_id: id}, {$set: meeting}))
+    if (repeatEdit) {
+      let idorigin = meeting._originId || id
+      awaitFor(MeetingModel.updateMany({_originId: idorigin}, {$set:{"time": meeting.time}}))
+    }
     return MeetingModel.findById(id)
       .populate({
         path: 'collaborators',
@@ -100,9 +104,11 @@ const createRepetitionsMeeting = function (meeting) {
      //desde hasta crear reuniones con el meeting_origin
      var a = moment(meeting.date);
      var b = moment(meeting.dateFrom);
-     for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) { 
-        cloneWithAnotherDate(meeting,m.format('YYYY-MM-DD'));
-      }
+     var tmp;
+     for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
+      tmp = m.clone();    
+      cloneWithAnotherDate(meeting,new Date(tmp.locale("en").add(1, 'd').format("YYYY-MM-DD")));
+      } 
   } 
 
   if (meeting.frecuency === 'WEEKLY') {
@@ -110,6 +116,7 @@ const createRepetitionsMeeting = function (meeting) {
     var b = moment(meeting.dateFrom);
     var firts = true;
     let meetingT = meeting;
+    var tmp;
     //desde hasta crear reuniones con el meeting_origin
     meeting.weeklys.forEach(dweek => {
       // Get "next" monday
@@ -119,12 +126,13 @@ const createRepetitionsMeeting = function (meeting) {
           console.log(m.format('YYYY-MM-DD'));
         }
         while( m.isBefore(b) ){ 
-          console.log(m.format('YYYY-MM-DD'));
+          //console.log(m.format('YYYY-MM-DD'));
           if (firts){
             meetingT = awaitFor(MeetingModel.create(meeting));
             firts = false;
           }
-          cloneWithAnotherDate(meetingT,m.format('YYYY-MM-DD'));
+          tmp = m.clone();
+          cloneWithAnotherDate(meetingT,new Date(tmp.locale("en").add(1, 'd').format("YYYY-MM-DD")));
           m.add(7, 'days'); 
         }
         });
@@ -132,6 +140,23 @@ const createRepetitionsMeeting = function (meeting) {
 
   if (meeting.frecuency === 'MONTHLY') {
     //desde hasta crear reuniones con el meeting_origin
+    var a = moment(meeting.date);
+    var b = moment(meeting.dateFrom);
+    let meetingT = meeting;
+    let m = a;
+    var tmp;
+    if( m.isAfter(a, 'd') ){ 
+      console.log(m.format('YYYY-MM-DD'));
+    }
+    while( m.isBefore(b) ){ 
+      //console.log(m.format('YYYY-MM-DD'));
+      if (a.date() <= m.daysInMonth() ) {
+        m.date(a.date());
+        tmp = m.clone();
+        cloneWithAnotherDate(meetingT,new Date(tmp.locale("en").add(1, 'd').format("YYYY-MM-DD")));
+      }
+      m.add(1,'months'); 
+    }
   }
   return meeting
 }

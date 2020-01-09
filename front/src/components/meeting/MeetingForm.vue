@@ -96,6 +96,9 @@
           <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY'">
               <h3>Hora</h3>
               <input type="time" v-model="meeting.time">
+              <label><span><input type="checkbox" v-model="meeting.repeatEdit" >
+                Editar repeticiones
+              </span></label>
           </div>
           <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY'">
             <h3>Hasta</h3>
@@ -187,7 +190,8 @@
           description: this.editable.description || '',
           date: this.editable.date || new Date(),
           dateFrom: this.editable.dateFrom || new Date(),
-          time: this.editable.time || this.getTime()
+          time: this.editable.time || this.getTime(),
+          repeatEdit: false
         }
       },
       getTime () {

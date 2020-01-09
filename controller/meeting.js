@@ -95,8 +95,8 @@ const controller = {
       weeklys: req.body.meeting.weeklys,
       time: req.body.meeting.time
     }
-
-    meeting = awaitFor(meetingService.edit(req.params.id, meeting))
+    let repeatEdit = req.body.meeting.repeatEdit || false
+    meeting = awaitFor(meetingService.edit(req.params.id, meeting,repeatEdit))
     res.json({success: true, meeting})
   })
 }

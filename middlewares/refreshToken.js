@@ -6,7 +6,8 @@ const Boom = require('boom')
 const unless = require('express-unless')
 
 let reloadToken = async(function (req, res, next) {
-    const tokenReq = null
+    next()
+    let tokenReq = null
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
         tokenReq = req.headers.authorization.split(' ')[1];
     } else if (req.query && req.query.token) {
@@ -49,7 +50,7 @@ let reloadToken = async(function (req, res, next) {
         //next()        
     }
     else {
-            next(Boom.unauthorized('Token invalido o mal formado'))
+            next(Boom.unauthorized('Token invalido o mal formado - RE004'))
     }
 })
 
