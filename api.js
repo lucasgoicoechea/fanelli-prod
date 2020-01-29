@@ -80,7 +80,7 @@ function errorHandler (app) {
       res.status(401).json({
         success: false,
         error: err.name,
-        message: 'Token invalido o mal formado',
+        message: 'Token invalido o mal formado - RE001',
         status: err.status
       })
     } else {

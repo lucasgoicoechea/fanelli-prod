@@ -43,6 +43,9 @@ const meetingSchema = new Schema({
     type: String
     //enum: Object.keys(Const.WEEKLY_MEETING_FRECUENCY).map(t => Const.WEEKLY_MEETING_FRECUENCY[t])
   }],
+  names: [{
+    type: String
+  }],
   description: {
     type: String,
     required: true
@@ -73,7 +76,7 @@ meetingSchema.methods.printableDetails = function () {
   const details = []
 
   details.push({
-    key: `Reunion ${Const.READABLE_MEETING_TYPE[this.type]}: `,
+    key: `Reunion ${this.type === 'FRECUENCY'?Const.MEETING_FRECUENCY[this.frecuency]:Const.READABLE_MEETING_TYPE[this.type]}: `,
     value: this.recommendations.map(t => Const.READABLE_RECOMMENDATION_MEETING[t]).join(', ')
   })
 
@@ -91,6 +94,6 @@ meetingSchema.methods.printableDetails = function () {
 }
 
 meetingSchema.query.teamOf = queryTeam('collaborators')
-
+// mongoose.set('debug', true)
 const MeetingModel = mongoose.model('Meeting', meetingSchema)
 module.exports = MeetingModel

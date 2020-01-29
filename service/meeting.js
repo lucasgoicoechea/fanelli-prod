@@ -16,6 +16,7 @@ const service = {
       }*/
       createRepetitionsMeeting(meetingTmp)
     }
+    else meetingTmp = awaitFor(MeetingModel.create(meeting))
     return meetingTmp
   }),
   getPdf: async(function (meetingId) {
@@ -171,6 +172,7 @@ const cloneWithAnotherDate = function (meeting, dateOther) {
       dateFrom: meeting.dateFrom,
       recommendations: meeting.recommendations,
       weeklys: meeting.weeklys,
+      names: meeting.names,
       description: meeting.description,
       time: meeting.time,
       _originId: meeting._id

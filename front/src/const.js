@@ -352,7 +352,8 @@ export default {
   OCCURRENCE_TYPE_READABLE: {
     OPERATIVE: 'Operativa',
     SAFETY: 'Seguridad',
-    DISCIPLINE: 'Disciplina'
+    DISCIPLINE: 'Disciplina',
+    TRAINING: 'Capacitación'
   },
   OCCURRENCE_STATE_READABLE: {
     PENDING_RESOLUTION: 'Pendiente de resolución',
@@ -366,10 +367,40 @@ export default {
     REJECTED: 'REJECTED',
     CANCELED: 'CANCELED'
   },
+  MEETING_NAME: {
+    T1L1: 'T1-L1',
+    T1L2: 'T1-L2',
+    T2L1: 'T2-L1',
+    T2L2: 'T2-L2',
+    T3L1: 'T3-L1',
+    T3L2: 'T3-L2',
+    T4L1: 'T4-L1',
+    T4L2: 'T4-L2',
+    SUPERVISORES: 'Supervisores',
+    PRODUCCION: 'Producción',
+    EXTRUSORA: 'EXTRUSORA',
+    APILADORA: 'APILADORA',
+    DESAPILADORA: 'DESAPILADORA',
+    ACOPIO_TIERRA: 'Acopio de tierra',
+    PREPARACION_TIERRA: 'Preparacion de tierra',
+    MANT_MECANICO: 'Mant. Mecanico',
+    MANT_VAGONETA: 'Mant. vagoneta',
+    MANT_AUTOMOTOR: 'Mant. Automotor',
+    MANT_ELECTRICO: 'Mant. Electrico',
+    MANT_ELECTRONICO: 'Mant. Electrónico',
+    MANT_EDILICIO: 'Mant. Edilicio',
+    MANT_GENERAL: 'Mantenimiento Grl.',
+    MANT_TECNICA: 'Técnica de Mant.',
+    PAÑOL: 'Pañol',
+    PLAYA: 'Playa',
+    COMPRAS: 'Compras',
+    RRHH: 'RRHH/Personal',
+    SEGURIDAD_HIGIENE: 'Seguridad e Higiene'
+  },
   MEETING_TYPE_READABLE: {
     INDIVIDUAL: 'Individual',
     FRECUENCY: 'Predeterminada',
-    SIMPLE: 'Común/Capacitación',
+    SIMPLE: 'Extraordinaria',
     GROUP: 'Diaria de Producción',
     MONTHLY: 'Mensual del Turno/Sector',
     TRAINING: 'Capacitación'
@@ -377,11 +408,11 @@ export default {
   MEETING_TYPE_CREATABLE: {
     INDIVIDUAL: 'Individual',
     FRECUENCY: 'Predeterminada',
-    SIMPLE: 'Común/Capacitación'
+    SIMPLE: 'Extraordinaria'
   },
   MEETING_FRECUENCY: {
     DAILY: 'Diaria',
-    MONTHLY: 'Mensual',
+    // MONTHLY: 'Mensual',
     WEEKLY: 'Semanal'
   },
   WEEKLY_MEETING_FRECUENCY: {
@@ -396,7 +427,8 @@ export default {
   RECOMMENDATION_MEETING_READABLE: {
     OPERATIVE: 'Operativa',
     SAFETY: 'Seguridad',
-    DISCIPLINE: 'Disciplina'
+    DISCIPLINE: 'Disciplina',
+    TRAINING: 'Capacitación'
   },
   FABRIC_ATTRIBUTE: {
     area: 'Área',

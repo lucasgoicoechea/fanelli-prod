@@ -107,7 +107,17 @@ const mutations = {
   changeShowList (state) {
     state.showList = !state.showList
   },
+  groupByLastnameName (state) {
+    state.collaborators = state.collaborators.map(c => {
+      c.lastname = c.hasOwnProperty('lastname')
+        ? c.lastname.value
+        : 'no Asignado'
+      return c
+    })
+    state.groupCollaborators = group(state.collaborators, 'lastname')
+  },
   groupByArea (state) {
+    state.collaborators = state.collaborators.sort(function (a, b) { return a.lastname > b.lastname })
     state.collaborators = state.collaborators.map(c => {
       c.area = c.hasOwnProperty('area')
         ? c.area.value
@@ -138,6 +148,9 @@ const actions = {
             commit('update', {collaborators: res.body.collaborators})
             commit('groupByArea')
             endLoading(dispatch, 'collaborators fetch')
+            res.body.collaborators.sort(function (a, b) {
+              return a.lastname - b.lastname
+            })
           }
         },
         () => {

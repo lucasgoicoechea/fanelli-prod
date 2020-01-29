@@ -441,7 +441,7 @@ const pdf = {
     })
     content.push(detailList)
     content.push({text: '', pageBreak: 'before'})
-    content.push(`Reunion del ${dateFns.format(meeting.date, 'DD/MM/YYYY')}`)
+    content.push(`Reunion del ${dateFns.format(meeting.date, 'DD/MM/YYYY')} a hora ${meeting.time}`)
     const notificationList = [{text: 'Notificado', bold: true, alignment: 'left'}]
     const nameList = [{text: 'Apellido', bold: true}]
     const presentList = [{text: 'Presente', bold: true}]

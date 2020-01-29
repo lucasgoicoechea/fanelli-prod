@@ -7,7 +7,7 @@ const Const = require(path.join(__dirname, '/../libs/const'))
 const controller = {
 
   /**
-   * @apiDefine createMeeting
+   * @apiDefine createMeetingper_page
    * @apiParam {Object} meeting Meeting Object
    * @apiParam {String[]} meeting.collaborators Array containing collaborators ids
    * @apiParam {String} meeting.type Meeting type (INDIVIDUAL | GROUP)
@@ -26,6 +26,7 @@ const controller = {
       dateFrom: req.body.meeting.dateFrom,
       recommendations: req.body.meeting.recommendations,
       weeklys: req.body.meeting.weeklys,
+      names: req.body.meeting.names,
       description: req.body.meeting.description,
       time: req.body.meeting.time
     }
@@ -42,7 +43,14 @@ const controller = {
       next(error)
     }
   }),
-
+  getDoneTo: async(function (req, res, next) {
+    let meetings
+    meetings = awaitFor(meetingService.listMyMeetings(req.query.userId, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    res.json({success: true, meetings})
+  }),
   getById: async(function (req, res) {
     const meeting = awaitFor(meetingService.getById(req.params.id))
     res.json({success: true, meeting})
@@ -78,6 +86,8 @@ const controller = {
    * @apiParam {Time} [meeting.time]  Meeting time
    * @apiParam {String} [meeting.frecuency] meeting frecuency
    * @apiParam {String[]} [meeting.weeklys] meeting weeklys
+   * @apiParam {String[]} [meeting.names] meeting names
+   * 
    */
   edit: async(function (req, res, next) {
     if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !meetingService.isCreator(req.user.id, req.params.id)) {
@@ -93,6 +103,7 @@ const controller = {
       frecuency: req.body.meeting.frecuency,
       dateFrom: req.body.meeting.dateFrom,
       weeklys: req.body.meeting.weeklys,
+      names: req.body.meeting.names,
       time: req.body.meeting.time
     }
     let repeatEdit = req.body.meeting.repeatEdit || false

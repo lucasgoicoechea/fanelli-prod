@@ -7,6 +7,7 @@
           <h3>Selección de participante/s</h3>
           <collaborator-selector
             :multipleSelection="true"
+             typeList="full"
             :preSelection="editable.collaborators"></collaborator-selector>
         </div>
 
@@ -48,6 +49,21 @@
           </div>
   
         </div>
+        <div class="col-xs-12" v-show="meeting.frecuency  && meeting.type ==='FRECUENCY'">
+          <h3>Nombre</h3>
+          <div class="row">
+              <div
+              class="col-md-6"
+              v-for="(label, value) in $constants.MEETING_NAME"
+              :key="value">
+              <check-box
+                class="margin"
+                v-model="meeting.names"
+                :val="value"
+                :label="label"></check-box>
+            </div>
+          </div>
+        </div>
          <div class="col-xs-12" v-show="meeting.frecuency  && meeting.frecuency ==='WEEKLY'">
           <h3>Días de la Semana</h3>
           <div class="row">
@@ -79,7 +95,7 @@
           </div>
         </div>
         <div class="col-xs-12">
-          <h3>Desde</h3>
+          <h3>FECHA REUNIÓN</h3>
          <div class="row">
           <div class="col-md-4">
             <div class="calendar">
@@ -93,10 +109,10 @@
               <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
             </div>
           </div>
-          <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY'">
+          <div class="col-md-3" >
               <h3>Hora</h3>
               <input type="time" v-model="meeting.time">
-              <label><span><input type="checkbox" v-model="meeting.repeatEdit" >
+              <label v-show="meeting.type && meeting.type ==='FRECUENCY'"><span><input type="checkbox" v-model="meeting.repeatEdit"  >
                 Editar repeticiones
               </span></label>
           </div>
@@ -186,6 +202,7 @@
           type: this.editable.type || [],
           frecuency: this.editable.frecuency || [],
           weeklys: this.editable.weeklys || [],
+          names: this.editable.names || [],
           recommendations: this.editable.recommendations || [],
           description: this.editable.description || '',
           date: this.editable.date || new Date(),

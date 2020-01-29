@@ -6,16 +6,17 @@
           :headerBackground="headerBackground"
           :subHeaderBackground="subHeaderBackground">
           <div slot="header" class="header">
-            <span>{{ meetingType }}</span>
+            <span>{{ meetingType }}  {{ meetingName }}</span>
             <span
               class="involved"
               v-show="isInvolved">PARTICIPANTE</span>
           </div>
+          <p slot="subHeader" class="name-header-text"></p>
           <p slot="subHeader" class="subheader-text">{{ recommendations }}</p>
         </card-header>
         <card-section>
           <div class="card-section" slot="content">
-            <p class="time">{{ createdDate }}</p>
+            <p class="time">{{ createdDate }} </p>
             <p>{{ creator }}</p>
             <p>{{ involved }}</p>
           </div>
@@ -68,13 +69,20 @@
         return '#8090b7'
       },
       createdDate () {
-        return this.meeting.hasOwnProperty('date')
+        return (this.meeting.hasOwnProperty('date')
           ? dateAndTime.dateDayAndMonth(new Date(this.meeting.date))
-          : ''
+          : '') +
+         (this.meeting.hasOwnProperty('time')
+          ? (' HORA:' + this.meeting.time)
+          : '')
       },
       applyCollaborators () {
         return this.meeting.collaborators
           .map(collaborator => collaborator.lastname)
+          .join(', ')
+      },
+      applyNames () {
+        return this.meeting.names
           .join(', ')
       },
       involved () {
@@ -86,10 +94,16 @@
       },
       meetingType () {
         return (this.meeting.hasOwnProperty('type')
-          ? `Reunión ${this.$constants.MEETING_TYPE_READABLE[this.meeting.type]}`
+          ? `${this.$constants.MEETING_TYPE_READABLE[this.meeting.type]}`
           : '') +
           (this.meeting.frecuency
           ? ` -  ${this.$constants.MEETING_FRECUENCY[this.meeting.frecuency]}`
+          : '')
+      },
+      meetingName () {
+        return (this.meeting.hasOwnProperty('names') && this.meeting.type === 'FRECUENCY'
+          ? `
+          de  ${this.applyNames}`
           : '')
       },
       recommendations () {
@@ -128,6 +142,12 @@
   .subheader-text {
     font-size: small;
   }
+
+  .name-header-text {
+    color: #1c0166;
+    background: #d3def7;
+  }
+
 
   .time {
     font-family: monospace;

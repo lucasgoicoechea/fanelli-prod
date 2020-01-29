@@ -117,6 +117,37 @@ const actions = {
     return Vue.http.delete(`meeting/${meeting._id}`)
       .then(deleted)
       .catch(handleError)
+  },
+  /* getAll ({commit, dispatch}, payload) {
+    const success = (res) => {
+      endLoading(dispatch, `meetingRequet fetchAll`)
+      return res.body
+    }
+
+    const failure = (err) => {
+      endLoading(dispatch, `meetingRequet fetchAll`)
+      return Promise.reject(err)
+    }
+
+    startLoading(dispatch, `meetingRequet fetchAll`)
+    return Vue.http.get(`meeting/to/${payload}`)
+      .then(success)
+      .catch(failure)
+  }, */
+  fetchAll (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+
+    return Vue.http.get('meeting/to/' + payload.userId, {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
   }
 }
 

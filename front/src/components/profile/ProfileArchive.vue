@@ -29,6 +29,13 @@
         :replace="$mq !== 'mobile'">
         <h3>Acontecimientos</h3>
       </router-link>
+
+      <router-link
+        class="tab"
+        :to="{name: 'profile-archive-meetings'}"
+        :replace="$mq !== 'mobile'">
+        <h3>Reuniones</h3>
+      </router-link>
     </section>
     <router-view/>
   </div>

@@ -18,7 +18,7 @@
 
         <div class="recommendations">
           <h4>
-            <span>{{ meetingType }}</span>
+            <span>{{ meetingType }}   {{ meetingName }}</span>
           </h4>
         </div>
 
@@ -37,14 +37,16 @@
 
     <div class="box-section collaborator-list">
       <h4 class="collaborator-title">Participantes: </h4>
-      <router-link
+      <!-- <router-link -->
+        <div
         v-for="c in meeting.collaborators"
         :key="c._id"
         class="collaborator"
-        :to="{ name: 'profile-information', params: {id: c._id} }">
+        :to="{ name: 'profile-information', params: {id: c._id} }"> 
         <card-collaborator-full
           :collaborator="c"></card-collaborator-full>
-      </router-link>
+        </div> 
+      <!-- </router-link> -->
     </div>
 
     <div class="box-section buttons-container">
@@ -109,7 +111,9 @@
     data () {
       return {
         title: 'Detalle de reunión',
-        meeting: {},
+        meeting: {
+          names: []
+        },
         loaderPrint: false,
         loaderCancel: false
       }
@@ -122,7 +126,7 @@
         return this.$store.dispatch('meetings/getDetail', {
           id: this.$route.params.id
         })
-          .then((res) => { this.meeting = res.meeting })
+          .then((res) => { this.meeting = res.meeting; this.meeting.names = res.meeting.names })
           .catch(() => { this.$snotifyWrapper.error('Se produjo un error al obtener el detalle de reunión') })
       },
       edit () {
@@ -214,9 +218,12 @@
         return '/static/img/meeting.svg'
       },
       createdAt () {
-        return this.meeting.hasOwnProperty('date')
+        return (this.meeting.hasOwnProperty('date')
           ? dateAndTime.dateDayAndMonth(new Date(this.meeting.date))
-          : ''
+          : '') +
+         (this.meeting.hasOwnProperty('time')
+          ? (' HORA:' + this.meeting.time)
+          : '')
       },
       creator () {
         return this.meeting.hasOwnProperty('creator')
@@ -224,10 +231,24 @@
           : ''
       },
       meetingType () {
-        return this.meeting.hasOwnProperty('type')
-          ? `Reunión ${this.$constants.MEETING_TYPE_READABLE[this.meeting.type]}`
-          : ''
+        return (this.meeting.hasOwnProperty('type')
+          ? `${this.$constants.MEETING_TYPE_READABLE[this.meeting.type]}`
+          : '') +
+          (this.meeting.frecuency
+          ? ` -  ${this.$constants.MEETING_FRECUENCY[this.meeting.frecuency]}`
+          : '')
       },
+      applyNames () {
+        return this.meeting.names
+          .join(', ')
+      },
+      meetingName () {
+        return (this.meeting.hasOwnProperty('names') && this.meeting.type === 'FRECUENCY'
+          ? `
+          de  ${this.applyNames}`
+          : '')
+      },
+
       recommendationTypes () {
         if (!this.meeting.hasOwnProperty('recommendations')) {
           return ''

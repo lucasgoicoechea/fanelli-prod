@@ -254,14 +254,16 @@ const constants = {
     OPERATIVE: 'OPERATIVE',
     SAFETY: 'SAFETY',
     DISCIPLINE: 'DISCIPLINE',
-    MONTHLY: 'MONTHLY'
+    MONTHLY: 'MONTHLY',
+    TRAINING: 'TRAINING'
   },
   READABLE_RECOMMENDATION_MEETING: {
     OPERATIVE: 'operativa',
     SAFETY: 'seguridad',
     DISCIPLINE: 'disciplina',
     /* TODO create migration to replace MONTHLY recommendation meeting */
-    MONTHLY: 'mensual del sector'
+    MONTHLY: 'mensual del sector',
+    TRAINING: 'Capacitación'
   },
   OCCURRENCE_STATE: {
     PENDING_RESOLUTION: 'PENDING_RESOLUTION',
@@ -280,7 +282,8 @@ const constants = {
   OCCURRENCE_RECOMENDATION_READABLE: {
     OPERATIVE: 'Operativa',
     SAFETY: 'Seguridad',
-    DISCIPLINE: 'Disciplina'
+    DISCIPLINE: 'Disciplina',
+    TRAINING: 'Capacitación'
   },
   MEETING_TYPE: {
     INDIVIDUAL: 'INDIVIDUAL',

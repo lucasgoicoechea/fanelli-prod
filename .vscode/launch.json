@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+    "name": "Run Express",
+    "type": "node",
+    "request": "launch",
+    "stopOnEntry": true,
+    "args": [],
+    "cwd": "${workspaceRoot}",
+    "preLaunchTask": null,
+    "runtimeExecutable": "npm",
+    "runtimeArgs": ["run start"],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "console": "integratedTerminal",
+    "sourceMaps": false,
+    
+}
+    ]
+}

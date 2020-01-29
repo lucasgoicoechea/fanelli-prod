@@ -59,6 +59,21 @@ router.get('/:id', meetingController.getById)
 router.get('', meetingController.listMyMeetings)
 
 /**
+ * @api {get} /api/meeting/to/:id Get sanctions done to a collaborator
+ * @apiName get sanctions to
+ * @apiGroup Meeting
+ *
+ * @apiUse JWT
+ * @apiParam {string} :id collaborator id
+ * @apiUse pagination
+ *
+ * @apiSuccess {Object[]} meeting Array containing meeting
+ * @apiUse sanctionEntity
+ *
+ */
+router.get('/to/:id',  meetingController.getDoneTo)
+
+/**
  * @api {delete} /api/meeting/:id Remove a meeting
  * @apiName Remove meeting
  * @apiGroup Meeting

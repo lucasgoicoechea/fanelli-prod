@@ -46,6 +46,7 @@ import ProfileArchiveNews from '@/components/profile/ProfileArchiveNews'
 import ProfileArchiveStaffRequests from '@/components/profile/ProfileArchiveStaffRequests'
 import ProfileArchiveSanctions from '@/components/profile/ProfileArchiveSanctions'
 import ProfileArchiveOccurrences from '@/components/profile/ProfileArchiveOccurrences'
+import ProfileArchiveMeeting from '@/components/profile/ProfileArchiveMeetings'
 
 // Personal
 import PersonalIndex from '@/components/personal/PersonalIndex'
@@ -239,6 +240,15 @@ const router = new Router({
                   path: 'acontecimientos',
                   name: 'profile-archive-occurrences',
                   component: ProfileArchiveOccurrences,
+                  meta: {
+                    permission: 'any',
+                    fail: '/error'
+                  }
+                },
+                {
+                  path: 'reuniones',
+                  name: 'profile-archive-meetings',
+                  component: ProfileArchiveMeeting,
                   meta: {
                     permission: 'any',
                     fail: '/error'
