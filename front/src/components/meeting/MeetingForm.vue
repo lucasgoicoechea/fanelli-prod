@@ -3,12 +3,29 @@
     <div class="container-fluid">
 
       <div class="row">
+      
         <div class="col-xs-12">
           <h3>Selección de participante/s</h3>
           <collaborator-selector
             :multipleSelection="true"
              typeList="full"
             :preSelection="editable.collaborators"></collaborator-selector>
+        </div>
+        <div class="col-xs-12">
+          <h3>Selección de Editor/s</h3>
+           <div class="row">
+              <div
+              class="col-md-6"
+              v-for="collaborator in listCollaboratorsSelected"
+              :key="collaborator._id">
+              <check-box
+                class="margin"
+                v-model="meeting.editors"
+                :val="collaborator._id"
+                :label="'Leg.' + collaborator.legajo "></check-box>
+               <span>{{collaborator.lastname + ', ' + collaborator.name}} </span>
+            </div>
+          </div>
         </div>
 
         <div class="col-xs-12">
@@ -97,7 +114,7 @@
         <div class="col-xs-12">
           <h3>FECHA REUNIÓN</h3>
          <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="calendar">
               <div class="picker">
                 <flat-pickr
@@ -109,14 +126,14 @@
               <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
             </div>
           </div>
-          <div class="col-md-3" >
+          <div class="col-md-3" style="float: left" >
               <h3>Hora</h3>
               <input type="time" v-model="meeting.time">
-              <label v-show="meeting.type && meeting.type ==='FRECUENCY'"><span><input type="checkbox" v-model="meeting.repeatEdit"  >
+              <label v-show="false"><span><input type="checkbox" v-model="meeting.repeatEdit"  >
                 Editar repeticiones
               </span></label>
           </div>
-          <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY'">
+          <div class="col-md-3" v-show="meeting.type && meeting.type ==='FRECUENCY' && meeting.frecuency !=='MONTHLY'">
             <h3>Hasta</h3>
             <div class="calendar">
               <div class="picker">
@@ -127,6 +144,19 @@
                   placeholder="Seleccione una fecha"></flat-pickr>
               </div>
               <button class="button" @click="clearDatePicker('_flatpickrFrom')">Borrar</button>
+            </div>
+          </div>  
+          <div class="col-md-4" v-for="nro in 11" :key="nro" v-show="meeting.type && meeting.type ==='FRECUENCY' && meeting.frecuency ==='MONTHLY'">
+            <h3>Reunión {{nro}}</h3>
+            <div class="calendar">
+              <div class="picker">
+                <flat-pickr
+                  v-model="meeting.dates[nro-1]"
+                  :config="confPicker"
+                  ref="_flatpickrs" 
+                  placeholder="Seleccione una fecha"></flat-pickr>
+              </div>
+              <button class="button" @click="clearDatePicker('_flatpickrs[{{nro}}]')">Borrar</button>
             </div>
           </div>          
         </div>
@@ -159,6 +189,10 @@
       CheckBox
     },
     props: {
+      preSelection: {
+        type: Array,
+        default: () => ([])
+      },
       editable: {
         type: Object,
         default: () => ({})
@@ -182,6 +216,7 @@
         },
         datePicker: null,
         datePickerFrom: null,
+        datesPicker: [],
         isFrecuency: false
       }
     },
@@ -190,6 +225,14 @@
       this.datePickerFrom = (this.$refs._flatpickrFrom)
       ? this.$refs._flatpickrFrom.fp
       : null
+      if (this.$refs._flatpickrs) {
+        for (var i = 0; i <= 10; i++) {
+          var efp = this.$refs._flatpickrs[i]
+          this.datesPicker[i] = (efp)
+          ? efp.fp
+          : null
+        }
+      }
       this.$emit('update', {
         validation: this.validate(),
         form: this.meeting
@@ -199,6 +242,7 @@
       generateData () {
         return {
           collaborators: this.editable.collaborators || [],
+          editors: this.editable.editors || [],
           type: this.editable.type || [],
           frecuency: this.editable.frecuency || [],
           weeklys: this.editable.weeklys || [],
@@ -207,6 +251,7 @@
           description: this.editable.description || '',
           date: this.editable.date || new Date(),
           dateFrom: this.editable.dateFrom || new Date(),
+          dates: this.editable.dates || [],
           time: this.editable.time || this.getTime(),
           repeatEdit: false
         }
@@ -230,6 +275,15 @@
         if (this.datePickerFrom !== null) {
           this.datePickerFrom.setDate(this.editable.dateFrom)
         }
+        for (var i = 0; i <= 10; i++) {
+          var efp = this.$refs._flatpickrs[i]
+          if (this.datePickers[i] == null && efp) {
+            this.datePickers[i] = efp.fp
+          }
+          if (this.datePickers[i] !== null) {
+            this.datePickers[i].setDate(this.editable.dates[i])
+          }
+        }
       },
       validate () {
         if (!this.hasSelected) {
@@ -246,6 +300,9 @@
         }
         return {valid: true, msg: 'OK'}
       },
+      /* setEditors () {
+        this.meeting.editors = this.getSelectedEditorsIds
+      }, */
       setCollaborators () {
         this.meeting.collaborators = this.getSelectedIds
       },
@@ -258,8 +315,14 @@
           (this.datePickerFrom && this.datePickerFrom.latestSelectedDateObj)
             ? this.datePickerFrom.latestSelectedDateObj.getTime()
             : ''
+        for (var i = 0; i <= 10; i++) {
+          this.meeting.dates[i] = (this.datesPicker[i] && this.datesPicker[i].latestSelectedDateObj)
+            ? this.datesPicker[i].latestSelectedDateObj.getTime()
+            : ''
+        }
       },
       prepareMeeting () {
+        // this.setEditors()
         this.setCollaborators()
         this.setDateRange()
       }
@@ -285,6 +348,16 @@
         },
         deep: true
       },
+      /* getSelectedEditorsIds: {
+        handler: function () {
+          this.prepareMeeting()
+          this.$emit('update', {
+            validation: this.validate(),
+            form: this.meeting
+          })
+        },
+        deep: true
+      }, */
       editable: {
         handler: function () {
           this.meeting = this.generateData()
@@ -303,7 +376,8 @@
       ]),
       ...mapState('collaborators', [
         'collaboratorSelected',
-        'showList'
+        'showList',
+        'listCollaboratorsSelected'
       ])
     }
   }

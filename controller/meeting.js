@@ -19,9 +19,11 @@ const controller = {
   create: async(function (req, res) {
     let meeting = {
       collaborators: req.body.meeting.collaborators,
+      editors: req.body.meeting.editors,
       creator: req.user.id,
       type: req.body.meeting.type,
       frecuency: req.body.meeting.frecuency,
+      dates: req.body.meeting.dates,
       date: req.body.meeting.date,
       dateFrom: req.body.meeting.dateFrom,
       recommendations: req.body.meeting.recommendations,
@@ -51,6 +53,38 @@ const controller = {
       }))
     res.json({success: true, meetings})
   }),
+  getAllDoneTo: async(function (req, res, next) {
+    let meetings
+    meetings = awaitFor(meetingService.listMyMeetingsAll(req.query.userId, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    res.json({success: true, meetings})
+  }),
+  getAllPassTo: async(function (req, res, next) {
+    let meetings
+    var idus = req.query.userId;
+    meetings = awaitFor(meetingService.listMyMeetingsAllPass(idus, {
+        perPage: req.query.per_page,
+        page: req.query.page,
+        date: req.query.date,
+        type: req.query.type,
+        frecuency: req.query.frecuency
+      }))
+    res.json({success: true, meetings})
+  }),
+  getAllPassMe: async(function (req, res, next) {
+    let meetings
+    var idus = req.user.id;
+    meetings = awaitFor(meetingService.listMyMeetingsAllPass(idus, {
+        perPage: req.query.per_page,
+        page: req.query.page,
+        date: req.query.date,
+        type: req.query.type,
+        frecuency: req.query.frecuency
+      }))
+    res.json({success: true, meetings})
+  }),
   getById: async(function (req, res) {
     const meeting = awaitFor(meetingService.getById(req.params.id))
     res.json({success: true, meeting})
@@ -67,11 +101,33 @@ const controller = {
     }
     res.json({success: true, meetings})
   }),
+  getActiveByMe: async(function (req, res) {
+    const meetings = awaitFor(meetingService.getActiveByUser(req.user.id, {
+      perPage: req.query.per_page,
+      page: req.query.page
+    }, {collaborator: req.query.collaborator, date: req.query.date, teamOf: req.user.id}))
+    res.send({success: true, requests: meetings})
+  }),
+  listMyMeetingsNotPassed: async(function (req, res, next) {
+    let meetings
+    meetings = awaitFor(meetingService.listMyMeetings(req.query.userId, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    res.json({success: true, meetings})
+  }),
   remove: async(function (req, res, next) {
     if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !meetingService.isCreator(req.user.id, req.params.id)) {
       return next(new AppError('Impossible delete', 'No se puede eliminar', Const.ERROR.DOCUMENT_CANT_BE_REMOVED))
     }
     awaitFor(meetingService.remove(req.params.id))
+    res.json({success: true, message: 'Reunion eliminada'})
+  }),
+  removeAll: async(function (req, res, next) {
+    if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !meetingService.isCreator(req.user.id, req.params.id)) {
+      return next(new AppError('Impossible delete', 'No se puede eliminar', Const.ERROR.DOCUMENT_CANT_BE_REMOVED))
+    }
+    awaitFor(meetingService.removeAll(req.params.id))
     res.json({success: true, message: 'Reunion eliminada'})
   }),
   /**
@@ -96,8 +152,10 @@ const controller = {
 
     let meeting = {
       collaborators: req.body.meeting.collaborators,
+      editors: req.body.meeting.editors,
       type: req.body.meeting.type,
       date: req.body.meeting.date,
+      dates: req.body.meeting.dates,
       recommendations: req.body.meeting.recommendations,
       description: req.body.meeting.description,
       frecuency: req.body.meeting.frecuency,

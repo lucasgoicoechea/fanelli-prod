@@ -75,12 +75,25 @@
         buttonHeight="50px"></blockable-button>
 
       <blockable-button
-        v-show="$can($constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH)"
+        v-show="$can($constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH)"
         class="margin"
         icon="/static/img/checklists/cross.svg"
         title="eliminar"
         :clickMethod="cancelModal"
         :isLoading="loaderCancel"
+        buttonBackgroundColor="#F44336"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px"></blockable-button>
+  
+      <blockable-button
+        v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) &&  meeting.hasOwnProperty('_originId')"
+        class="margin"
+        icon="/static/img/checklists/cross-repeat.svg"
+        title="eliminar con repeticiones"
+        :clickMethod="cancelModalAll"
+        :isLoading="loaderCancelAll"
         buttonBackgroundColor="#F44336"
         iconPadding="10px"
         buttonRadius="50px"
@@ -115,7 +128,8 @@
           names: []
         },
         loaderPrint: false,
-        loaderCancel: false
+        loaderCancel: false,
+        loaderCancelAll: false
       }
     },
     created () {
@@ -184,6 +198,33 @@
         return this.$store.dispatch('meetings/cancel', this.meeting)
           .then(this.successfulCancellation)
           .catch(this.failedCancellation)
+      },
+      cancelAll () {
+        this.loaderCancel = true
+        return this.$store.dispatch('meetings/cancelAll', this.meeting)
+          .then(this.successfulCancellation)
+          .catch(this.failedCancellation)
+      },
+      cancelModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Eliminación',
+          text: '¿Esta seguro de eliminar esta reunión y sus repeticiones?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.cancelAll()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
       },
       cancelModal () {
         this.$modal.show('dialog', {
@@ -261,7 +302,8 @@
         }
         return this.$can(this.$constants.ROLES.JEFES + '|' + this.$constants.ROLES.RRHH) ||
           this.meeting.creator.id === this.user.id ||
-          this.meeting.creator.id === this.user._id
+          this.meeting.creator.id === this.user._id ||
+          this.meeting.editors.includes(this.user.id)
       }
     }
   }

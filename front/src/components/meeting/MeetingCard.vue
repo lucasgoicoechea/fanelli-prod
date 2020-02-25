@@ -6,7 +6,7 @@
           :headerBackground="headerBackground"
           :subHeaderBackground="subHeaderBackground">
           <div slot="header" class="header">
-            <span>{{ meetingType }}  {{ meetingName }}</span>
+            <span>{{ meetingType }}  {{ meetingName }} </span>
             <span
               class="involved"
               v-show="isInvolved">PARTICIPANTE</span>
@@ -63,7 +63,15 @@
         'user'
       ]),
       headerBackground () {
-        return '#1e3773'
+        if (this.meeting.hasOwnProperty('date')) {
+          if (dateAndTime.compareDate(new Date(), this.meeting.date) === 0) {
+            return '#3ecc1a'
+          }
+          if (dateAndTime.compareDate(new Date(), this.meeting.date) > 0) {
+            return '#1e3773'
+          }
+        }
+        return 'red'
       },
       subHeaderBackground () {
         return '#8090b7'

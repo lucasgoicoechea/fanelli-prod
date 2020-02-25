@@ -1,6 +1,5 @@
 <template>
   <div class="meeting-list">
-    
     <div
       class="cards-container"
       v-infinite-scroll="fetch"
@@ -26,13 +25,12 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
   import Navigation from '@/components/Navigation.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import MeetingCard from '@/components/meeting/MeetingCard.vue'
 
   export default {
-    name: 'ProfileArchiveMeetings',
+    name: 'MeetingHistoryListActive',
     components: {
       MeetingCard,
       Navigation,
@@ -51,20 +49,17 @@
       }
     },
     created () {
-      this.fullAccess = true
+      this.fullAccess = this.$can(this.$constants.ROLES.JEFES)
     },
     methods: {
       fetch () {
-        if (this.user) {
-          this.meeting.loading = true
-          const action = (this.fullAccess)
-            ? 'meetings/fetchAllTo'
-            : 'meetings/fetchAllTo'
-
-          this.$store.dispatch(action, {userId: this.$route.params.id, page: this.meeting.page})
-            .then(this.successFetch)
-            .catch(this.failFetch)
-        }
+        this.meeting.loading = true
+        const action = (this.fullAccess)
+          ? 'meetings/fetchActive'
+          : 'meetings/fetchActive'
+        this.$store.dispatch(action, {page: this.meeting.page})
+          .then(this.successFetch)
+          .catch(this.failFetch)
       },
       successFetch (response) {
         if (response.meetings.length === 0) {
@@ -89,9 +84,6 @@
       }
     },
     computed: {
-      ...mapState('users', [
-        'user'
-      ]),
       notUpdateList () {
         return this.notUpdate(this.meeting)
       },

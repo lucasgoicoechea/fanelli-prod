@@ -21,6 +21,10 @@ const meetingSchema = new Schema({
     ref: 'User',
     required: true
   }],
+  editors: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -57,6 +61,9 @@ const meetingSchema = new Schema({
     type: Date,
     required: true
   },
+  dates: [{
+    type: Date
+  }],
   time: {
     type: String
   },

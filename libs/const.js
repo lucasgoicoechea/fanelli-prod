@@ -48,7 +48,8 @@ const constants = {
     EXTRA_HOURS: 'EXTRA_HOURS',
     LEAVE: 'LEAVE',
     STAFF_REQUEST: 'STAFF_REQUEST',
-    OCCURRENCE: 'OCCURRENCE'
+    OCCURRENCE: 'OCCURRENCE',
+    MEETING: 'MEETING'
   },
 
   SHIFTS: ['T1', 'T2', 'T3', 'T4', 'D67', 'D68'],

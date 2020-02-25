@@ -412,7 +412,7 @@ export default {
   },
   MEETING_FRECUENCY: {
     DAILY: 'Diaria',
-    // MONTHLY: 'Mensual',
+    MONTHLY: 'Mensual',
     WEEKLY: 'Semanal'
   },
   WEEKLY_MEETING_FRECUENCY: {

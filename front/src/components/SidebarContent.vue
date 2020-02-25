@@ -224,6 +224,13 @@
                 type: 'meeting-list',
                 route: {name: 'meeting-list'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Mis Reuniones Historico',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-history',
+                route: {name: 'meeting-history'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
               }
             ]
           },

@@ -59,6 +59,20 @@ router.get('/:id', meetingController.getById)
 router.get('', meetingController.listMyMeetings)
 
 /**
+ * @api {get} /api/meeting/notpassed Get meetings
+ * @apiName get meetings
+ * @apiGroup Meeting
+ *
+ * @apiUse JWT
+ * @apiUse pagination
+ * @apiSuccess {Object[]} meetings Array containing meetings
+ * @apiUse meetingEntity
+ *
+ */
+// router.get('/notpassed/',meetingController.listMyMeetingsNotPassed)
+router.get('/by-me/active', meetingController.getActiveByMe)
+
+/**
  * @api {get} /api/meeting/to/:id Get sanctions done to a collaborator
  * @apiName get sanctions to
  * @apiGroup Meeting
@@ -74,6 +88,23 @@ router.get('', meetingController.listMyMeetings)
 router.get('/to/:id',  meetingController.getDoneTo)
 
 /**
+ * @api {get} /api/meeting/to/:id Get sanctions done to a collaborator
+ * @apiName get sanctions to
+ * @apiGroup Meeting
+ *
+ * @apiUse JWT
+ * @apiParam {string} :id collaborator id
+ * @apiUse pagination
+ *
+ * @apiSuccess {Object[]} meeting Array containing meeting
+ * @apiUse sanctionEntity
+ *
+ */
+router.get('/all/:id',  meetingController.getAllDoneTo)
+router.get('/pass/:id', meetingController.getAllPassTo)
+router.get('/pass-me/:id', meetingController.getAllPassMe)
+
+/**
  * @api {delete} /api/meeting/:id Remove a meeting
  * @apiName Remove meeting
  * @apiGroup Meeting
@@ -84,6 +115,8 @@ router.get('/to/:id',  meetingController.getDoneTo)
  *
  */
 router.delete('/:id', meetingController.remove)
+router.delete('/:id/all', meetingController.removeAll)
+
 
 /**
  * @api {put} /api/meeting/:id Edit meeting info

@@ -89,6 +89,48 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
+  fetchPass (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    // console.dir(context)
+    return Vue.http.get('meeting/pass/' + payload.userId, {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
+  fetchPassMe (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    // console.dir(context)
+    return Vue.http.get('meeting/pass-me/' + payload.userId, {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
+  fetchActive (context, payload) {
+    const params = (payload !== undefined) ? payload : {}
+    const fetched = (response) => {
+      return response.body
+    }
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get('meeting/by-me/active', {params})
+      .then(fetched)
+      .catch(handleError)
+  },
   print ({dispatch}, meeting) {
     const success = (response) => {
       const blob = new Blob([response.data], {type: response.headers.get['content-type']})
@@ -118,22 +160,19 @@ const actions = {
       .then(deleted)
       .catch(handleError)
   },
-  /* getAll ({commit, dispatch}, payload) {
-    const success = (res) => {
-      endLoading(dispatch, `meetingRequet fetchAll`)
-      return res.body
+  cancelAll (context, meeting) {
+    const deleted = (response) => {
+      return response.body
     }
 
-    const failure = (err) => {
-      endLoading(dispatch, `meetingRequet fetchAll`)
-      return Promise.reject(err)
+    const handleError = (error) => {
+      return Promise.reject(error)
     }
 
-    startLoading(dispatch, `meetingRequet fetchAll`)
-    return Vue.http.get(`meeting/to/${payload}`)
-      .then(success)
-      .catch(failure)
-  }, */
+    return Vue.http.delete(`meeting/${meeting._id}/all`)
+      .then(deleted)
+      .catch(handleError)
+  },
   fetchAll (context, payload) {
     const fetched = (response) => {
       return response.body
@@ -144,6 +183,21 @@ const actions = {
     }
 
     return Vue.http.get('meeting/to/' + payload.userId, {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
+  fetchAllTo (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+
+    return Vue.http.get('meeting/all/' + payload.userId, {
       params: payload
     })
       .then(fetched)
