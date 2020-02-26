@@ -68,10 +68,10 @@
             return '#3ecc1a'
           }
           if (dateAndTime.compareDate(new Date(), this.meeting.date) > 0) {
-            return '#1e3773'
+            return 'red'
           }
         }
-        return 'red'
+        return '#1e3773'
       },
       subHeaderBackground () {
         return '#8090b7'
