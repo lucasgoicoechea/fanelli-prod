@@ -163,10 +163,10 @@
         </div>
         <div class="col-xs-12">
           <h3>Resumen/Temas</h3>
-          <textarea
-            class="textarea"
-            v-model="meeting.description"
-            placeholder="Escriba aquí el resumen de la reunión"></textarea>
+          <vue-editor
+          v-model="meeting.description"
+          placeholder="Escriba aquí el resumen de la reunión"
+          :editorToolbar="customToolbar"></vue-editor>
         </div>
       </div>
 
@@ -180,11 +180,13 @@
   import { mapState, mapGetters } from 'vuex'
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector'
   import CheckBox from '@/components/CheckBoxInput'
+  import { VueEditor } from 'vue2-editor'
   import { Spanish } from 'flatpickr/dist/l10n/es'
 
   export default {
     name: 'MeetingForm',
     components: {
+      VueEditor,
       CollaboratorSelector,
       CheckBox
     },

@@ -61,6 +61,14 @@ const initialState = () => ({
     {
       type: Constants.event_types.HOLIDAYS,
       name: 'Vacaciones'
+    },
+    {
+      type: Constants.event_types.EXTRAORDINARY,
+      name: 'Extraordinaria'
+    },
+    {
+      type: Constants.event_types.COVID19,
+      name: 'COVID19'
     }
   ],
   medicInformTypes: [

@@ -25,6 +25,12 @@
 
     <div v-show="!isAWeek && !todayEmpty">
       <h4 class="title">Diarias</h4>
+      <button
+          class="report-button"
+          @click="getReportForDay">
+          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+          Generar reporte
+      </button>
       <div
         class="collaborators"
         v-for="(availability, index) in availabilities">
@@ -68,6 +74,7 @@
 <script>
   import Spinner from '@/components/SpinnerWrapper'
   import WidgetAvailabilityCard from '@/components/widgets/availability/WidgetAvailabilityCard'
+  import pdf from '@/utils/pdf'
 
   export default {
     name: 'WidgetAvailabilityContainer',
@@ -111,6 +118,17 @@
       this.fetch()
     },
     methods: {
+      successfulPrint (blob) {
+        pdf.download(blob, 'report.xlsx')
+      },
+      errorPrint () {
+        this.$snotifyWrapper.warning('Error de impresión. Intente nuevamente')
+      },
+      getReportForDay () {
+        this.$store.dispatch('users/getAllReportDay', this.dateRangeBackendFormat.from)
+          .then(this.successfulPrint)
+          .catch(this.errorPrint)
+      },
       fetch () {
         this.queuedRequests += 1
         this.$store.dispatch('widgets/fetchAvailability', this.dateRangeBackendFormat)

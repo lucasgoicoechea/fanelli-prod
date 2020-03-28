@@ -3,11 +3,11 @@
       
         "production": {
             "driver": "mongodb",
-            "database": "fanelli_prod",
+            "database": "fanelli",
             "host": "localhost",
-            "process.env.DB_NAME"  : "fanelli_prod",
-            "process.env.MONGO_URL" :"mongodb://localhost:27017/fanelli_prod",
-            "DB_NAME"  : "fanelli_prod"
+            "process.env.DB_NAME"  : "fanelli",
+            "process.env.MONGO_URL" :"mongodb://localhost:27017/fanelli",
+            "DB_NAME"  : "fanelli"
       }
       
     }

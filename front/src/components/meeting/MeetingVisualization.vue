@@ -30,7 +30,9 @@
 
         <div class="reason">
           <h4>Resumen</h4>
-          <p>{{ meeting.description }}</p>
+          <div class="visor" >
+            <div  v-html="meeting.description"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -111,12 +113,14 @@
   import CardCollaboratorFull from '@/components/cards/CardCollaboratorFull'
   import Spinner from '@/components/SpinnerWrapper'
   import pdf from '@/utils/pdf'
+  import { VueEditor } from 'vue2-editor'
   import { mapState } from 'vuex'
 
   export default {
     name: 'MeetingVisualization',
     components: {
       Navigation,
+      VueEditor,
       BlockableButton,
       CardCollaboratorFull,
       Spinner
@@ -129,7 +133,13 @@
         },
         loaderPrint: false,
         loaderCancel: false,
-        loaderCancelAll: false
+        loaderCancelAll: false,
+        editorSettings: {
+          modules: {
+            toolbar: false
+          }
+        },
+        editorConfig: [ ]
       }
     },
     created () {
@@ -289,7 +299,6 @@
           de  ${this.applyNames}`
           : '')
       },
-
       recommendationTypes () {
         if (!this.meeting.hasOwnProperty('recommendations')) {
           return ''
@@ -313,6 +322,19 @@
   @import "~@/assets/styles/_variables.scss";
   @import "~@/assets/styles/_mixins.scss";
 
+  #editor1 .ql-toolbar .ql-snow{
+    display: none;
+  }
+
+  .visor{
+    position: relative;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border-style: solid;
+    border-color: gray;
+  }
   .meeting-detail {
     display: flex;
     flex-direction: row;

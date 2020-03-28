@@ -132,6 +132,16 @@ const typeMsg = {
     return `Vacaciones
       desde ${dateAndTime.dateDayAndMonth(params.from)}
       hasta ${dateAndTime.dateDayAndMonth(params.to)}.`
+  },
+  'EXTRAORDINARY': (params) => {
+    return `Extraordinaria 
+      desde ${dateAndTime.dateDayAndMonth(params.from)}
+      hasta ${dateAndTime.dateDayAndMonth(params.to)}.`
+  },
+  'COVID19': (params) => {
+    return `COVID19 
+      desde ${dateAndTime.dateDayAndMonth(params.from)}
+      hasta ${dateAndTime.dateDayAndMonth(params.to)}.`
   }
 }
 

@@ -237,6 +237,20 @@ const actions = {
       .then(success)
       .catch(handleError)
   },
+  getAllReportDay (context, day) {
+    const success = (response) => {
+      return new Blob([response.data], {type: response.headers.get['content-type']})
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get(`report/day/${day}`,
+      {responseType: 'arraybuffer'}
+    )
+      .then(success)
+      .catch(handleError)
+  },
   getAllReport (context) {
     const success = (response) => {
       return new Blob([response.data], {type: response.headers.get['content-type']})

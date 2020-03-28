@@ -65,13 +65,13 @@
       headerBackground () {
         if (this.meeting.hasOwnProperty('date')) {
           if (dateAndTime.compareDate(new Date(), this.meeting.date) === 0) {
-            return '#3ecc1a'
+            return '#1e3773'
           }
           if (dateAndTime.compareDate(new Date(), this.meeting.date) > 0) {
-            return 'red'
+            return '#3ecc1a'
           }
         }
-        return '#1e3773'
+        return 'red'
       },
       subHeaderBackground () {
         return '#8090b7'

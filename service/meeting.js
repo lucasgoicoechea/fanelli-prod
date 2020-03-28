@@ -215,10 +215,14 @@ const createRepetitionsMeeting = function (meeting) {
           //console.log(m.format('YYYY-MM-DD'));
           if (firts){
             meetingT = awaitFor(MeetingModel.create(meeting));
-            firts = false;
           }
           tmp = m.clone();
-          cloneWithAnotherDate(meetingT,new Date(tmp.locale("en").add(1, 'd').format("YYYY-MM-DD")));
+          if (!firts){
+            cloneWithAnotherDate(meetingT,new Date(tmp.locale("en").add(1, 'd').format("YYYY-MM-DD")));
+          }
+          else {
+            firts = false;
+          }
           m.add(7, 'days'); 
         }
         });
