@@ -22,15 +22,20 @@
           :availability="availability"></widget-availability-card>
       </div>
     </div>
-
-    <div v-show="!isAWeek && !todayEmpty">
-      <h4 class="title">Diarias</h4>
-      <button
+    <button
           class="report-button"
           @click="getReportForDay">
           <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
           Generar reporte
-      </button>
+     </button>
+    <div v-show="!isAWeek && !todayEmpty">
+      <h4 class="title">Diarias</h4>
+      <!--<button
+          class="report-button"
+          @click="getReportForDay">
+          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+          Generar reporte
+      </button> -->
       <div
         class="collaborators"
         v-for="(availability, index) in availabilities">

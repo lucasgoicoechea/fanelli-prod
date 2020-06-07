@@ -217,6 +217,14 @@ const constants = {
     REJECTED: 2
   },
 
+  MEETING_STATE: {
+    PROGRAMMED: 0,
+    EXECUTED: 1,
+    DONE: 2,
+    UNREALIZED: 3,
+    REPROGRAMED: 4
+  },
+
   LEAVE_RESOLUTION: {
     COMPENSATE: 'COMPENSATE',
     NO_COMPENSATE: 'NO_COMPENSATE',

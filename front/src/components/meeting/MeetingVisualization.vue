@@ -27,6 +27,11 @@
             <span>Tipo:</span>
             {{ recommendationTypes }}</h4>
         </div>
+        <div class="recommendations">
+          <h4>
+            <span>ESTADO:</span>
+            <span :class="meetingStateClass"> {{ meetingState }}</span></h4>
+        </div>
 
         <div class="reason">
           <h4>Resumen</h4>
@@ -289,6 +294,17 @@
           ? ` -  ${this.$constants.MEETING_FRECUENCY[this.meeting.frecuency]}`
           : '')
       },
+      meetingState () {
+        return (this.meeting.hasOwnProperty('state')
+          ? `${this.$constants.MEETING_STATE_READABLE[this.meeting.state]}`
+          : '')
+      },
+      meetingStateClass () {
+        return (this.meeting.hasOwnProperty('state')
+          ? this.meeting.state === 0 ? 'name-subheader-text'
+          : 'visor'
+          : '')
+      },
       applyNames () {
         return this.meeting.names
           .join(', ')
@@ -399,6 +415,12 @@
         color: #555555;
       }
     }
+  }
+
+  .name-subheader-text {
+    color: #3e09d1;
+    background: #d3def7;
+    float: right;
   }
 
   .monospace {

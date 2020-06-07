@@ -166,7 +166,7 @@
           <vue-editor
           v-model="meeting.description"
           placeholder="Escriba aquí el resumen de la reunión"
-          :editorToolbar="customToolbar"></vue-editor>
+          :editorToolbar="defaultToolbar"></vue-editor>
         </div>
       </div>
 
@@ -219,7 +219,28 @@
         datePicker: null,
         datePickerFrom: null,
         datesPicker: [],
-        isFrecuency: false
+        isFrecuency: false,
+        customToolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          ['image', 'code-block']
+        ],
+        defaultToolbar: [
+          [{ header: [false, 1, 2, 3, 4, 5, 6] }],
+          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+          [
+            { align: '' },
+            { align: 'center' },
+            { align: 'right' },
+            { align: 'justify' }
+          ],
+          ['blockquote', 'code-block'],
+          [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
+          [{ indent: '-1' }, { indent: '+1' }],
+          [{ color: [] }, { background: [] }],
+          ['link'],
+          ['clean']
+        ]
       }
     },
     mounted () {

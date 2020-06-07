@@ -128,13 +128,15 @@ module.exports = {
     ]
     this.colorRow(sheet.getRow(1), 'FFFFA420')
     console.log('llegue2')
-    data.forEach(d => {
-      d.events
-      .map(e => e.toExcelObject())
-      .forEach(eventExcelObject => {
-        this.addEventsByDayFilter(eventExcelObject, d.collaborator, sheet, day)
+    if (data.length > 0 ) {
+      data.forEach(d => {
+        d.events
+        .map(e => e.toExcelObject())
+        .forEach(eventExcelObject => {
+          this.addEventsByDayFilter(eventExcelObject, d.collaborator, sheet, day)
+        })
       })
-    })
+    }
     sheet.autoFilter = {
       from: 'A1',
       to: 'C1'

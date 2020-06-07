@@ -273,12 +273,30 @@ export default {
     REJECTED: 2,
     ARCHIVED: 3
   },
+
+  MEETING_STATE: {
+    PROGRAMMED: 0,
+    EXECUTED: 1,
+    DONE: 2,
+    UNREALIZED: 3,
+    REPROGRAMED: 4
+  },
+
   STAFF_REQUEST_STATE_READABLE: {
     0: 'Pendiente',
     1: 'Aprobada',
     2: 'Rechazada',
     3: 'Archivada'
   },
+
+  MEETING_STATE_READABLE: {
+    0: 'Programada',
+    1: 'Ejecutada',
+    2: 'Realizada',
+    3: 'No Realizada',
+    4: 'Re-Programada'
+  },
+
   staff_requests_types_uri: {
     SHIFT_CHANGE: 'shift-change',
     EXTRA_HOURS: 'extra-hours',

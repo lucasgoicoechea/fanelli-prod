@@ -71,6 +71,11 @@ const meetingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Meeting',
     required: false
+  },
+  state: {
+    type: Number,
+    enum: Const.MEETING_STATE,
+    default: Const.MEETING_STATE.PROGRAMMED
   }
 }, {
   timestamps: {

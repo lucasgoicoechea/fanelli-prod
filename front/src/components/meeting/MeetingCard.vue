@@ -6,13 +6,16 @@
           :headerBackground="headerBackground"
           :subHeaderBackground="subHeaderBackground">
           <div slot="header" class="header">
-            <span>{{ meetingType }}  {{ meetingName }} </span>
+            <span>{{ meetingType }}  {{ meetingName }}</span>
             <span
               class="involved"
               v-show="isInvolved">PARTICIPANTE</span>
           </div>
           <p slot="subHeader" class="name-header-text"></p>
-          <p slot="subHeader" class="subheader-text">{{ recommendations }}</p>
+          <p slot="subHeader" class="subheader-text">{{ recommendations }}
+            <span  class="name-subheader-text">{{meetingState}}</span>
+          </p>
+           
         </card-header>
         <card-section>
           <div class="card-section" slot="content">
@@ -108,6 +111,11 @@
           ? ` -  ${this.$constants.MEETING_FRECUENCY[this.meeting.frecuency]}`
           : '')
       },
+      meetingState () {
+        return (this.meeting.hasOwnProperty('state')
+          ? `${this.$constants.MEETING_STATE_READABLE[this.meeting.state]}`
+          : '')
+      },
       meetingName () {
         return (this.meeting.hasOwnProperty('names') && this.meeting.type === 'FRECUENCY'
           ? `
@@ -156,6 +164,11 @@
     background: #d3def7;
   }
 
+  .name-subheader-text {
+    color: #3e09d1;
+    background: #d3def7;
+    float: right;
+  }
 
   .time {
     font-family: monospace;
