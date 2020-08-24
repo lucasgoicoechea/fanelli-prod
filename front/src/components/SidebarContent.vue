@@ -109,6 +109,12 @@
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
+                name: 'Partes',
+                type: 'control-supervisionparts',
+                route: {name: 'control-supervisionparts'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
                 name: 'Novedades',
                 type: 'control-novedades',
                 route: {name: 'control-novedades'},
@@ -171,6 +177,33 @@
                 type: 'desapiladora',
                 route: {name: 'checklist', params: {sector: 'DESAPILADORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              }
+            ]
+          },
+          {
+            name: 'Partes',
+            img: '/static/img/icons-sidebar/checklist.svg',
+            type: 'checklist',
+            can: authorize(ROLES.OFICIALES, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
+            routeName: 'supervisionpartsIndex',
+            submenu: [
+              {
+                name: 'Extrusora',
+                type: 'extrusora',
+                route: {name: 'supervisionpart', params: {sector: 'EXTRUSORA'}},
+                can: authorize(ROLES.OFICIAL_EXTRUSORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              },
+              {
+                name: 'Apiladora',
+                type: 'apiladora',
+                route: {name: 'supervisionpart', params: {sector: 'APILADORA'}},
+                can: authorize(ROLES.OFICIAL_APILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              },
+              {
+                name: 'Desapiladora',
+                type: 'desapiladora',
+                route: {name: 'supervisionpart', params: {sector: 'DESAPILADORA'}},
+                can: authorize(ROLES.OFICIAL_DESAPILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               }
             ]
           },
@@ -347,7 +380,7 @@
         }
       },
       isRouterSubItemActive (subItemRoute) {
-        if (subItemRoute.name === 'checklist') {
+        if (subItemRoute.name === 'checklist' || subItemRoute.name === 'supervisionpart') {
           return subItemRoute.params.sector === this.$route.params.sector
         } else {
           return subItemRoute === this.$route.name

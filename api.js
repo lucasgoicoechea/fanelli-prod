@@ -64,6 +64,7 @@ const Router = {
     app.use('/api/position', routes.position)
     app.use('/api/sector', routes.sector)
     app.use('/api/line', routes.line)
+    app.use('/api/supervisionpart', routes.supervisionpart)
     app.use('/doc', express.static('apidoc'))
     errorHandler(app)
   }

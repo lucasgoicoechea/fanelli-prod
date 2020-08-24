@@ -26,6 +26,12 @@ import ChecklistsList from '@/components/checklists/ChecklistsList'
 import ChecklistHistory from '@/components/checklists/ChecklistHistory'
 import ChecklistForm from '@/components/checklists/ChecklistForm'
 import ChecklistsControl from '@/components/checklists/ChecklistsControl'
+// Supervisionparts
+import SupervisionpartIndex from '@/components/supervisionParts/SupervisionpartIndex'
+import SupervisionpartList from '@/components/supervisionParts/SupervisionpartList'
+import SupervisionpartHistory from '@/components/supervisionParts/SupervisionpartHistory'
+import SupervisionpartForm from '@/components/supervisionParts/SupervisionpartForm'
+import SupervisionpartsControl from '@/components/supervisionParts/SupervisionpartControl'
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
 import ControlPanelIndex from '@/components/control/ControlPanelIndex'
@@ -299,6 +305,15 @@ const router = new Router({
               }
             },
             {
+              path: 'supervisionparts',
+              name: 'control-supervisionparts',
+              component: SupervisionpartsControl,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
               path: 'novedades',
               name: 'control-novedades',
               component: EventsIndex,
@@ -446,6 +461,47 @@ const router = new Router({
               component: ChecklistForm,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'supervisionpart',
+          component: SupervisionpartIndex,
+          name: 'supervisionpartsIndex',
+          redirect: {
+            name: 'supervisionparts'
+          },
+          meta: {
+            permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'supervisionparts',
+              component: SupervisionpartList,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial/:date',
+              name: 'supervisionpartsHistory',
+              component: SupervisionpartHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':sector',
+              name: 'supervisionpart',
+              component: SupervisionpartForm,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
                 fail: '/error'
               }
             }

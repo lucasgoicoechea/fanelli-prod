@@ -8,6 +8,7 @@
   import RequestNews from '@/components/requests/RequestNews.vue'
   import RequestChecklistObservation from '@/components/requests/RequestChecklistObservation.vue'
   import RequestChecklistGeneralObservation from '@/components/requests/RequestChecklistGeneralObservation.vue'
+  import RequestSupervisionpartGeneralObservation from '@/components/requests/RequestSupervisionpartGeneralObservation.vue'
   import RequestChecklistCheck from '@/components/requests/RequestChecklistCheck.vue'
 
   export default {
@@ -17,6 +18,7 @@
       NEWS: RequestNews,
       CHECKLIST_OBSERVATION: RequestChecklistObservation,
       CHECKLIST_GENERAL_OBSERVATION: RequestChecklistGeneralObservation,
+      SUPERVISIONPART_GENERAL_OBSERVATION: RequestSupervisionpartGeneralObservation,
       CHECKLIST_CHECK: RequestChecklistCheck
     },
     props: {

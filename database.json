@@ -1,7 +1,7 @@
 {
-        "defaultEnv": "production",
+        "defaultEnv": "localhost",
       
-        "production": {
+        "localhost": {
             "driver": "mongodb",
             "database": "fanelli",
             "host": "localhost",

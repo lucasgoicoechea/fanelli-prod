@@ -7,6 +7,10 @@ export default {
     // Supervisor de sector
     SUPERVISOR: 'SUPERVISOR',
     PERSONAL: 'PERSONAL',
+    // Oficial de sector
+    OFICIAL_EXTRUSORA: 'OFICIAL_EXTRUSORA',
+    OFICIAL_APILADORA: 'OFICIAL_APILADORA',
+    OFICIAL_DESAPILADORA: 'OFICIAL_DESAPILADORA',
     // Supervisor de higiene y seguridad
     HIGIENE_SEGURIDAD: 'HIGIENE_SEGURIDAD',
     JEFE_PLANTA: 'JEFE_PLANTA',
@@ -28,6 +32,10 @@ export default {
     SUPERVISOR_PANOL: 'Supervisor de pañol',
     // Supervisor de sector
     SUPERVISOR: 'Supervisor',
+    // Oficial de sector
+    OFICIAL_EXTRUSORA: 'Oficial Extrusora',
+    OFICIAL_APILADORA: 'Oficial Apiladora',
+    OFICIAL_DESAPILADORA: 'Oficial Desapiladora',
     // Supervisor de higiene y seguridad
     HIGIENE_SEGURIDAD: 'Higiene y Seguridad',
     JEFE_PLANTA: 'Jefe de Planta',
@@ -50,6 +58,10 @@ export default {
     SUPERVISOR_PANOL: 'SUPERVISOR_PANOL',
     // Supervisor de sector
     SUPERVISOR: 'SUPERVISOR',
+    // Oficial de sector
+    OFICIAL_EXTRUSORA: 'OFICIAL_EXTRUSORA',
+    OFICIAL_APILADORA: 'OFICIAL_APILADORA',
+    OFICIAL_DESAPILADORA: 'OFICIAL_DESAPILADORA',
     // Supervisor de higiene y seguridad
     HIGIENE_SEGURIDAD: 'HIGIENE_SEGURIDAD',
     JEFE_PLANTA: 'JEFE_PLANTA',
@@ -63,6 +75,7 @@ export default {
     RRHH: 'RRHH',
     OFICINA_TECNICA: 'OFICINA_TECNICA',
     JEFE_MANTENIMIENTO: 'JEFE_MANTENIMIENTO',
+    OFICIALES: ['OFICIAL_EXTRUSORA', 'OFICIAL_APILADORA', 'OFICIAL_DESAPILADORA'],
     SUPERVISORES: ['SUPERVISOR', 'SUPERVISOR_MANTENIMIENTO', 'SUPERVISOR_PRODUCCION', 'SUPERVISOR_PANOL'].join('|'),
     ADMINISTRACION: ['PERSONAL', 'RRHH', 'JEFE_PERSONAL'].join('|'),
     JEFES: ['JEFE_LINEA', 'JEFE_PLANTA', 'JEFE_MANTENIMIENTO', 'JEFE_SECTOR', 'JEFE_PERSONAL'].join('|'),
@@ -127,8 +140,10 @@ export default {
     EPP: 'EPP',
     NEWS: 'NEWS',
     CHECKLIST_GENERAL_OBSERVATION: 'CHECKLIST_GENERAL_OBSERVATION',
+    SUPERVISIONPART_GENERAL_OBSERVATION: 'SUPERVISIONPART_GENERAL_OBSERVATION',
     CHECKLIST_OBSERVATION: 'CHECKLIST_OBSERVATION',
-    CHECKLIST_CHECK: 'CHECKLIST_CHECK'
+    CHECKLIST_CHECK: 'CHECKLIST_CHECK',
+    SUPERVISIONPART_HOUR: 'SUPERVISIONPART_HOUR'
   },
 
   states: {
@@ -454,6 +469,33 @@ export default {
     DISCIPLINE: 'Disciplina',
     TRAINING: 'Capacitación'
   },
+  SUPERVISION_PART_SECTOR: {
+    EXTRUSORA: 'EXTRUSORA',
+    APILADORA: 'APILADORA',
+    DESAPILADORA: 'DESAPILADORA'
+  },
+  SUPERVISION_PART_UNIT_SECTOR: {
+    EXTRUSORA: 'ESTANTE',
+    APILADORA: 'VAGONETA',
+    DESAPILADORA: 'VAGONETA'
+  },
+  SUPERVISION_PART_MACHINE: {
+    M850: '850',
+    M750: '750',
+    M650: '650'
+  },
+
+  SUPERVISION_PART_MATERIAL: {
+    MOLDE_8: '8',
+    MOLDE_12_6A: '12-6A',
+    MOLDE_12_8A: '12-8A',
+    MOLDE_18: '18',
+    MOLDE_P12: 'P12',
+    MOLDE_P18: 'P18',
+    MOLDE_L11: 'L11',
+    MOLDE_C: 'C'
+  },
+
   FABRIC_ATTRIBUTE: {
     area: 'Área',
     position: 'Puesto',
@@ -461,6 +503,7 @@ export default {
     shift: 'Turno',
     line: 'Linea'
   },
+
   PROTECTED_SHIFT: {
     T1: 'T1 (10)',
     T2: 'T2 (11)',

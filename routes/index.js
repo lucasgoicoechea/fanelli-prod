@@ -49,5 +49,6 @@ module.exports = {
   sector: require(path.join(__dirname, '/sector')),
   position: require(path.join(__dirname, '/position')),
   line: require(path.join(__dirname, '/line')),
-  report: require(path.join(__dirname, '/report'))
+  report: require(path.join(__dirname, '/report')),
+  supervisionpart: require(path.join(__dirname, '/supervisionPart'))
 }

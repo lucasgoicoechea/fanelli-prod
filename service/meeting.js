@@ -148,7 +148,7 @@ function filterMeeting (meetingss, filters) {
   /*if (filters.collaborator) {
     eppCursor = eppCursor.where('collaborator').equals(filters.collaborator)
   }*/
-  console.dir(filters)
+  // console.dir(filters)
   if (filters.date) {
     filters.date = new Date (filters.date)
     meetingss = meetingss.where('date').gt(filters.date).lt(dateFns.addDays(filters.date, 1))

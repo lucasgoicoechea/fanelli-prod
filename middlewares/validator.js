@@ -128,6 +128,27 @@ const validator = {
       validatorMiddleware
     ]
   },
+  supervisionPart: {
+    hour: [
+      BODY_CHECK_ID_REQUIRED,
+      BODY_CHECK_VALUE_REQUIRED,
+      validatorMiddleware
+    ],
+    comment: [
+      BODY_CHECK_ID_REQUIRED,
+      BODY_CHECK_COMMENT_REQUIRED,
+      BODY_CHECKLIST_ID_REQUIRED,
+      validatorMiddleware
+    ],
+    observation: [
+      BODY_CHECK_OBSERVATION_REQUIRED,
+      validatorMiddleware
+    ],
+    pdf: [
+      QUERY_DATE_REQUIRED,
+      validatorMiddleware
+    ]
+  },
   staffNews: {
     create: [
       body('news').exists(),

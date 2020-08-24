@@ -45,5 +45,8 @@ module.exports = {
   line: require(path.join(__dirname, '/line')),
   sector: require(path.join(__dirname, '/sector')),
   area: require(path.join(__dirname, '/area')),
-  occurrence: require(path.join(__dirname, '/occurrence'))
+  occurrence: require(path.join(__dirname, '/occurrence')),
+  supervisionPart: require(path.join(__dirname, '/supervisionPart')),
+  hour: require(path.join(__dirname, '/hour')),
+  fail: require(path.join(__dirname, '/fail'))
 }
