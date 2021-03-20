@@ -64,6 +64,16 @@
       })
       // tipo de usuario
       this.currentView = auth.getUser().user_type
+      // DESVIO EL HOME HACIA LOS PARTES OFICIALES
+      if (auth.getUser().user_type === 'OFICIAL_EXTRUSORA') {
+        this.$router.push({name: 'supervisionpart', params: {sector: 'EXTRUSORA'}})
+      }
+      if (auth.getUser().user_type === 'OFICIAL_APILADORA') {
+        this.$router.push({name: 'supervisionpart', params: {sector: 'APILADORA'}})
+      }
+      if (auth.getUser().user_type === 'OFICIAL_DESAPILADORA') {
+        this.$router.push({name: 'supervisionpart', params: {sector: 'DESAPILADORA'}})
+      }
       /* setTimeout(function () {
         auth.logout();
         next({name: 'login'});

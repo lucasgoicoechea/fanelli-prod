@@ -75,7 +75,7 @@ export default {
     RRHH: 'RRHH',
     OFICINA_TECNICA: 'OFICINA_TECNICA',
     JEFE_MANTENIMIENTO: 'JEFE_MANTENIMIENTO',
-    OFICIALES: ['OFICIAL_EXTRUSORA', 'OFICIAL_APILADORA', 'OFICIAL_DESAPILADORA'],
+    OFICIALES: ['OFICIAL_EXTRUSORA', 'OFICIAL_APILADORA', 'OFICIAL_DESAPILADORA'].join('|'),
     SUPERVISORES: ['SUPERVISOR', 'SUPERVISOR_MANTENIMIENTO', 'SUPERVISOR_PRODUCCION', 'SUPERVISOR_PANOL'].join('|'),
     ADMINISTRACION: ['PERSONAL', 'RRHH', 'JEFE_PERSONAL'].join('|'),
     JEFES: ['JEFE_LINEA', 'JEFE_PLANTA', 'JEFE_MANTENIMIENTO', 'JEFE_SECTOR', 'JEFE_PERSONAL'].join('|'),
@@ -475,7 +475,7 @@ export default {
     DESAPILADORA: 'DESAPILADORA'
   },
   SUPERVISION_PART_UNIT_SECTOR: {
-    EXTRUSORA: 'ESTANTE',
+    EXTRUSORA: 'ESTANTERIA',
     APILADORA: 'VAGONETA',
     DESAPILADORA: 'VAGONETA'
   },
@@ -484,16 +484,87 @@ export default {
     M750: '750',
     M650: '650'
   },
-
+  SUPERVISION_PART_MACHINE_READBLE: {
+    850: 'M850',
+    750: 'M750',
+    650: 'M650'
+  },
+  SUPERVISION_PART_COUNT_APILADORA: {
+    12: '12',
+    11: '11',
+    10: '10',
+    9: '9',
+    8: '8',
+    7: '7',
+    6: '6',
+    5: '5',
+    4: '4',
+    3: '3',
+    2: '2',
+    1: '1',
+    0: '0'
+  },
+  SUPERVISION_PART_COUNT_DESAPILADORA: {
+    16: '16',
+    15: '15',
+    14: '14',
+    13: '13',
+    12: '12',
+    11: '11',
+    10: '10',
+    9: '9',
+    8: '8',
+    7: '7',
+    6: '6',
+    5: '5',
+    4: '4',
+    3: '3',
+    2: '2',
+    1: '1',
+    0: '0'
+  },
+  SUPERVISION_PART_UNIT_NYLON: {
+    100: '100',
+    101: '101',
+    102: '102',
+    103: '103',
+    104: '104',
+    105: '105',
+    106: '106',
+    107: '107',
+    108: '108',
+    109: '109',
+    110: '110',
+    111: '111',
+    112: '112',
+    113: '113',
+    114: '114',
+    115: '115'
+  },
   SUPERVISION_PART_MATERIAL: {
     MOLDE_8: '8',
     MOLDE_12_6A: '12-6A',
-    MOLDE_12_8A: '12-8A',
+    MOLDE_12_8A: '12-9A',
     MOLDE_18: '18',
     MOLDE_P12: 'P12',
     MOLDE_P18: 'P18',
     MOLDE_L11: 'L11',
-    MOLDE_C: 'C'
+    MOLDE_C: 'C',
+    MOLDE_DM20: 'DM20',
+    MOLDE_DM27: 'DM27'
+  },
+
+  SUPERVISION_PART_MATERIAL_READBLE: {
+    '8': 'MOLDE_8',
+    '12-6A': 'MOLDE_12_6A',
+    '12-9A': 'MOLDE_12_8A',
+    '18': 'MOLDE_18',
+    'P12': 'MOLDE_P12',
+    'P18': 'MOLDE_P18',
+    'L11': 'MOLDE_L11',
+    'C': 'MOLDE_C',
+    'DM20': 'MOLDE_DM20',
+    'DM27': 'MOLDE_DM27'
   },
 
   FABRIC_ATTRIBUTE: {

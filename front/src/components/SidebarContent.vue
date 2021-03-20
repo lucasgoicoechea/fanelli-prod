@@ -112,7 +112,7 @@
                 name: 'Partes',
                 type: 'control-supervisionparts',
                 route: {name: 'control-supervisionparts'},
-                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Novedades',

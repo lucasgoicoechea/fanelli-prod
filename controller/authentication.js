@@ -22,7 +22,7 @@ const controller = {
         name: user.name,
         lastname: user.lastname,
         picture: user.picture
-      }, config.jwtSecret,{ expiresIn: '45m', })
+      }, config.jwtSecret,{ expiresIn: '485m', })
       let userResponse = {
         _id: user._id,
         dni: user.dni,
