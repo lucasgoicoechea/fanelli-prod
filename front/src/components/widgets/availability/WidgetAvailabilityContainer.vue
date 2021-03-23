@@ -169,7 +169,9 @@
             return a.type !== 'SHIFT_CHANGE' && a.request.medicalDischarge &&
               this.sameDay(new Date(a.to), this.dateRange.from)
           })
-
+        this.availabilities = this.availabilities.sort((a, b) => {
+          return new Date(a.created_at).getTime() > new Date(b.created_at).getTime()
+        })
         this.temporals =
           this.temporals.filter(a => !this.altas.includes(a))
       }

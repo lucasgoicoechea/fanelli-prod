@@ -16,6 +16,7 @@ router.post('/delRepositionPallet',  authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE
 router.post('/addVagon',  authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.addVagon)
 router.post('/delStopping',  authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.removeStopping)
 router.post('/delMaterial',  authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.removeMaterial)
+router.post('/delVagon',  authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.removeVagon)
 router.post('/observation', validator.supervisionPart.observation, authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.addObservation)
 router.post('/totals', authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.updateTotals)
 router.post('/updateHour', authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA]), supervisionpartController.updateHour)

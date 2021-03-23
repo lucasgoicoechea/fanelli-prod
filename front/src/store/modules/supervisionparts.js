@@ -549,6 +549,31 @@ const actions = {
         }
       )
   },
+  delVagon ({commit, dispatch}, payload) {
+    const guid = generateGuid()
+    const task = {}
+    task.id = guid
+    task.data = payload.observation
+    task.type = Constants.request_types.SUPERVISIONPART_GENERAL_OBSERVATION
+    task.extra_data = {sector: capitalize(payload.observation.sector)}
+    return Vue.http.post('supervisionpart/delVagon', {observation: payload.observation}, {headers: {'Idempotency-Key': guid}})
+      .then(
+        function (res) {
+          if (res.body.success) {
+            commit('setSupervisionpart', {sector: res.body.supervisionPart.sector, supervisionpart: res.body.supervisionPart})
+          } else {
+            task.state = Constants.states.ERROR
+            // dispatch('tasksQueue/addTask', task, {root: true})
+          }
+        },
+        function (err) {
+          if (err.status === 0) {
+            task.state = Constants.states.PENDING
+            // dispatch('tasksQueue/addTask', task, {root: true})
+          }
+        }
+      )
+  },
   delStopping ({commit, dispatch}, payload) {
     const guid = generateGuid()
     const task = {}

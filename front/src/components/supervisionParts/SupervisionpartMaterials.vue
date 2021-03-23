@@ -75,12 +75,12 @@
               </select>
               </span>
         </div>
-        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA' && sector !== 'APILADORA'">
-          <button @click="delMaterial(m._id)" :disabled="loadingObservationVagon[m._id]">
+        <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA'">
+          <!--<button @click="delMaterial(m._id)" :disabled="loadingObservationVagon[m._id]">
                 <span v-if="!loadingObservationVagon[m._id] && !editadosVagon[m._id]" class="action "><img src="/static/img/checklists/sumary/mal.svg"></span>
                 <span v-if="!loadingObservationVagon[m._id] && editadosVagon[m._id]" class="action true"><img src="/static/img/checklists/sumary/mal.svg"></span>
                 <spinner-little :show="loadingObservationVagon[m._id]"></spinner-little>
-          </button>
+          </button> -->
           <button @click="addVagon(m._id)" :disabled="loadingObservationVagon[m._id]">
                 <span v-if="!loadingObservationVagon[m._id] && !editadosVagon[m._id]" class="action "><img src="/static/img/checklists/tick.svg"></span>
                 <span v-if="!loadingObservationVagon[m._id] && editadosVagon[m._id]" class="action true"><img src="/static/img/checklists/tick.svg"></span>
@@ -96,8 +96,8 @@
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'EXTRUSORA'" >Numero: <span>{{v.number}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'APILADORA'" >Cantidad: <span>{{v.count}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'APILADORA'" >Pisos: <span>{{v.count}}</span></div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA' && sector !== 'APILADORA'">
-          <button @click="delVagon(v._id)" >
+       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA'">
+          <button @click="delVagon(m._id, v.number)" >
                 <span  class="action "><img src="/static/img/checklists/sumary/mal.svg"></span>
           </button>
        </div>  
@@ -291,6 +291,19 @@
           this.count_vagon_id[id] = 0
           this.editadosVagon[id] = false
         }
+      },
+      delVagon: function (id, nm) {
+        const observation = {
+          material_id: id,
+          vagon_number: nm,
+          supervisionpart_id: this.supervisionpart_id
+        }
+        this.$store.dispatch('supervisionparts/delVagon', {sector: this.sector, observation})
+          .then(() => {
+            this.loadingObservationVagon[id] = false
+            this.editadosVagon[id] = false
+          })
+        this.editadosVagon[id] = false
       },
       arrow: function (id) {
         return {

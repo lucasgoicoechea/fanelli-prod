@@ -1,6 +1,6 @@
 'use strict'
 const path = require('path')
-const fails = require(path.join(__dirname, '../data/supervsionparts'))
+const fails = require(path.join(__dirname, '../data/fails'))
 const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 var dbm

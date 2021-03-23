@@ -375,6 +375,54 @@ const controller = {
       res.json({success: true, supervisionPart: supervisionPart})
     }
   }),
+
+  removeVagon: async(function (req, res, next) {
+    if (!ObjectId.isValid(req.body.observation.supervisionpart_id) || !ObjectId.isValid(req.body.observation.material_id)) {
+      next(Boom.notFound('ID Inválido'))
+      return
+    }
+    let supervisionPart = awaitFor(SupervisionpartModel
+      .findById(req.body.observation.supervisionpart_id)
+      .populate({path: 'hours.hour', model: 'Hour'})
+      .populate('hours.comments.supervisor', ['name', 'lastname'])
+      .populate('hours.values.supervisor', ['name', 'lastname'])
+      .populate('last.supervisor', ['name', 'lastname'])
+      .populate('observations.supervisor', ['name', 'lastname']))
+    let material = supervisionPart.materials.find( mv => mv._id.toString() === req.body.observation.material_id.toString())
+      if (material != null) {
+        //borra y resta material total para la hora
+        const posSelected = material.vagons.findIndex(c => c.number === req.body.observation.vagon_number)
+        material.vagons.splice(posSelected, 1)
+      }
+   
+
+    //suma total hora
+    supervisionPart = completeCalculatedTotalData(supervisionPart)
+    supervisionPart = awaitFor(supervisionPart.save())
+    supervisionPart =  awaitFor(SupervisionpartModel
+      .findById(req.body.observation.supervisionpart_id)
+      .populate({path: 'hours.hour', model: 'Hour'})
+      .populate({path: 'hours.stoppings.fail', model: 'Fail'})
+      .populate('hours.hour', ['text','ordertime'])
+      .populate('supervisorShift', ['name', 'lastname'])
+      .populate('hours.supervisor', ['name', 'lastname'])
+      .populate('creator', ['name', 'lastname'])
+      .populate('hours.comments.supervisor', ['name', 'lastname'])
+      .populate('observations.supervisor', ['name', 'lastname'])
+      .populate('hours.stoppings.supervisor', ['name', 'lastname']))
+    // res.json({success: true, checklist: checklist})
+
+    const idempotencyKey = req.get('Idempotency-Key')
+    if (idempotencyKey !== undefined) {
+      res.json({
+        success: true,
+        supervisionPart: supervisionPart,
+        idempotencyKey: idempotencyKey,
+      })
+    } else {
+      res.json({success: true, supervisionPart: supervisionPart})
+    }
+  }),
   addVagon: async(function (req, res, next) {
     if (!ObjectId.isValid(req.body.observation.supervisionpart_id) || !ObjectId.isValid(req.body.observation.material_id)) {
       next(Boom.notFound('ID Inválido'))
