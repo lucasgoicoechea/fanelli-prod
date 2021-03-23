@@ -80,7 +80,7 @@
                 <span v-if="!loadingObservationVagon[m._id] && !editadosVagon[m._id]" class="action "><img src="/static/img/checklists/sumary/mal.svg"></span>
                 <span v-if="!loadingObservationVagon[m._id] && editadosVagon[m._id]" class="action true"><img src="/static/img/checklists/sumary/mal.svg"></span>
                 <spinner-little :show="loadingObservationVagon[m._id]"></spinner-little>
-          </button> -->
+          </button> //borrar -->
           <button @click="addVagon(m._id)" :disabled="loadingObservationVagon[m._id]">
                 <span v-if="!loadingObservationVagon[m._id] && !editadosVagon[m._id]" class="action "><img src="/static/img/checklists/tick.svg"></span>
                 <span v-if="!loadingObservationVagon[m._id] && editadosVagon[m._id]" class="action true"><img src="/static/img/checklists/tick.svg"></span>
