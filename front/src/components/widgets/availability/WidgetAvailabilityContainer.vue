@@ -72,6 +72,19 @@
           :availability="availability"></widget-availability-card>
       </div>
     </div>
+
+    <div v-show="!holidaysEmpty" class="temporals">
+      <h4 class="title">Vacaciones</h4>
+      <div
+        class="collaborators"
+        v-for="(availability, index) in holidays">
+        <widget-availability-card
+          :key="index"
+          :class="loadingStyle"
+          :mode="cardMode"
+          :availability="availability"></widget-availability-card>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -107,6 +120,7 @@
         availabilities: [],
         temporals: [],
         altas: [],
+        holidays: [],
         temporalTypes: [
           'MEDICAL_ORDER',
           'MEDICAL_REPORT',
@@ -161,8 +175,11 @@
         this.temporals =
           this.availabilities.filter(a => this.temporalTypes.includes(a.type))
 
+        this.holidays =
+          this.availabilities.filter(a => a.type === 'HOLIDAYS')
+
         this.availabilities =
-          this.availabilities.filter(a => !this.temporals.includes(a))
+          this.availabilities.filter(a => !this.temporals.includes(a) && a.type !== 'HOLIDAYS')
 
         this.altas =
           this.temporals.filter(a => {
@@ -170,7 +187,7 @@
               this.sameDay(new Date(a.to), this.dateRange.from)
           })
         this.availabilities = this.availabilities.sort((a, b) => {
-          return new Date(a.created_at).getTime() > new Date(b.created_at).getTime()
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         })
         this.temporals =
           this.temporals.filter(a => !this.altas.includes(a))
@@ -193,6 +210,9 @@
       },
       temporalsEmpty () {
         return this.temporals.length === 0
+      },
+      holidaysEmpty () {
+        return this.holidays.length === 0
       },
       altasEmpty () {
         return this.altas.length === 0
