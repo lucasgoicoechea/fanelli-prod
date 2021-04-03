@@ -74,7 +74,7 @@
     </div>
 
     <div v-show="!holidaysEmpty" class="temporals">
-      <h4 class="title">Vacaciones</h4>
+      <h4 class="title">Vacaciones </h4>
       <div
         class="collaborators"
         v-for="(availability, index) in holidays">
