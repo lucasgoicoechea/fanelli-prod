@@ -30,7 +30,8 @@
 
         <p v-show="loadingObservation">Cargando ...</p>
         <div class="textarea">
-        <textarea
+        <textarea 
+          style="width: 95%"
           v-model="observation"
           placeholder="Escriba aquí una observación general del proceso"></textarea>
           <button @click="createObservation" :disabled="loadingObservation">

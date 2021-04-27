@@ -25,10 +25,10 @@
               <option v-for="(label, value) in $constants.SUPERVISION_PART_MATERIAL"  :key="value" :value="value"> {{label}}</option>
           </select>
           </span></div>  
-         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   >Cantidad<span>
+         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"   >Cantidad<span>
                 <input  type="number"  v-mask="'###'"  class="active" v-model="value" autofocus></span>
           </div> 
-         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"> 
+         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"> 
           <button @click="createRepositionPallet" :disabled="loadingObservation">
             <span v-if="!loadingObservation">Agregar</span>
             <spinner-little :show="loadingObservation"></spinner-little>
@@ -331,8 +331,10 @@
       border-radius: 25px;
     }
 
+ 
     img {
-      height: 25px;
+      height: 40px;
+      width: 40px;
     }
   }
 

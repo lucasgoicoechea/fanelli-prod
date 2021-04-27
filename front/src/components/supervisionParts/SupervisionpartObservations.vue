@@ -19,6 +19,7 @@
         <p v-show="loadingObservation">Cargando ...</p>
         <div class="textarea">
         <textarea
+          style="95%"
           v-model="observation"
           placeholder="Escriba aquí una observación general del proceso">
         </textarea>
@@ -307,8 +308,10 @@
       border-radius: 25px;
     }
 
+   
     img {
-      height: 25px;
+      height: 40px;
+      width: 40px;
     }
   }
 

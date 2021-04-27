@@ -31,8 +31,9 @@
         </div>
         </div>
          <div  class="row"> 
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <textarea
+          style="95%"
           v-model="comment"
           placeholder="Escriba aquí una observación general de la parada"></textarea>
         </div>
@@ -358,8 +359,10 @@
       border-radius: 25px;
     }
 
+
     img {
-      height: 25px;
+      height: 40px;
+      width: 40px;
     }
   }
   @media (max-width: 340px) { // iphone 6plus landscape

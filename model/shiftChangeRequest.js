@@ -41,8 +41,8 @@ const ShiftChangeRequestSchema = new Schema({
   reason: String,
   state: {
     type: Number,
-    enum: Const.MEETING_STATE,
-    default: Const.MEETING_STATE.PENDING_APPROVAL
+    enum: Const.STAFF_REQUEST_STATE,
+    default: Const.STAFF_REQUEST_STATE.PENDING_APPROVAL
   },
   approvedBy: {
     type: Schema.Types.ObjectId,

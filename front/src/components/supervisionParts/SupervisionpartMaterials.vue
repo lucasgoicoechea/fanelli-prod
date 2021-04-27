@@ -502,7 +502,8 @@
     }
 
     img {
-      height: 25px;
+      height: 40px;
+      width: 40px;
     }
   }
 
