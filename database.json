@@ -3,11 +3,11 @@
       
         "localhost": {
             "driver": "mongodb",
-            "database": "fanelli",
+            "database": "fanelliTest",
             "host": "localhost",
-            "process.env.DB_NAME"  : "fanelli",
-            "process.env.MONGO_URL" :"mongodb://localhost:27017/fanelli",
-            "DB_NAME"  : "fanelli"
+            "process.env.DB_NAME"  : "fanelliTest",
+            "process.env.MONGO_URL" :"mongodb://localhost:27017/fanelliTest",
+            "DB_NAME"  : "fanelliTest"
       },
       "sql-file" : true
     }

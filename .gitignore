@@ -104,3 +104,9 @@ dist
 .tern-port
 /robomongo-0.9.0-linux-x86_64-0786489.tar.gz
 /.env~
+front/package-lock.json
+database.json
+package-lock.json
+config/localhost.js
+localhost.env
+database.json
