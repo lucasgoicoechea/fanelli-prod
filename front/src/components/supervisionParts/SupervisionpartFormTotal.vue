@@ -1,14 +1,18 @@
 <template>
   <article class="supervisionpart-form-total" v-if="supervisionPart!=null" >
   <!--<header v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'">-->
-   <header> <div data-v-832c7fbc="" class="col-lg-12">Totales</div>     </header>
+   <header>
+     <div>
+       Totales
+     </div>
+   </header>
     <section class="container-fluid">
    
     <div  class="row"> 
-      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">Total Turno<span><input @input="update" type="number"   v-mask="'###'"  class="active" v-model="supervisionPart.totalCountUnitMaterials" autofocus></span></div>
-      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Tiempo Marcha<span><input @input="update"  style="width: 82px " type="time" v-mask="'##:##'" v-model="supervisionPart.totalMinutesWithoutStopping" min="00:00" max="10:30" autofocus></span></div>
-      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">Tiempo Carga: <span>{{tiempoCarga}}</span></div>
-      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >
+      <div class="col-xs-12 col-sm-4">Total Turno<span><input @input="update" type="number"   v-mask="'###'"  class="active" v-model="supervisionPart.totalCountUnitMaterials" autofocus></span></div>
+      <div class="col-xs-12 col-sm-4">Tiempo Marcha<span><input @input="update"  style="width: 82px " type="time" v-mask="'##:##'" v-model="supervisionPart.totalMinutesWithoutStopping" min="00:00" max="10:30" autofocus></span></div>
+      <div class="col-xs-12 col-sm-4">Tiempo Carga: <span>{{tiempoCarga}}</span></div>
+      <div class="col-xs-12 col-sm-4"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >
         Peso Nylon<span> 
         <input @input="update" type="number" v-model="supervisionPart.totalBobin"  v-mask="'###'"  autofocus>
         <!--<select v-model="supervisionPart.totalBobin"  id="position" @change="update" style="color: black;" >
@@ -19,37 +23,37 @@
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maquina<span><input @input="update" type="number" v-model="supervisionPart.totalUnitsMachine" autofocus></span> </div>-->
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición Pallets<span><input @input="update" type="number" v-model="supervisionPart.totalRepositionPallet" autofocus></span> </div>-->
       
-      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">
-      <button @click="updateTotals" :disabled="loadingObservation">
-            <span v-if="!loadingObservation && !editados" class="action "><img src="/static/img/checklists/tick.svg"></span>
-            <span v-if="!loadingObservation && editados" class="action true"><img src="/static/img/checklists/tick.svg"></span>
-            <spinner-little :show="loadingObservation"></spinner-little>
-      </button>
+      <div class="col-xs-12 col-sm-4">
+        <button @click="updateTotals" :disabled="loadingObservation">
+              <span v-if="!loadingObservation && !editados" class="action "><img src="/static/img/checklists/tick.svg"></span>
+              <span v-if="!loadingObservation && editados" class="action true"><img src="/static/img/checklists/tick.svg"></span>
+              <spinner-little :show="loadingObservation"></spinner-little>
+        </button>
       </div>
     </div>
     <div class="row">
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >Total Dureza: {{supervisionPart.totalDurity}}</div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >Total Vacio: {{supervisionPart.totalVacuum}}</div>       
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Total Pallets Camara:
+       <div class="col-xs-12 col-sm-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >Total Dureza: {{supervisionPart.totalDurity}}</div>
+       <div class="col-xs-12 col-sm-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >Total Vacio: {{supervisionPart.totalVacuum}}</div>       
+       <div class="col-xs-12 col-sm-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Total Pallets Camara:
          <input @input="update" type="number" v-model="supervisionPart.totalPalletsCamara"   v-mask="'###'"  autofocus></div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Total Pallets Contador:
+       <div class="col-xs-12 col-sm-3"  v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Total Pallets Contador:
          <input @input="update" type="number" v-model="supervisionPart.totalPalletsContador"   v-mask="'###'"  autofocus></div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Total Sistema {{unidades}}: {{supervisionPart.totalUnits | decimalFormat}}</div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Total Paradas: {{supervisionPart.totalStoppings}} minutos</div>
+       <div class="col-xs-12 col-sm-3">Total Sistema {{unidades}}: {{supervisionPart.totalUnits | decimalFormat}}</div>
+       <div class="col-xs-12 col-sm-3">Total Paradas: {{supervisionPart.totalStoppings}} minutos</div>
     </div>
     <hr>
     <div class="container-fluid">
        <div class="row" >
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >MAQUINA</div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">MATERIAL</div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">TOTAL</div>
+          <div class="col-xs-12 col-sm-4" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >MAQUINA</div>
+          <div class="col-xs-12 col-sm-4">MATERIAL</div>
+          <div class="col-xs-12 col-sm-4">TOTAL</div>
           <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">TOTAL PARTE</div>-->
        </div> 
-        <div v-for="(total,index) in supervisionPart.totals" class="row"  :key="index" >
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >{{total.machine}}</div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">{{total.material}}</div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >{{total.count}}</div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector !== 'EXTRUSORA'" >{{total.count | decimalFormat}}</div>
+        <div v-for="(total,index) in supervisionPart.totals" class="row" :key="index" >
+          <div class="col-xs-12 col-sm-4" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >{{total.machine}}</div>
+          <div class="col-xs-12 col-sm-4">{{total.material}}</div>
+          <div class="col-xs-12 col-sm-4" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'EXTRUSORA'" >{{total.count}}</div>
+          <div class="col-xs-12 col-sm-4" v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector !== 'EXTRUSORA'" >{{total.count | decimalFormat}}</div>
           <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">{{total.count}}</div>-->
         </div>  
      </div>
