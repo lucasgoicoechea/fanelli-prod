@@ -9,11 +9,16 @@
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Tiempo Marcha<span><input @input="update"  style="width: 82px " type="time" v-mask="'##:##'" v-model="supervisionPart.totalMinutesWithoutStopping" min="00:00" max="10:30" autofocus></span></div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">Tiempo Carga: <span>{{tiempoCarga}}</span></div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >
-        Peso Nylon<span> 
+        Peso Nylon 1<span> 
         <input @input="update" type="number" v-model="supervisionPart.totalBobin"  v-mask="'###'"  autofocus>
         <!--<select v-model="supervisionPart.totalBobin"  id="position" @change="update" style="color: black;" >
                 <option v-for="(label, value) in $constants.SUPERVISION_PART_UNIT_NYLON"  :key="value" :value="value">{{label}}</option>
               </select>-->
+        </span>
+      </div>
+       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >
+        Peso Nylon 2<span> 
+        <input @input="update" type="number" v-model="supervisionPart.totalBobinTwo"  v-mask="'###'"  autofocus>
         </span>
       </div>
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maquina<span><input @input="update" type="number" v-model="supervisionPart.totalUnitsMachine" autofocus></span> </div>-->
@@ -91,6 +96,7 @@
       init () {
         this.current = Const.currentSchedule().value
         this.supervisionPart.totalBobin = 105
+        this.supervisionPart.totalBobinTwo = 105
       },
       currentSchedule (header) {
         return header.schedule === this.current && !this.date
@@ -144,6 +150,7 @@
             totalMinutesWithoutStopping: this.supervisionPart.totalMinutesWithoutStopping,
             totalCountUnitMaterials: this.supervisionPart.totalCountUnitMaterials,
             totalBobin: this.supervisionPart.totalBobin,
+            totalBobinTwo: this.supervisionPart.totalBobinTwo,
             totalPalletsCamara: this.supervisionPart.totalPalletsCamara,
             totalPalletsContador: this.supervisionPart.totalPalletsContador,
             supervisionpart_id: this.supervisionPart._id

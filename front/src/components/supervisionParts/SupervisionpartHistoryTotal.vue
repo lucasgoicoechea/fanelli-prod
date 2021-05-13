@@ -8,8 +8,8 @@
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"><span  style="color: black;">Total Turno: </span> <span>{{supervisionPart.totalCountUnitMaterials}}</span></div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"><span  style="color: black;">Tiempo Marcha: </span> <span>{{supervisionPart.totalMinutesWithoutStopping}}</span></div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"><span  style="color: black;">Tiempo Carga:</span> <span>{{tiempoCarga}}</span></div>
-      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" ><span style="color: black;">Peso Nylon: </span><span>{{supervisionPart.totalBobin}}</span> gramos</div>
-      <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maq.:<span>{{supervisionPart.totalUnitsMachine}}</span> </div>-->
+      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" ><span style="color: black;">Peso Nylon 1: </span><span>{{supervisionPart.totalBobin}}</span> gramos</div>
+      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" ><span style="color: black;">Peso Nylon 2: </span><span>{{supervisionPart.totalBobinTwo}}</span> gramos</div>   <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maq.:<span>{{supervisionPart.totalUnitsMachine}}</span> </div>-->
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición Pallets:<span>{{supervisionPart.totalRepositionPallet}}</span> </div>-->
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">  </div>
     </div>

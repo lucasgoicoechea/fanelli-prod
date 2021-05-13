@@ -392,7 +392,19 @@ const controller = {
       if (material != null) {
         //borra y resta material total para la hora
         const posSelected = material.vagons.findIndex(c => c.number === req.body.observation.vagon_number)
+        //todo ltg
+        //resta material total para la hora
+        let materialTotal = getMaterial(supervisionPart.totals,constant.SUPERVISION_PART_MACHINE_READBLE["M750"],material.material,supervisionPart.sector)
+        if (materialTotal != null) {
+          if (supervisionPart.sector == 'APILADORA') {
+            materialTotal.count = materialTotal.count - ( material.vagons[posSelected].count / 12 )
+          }
+          if (supervisionPart.sector == 'DESAPILADORA') {
+            materialTotal.count = materialTotal.count - 1
+          }
+        }
         material.vagons.splice(posSelected, 1)
+
       }
    
 
@@ -521,6 +533,7 @@ const controller = {
     supervisionPart.totalMinutesWithoutStopping = req.body.totals.totalMinutesWithoutStopping
     supervisionPart.totalCountUnitMaterials = req.body.totals.totalCountUnitMaterials
     supervisionPart.totalBobin = req.body.totals.totalBobin
+    supervisionPart.totalBobinTwo = req.body.totals.totalBobinTwo
     supervisionPart.totalPalletsCamara = req.body.totals.totalPalletsCamara
     supervisionPart.totalPalletsContador = req.body.totals.totalPalletsContador
     supervisionPart = awaitFor(supervisionPart.save())
@@ -597,7 +610,6 @@ const controller = {
   getCurrent: async(function (req, res, next) {
     let supervisionpart = awaitFor(getLastOrCreate(req.user.id, req.params.sector.toUpperCase()))
     if (supervisionpart === null) return next(Boom.notFound('Sector inexistente'))
-    supervisionpart = completeCalculatedTotalData(supervisionpart)
     res.json({success: true, supervisionpart: supervisionpart})
   }),
 
@@ -652,8 +664,9 @@ const controller = {
 
 
   getFails: async(function (req, res, next) {
+    // console.log(req.params.sector.toUpperCase())
     let fails = awaitFor(FailModel.find({sector: req.params.sector.toUpperCase()}))
-    //console.log(req.params.sector.toUpperCase())
+    // console.log(fails)
     if (fails === null) return next(Boom.notFound('Sector inexistente'))
     res.json({success: true, fails: fails})
   }),
@@ -1062,7 +1075,7 @@ function updateMaterialsAndCalculatedTotal (req) {
       supervisionPart.totals.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], count: cantpisos, number: 1})
     }
     if (supervisionPart.sector == 'DESAPILADORA') {
-      supervisionPart.totals.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], count: req.body.observation.count, number: 1})
+      supervisionPart.totals.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], count: 1, number: 1})
     }  
   }
   else {
@@ -1096,7 +1109,7 @@ function updateMaterialsAndCalculatedTotal (req) {
         materialTotal.count = materialTotal.count + 1
       } 
       else {
-        //count / 12 , por elnro de pisos
+        //apiladora : count / 12 , por elnro de pisos
         let cantpisos = req.body.observation.count / 12
         materialTotal.count += eval(cantpisos)
       }

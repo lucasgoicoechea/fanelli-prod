@@ -171,6 +171,10 @@ const supervisionpartSchema = new Schema({
     type: Number,
     default: 0
   },
+  totalBobinTwo: {
+    type: Number,
+    default: 0
+  },
   totalRepositionPallet: {
     type: Number,
     default: 0
