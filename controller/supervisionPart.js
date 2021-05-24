@@ -1136,8 +1136,12 @@ function completeCalculatedTotalData (supervisionpart) {
   let totalVacuum = 0
   let countHoursVacuum = 0
   let countHoursDurity = 0
+  let countVagons = 0
   let totalGenerals = []
   
+  supervisionpart.materials.forEach( m => {
+    countVagons = countVagons + m.vagons.length
+  })
   supervisionpart.hours.forEach( h => {
     h.stoppings.forEach( s => {
       totalStoppings = totalStoppings + s.minutes
@@ -1159,8 +1163,9 @@ function completeCalculatedTotalData (supervisionpart) {
       totalUnits = totalUnits + ht.count
   })
   
-  supervisionpart.totalPalletsCamara = totalPalletCamara
-  supervisionpart.totalPalletsContador = totalPalletContador
+  //24-05-21 lgoicoechea comento esto pq creo q es viejo
+  //supervisionpart.totalPalletsCamara = totalPalletCamara
+  //supervisionpart.totalPalletsContador = totalPalletContador
   supervisionpart.totalDurity = totalDurity
   if (totalDurity > 0 ) {
     var n = totalDurity / countHoursDurity
@@ -1177,7 +1182,7 @@ function completeCalculatedTotalData (supervisionpart) {
      supervisionpart.totalVacuum = Math.round(n*100)/100 
     }
   }
-  
+  supervisionpart.countVagon = countVagons
   supervisionpart.totalUnits = totalUnits
   supervisionpart.totalStoppings = totalStoppings
   return supervisionpart

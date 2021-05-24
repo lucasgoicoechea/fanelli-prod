@@ -15,9 +15,9 @@
         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"><span  class="negro"  >Molde: </span><span>{{m.material}}</span></div> 
         <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">+ {{unidades}}-></div>-->
     </div> 
-      <div v-for="v in m.vagons" v-bind:key="v._id" >
+      <div v-for="(v,idenx) in m.vagons" v-bind:key="v._id" >
      <div  class="row"> 
-         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">--></div>
+         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">#{{idenx+1}} --></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Unidad: <span>{{v.unit}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="  sector &&  sector !== 'EXTRUSORA'" >Numero: <span>{{v.number}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="sector &&  sector !== 'APILADORA'" >Cantidad: <span>{{v.count}}</span></div>

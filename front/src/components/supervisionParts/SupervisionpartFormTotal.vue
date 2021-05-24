@@ -21,6 +21,7 @@
         <input @input="update" type="number" v-model="supervisionPart.totalBobinTwo"  v-mask="'###'"  autofocus>
         </span>
       </div>
+      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'APILADORA'" >Cantidad Vagonetas: <span>{{supervisionPart.countVagon}}</span> </div>
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maquina<span><input @input="update" type="number" v-model="supervisionPart.totalUnitsMachine" autofocus></span> </div>-->
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición Pallets<span><input @input="update" type="number" v-model="supervisionPart.totalRepositionPallet" autofocus></span> </div>-->
       

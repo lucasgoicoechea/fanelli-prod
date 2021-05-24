@@ -11,6 +11,8 @@
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" ><span style="color: black;">Peso Nylon 1: </span><span>{{supervisionPart.totalBobin}}</span> gramos</div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" ><span style="color: black;">Peso Nylon 2: </span><span>{{supervisionPart.totalBobinTwo}}</span> gramos</div>   <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maq.:<span>{{supervisionPart.totalUnitsMachine}}</span> </div>-->
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición Pallets:<span>{{supervisionPart.totalRepositionPallet}}</span> </div>-->
+       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'APILADORA'" ><span  style="color: black;">Cantidad Vagonetas:</span> <span>{{supervisionPart.countVagon}}</span> </div>
+      
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">  </div>
     </div>
     <div class="row"> 

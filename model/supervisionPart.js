@@ -219,6 +219,10 @@ const supervisionpartSchema = new Schema({
     type: Number,
     default: 0
   },
+  countVagon: {
+    type: Number,
+    default: 0
+  },
   observations: [{
     observation: {
       type: String,
