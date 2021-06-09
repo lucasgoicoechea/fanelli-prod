@@ -117,6 +117,19 @@ const constants = {
     M650: '650'
   },
 
+  SUPERVISION_PART_MATERIAL_FLOORS: {
+    '8': 12,
+    '12-6A': 12,
+    '12-9A': 12,
+    '18': 12,
+    'P12': 11,
+    'P18': 12,
+    'L11': 9,
+    'C': 12,
+    'DM20': 12,
+    'DM27': 12
+  },
+  
   SUPERVISION_PART_MATERIAL_READBLE: {
     MOLDE_8: '8',
     MOLDE_12_6A: '12-6A',

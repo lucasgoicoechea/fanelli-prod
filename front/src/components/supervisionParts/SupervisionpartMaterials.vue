@@ -96,7 +96,7 @@
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'EXTRUSORA'" >Numero: <span>{{v.number}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'APILADORA'" >Cantidad: <span>{{v.count}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'APILADORA'" >Pisos: <span>{{v.count}}</span></div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA'">
+       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" >
           <button @click="delVagon(m._id, v.number)" >
                 <span  class="action "><img src="/static/img/checklists/sumary/mal.svg"></span>
           </button>

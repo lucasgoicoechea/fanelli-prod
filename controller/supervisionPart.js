@@ -392,15 +392,42 @@ const controller = {
       if (material != null) {
         //borra y resta material total para la hora
         const posSelected = material.vagons.findIndex(c => c.number === req.body.observation.vagon_number)
-        //todo ltg
+        
+  
         //resta material total para la hora
-        let materialTotal = getMaterial(supervisionPart.totals,constant.SUPERVISION_PART_MACHINE_READBLE["M750"],material.material,supervisionPart.sector)
-        if (materialTotal != null) {
-          if (supervisionPart.sector == 'APILADORA') {
-            materialTotal.count = materialTotal.count - ( material.vagons[posSelected].count / 12 )
+        if (supervisionPart.sector == 'EXTRUSORA') {
+         let materialTotal = getMaterial(supervisionPart.totals,material.machine,material.material,supervisionPart.sector)
+          //si es la ultima vagoneta tieneq  descontar
+          if (materialTotal != null && posSelected  ===  material.vagons.length - 1 ) {
+            //si es la unica descuenta entera
+            if (material.vagons.length == 1){
+              materialTotal.count = materialTotal.count - material.vagons[posSelected].count
+              materialTotal.number = materialTotal.number - material.vagons[posSelected].count
+            } //sino descuenta con la diferencia de la anterior
+            else {
+              let preLastVagon = material.vagons[material.vagons.length - 2]
+              materialTotal.count = preLastVagon.count//materialTotal.count - (material.vagons[posSelected].count - preLastVagon.count)
+              materialTotal.number = preLastVagon.count//materialTotal.number - (material.vagons[posSelected].count - preLastVagon.count)
+            }
           }
-          if (supervisionPart.sector == 'DESAPILADORA') {
-            materialTotal.count = materialTotal.count - 1
+          // y actualizar el last con la atnerior
+          let last = supervisionPart.last
+          if (last != null && last.material == material.material && material.machine == last.machine){
+            supervisionPart.last = {machine: material.machine, 
+                material: material.material, count: materialTotal.count,
+                number: materialTotal.number} 
+          }
+        }
+        else {
+          let materialTotal = getMaterial(supervisionPart.totals,constant.SUPERVISION_PART_MACHINE_READBLE["M750"],material.material,supervisionPart.sector)
+          if (materialTotal != null) {
+            if (supervisionPart.sector == 'APILADORA') {
+              let pisos = constant.SUPERVISION_PART_MATERIAL_FLOORS[material.material]
+              materialTotal.count = materialTotal.count - ( material.vagons[posSelected].count / pisos )
+            }
+            if (supervisionPart.sector == 'DESAPILADORA') {
+              materialTotal.count = materialTotal.count - 1
+            }
           }
         }
         material.vagons.splice(posSelected, 1)
@@ -1037,8 +1064,7 @@ function updateMaterialsAndCalculatedTotal (req) {
     //console.dir(material.cantExtrusora)
     if (material == null) { 
       if (supervisionPart.sector == 'APILADORA') {
-        // let cantpisos = req.body.observation.count / 12
-        supervisionPart.materials.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], vagons: [{ count: req.body.observation.count, number: req.body.observation.value, unit: constant.SUPERVISION_PART_UNIT_SECTOR[supervisionPart.sector]}]})
+       supervisionPart.materials.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], vagons: [{ count: req.body.observation.count, number: req.body.observation.value, unit: constant.SUPERVISION_PART_UNIT_SECTOR[supervisionPart.sector]}]})
       }
       if (supervisionPart.sector == 'DESAPILADORA') {
         supervisionPart.materials.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], vagons: [{ count: req.body.observation.count, number: req.body.observation.value, unit: constant.SUPERVISION_PART_UNIT_SECTOR[supervisionPart.sector]}]})
@@ -1046,7 +1072,6 @@ function updateMaterialsAndCalculatedTotal (req) {
     }
     else {
         if (supervisionPart.sector == 'APILADORA') {
-          // let cantpisos = req.body.observation.count / 12
           material.vagons.push({ count: req.body.observation.count, number: req.body.observation.value, unit: constant.SUPERVISION_PART_UNIT_SECTOR[supervisionPart.sector]})
         }
         if (supervisionPart.sector == 'DESAPILADORA') {
@@ -1057,6 +1082,7 @@ function updateMaterialsAndCalculatedTotal (req) {
   
   //suma material total para la hora
   let materialTotal = getMaterial(supervisionPart.totals,constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine],constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material],supervisionPart.sector)
+  let pisos = constant.SUPERVISION_PART_MATERIAL_FLOORS[req.body.observation.material]
   if (materialTotal == null) {
     //console.log('null mate total')
     if (supervisionPart.sector == 'EXTRUSORA') {
@@ -1070,8 +1096,8 @@ function updateMaterialsAndCalculatedTotal (req) {
         }*/
     }
     if (supervisionPart.sector == 'APILADORA') {
-      //count / 12 , por elnro de pisos
-      let cantpisos = req.body.observation.count / 12
+      //count /  por elnro de pisos
+      let cantpisos = req.body.observation.count / pisos
       supervisionPart.totals.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], count: cantpisos, number: 1})
     }
     if (supervisionPart.sector == 'DESAPILADORA') {
@@ -1109,8 +1135,8 @@ function updateMaterialsAndCalculatedTotal (req) {
         materialTotal.count = materialTotal.count + 1
       } 
       else {
-        //apiladora : count / 12 , por elnro de pisos
-        let cantpisos = req.body.observation.count / 12
+        //apiladora : count /  por elnro de pisos
+        let cantpisos = req.body.observation.count / pisos
         materialTotal.count += eval(cantpisos)
       }
       let material = getMaterial(supervisionPart.materials,constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine],constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material],supervisionPart.sector)
