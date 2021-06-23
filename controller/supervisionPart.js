@@ -563,6 +563,21 @@ const controller = {
     supervisionPart.totalBobinTwo = req.body.totals.totalBobinTwo
     supervisionPart.totalPalletsCamara = req.body.totals.totalPalletsCamara
     supervisionPart.totalPalletsContador = req.body.totals.totalPalletsContador
+    supervisionPart.total_MOLDE_8 = req.body.totals.total_MOLDE_8
+    supervisionPart.total_MOLDE_12_6A = req.body.totals.total_MOLDE_12_6A
+    supervisionPart.total_MOLDE_12_8A = req.body.totals.total_MOLDE_12_8A
+    supervisionPart.total_MOLDE_18 = req.body.totals.total_MOLDE_18
+    supervisionPart.total_MOLDE_P12 = req.body.totals.total_MOLDE_P12
+    supervisionPart.total_MOLDE_P18 = req.body.totals.total_MOLDE_P18
+    supervisionPart.total_MOLDE_L11 = req.body.totals.total_MOLDE_L11
+    supervisionPart.total_MOLDE_C = req.body.totals.total_MOLDE_C
+    supervisionPart.total_MOLDE_DM4 = req.body.totals.total_MOLDE_DM4
+    supervisionPart.total_MOLDE_DM20 = req.body.totals.total_MOLDE_DM20
+    supervisionPart.total_MOLDE_DM24 = req.body.totals.total_MOLDE_DM24
+    supervisionPart.total_MOLDE_DM27 = req.body.totals.total_MOLDE_DM27
+    supervisionPart.total_MOLDE_DIN18 = req.body.totals.total_MOLDE_DIN18
+    supervisionPart.total_MOLDE_DIN27 = req.body.totals.total_MOLDE_DIN27
+    supervisionPart.total_MOLDE_COLUMNA = req.body.totals.total_MOLDE_COLUMNA
     supervisionPart = awaitFor(supervisionPart.save())
     // res.json({success: true, checklist: checklist})
 
@@ -1082,7 +1097,7 @@ function updateMaterialsAndCalculatedTotal (req) {
   
   //suma material total para la hora
   let materialTotal = getMaterial(supervisionPart.totals,constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine],constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material],supervisionPart.sector)
-  let pisos = constant.SUPERVISION_PART_MATERIAL_FLOORS[req.body.observation.material]
+  let pisos = constant.SUPERVISION_PART_MATERIAL_FLOORS[constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material]]
   if (materialTotal == null) {
     //console.log('null mate total')
     if (supervisionPart.sector == 'EXTRUSORA') {
@@ -1097,7 +1112,7 @@ function updateMaterialsAndCalculatedTotal (req) {
     }
     if (supervisionPart.sector == 'APILADORA') {
       //count /  por elnro de pisos
-      let cantpisos = req.body.observation.count / pisos
+      let cantpisos =  Number(req.body.observation.count) / Number(pisos)
       supervisionPart.totals.push({machine: constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine], material: constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material], count: cantpisos, number: 1})
     }
     if (supervisionPart.sector == 'DESAPILADORA') {
@@ -1136,7 +1151,7 @@ function updateMaterialsAndCalculatedTotal (req) {
       } 
       else {
         //apiladora : count /  por elnro de pisos
-        let cantpisos = req.body.observation.count / pisos
+        let cantpisos =  Number(req.body.observation.count) / Number(pisos)
         materialTotal.count += eval(cantpisos)
       }
       let material = getMaterial(supervisionPart.materials,constant.SUPERVISION_PART_MACHINE_READBLE[req.body.observation.machine],constant.SUPERVISION_PART_MATERIAL_READBLE[req.body.observation.material],supervisionPart.sector)

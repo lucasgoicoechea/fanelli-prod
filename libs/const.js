@@ -127,7 +127,12 @@ const constants = {
     'L11': 9,
     'C': 12,
     'DM20': 12,
-    'DM27': 12
+    'DM27': 12,
+    'DM24': 12,
+    'DM4': 12,
+    'DIN18': 12,
+    'DIN27': 12,
+    'COLUMNA': 12
   },
   
   SUPERVISION_PART_MATERIAL_READBLE: {
@@ -139,8 +144,13 @@ const constants = {
     MOLDE_P18: 'P18',
     MOLDE_L11: 'L11',
     MOLDE_C: 'C',
+    MOLDE_DM4: 'DM4',
     MOLDE_DM20: 'DM20',
-    MOLDE_DM27: 'DM27'
+    MOLDE_DM24: 'DM24',
+    MOLDE_DM27: 'DM27',
+    MOLDE_DIN18: 'DIN18',
+    MOLDE_DIN27: 'DIN27',
+    MOLDE_COLUMNA: 'COLUMNA'
   },
 
   STAFF_NEWS_TYPE: {

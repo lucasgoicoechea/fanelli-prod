@@ -149,7 +149,9 @@ const controller = {
     if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !meetingService.isCreator(req.user.id, req.params.id)) {
       return next(new AppError('Impossible to edit', 'No se puede editar', Const.ERROR.DOCUMENT_CANT_BE_EDITED))
     }
-
+    if (req.body.meeting.state == null){
+      req.body.meeting.state = 2
+    }
     let meeting = {
       collaborators: req.body.meeting.collaborators,
       editors: req.body.meeting.editors,
@@ -162,6 +164,7 @@ const controller = {
       dateFrom: req.body.meeting.dateFrom,
       weeklys: req.body.meeting.weeklys,
       names: req.body.meeting.names,
+      state: req.body.meeting.state,
       time: req.body.meeting.time
     }
     let repeatEdit = req.body.meeting.repeatEdit || false

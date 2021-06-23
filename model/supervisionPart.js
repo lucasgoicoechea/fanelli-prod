@@ -223,6 +223,66 @@ const supervisionpartSchema = new Schema({
     type: Number,
     default: 0
   },
+  total_MOLDE_8: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_12_6A: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_12_8A: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_18: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_P12: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_P18: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_L11: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_C: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM20: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM27: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM24 :{
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM4: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DIN18: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DIN27: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_COLUMNA: {
+    type: Number,
+    default: 0
+  },
   observations: [{
     observation: {
       type: String,

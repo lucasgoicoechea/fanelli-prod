@@ -23,6 +23,85 @@
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"> <span  style="color: black;">Total Sistema {{unidades}}:</span>{{supervisionPart.totalUnits | decimalFormat}}</div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"> <span  style="color: black;">Total Paradas:</span> {{supervisionPart.totalStoppings}} <span  style="color: black;">minutos</span></div>
     </div>
+    <hr> 
+    <div class="container-fluid">
+         <div class="row" >
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                <span  style="color: black;">Total MOLDE_8:</span>{{supervisionPart.total_MOLDE_8}}
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                <span  style="color: black;">Total MOLDE_12_6A:</span>
+                  {{supervisionPart.total_MOLDE_12_6A}}
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                <span  style="color: black;">Total MOLDE_12_8A:</span>
+                  {{supervisionPart.total_MOLDE_12_8A}}
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                <span  style="color: black;">Total MOLDE_18:</span>
+                  {{supervisionPart.total_MOLDE_18}}
+           </div>     
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                <span  style="color: black;">Total MOLDE_P12:</span>
+                  {{supervisionPart.total_MOLDE_P12}}
+           </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+               <span  style="color: black;">Total MOLDE_P18:</span>
+                  {{supervisionPart.total_MOLDE_P18}}
+           </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+               <span  style="color: black;">Total MOLDE_L11:</span>
+                  {{supervisionPart.total_MOLDE_L11}}
+           </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                <span  style="color: black;">Total MOLDE_C:</span>
+                  {{supervisionPart.total_MOLDE_C}}
+           </div>   
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_DM4:</span>
+                  {{supervisionPart.total_MOLDE_DM4}}
+           </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_DM20:</span>
+                  {{supervisionPart.total_MOLDE_DM20}}
+           </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_DM24:</span>
+                  {{supervisionPart.total_MOLDE_DM24}}
+           </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_DM27:</span>
+                  {{supervisionPart.total_MOLDE_DM27}}
+           </div>    
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_DIN18:</span>
+                  {{supervisionPart.total_MOLDE_DIN18}}
+           </div>   
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_DIN27:</span>
+                  {{supervisionPart.total_MOLDE_DIN27}}
+           </div>  
+             <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+              <span  style="color: black;">Total MOLDE_COLUMNA:</span>
+                  {{supervisionPart.total_MOLDE_COLUMNA}}
+           </div>                                                                                                                                          
+         </div>              
+    </div>  
     <hr>
     <div class="container-fluid">
        <div class="row" >

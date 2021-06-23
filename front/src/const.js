@@ -306,7 +306,7 @@ export default {
 
   MEETING_STATE_READABLE: {
     0: 'Programada',
-    1: 'Ejecutada',
+    1: 'Vencida',
     2: 'Realizada',
     3: 'No Realizada',
     4: 'Re-Programada'
@@ -550,8 +550,13 @@ export default {
     MOLDE_P18: 'P18',
     MOLDE_L11: 'L11',
     MOLDE_C: 'C',
+    MOLDE_DM4: 'DM4',
     MOLDE_DM20: 'DM20',
-    MOLDE_DM27: 'DM27'
+    MOLDE_DM24: 'DM24',
+    MOLDE_DM27: 'DM27',
+    MOLDE_DIN18: 'DIN18',
+    MOLDE_DIN27: 'DIN27',
+    MOLDE_COLUMNA: 'COLUMNA'
   },
 
   SUPERVISION_PART_MATERIAL_FLOORS: {
@@ -564,7 +569,12 @@ export default {
     'L11': 9,
     'C': 12,
     'DM20': 12,
-    'DM27': 12
+    'DM27': 12,
+    'DM24': 12,
+    'DM4': 12,
+    'DIN18': 12,
+    'DIN27': 12,
+    'COLUMNA': 12
   },
 
   SUPERVISION_PART_MATERIAL_READBLE: {
@@ -577,7 +587,12 @@ export default {
     'L11': 'MOLDE_L11',
     'C': 'MOLDE_C',
     'DM20': 'MOLDE_DM20',
-    'DM27': 'MOLDE_DM27'
+    'DM27': 'MOLDE_DM27',
+    'DM24': 'MOLDE_DM24',
+    'DM4': 'MOLDE_DM4',
+    'DIN18': 'MOLDE_DIN18',
+    'DIN27': 'MOLDE_DIN27',
+    'COLUMNA': 'COLUMNA'
   },
 
   FABRIC_ATTRIBUTE: {
