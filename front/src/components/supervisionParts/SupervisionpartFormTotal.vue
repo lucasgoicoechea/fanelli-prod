@@ -58,7 +58,7 @@
             </div> 
             <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
                 v-show="supervisionPart && supervisionPart.sector" >
-                Total MOLDE_12_8A:
+                Total MOLDE_12_9A:
                   <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_12_8A"  style="width: 83px;"  v-mask="'###.##'" autofocus>
             </div> 
             <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  

@@ -102,7 +102,11 @@ const constants = {
     MOLDE_L11: 'L11',
     MOLDE_C: 'C',
     MOLDE_DM20: 'DM20',
-    MOLDE_DM27: 'DM27'
+    MOLDE_DM24: 'DM24',
+    MOLDE_DM27: 'DM27',
+    MOLDE_DIN18: 'DIN18',
+    MOLDE_DIN27: 'DIN27',
+    MOLDE_COLUMNA: 'COLUMNA'
   },
   
   SUPERVISION_PART_UNIT_SECTOR: {

@@ -37,7 +37,7 @@
             </div> 
             <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
                 v-show="supervisionPart && supervisionPart.sector" >
-                <span  style="color: black;">Total MOLDE_12_8A:</span>
+                <span  style="color: black;">Total MOLDE_12_9A:</span>
                   {{supervisionPart.total_MOLDE_12_8A}}
             </div> 
             <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
