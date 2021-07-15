@@ -264,6 +264,13 @@
                 type: 'meeting-history',
                 route: {name: 'meeting-history'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Control',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-manager',
+                route: {name: 'meeting-manager'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
               }
             ]
           },

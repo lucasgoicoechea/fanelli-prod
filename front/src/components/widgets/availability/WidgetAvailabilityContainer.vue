@@ -271,6 +271,21 @@
     }
   }
 
+  @media (min-width: 700px) and (orientation: landscape) {
+   .widget-availability-container {
+    position: relative;
+    padding: 5px;
+    background-color: #dadada;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width:  91%;
+    div {
+      position: relative;
+    }
+  }
+  }
+
   .error {
     padding: 20px;
     color: #000;

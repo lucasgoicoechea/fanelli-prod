@@ -102,6 +102,7 @@ import MeetingEdition from '@/components/meeting/MeetingEdition'
 import MeetingList from '@/components/meeting/MeetingList'
 import MeetingHistory from '@/components/meeting/MeetingHistory'
 import MeetingVisualization from '@/components/meeting/MeetingVisualization'
+import MeetingManager from '@/components/meeting/MeetingManager'
 
 const { ROLES } = Const
 
@@ -812,6 +813,15 @@ const router = new Router({
               path: 'listado',
               name: 'meeting-list',
               component: MeetingList,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'control',
+              name: 'meeting-manager',
+              component: MeetingManager,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
