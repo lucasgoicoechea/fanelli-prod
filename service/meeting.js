@@ -82,7 +82,25 @@ const service = {
       .populate('creator', 'name lastname legajo')
     return paginateAndSort(meetings, options)
   }),
+  listMyMeetingsMonth: async(function (id, month, year, options) {
+    var start = new Date(new Date(year+"-"+month+"-01").getTime()-(24*60*60*1000))
+    var end = new Date(new Date(year+"-"+month+"-30").getTime()+(24*60*60*1000))
+    var conditions = id==null?{date:{$gte: start, $lt: end}}:{
+      date:{$gte: start, $lt: end},
+      $or: [{creator: id}, {collaborators: id}]
+    }
 
+    console.dir(conditions)
+    let meetings = MeetingModel
+      .find(conditions)
+      .populate({
+        path: 'collaborators',
+        populate: {path: 'shift', select: 'value'},
+        select: {name: 1, lastname: 1, legajo: 1}
+      })
+      .populate('creator', 'name lastname legajo')
+    return paginateAndSort(meetings, options)
+  }),
   listMyMeetings: async(function (id, options) {
     let meetings = MeetingModel
       .find({

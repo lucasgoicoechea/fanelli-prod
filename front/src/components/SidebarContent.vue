@@ -115,6 +115,12 @@
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
+                name: 'Partes Control',
+                type: 'control-resume-supervisionparts',
+                route: {name: 'control-resume-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
                 name: 'Novedades',
                 type: 'control-novedades',
                 route: {name: 'control-novedades'},
@@ -270,6 +276,13 @@
                 img: '/static/img/icons-sidebar/staffRequests.svg',
                 type: 'meeting-manager',
                 route: {name: 'meeting-manager'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Sectores',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-sector',
+                route: {name: 'meeting-sector'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
               }
             ]

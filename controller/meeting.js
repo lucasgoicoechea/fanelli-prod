@@ -102,6 +102,49 @@ const controller = {
     }
     res.json({success: true, meetings})
   }),
+  listMyMeetingsSector: async(function (req, res, next) {
+    let meetings
+    let mes = Const.MEETING_MONTH_READBLE[req.query.month]
+    let anio = req.query.year
+    if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {
+      meetings = awaitFor(meetingService.listMyMeetingsMonth(null, mes, anio, {
+        perPage: req.query.per_page, 
+        page: req.query.page, 
+        teamOf: req.user.id
+      }))
+    } else {
+      meetings = awaitFor(meetingService.listMyMeetingsMonth(req.user.id, mes, anio, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    }
+    let resList = []
+    meetings.forEach(c => {
+      let meetingrepro = awaitFor(meetingService.getByIdOrigin(c._id))
+      if (c.type === 'FRECUENCY'){
+        let frecuentcia = c.type === 'FRECUENCY'?Const.MEETING_FRECUENCY[c.frecuency]:Const.READABLE_MEETING_TYPE[c.type]
+        resList.push(
+          {
+            _id: c._id,
+            state: c.state,
+            type: c.type,
+            frecuency: frecuentcia,
+            date: c.date,
+            time: c.time,
+            creator: c.creator,
+            dateFrom: c.dateFrom,
+            description: c.description,
+            names: c.names,
+            weeklys: c.weeklys,
+            recommendations: c.recommendations,
+            collaborators: c.collaborators,
+            repro: meetingrepro
+          }
+        )  
+      }
+    })
+    res.json({success: true, meetings: resList})
+  }),
   listMyMeetingsManager: async(function (req, res, next) {
     let meetings
     if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {

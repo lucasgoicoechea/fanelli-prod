@@ -32,6 +32,8 @@ import SupervisionpartList from '@/components/supervisionParts/SupervisionpartLi
 import SupervisionpartHistory from '@/components/supervisionParts/SupervisionpartHistory'
 import SupervisionpartForm from '@/components/supervisionParts/SupervisionpartForm'
 import SupervisionpartsControl from '@/components/supervisionParts/SupervisionpartControl'
+import SupervisionpartResumen from '@/components/supervisionParts/SupervisionpartResumen'
+import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal'
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
 import ControlPanelIndex from '@/components/control/ControlPanelIndex'
@@ -103,6 +105,7 @@ import MeetingList from '@/components/meeting/MeetingList'
 import MeetingHistory from '@/components/meeting/MeetingHistory'
 import MeetingVisualization from '@/components/meeting/MeetingVisualization'
 import MeetingManager from '@/components/meeting/MeetingManager'
+import MeetingSector from '@/components/meeting/MeetingSector'
 
 const { ROLES } = Const
 
@@ -315,6 +318,15 @@ const router = new Router({
               }
             },
             {
+              path: 'supervisionparts',
+              name: 'control-resume-supervisionparts',
+              component: SupervisionpartResumen,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
               path: 'novedades',
               name: 'control-novedades',
               component: EventsIndex,
@@ -492,6 +504,24 @@ const router = new Router({
               path: 'historial/:date',
               name: 'supervisionpartsHistory',
               component: SupervisionpartHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial/:date',
+              name: 'supervisionpartResumeHistoryTotal',
+              component: SupervisionpartResumeHistoryTotal,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial/:date',
+              name: 'supervisionpartsResume',
+              component: SupervisionpartResumen,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
@@ -822,6 +852,15 @@ const router = new Router({
               path: 'control',
               name: 'meeting-manager',
               component: MeetingManager,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'sectores',
+              name: 'meeting-sector',
+              component: MeetingSector,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
