@@ -115,7 +115,7 @@
     },
     data () {
       return {
-        month: 'AGOSTO',
+        month: 'SEPTIEMBRE',
         year: 2021,
         title: 'Mes reuniones',
         fullAccess: false,
@@ -308,6 +308,7 @@
         if (response.meetings.length === 0) {
           this.meeting.lastOne = true
         } else {
+          this.meeting.list = []
           response.meetings.forEach(e => {
             this.meeting.list.push(e)
           })

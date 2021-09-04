@@ -60,6 +60,7 @@ router.get('', meetingController.listMyMeetings)
 router.get('/manager/all', meetingController.listMyMeetingsManager)
 
 router.get('/manager/sector', meetingController.listMyMeetingsSector)
+router.get('/manager/calendar', meetingController.listMyMeetingsCalendar)
 
 
 /**

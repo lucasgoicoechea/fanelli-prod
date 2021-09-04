@@ -284,6 +284,13 @@
                 type: 'meeting-sector',
                 route: {name: 'meeting-sector'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Calendario',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-calendar',
+                route: {name: 'meeting-calendar'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
               }
             ]
           },

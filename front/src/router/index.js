@@ -106,6 +106,7 @@ import MeetingHistory from '@/components/meeting/MeetingHistory'
 import MeetingVisualization from '@/components/meeting/MeetingVisualization'
 import MeetingManager from '@/components/meeting/MeetingManager'
 import MeetingSector from '@/components/meeting/MeetingSector'
+import MeetingCalendar from '@/components/meeting/MeetingCalendar'
 
 const { ROLES } = Const
 
@@ -861,6 +862,15 @@ const router = new Router({
               path: 'sectores',
               name: 'meeting-sector',
               component: MeetingSector,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'calendario',
+              name: 'meeting-calendar',
+              component: MeetingCalendar,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'

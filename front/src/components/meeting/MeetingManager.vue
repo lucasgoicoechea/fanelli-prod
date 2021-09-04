@@ -7,7 +7,8 @@
       v-infinite-scroll="fetch"
       infinite-scroll-disabled="notUpdateList"
       infinite-scroll-distance="200">
-
+Lista de reuniones frecuentes: DIARIAS, MENSUALES y PERIODICAS
+ 
       <div class="empty" v-show="emptyList">
         No hay reuniones.
       </div>
