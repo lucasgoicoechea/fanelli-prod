@@ -219,6 +219,13 @@ const mutations = {
     })
     // state.histories = histories
   },
+  addTotales (state, totales) {
+    const histories = totales
+    histories.forEach(hi => {
+      state.histories.push(hi)
+    })
+    return totales
+  },
   cleanHistories (state) {
     state.histories.length = 0
   }
@@ -700,6 +707,25 @@ const actions = {
             if (res.body.success) {
               commit('addComparativeHistory', res.body)
               resolve()
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  totales ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totales`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              return res
             }
             reject()
           },

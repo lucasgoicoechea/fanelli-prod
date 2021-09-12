@@ -121,6 +121,12 @@
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
+                name: 'Partes Totales',
+                type: 'control-totales-supervisionparts',
+                route: {name: 'control-totales-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
                 name: 'Novedades',
                 type: 'control-novedades',
                 route: {name: 'control-novedades'},

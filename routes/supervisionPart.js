@@ -31,5 +31,6 @@ router.get('/comparative/:sector', authorize([ROLE.JEFE_LINEA, ROLE.OFICIALES, R
 //router.get('/:sector/pdf', authorize([ROLE.JEFE_LINEA, ROLE.JEFE_PLANTA, ROLE.RRHH, ROLE.JEFE_MANTENIMIENTO]), validator.checklist.pdf, supervisionpartController.getPdf)
 router.get('/:sector', authorize([ROLE.SUPERVISOR_PRODUCCION, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.JEFE_LINEA, ROLE.RRHH, ROLE.JEFE_MANTENIMIENTO]), supervisionpartController.getSupervisionparts)
 router.get('/fails/:sector',  supervisionpartController.getFails)
+router.get('/totales', authorize([ROLE.JEFE_LINEA, ROLE.OFICIALES, ROLE.JEFE_PLANTA, ROLE.RRHH, ROLE.JEFE_MANTENIMIENTO]), supervisionpartController.totales)
 
 module.exports = router

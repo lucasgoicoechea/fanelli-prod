@@ -26,7 +26,7 @@
   import { mapState, mapGetters } from 'vuex'
 
   export default {
-    name: 'SupervisionpartsList',
+    name: 'SupervisionpartsResumeList',
     components: {Spinner, SupervisionpartResumeDateButton},
     data () {
       return {
@@ -40,7 +40,7 @@
       redirect: function () {
         if (this.date !== '') {
           const formatedDate = this.$moment(this.date).format('DD-MM-YYYY')
-          this.$router.push({name: 'supervisionpartsResume', params: {date: formatedDate}})
+          this.$router.push({name: 'supervisionpartsResumen', params: {date: formatedDate}})
         } else {
           this.$modal.show('dialog', {
             text: 'Ingrese una fecha válida',

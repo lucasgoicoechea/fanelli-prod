@@ -769,6 +769,24 @@ const controller = {
     }, 1 )) 
     //headers.length))
     res.json({success: true, headers, supervisionparts})
+  }),
+
+  totales: async(function (req, res, next) {
+    let date
+    if (req.query.hasOwnProperty('date')) {
+      date = new Date(new Date(req.query.date).getTime() + 1000 * 60 * 60 * 3)
+    } else {
+      date = new Date(new Date().toDateString())
+    }
+    winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
+
+    let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDay(date, schedule))
+
+    // le pasas turno y fecha y te devuelve el grupo 
+    shift.getShiftForSchedule (schedule, date)
+    supervisionparts = _.orderBy(supervisionparts, c => c.schedule)
+
+    res.json({success: true, supervisionparts})
   })
 }
 

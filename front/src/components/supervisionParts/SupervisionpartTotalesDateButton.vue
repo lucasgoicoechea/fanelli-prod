@@ -1,6 +1,6 @@
 <template>
-  <article class="supervisionpart-resume-date-button">
-    <router-link :to="{ name: 'supervisionpartsResumen', params: { date: formatedDate }}">
+  <article class="supervisionpart-totales-date-button">
+    <router-link :to="{ name: 'supervisionpartTotalesView', params: { date: formatedDate }}">
       <header>{{ formatedDate }}</header>
       <div class="fill">
         <hr class="red">
@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'SupervisionpartResumeDateButton',
+    name: 'SupervisionpartTotalesDateButton',
     props: {
       date: {
         type: String
