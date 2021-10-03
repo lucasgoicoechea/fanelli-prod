@@ -1306,15 +1306,16 @@ function completeTotalesMaterialApiladora(supervisonpart,totalesMaterial) {
 
 function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
   supervisonpart.totals.forEach( ht => {
-    let tonXPallet = constant.SUPERVISION_PART_MATERIAL_TONELADAS[ht.material]
+    //let tonXPallet = constant.SUPERVISION_PART_MATERIAL_TONELADAS[ht.material]
     let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
+    let ladrillosXPallet = constant.SUPERVISION_PART_LADRILLO_PALLET[ht.material]
     if(totalesMaterial[ht.material]) {
       totalesMaterial[ht.material] = { 
         turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
         schedule: supervisonpart.schedule,
         material: ht.material,
         unidades: totalesMaterial[ht.material].unidades + ht.count,
-        toneladas: tonXPallet * (totalesMaterial[ht.material].unidades + ht.count),
+        toneladas: totalesMaterial[ht.material].unidades + (ladrillosXPallet * ht.count * pesoLadrillo),
         pesoLadrillo: pesoLadrillo,
         tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
       }
@@ -1325,7 +1326,7 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
         schedule: supervisonpart.schedule,
         material: ht.material, 
         unidades: ht.count,
-        toneladas: tonXPallet * ht.count,
+        toneladas: ladrillosXPallet * ht.count * pesoLadrillo,
         pesoLadrillo: pesoLadrillo,
         tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
       }
