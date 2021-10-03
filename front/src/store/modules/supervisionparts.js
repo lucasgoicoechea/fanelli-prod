@@ -734,6 +734,63 @@ const actions = {
           }
         )
     })
+  },
+  totalesExtrusora ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesExtrusora`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              return res
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  totalesApiladora ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesApiladora`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              return res
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  totalesDesapiladora ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesDesapiladora`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              return res
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
   }
 }
 

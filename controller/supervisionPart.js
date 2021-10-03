@@ -779,14 +779,74 @@ const controller = {
       date = new Date(new Date().toDateString())
     }
     winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
+    const sector =  'DESAPILADORA'   
+    let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+    //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
+    let totalesMaterial = []
+    supervisionparts.forEach(supervisonpart => {
+      totalesMaterial = completeTotalesMaterial(supervisonpart,totalesMaterial)
+    })
+    
+    res.json({success: true, totalesMaterial})
+  }),
 
-    let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDay(date, schedule))
+  totalesExtrusora: async(function (req, res, next) {
+    let date
+    if (req.query.hasOwnProperty('date')) {
+      date = new Date(new Date(req.query.date).getTime() + 1000 * 60 * 60 * 3)
+    } else {
+      date = new Date(new Date().toDateString())
+    }
+    winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
+    const sector =  'EXTRUSORA'   
+    let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+    //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
+    let totalesMaterial = []
+    supervisionparts.forEach(supervisonpart => {
+      totalesMaterial = completeTotalesMaterialExtrusora(supervisonpart,totalesMaterial)
+    })
+    
+    res.json({success: true, totalesMaterial})
+  }),
 
-    // le pasas turno y fecha y te devuelve el grupo 
-    shift.getShiftForSchedule (schedule, date)
-    supervisionparts = _.orderBy(supervisionparts, c => c.schedule)
 
-    res.json({success: true, supervisionparts})
+  totalesApiladora: async(function (req, res, next) {
+    let date
+    if (req.query.hasOwnProperty('date')) {
+      date = new Date(new Date(req.query.date).getTime() + 1000 * 60 * 60 * 3)
+    } else {
+      date = new Date(new Date().toDateString())
+    }
+    winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
+    const sector =  'APILADORA'   
+    let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+    //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
+    let totalesMaterial = []
+    supervisionparts.forEach(supervisonpart => {
+      totalesMaterial = completeTotalesMaterialApiladora(supervisonpart,totalesMaterial)
+    })
+    
+    res.json({success: true, totalesMaterial})
+  }),
+
+
+  totalesDesapiladora: async(function (req, res, next) {
+    let date
+    if (req.query.hasOwnProperty('date')) {
+      date = new Date(new Date(req.query.date).getTime() + 1000 * 60 * 60 * 3)
+    } else {
+      date = new Date(new Date().toDateString())
+    }
+    winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
+    const sector =  'DESAPILADORA'   
+    let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+    //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
+    let totalesMaterial = []
+    supervisionparts.forEach(supervisonpart => {
+      totalesMaterial = completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial)
+    })
+    
+    res.json({success: true, totalesMaterial})
   })
 }
 
@@ -1177,6 +1237,122 @@ function updateMaterialsAndCalculatedTotal (req) {
     }
   }
   return supervisionPart
+}
+
+function completeTotalesMaterialExtrusora(supervisonpart,totalesMaterial) {
+  supervisonpart.totals.forEach( ht => {
+    let tonXPallet = constant.SUPERVISION_PART_MATERIAL_TONELADAS[ht.material]
+    let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
+    if(totalesMaterial[ht.material]) {
+      totalesMaterial[ht.material] = { 
+        turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
+        schedule: supervisonpart.schedule,
+        material: ht.material,
+        unidades: totalesMaterial[ht.material].unidades + ht.count,
+        toneladas: tonXPallet * (totalesMaterial[ht.material].unidades + ht.count),
+        machine: ht.machine,
+        pesoLadrillo: pesoLadrillo,
+        tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
+      }
+    }
+    else {
+      totalesMaterial[ht.material] = {
+        turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
+        schedule: supervisonpart.schedule,
+        material: ht.material, 
+        unidades: ht.count,
+        toneladas: tonXPallet * ht.count,
+        machine: ht.machine,
+        pesoLadrillo: pesoLadrillo,
+        tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
+      }
+    }
+  })
+  return totalesMaterial
+}
+
+function completeTotalesMaterialApiladora(supervisonpart,totalesMaterial) {
+  supervisonpart.totals.forEach( ht => {
+    let tonXPallet = constant.SUPERVISION_PART_MATERIAL_TONELADAS[ht.material]
+    let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
+    if(totalesMaterial[ht.material]) {
+      totalesMaterial[ht.material] = { 
+        turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
+        schedule: supervisonpart.schedule,
+        material: ht.material,
+        unidades: totalesMaterial[ht.material].unidades + ht.count,
+        toneladas: tonXPallet * (totalesMaterial[ht.material].unidades + ht.count),
+        pesoLadrillo: pesoLadrillo,
+        tiempoMarcha: supervisonpart.totalMinutesWithoutStopping,
+        palletReposicion: supervisonpart.totalRepositionPallet
+      }
+    }
+    else {
+      totalesMaterial[ht.material] = {
+        turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
+        schedule: supervisonpart.schedule,
+        material: ht.material, 
+        unidades: ht.count,
+        toneladas: tonXPallet * ht.count,
+        pesoLadrillo: pesoLadrillo,
+        tiempoMarcha: supervisonpart.totalMinutesWithoutStopping,
+        palletReposicion: supervisonpart.totalRepositionPallet
+      }
+    }
+  })
+  return totalesMaterial
+}
+
+
+function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
+  supervisonpart.totals.forEach( ht => {
+    let tonXPallet = constant.SUPERVISION_PART_MATERIAL_TONELADAS[ht.material]
+    let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
+    if(totalesMaterial[ht.material]) {
+      totalesMaterial[ht.material] = { 
+        turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
+        schedule: supervisonpart.schedule,
+        material: ht.material,
+        unidades: totalesMaterial[ht.material].unidades + ht.count,
+        toneladas: tonXPallet * (totalesMaterial[ht.material].unidades + ht.count),
+        pesoLadrillo: pesoLadrillo,
+        tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
+      }
+    }
+    else {
+      totalesMaterial[ht.material] = {
+        turno: shift.getShiftForSchedule( supervisonpart.schedule.value, supervisonpart.date),
+        schedule: supervisonpart.schedule,
+        material: ht.material, 
+        unidades: ht.count,
+        toneladas: tonXPallet * ht.count,
+        pesoLadrillo: pesoLadrillo,
+        tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
+      }
+    }
+  })
+  return totalesMaterial
+}
+
+function completeTotalesMaterial(supervisonpart,totalesMaterial) {
+  supervisonpart.totals.forEach( ht => {
+    let tonXPallet = constant.SUPERVISION_PART_MATERIAL_TONELADAS[ht.material]
+    if(totalesMaterial[ht.material]) {
+      totalesMaterial[ht.material] = { 
+        material: ht.material,
+        unidades: totalesMaterial[ht.material].unidades + ht.count,
+        toneladas: tonXPallet * (totalesMaterial[ht.material].unidades + ht.count)
+      }
+    }
+    else {
+      totalesMaterial[ht.material] = {  
+        material: ht.material,        
+        unidades: ht.count,
+        toneladas: tonXPallet * ht.count
+      }
+    }
+  })
+  return totalesMaterial
 }
 /**
  * This function is used in case that the array must have some specific length

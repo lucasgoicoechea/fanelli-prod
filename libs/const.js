@@ -138,7 +138,43 @@ const constants = {
     'DIN27': 12,
     'COLUMNA': 12
   },
+
+  SUPERVISION_PART_MATERIAL_TONELADAS: {
+    '8': 12,
+    '12-6A': 12,
+    '12-9A': 12,
+    '18': 12,
+    'P12': 11,
+    'P18': 12,
+    'L11': 9,
+    'C': 12,
+    'DM20': 12,
+    'DM27': 12,
+    'DM24': 12,
+    'DM4': 12,
+    'DIN18': 12,
+    'DIN27': 12,
+    'COLUMNA': 12
+  },
   
+  SUPERVISION_PART_PESO_LADRILLO: {
+    '8': 4.7,
+    '12-6A': 4.7,
+    '12-9A': 4.7,
+    '18': 4.7,
+    'P12': 4.7,
+    'P18': 4.7,
+    'L11': 4.7,
+    'C': 4.7,
+    'DM20': 7.5,
+    'DM27': 7.5,
+    'DM24': 7.5,
+    'DM4': 7.5,
+    'DIN18': 7.5,
+    'DIN27': 7.5,
+    'COLUMNA': 7.5
+  },
+
   SUPERVISION_PART_MATERIAL_READBLE: {
     MOLDE_8: '8',
     MOLDE_12_6A: '12-6A',
