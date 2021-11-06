@@ -1,5 +1,7 @@
 const Excel = require('exceljs')
 const dateFns = require('date-fns')
+const _ = require('lodash')
+
 module.exports = {
   /**
    *
@@ -14,6 +16,9 @@ module.exports = {
   addEvent: function (event, collaborator, sheet) {
     return sheet.addRow([`${collaborator.lastname} ${collaborator.name}`, event.dates[0], event.type, event.data])
   },
+  addMaterial: function (total, sheet) {
+    return sheet.addRow([total.turno, total.schedule,turno.unidades, turno.toneladas, turno.material, turno.machine])
+  },
   addEventsByDay: function (event, collaborator, sheet) {
     event.dates.forEach(day => {
       sheet.addRow([`${collaborator.lastname} ${collaborator.name}`, day, event.type, event.data])
@@ -26,6 +31,36 @@ module.exports = {
         sheet.addRow([`${collaborator.lastname} ${collaborator.name}`, day, event.type, event.data])
       }
     })
+  },
+  toMaterialExcelObject: function (material) {
+    const excelObject = {
+      fecha: '',
+      turno: '',
+      schedule: '',
+      material: '',
+      unidades: '',
+      toneladas: '',
+      machine: '',
+      pesoLadrillo: ' ',
+      tiempoMarcha: '',
+      palletReposicion: ''
+    }
+    excelObject.fecha = material.fecha
+    excelObject.turno =  material.turno
+    excelObject.schedule = material.schedule
+    excelObject.material = material.material
+    excelObject.unidades = material.unidades
+    excelObject.toneladas = material.toneladas
+    excelObject.machine = material.machine
+    excelObject.pesoLadrillo = material.pesoLadrillo
+    excelObject.tiempoMarcha = material.tiempoMarcha
+    excelObject.palletReposicion = material.palletReposicion
+    return excelObject
+  },
+  addMaterialByDayFilter: function (material, sheet) {
+    const eventsOrdered = this.toMaterialExcelObject(material)
+    this.addMaterial(eventsOrdered, sheet)
+    return sheet
   },
   colorRow: function (row, color) {
     row.eachCell((cell) => {
@@ -145,6 +180,40 @@ module.exports = {
       vertical: 'center',
       horizontal: 'center'
     }
+    return wb
+  },
+
+    /**
+   * @param {Object[]} data
+   * @param {Object[]} data[].events
+   * @param {Object[]} data[].collaborator
+   */
+  generateExcelSupervisionPartByDay: function (data) {
+    const wb = new Excel.Workbook()
+    let sheet = wb.addWorksheet('Reporte')
+    sheet.columns = [
+      {header: 'Fecha', key: 'date', width: 15},
+      {header: 'Turno', key: 'turno', width: 20},
+      {header: 'Turno', key: 'schedule', width: 25, outlineLevel: 1},
+      {header: 'Tipo.', key: 'material', width: 25, outlineLevel: 1},
+      {header: 'Unidades', key: 'unidades', width: 30, outlineLevel: 1},
+      {header: 'Toneladas', key: 'toneladas', width: 30, outlineLevel: 1}
+    ]
+    this.colorRow(sheet.getRow(1), 'FFFFA420')
+    if (data.length > 0 ) {
+      data.forEach(d => {
+        sheet = this.addMaterialByDayFilter(d, sheet)
+        })
+    }
+    
+    /*sheet.autoFilter = {
+      from: 'A1',
+      to: 'C1'
+    }
+    sheet.getColumn(2).alignment = {
+      vertical: 'center',
+      horizontal: 'center'
+    }*/
     return wb
   }
 }

@@ -97,6 +97,20 @@
             can: authorize(ROLES.RRHH, ROLES.SUPERVISORES)
           },
           {
+            name: 'Partes Historico',
+            type: 'control-supervisionparts',
+            routeName: 'control-supervisionparts-historico',
+            route: {name: 'control-supervisionparts-historico'},
+            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
+            name: 'Partes Control',
+            type: 'control-oficial-supervisionpart',
+            routeName: 'control-oficial-control',
+            route: {name: 'control-oficial-control'},
+            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
             name: 'Panel de Control',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanel',
@@ -118,6 +132,12 @@
                 name: 'Partes Control',
                 type: 'control-resume-supervisionparts',
                 route: {name: 'control-resume-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Totales',
+                type: 'control-totales-supervisionparts',
+                route: {name: 'control-totales-supervisionparts'},
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {

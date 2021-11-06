@@ -340,6 +340,26 @@ supervisionpartSchema.statics.getSupervisionPartForDayAndSector = function (date
     .populate('hours.stoppings.supervisor', ['name', 'lastname'])
     .lean()
 }
+
+supervisionpartSchema.statics.getSupervisionPartForDay = function (date) {
+  // we can't search by date. We must query between beginning of the day and the end of the day
+  const beginning = new Date(date.getTime())
+  // Adding 24 hs
+  const ending = new Date(beginning.getTime() + (24 * 60 * 60 * 1000))
+  return this.find({date: {$gte: beginning, $lt: ending}})
+    .populate({path: 'hours.hour', model: 'Hour'})
+    .populate({path: 'hours.stoppings.fail', model: 'Fail'})
+    //.populate('checks.comments.supervisor', ['name', 'lastname'])
+    .populate('hours.hour', ['text','ordertime'])
+    .populate('supervisorShift', ['name', 'lastname'])
+    .populate('hours.supervisor', ['name', 'lastname'])
+    .populate('creator', ['name', 'lastname'])
+    .populate('hours.comments.supervisor', ['name', 'lastname'])
+    .populate('observations.supervisor', ['name', 'lastname'])
+    .populate('hours.stoppings.supervisor', ['name', 'lastname'])
+    .lean()
+}
+
 // mongoose.set('debug', true)
 const SupervisionpartModel = mongoose.model('Supervisionpart', supervisionpartSchema)
 

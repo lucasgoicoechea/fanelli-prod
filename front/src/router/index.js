@@ -32,7 +32,11 @@ import SupervisionpartList from '@/components/supervisionParts/SupervisionpartLi
 import SupervisionpartHistory from '@/components/supervisionParts/SupervisionpartHistory'
 import SupervisionpartForm from '@/components/supervisionParts/SupervisionpartForm'
 import SupervisionpartsControl from '@/components/supervisionParts/SupervisionpartControl'
-import SupervisionpartResumen from '@/components/supervisionParts/SupervisionpartResumen'
+import SupervisionpartTotal from '@/components/supervisionParts/SupervisionpartTotal'
+import SupervisionpartTotales from '@/components/supervisionParts/SupervisionpartTotales'
+// import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView'
+import SupervisionpartsResumen from '@/components/supervisionParts/SupervisionpartResumen'
+import SupervisionpartResume from '@/components/supervisionParts/SupervisionpartResume'
 import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal'
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
@@ -319,9 +323,18 @@ const router = new Router({
               }
             },
             {
-              path: 'supervisionparts',
+              path: 'supervisionparts-resume',
               name: 'control-resume-supervisionparts',
-              component: SupervisionpartResumen,
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-totals',
+              name: 'control-totales-supervisionparts',
+              component: SupervisionpartTotales,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
@@ -342,6 +355,24 @@ const router = new Router({
               component: PersonalManager,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SECTOR_PANOL, ROLES.SUPERVISORES),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts',
+              name: 'control-supervisionparts-historico',
+              component: SupervisionpartsControl,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-resume',
+              name: 'control-oficial-control',
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
                 fail: '/error'
               }
             },
@@ -506,25 +537,34 @@ const router = new Router({
               name: 'supervisionpartsHistory',
               component: SupervisionpartHistory,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
             {
-              path: 'historial/:date',
+              path: 'historial-resume-total/:date',
               name: 'supervisionpartResumeHistoryTotal',
               component: SupervisionpartResumeHistoryTotal,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
             {
-              path: 'historial/:date',
-              name: 'supervisionpartsResume',
-              component: SupervisionpartResumen,
+              path: 'historial-totales-total/:date',
+              name: 'supervisionpartTotalesView',
+              component: SupervisionpartTotal,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume/:date',
+              name: 'supervisionpartsResumen',
+              component: SupervisionpartResume,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
