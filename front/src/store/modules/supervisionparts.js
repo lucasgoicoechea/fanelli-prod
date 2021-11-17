@@ -219,6 +219,13 @@ const mutations = {
     })
     // state.histories = histories
   },
+  addTotales (state, totales) {
+    const histories = totales
+    histories.forEach(hi => {
+      state.histories.push(hi)
+    })
+    return totales
+  },
   cleanHistories (state) {
     state.histories.length = 0
   }
@@ -708,6 +715,96 @@ const actions = {
           }
         )
     })
+  },
+  totales ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesGral`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              resolve(res.body)
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  totalesExtrusora ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesExtrusora`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              resolve(res.body)
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  totalesApiladora ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesApiladora`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              resolve(res.body)
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  totalesDesapiladora ({commit}, payload) {
+    return new Promise((resolve, reject) => {
+      const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
+      Vue.http.get(`supervisionpart/totalesDesapiladora`, {
+        params: params
+      })
+        .then(
+          (res) => {
+            if (res.body.success) {
+              resolve(res.body)
+            }
+            reject()
+          },
+          () => {
+            reject()
+          }
+        )
+    })
+  },
+  getAllReportDay (context, day) {
+    const success = (response) => {
+      return new Blob([response.data], {type: response.headers.get['content-type']})
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get(`supervisionpart/excel/${day}`,
+      {responseType: 'arraybuffer'}
+    )
+      .then(success)
+      .catch(handleError)
   }
 }
 

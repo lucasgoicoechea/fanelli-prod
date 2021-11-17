@@ -23,7 +23,7 @@
   import { mapState } from 'vuex'
 
   export default {
-    name: 'SupervisionpartControl',
+    name: 'SupervisionpartResume',
     components: {
       // summaryView: ChecklistSummaryView,
       detailView: SupervisionpartResumeView,

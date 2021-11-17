@@ -10,11 +10,11 @@
       </div>
     </div>
 
-    <div class="container-fluid" v-show="!loading">
+    <div class="container-fluid" v-show="!loading"> 
       <div class="col-xs-6 col-sm-4 col-md-2"  v-for="supervisionpartDate in getDatesSupervisionparts">
         <spinner :show="loading"></spinner>
-        <supervisionpart-date-button :key="supervisionpartDate" :date="supervisionpartDate">
-        </supervisionpart-date-button>
+        <supervisionpart-totales-date-button :key="supervisionpartDate" :date="supervisionpartDate">
+        </supervisionpart-totales-date-button>
       </div>
     </div>
   </div>
@@ -22,12 +22,12 @@
 
 <script>
   import Spinner from '@/components/Spinner.vue'
-  import SupervisionpartDateButton from '@/components/supervisionParts/SupervisionpartDateButton.vue'
+  import SupervisionpartTotalesDateButton from '@/components/supervisionParts/SupervisionpartTotalesDateButton.vue'
   import { mapState, mapGetters } from 'vuex'
 
   export default {
-    name: 'SupervisionpartsFullList',
-    components: {Spinner, SupervisionpartDateButton},
+    name: 'SupervisionpartsTotalesList',
+    components: {Spinner, SupervisionpartTotalesDateButton},
     data () {
       return {
         date: ''
@@ -40,7 +40,7 @@
       redirect: function () {
         if (this.date !== '') {
           const formatedDate = this.$moment(this.date).format('DD-MM-YYYY')
-          this.$router.push({name: 'supervisionpartsHistory', params: {date: formatedDate}})
+          this.$router.push({name: 'supervisionpartsTotales', params: {date: formatedDate}})
         } else {
           this.$modal.show('dialog', {
             text: 'Ingrese una fecha válida',
