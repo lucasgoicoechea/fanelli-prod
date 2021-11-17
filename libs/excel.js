@@ -46,6 +46,7 @@ module.exports = {
       tiempoMarcha: '',
       palletReposicion: ''
     }
+    
     excelObject.sector = material.sector
     excelObject.fecha = material.fecha
     excelObject.turno =  material.turno

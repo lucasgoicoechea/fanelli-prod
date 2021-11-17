@@ -1443,6 +1443,7 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
       let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
       let ladrillosXPallet = constant.SUPERVISION_PART_LADRILLO_PALLET[ht.material]
       let indice = constant.SUPERVISION_PART_MATERIALS[ht.material]
+
       if (supervisonpart.schedule=='NOCHE'){
         indice=indice+10;
       }     
