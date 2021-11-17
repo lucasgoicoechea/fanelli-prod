@@ -719,13 +719,13 @@ const actions = {
   totales ({commit}, payload) {
     return new Promise((resolve, reject) => {
       const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {dae: 'dd'}
-      Vue.http.get(`supervisionpart/totales`, {
+      Vue.http.get(`supervisionpart/totalesGral`, {
         params: params
       })
         .then(
           (res) => {
             if (res.body.success) {
-              return res
+              resolve(res.body)
             }
             reject()
           },
@@ -744,7 +744,7 @@ const actions = {
         .then(
           (res) => {
             if (res.body.success) {
-              return res
+              resolve(res.body)
             }
             reject()
           },
@@ -763,7 +763,7 @@ const actions = {
         .then(
           (res) => {
             if (res.body.success) {
-              return res
+              resolve(res.body)
             }
             reject()
           },
@@ -782,7 +782,7 @@ const actions = {
         .then(
           (res) => {
             if (res.body.success) {
-              return res
+              resolve(res.body)
             }
             reject()
           },
@@ -791,6 +791,20 @@ const actions = {
           }
         )
     })
+  },
+  getAllReportDay (context, day) {
+    const success = (response) => {
+      return new Blob([response.data], {type: response.headers.get['content-type']})
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get(`supervisionpart/excel/${day}`,
+      {responseType: 'arraybuffer'}
+    )
+      .then(success)
+      .catch(handleError)
   }
 }
 

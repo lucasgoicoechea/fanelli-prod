@@ -2,6 +2,14 @@
   <div class="supervisionpart-totales-view">
     <section>
       <div class="container-fluid">
+        <div class="row" >
+            <button class="redirect" @click="generateReport">
+              <div>
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span class="text">Generar reporte</span>
+              </div>
+            </button>
+        </div>
         <div class="row">
            <div class="col-xs-12 detail"  >   
             <div  >
@@ -21,20 +29,55 @@
                 ></vuetable>
               </div>  
             </div>
-          </div>         
-          <div class="col-xs-12 detail"  >   
-            <div  >
+          </div> 
+        </div>  
+
               <div class="title">
                <div class="shifts">
                  TOTAL TURNOS
                 </div>
               </div>
+      <div class="row">      
+          <div class="col-xs-12 detail"  >   
+            <div  >
                 <div>
                <vuetable 
                   ref="vuetableTurnosTotales"
                   :api-mode="false"
-                  :fields="camposTurnos"
-                  :data="this.supervisionpartTurnosTotales"
+                  :fields="camposExtrusora"
+                  :data="this.supervisionpartExtrusora"
+                  pagination-path=""
+                  :css="css.table"
+                ></vuetable>
+              </div>  
+            </div>
+          </div>
+        </div>
+        <div class="row">      
+          <div class="col-xs-12 detail"  >   
+            <div  >
+                <div>
+               <vuetable 
+                  ref="vuetableTurnosTotales"
+                  :api-mode="false"
+                  :fields="camposDesapiladora"
+                  :data="this.supervisionpartDesapiladora"
+                  pagination-path=""
+                  :css="css.table"
+                ></vuetable>
+              </div>  
+            </div>
+          </div>
+        </div>
+        <div class="row">      
+          <div class="col-xs-12 detail"  >   
+            <div>
+                <div>
+               <vuetable 
+                  ref="vuetableTurnosTotales"
+                  :api-mode="false"
+                  :fields="camposApiladora"
+                  :data="this.supervisionpartApiladora"
                   pagination-path=""
                   :css="css.table"
                 ></vuetable>
@@ -52,7 +95,9 @@
   import Vuetable from 'vuetable-2'
   import CssForBootstrap4 from './VuetableCssBootstrap4.js'
   import {mapState, mapGetters} from 'vuex'
+  import pdf from '@/utils/pdf'
   import Const from '@/const'
+  import dateAndTime from '@/utils/dateAndTime.js'
 
   export default {
     name: 'SupervisionpartTotalesView',
@@ -72,43 +117,52 @@
         current: '',
         loading: true,
         supervisionpartTotales: [],
-        supervisionpartTurnosTotales: [],
+        supervisionpartExtrusora: [],
+        supervisionpartDesapiladora: [],
+        supervisionpartApiladora: [],
         campos: [
           {
             name: 'material',
-            title: 'Material',
+            title: 'Tipo Ladrillo',
             callback: function (value) {
               return '<b>' + value + ' </b>'
             }
           },
           {
-            name: 'pallets',
-            title: 'Pallet'
+            name: 'unidades',
+            title: 'Pallets'
           },
           {
             name: 'toneladas',
             title: 'Toneladas'
           }
         ],
-        camposTurnos: [
+        camposExtrusora: [
+          {
+            name: 'fecha',
+            title: 'Fecha',
+            callback: function (value) {
+              return dateAndTime.dateDayAndMonth(new Date(value))
+            }
+          },
           {
             name: 'turno',
             title: 'Turno'
           },
           {
-            name: 'sector',
+            name: 'schedule',
+            title: 'Turno Dia'
+          },
+          {
+            name: 'sectorExtrusora',
             title: 'Sector',
             callback: function (value) {
               return '<b>Extrusora</b>'
             }
           },
           {
-            name: 'carros',
+            name: 'unidades',
             title: 'Carros'
-          },
-          {
-            name: 'tiempoExtrusora',
-            title: 'Tiempo'
           },
           {
             name: 'material',
@@ -118,64 +172,107 @@
             }
           },
           {
-            name: 'maquina',
-            title: 'Maquina'
+            name: 'machine',
+            title: 'Extrusora'
           },
           {
+            name: 'tiempoMarcha',
+            title: 'Tiempo Trabajo'
+          },
+          /* {
             name: 'pesoLadrillo',
             title: 'Peso Ladrillo'
+          }, */
+          {
+            name: 'toneladas',
+            title: 'Toneladas',
+            callback: function (value) {
+              value = (value === 0) ? 0 : (value / 1000)
+              return '<b>' + value + ' </b>'
+            }
+          }
+        ],
+        camposDesapiladora: [
+          {
+            name: 'fecha',
+            title: 'Fecha',
+            callback: function (value) {
+              return dateAndTime.dateDayAndMonth(new Date(value))
+            }
           },
           {
-            name: 'toneladasExtrusora',
-            title: 'Toneladas'
+            name: 'turno',
+            title: 'Turno'
           },
           {
-            name: 'sector',
+            name: 'schedule',
+            title: 'Turno Dia'
+          },
+          {
+            name: 'sectorDesapiladora',
             title: 'Sector',
             callback: function (value) {
               return '<b>Desapiladora</b>'
             }
           },
           {
+            name: 'unidades',
+            title: 'Pallets'
+          },
+          {
             name: 'material',
-            title: 'Material',
+            title: 'Material'
+          },
+          {
+            name: 'tiempoMarcha',
+            title: 'Tiempo Trabajo'
+          },
+          /* {
+            name: 'ladrilloPorPallet',
+            title: 'Ladrillo Por Pallet'
+          },
+          {
+            name: 'pesoLadrillo',
+            title: 'Peso Del Ladrillo'
+          }, */
+          {
+            name: 'toneladas',
+            title: 'Toneladas',
             callback: function (value) {
+              value = (value === 0) ? 0 : (value / 1000)
               return '<b>' + value + ' </b>'
             }
           },
           {
-            name: 'pallets',
-            title: 'Cantidad Pallets'
-          },
-          {
-            name: 'ladrillosPallet',
-            title: 'Ladrillos Pallet'
-          },
-          {
-            name: 'pesoLadrillo',
-            title: 'Peso Ladrillo'
-          },
-          {
-            name: 'toneladasDesapiladora',
-            title: 'Toneladas'
-          },
-          {
-            name: 'tiempoDesapiladora',
-            title: 'Tiempo'
-          },
-          {
             name: 'palletReposicion',
-            title: 'Pallet Reposicion'
+            title: 'Pallet Repos'
+          }
+        ],
+        camposApiladora: [
+          {
+            name: 'fecha',
+            title: 'Fecha',
+            callback: function (value) {
+              return dateAndTime.dateDayAndMonth(new Date(value))
+            }
           },
           {
-            name: 'sector',
+            name: 'turno',
+            title: 'Turno'
+          },
+          {
+            name: 'schedule',
+            title: 'Turno Dia'
+          },
+          {
+            name: 'sectorApiladora',
             title: 'Sector',
             callback: function (value) {
               return '<b>Apiladora</b>'
             }
           },
           {
-            name: 'vagonetas',
+            name: 'unidades',
             title: 'Vagonetas'
           },
           {
@@ -186,8 +283,20 @@
             }
           },
           {
-            name: 'toneladasApiladora',
-            title: 'Vagonetas'
+            name: 'tiempoMarcha',
+            title: 'Tiempo Trabajo'
+          },
+          {
+            name: 'toneladas',
+            title: 'Toneladas',
+            callback: function (value) {
+              value = (value === 0) ? 0 : (value / 1000)
+              return '<b>' + value + ' </b>'
+            }
+          },
+          {
+            name: 'palletReposicion',
+            title: 'Pallet Repos'
           }
         ],
         css: {
@@ -216,6 +325,12 @@
       }
     },
     methods: {
+      successfulPrint (blob) {
+        pdf.download(blob, 'report.xlsx')
+      },
+      errorPrint () {
+        this.$snotifyWrapper.warning('Error de impresión. Intente nuevamente')
+      },
       isNotLast (order, countHour) {
         // console.log(order + '-' + countHour)
         return order < countHour
@@ -231,14 +346,45 @@
           this.$store.dispatch('supervisionparts/totales', {date: this.convertedDate})
             .then(this.successFetch)
             .catch(this.catchError)
+          this.$store.dispatch('supervisionparts/totalesApiladora', {date: this.convertedDate})
+            .then(this.successApiladoraFetch)
+            .catch(this.catchError)
+          this.$store.dispatch('supervisionparts/totalesDesapiladora', {date: this.convertedDate})
+            .then(this.successDesapiladoraFetch)
+            .catch(this.catchError)
+          this.$store.dispatch('supervisionparts/totalesExtrusora', {date: this.convertedDate})
+            .then(this.successExtrusoraFetch)
+            .catch(this.catchError)
           this.current = Const.currentSchedule().value
         }
       },
       successFetch (response) {
-        this.supervisionpartTotales = response.totales
+        if (response.totales.length === 0) {
+          this.supervisionpartTotales = []
+        } else {
+          response.totales.forEach(e => {
+            this.supervisionpartTotales.push(e)
+          })
+        }
+        this.loading = false
+      },
+      successDesapiladoraFetch (response) {
+        this.supervisionpartDesapiladora = response.totales
+      },
+      successApiladoraFetch (response) {
+        this.supervisionpartApiladora = response.totales
+      },
+      successExtrusoraFetch (response) {
+        this.supervisionpartExtrusora = response.totales
       },
       catchError () {
+        console.dir('entro')
         return Promise.reject()
+      },
+      generateReport () {
+        this.$store.dispatch('supervisionparts/getAllReportDay', this.convertedDate)
+          .then(this.successfulPrint)
+          .catch(this.errorPrint)
       }
     },
     created () {
@@ -364,11 +510,11 @@
   .observaciones {
     position: relative;
     margin-top: 10px;
-    border: 6px solid blueviolet;
+    border: 6px solid rgb(211, 54, 216);
   }
 
   .container-fluid {
-    width: 70%;
+    --width: 70%;
   }
 
   @media (min-width: 600px) and (max-width: 1200px) {

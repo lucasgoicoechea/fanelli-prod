@@ -359,6 +359,24 @@ const router = new Router({
               }
             },
             {
+              path: 'supervisionparts',
+              name: 'control-supervisionparts-historico',
+              component: SupervisionpartsControl,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-resume',
+              name: 'control-oficial-control',
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            },
+            {
               path: 'epp-historial',
               name: 'control-epp',
               component: EPPHistory,
@@ -519,7 +537,7 @@ const router = new Router({
               name: 'supervisionpartsHistory',
               component: SupervisionpartHistory,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
@@ -528,7 +546,7 @@ const router = new Router({
               name: 'supervisionpartResumeHistoryTotal',
               component: SupervisionpartResumeHistoryTotal,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
@@ -537,7 +555,7 @@ const router = new Router({
               name: 'supervisionpartTotalesView',
               component: SupervisionpartTotal,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
@@ -546,7 +564,7 @@ const router = new Router({
               name: 'supervisionpartsResumen',
               component: SupervisionpartResume,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },

@@ -359,6 +359,7 @@ supervisionpartSchema.statics.getSupervisionPartForDay = function (date) {
     .populate('hours.stoppings.supervisor', ['name', 'lastname'])
     .lean()
 }
+
 // mongoose.set('debug', true)
 const SupervisionpartModel = mongoose.model('Supervisionpart', supervisionpartSchema)
 
