@@ -34,6 +34,7 @@ module.exports = {
   },
   toMaterialExcelObject: function (material) {
     const excelObject = {
+
       sector: '',
       fecha: '',
       turno: '',
@@ -46,6 +47,7 @@ module.exports = {
       tiempoMarcha: '',
       palletReposicion: ''
     }
+
     excelObject.sector = material.sector
     excelObject.fecha = material.fecha
     excelObject.turno =  material.turno
