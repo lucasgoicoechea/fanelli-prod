@@ -17,7 +17,7 @@ module.exports = {
     return sheet.addRow([`${collaborator.lastname} ${collaborator.name}`, event.dates[0], event.type, event.data])
   },
   addMaterial: function (total, sheet) {
-    return sheet.addRow([total.turno, total.schedule,turno.unidades, turno.toneladas, turno.material, turno.machine])
+    return sheet.addRow([total.sector, total.fecha, total.turno, total.schedule,total.unidades, total.toneladas, total.material, total.machine])
   },
   addEventsByDay: function (event, collaborator, sheet) {
     event.dates.forEach(day => {
@@ -34,6 +34,8 @@ module.exports = {
   },
   toMaterialExcelObject: function (material) {
     const excelObject = {
+
+      sector: '',
       fecha: '',
       turno: '',
       schedule: '',
@@ -45,6 +47,8 @@ module.exports = {
       tiempoMarcha: '',
       palletReposicion: ''
     }
+
+    excelObject.sector = material.sector
     excelObject.fecha = material.fecha
     excelObject.turno =  material.turno
     excelObject.schedule = material.schedule
@@ -192,12 +196,14 @@ module.exports = {
     const wb = new Excel.Workbook()
     let sheet = wb.addWorksheet('Reporte')
     sheet.columns = [
+      {header: 'Sector', key: 'sector', width: 15},
       {header: 'Fecha', key: 'date', width: 15},
       {header: 'Turno', key: 'turno', width: 20},
       {header: 'Turno', key: 'schedule', width: 25, outlineLevel: 1},
-      {header: 'Tipo.', key: 'material', width: 25, outlineLevel: 1},
       {header: 'Unidades', key: 'unidades', width: 30, outlineLevel: 1},
-      {header: 'Toneladas', key: 'toneladas', width: 30, outlineLevel: 1}
+      {header: 'Toneladas', key: 'toneladas', width: 30, outlineLevel: 1},
+      {header: 'Tipo', key: 'material', width: 25, outlineLevel: 1},
+      {header: 'Maquina', key: 'machine', width: 25, outlineLevel: 1}
     ]
     this.colorRow(sheet.getRow(1), 'FFFFA420')
     if (data.length > 0 ) {

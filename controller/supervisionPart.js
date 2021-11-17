@@ -1339,8 +1339,19 @@ function completeTotalesMaterialExtrusora(supervisonpart,totalesMaterial) {
       let ladrillosXCarro = constant.SUPERVISION_PART_LADRILLO_CARRO[ht.material]
       let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
       let indice = constant.SUPERVISION_PART_MATERIALS[ht.material]
+      if (supervisonpart.schedule=='NOCHE'){
+        indice=indice+10;
+      }     
+      if (supervisonpart.schedule=='TARDE'){
+        indice=indice+20;
+      }    
+      if (supervisonpart.schedule=='MANIANA'){
+        indice=indice+30;
+      }
       if(totalesMaterial[indice]) {
         totalesMaterial[indice] = {
+          sector: 'EXTRUSORA',
+          indice: constant.SUPERVISION_PART_MATERIALS[ht.material]+''+supervisonpart.schedule,
           fecha: supervisonpart.date, 
           turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
           schedule: supervisonpart.schedule,
@@ -1356,6 +1367,7 @@ function completeTotalesMaterialExtrusora(supervisonpart,totalesMaterial) {
       }
       else {
         totalesMaterial[indice] = { 
+          sector: 'EXTRUSORA',
           fecha: supervisonpart.date,
           turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
           schedule: supervisonpart.schedule,
@@ -1381,8 +1393,18 @@ function completeTotalesMaterialApiladora(supervisonpart,totalesMaterial) {
     let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
     let ladrillosXVagon = constant.SUPERVISION_PART_LADRILLO_VAGON[ht.material]
     let indice = constant.SUPERVISION_PART_MATERIALS[ht.material]
+    if (supervisonpart.schedule=='NOCHE'){
+      indice=indice+10;
+    }     
+    if (supervisonpart.schedule=='TARDE'){
+      indice=indice+20;
+    }    
+    if (supervisonpart.schedule=='MANIANA'){
+      indice=indice+30;
+    }
     if(totalesMaterial[indice]) {
       totalesMaterial[indice] = {  
+        sector: 'APILADORA',
         fecha: supervisonpart.date, 
         turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
         schedule: supervisonpart.schedule,
@@ -1396,6 +1418,7 @@ function completeTotalesMaterialApiladora(supervisonpart,totalesMaterial) {
     }
     else {
       totalesMaterial[indice] = { 
+        sector: 'APILADORA',
         fecha: supervisonpart.date,
         turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
         schedule: supervisonpart.schedule,
@@ -1420,8 +1443,19 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
       let pesoLadrillo = constant.SUPERVISION_PART_PESO_LADRILLO[ht.material]
       let ladrillosXPallet = constant.SUPERVISION_PART_LADRILLO_PALLET[ht.material]
       let indice = constant.SUPERVISION_PART_MATERIALS[ht.material]
+
+      if (supervisonpart.schedule=='NOCHE'){
+        indice=indice+10;
+      }     
+      if (supervisonpart.schedule=='TARDE'){
+        indice=indice+20;
+      }    
+      if (supervisonpart.schedule=='MANIANA'){
+        indice=indice+30;
+      }
       if(totalesMaterial[indice]) {
         totalesMaterial[indice] = { 
+          sector: 'DESAPILADORA',
           fecha: supervisonpart.date,
           turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
           schedule: supervisonpart.schedule,
@@ -1434,6 +1468,7 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
       }
       else {
         totalesMaterial[indice] = { 
+          sector: 'DESAPILADORA',
           fecha: supervisonpart.date,
           turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
           schedule: supervisonpart.schedule,
