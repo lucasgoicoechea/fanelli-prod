@@ -101,6 +101,12 @@ import OccurrenceEdition from '@/components/occurrences/OccurrenceEdition'
 // Administracion fabrica
 import FabricManagement from '@/components/fabric/FabricManagement'
 
+// Reporte de fallas
+import BugReportIndex from '@/components/fails/BugReportIndex'
+import BugReportCreation from '@/components/fails/BugReportCreation'
+import BugReportHistory from '@/components/fails/BugReportHistory'
+import BugReportResume from '@/components/fails/BugReportResume'
+
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
 import MeetingCreation from '@/components/meeting/MeetingCreation'
@@ -858,6 +864,47 @@ const router = new Router({
             permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
             fail: '/error'
           }
+        },
+        {
+          path: 'fallas',
+          component: BugReportIndex,
+          name: 'bug-report-index',
+          redirect: {
+            name: 'bug-report-creation'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: 'creacion',
+              name: 'bug-report-creation',
+              component: BugReportCreation,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-fallas',
+              name: 'bug-report-history',
+              component: BugReportHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'resumen-fallas',
+              name: 'bug-report-resume',
+              component: BugReportResume,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            }
+          ]
         },
         {
           path: 'reuniones',

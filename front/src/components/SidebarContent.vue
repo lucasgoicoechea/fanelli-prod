@@ -264,6 +264,33 @@
             ]
           },
           {
+            name: 'Reporte de Fallas',
+            img: '/static/img/icons-sidebar/news.svg',
+            type: 'bugnews',
+            can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH),
+            routeName: 'bug-report-index',
+            submenu: [
+              {
+                name: 'Creacion',
+                type: 'bug-report-creation',
+                route: {name: 'bug-report-creation'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Historial de Fallas',
+                type: 'bug-report-history',
+                route: {name: 'bug-report-history'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Resumen de Fallas',
+                type: 'bug-report-resume',
+                route: {name: 'bug-report-resume'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              }
+            ]
+          },
+          {
             name: 'Reuniones',
             img: '/static/img/icons-sidebar/staffRequests.svg',
             type: 'meeting',
