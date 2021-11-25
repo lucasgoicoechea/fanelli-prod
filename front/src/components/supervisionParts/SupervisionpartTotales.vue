@@ -16,18 +16,18 @@
 
 <script>
   // import ChecklistSummaryView from '@/components/checklists/ChecklistSummaryView.vue'
-  import SupervisionpartComparativeView from '@/components/supervisionParts/SupervisionpartComparativeView.vue'
-  import SupervisionpartsFullList from '@/components/supervisionParts/SupervisionpartsFullList.vue'
+  import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView.vue'
+  import SupervisionpartsTotalesFullList from '@/components/supervisionParts/SupervisionpartsTotalesFullList.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapState } from 'vuex'
 
   export default {
-    name: 'SupervisionpartsControl',
+    name: 'SupervisionpartsTotales',
     components: {
       // summaryView: ChecklistSummaryView,
-      detailView: SupervisionpartComparativeView,
-      historialView: SupervisionpartsFullList,
+      detailView: SupervisionpartTotalesView,
+      historialView: SupervisionpartsTotalesFullList,
       Tabs,
       Tab
     },

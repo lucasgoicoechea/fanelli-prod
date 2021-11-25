@@ -32,7 +32,11 @@ import SupervisionpartList from '@/components/supervisionParts/SupervisionpartLi
 import SupervisionpartHistory from '@/components/supervisionParts/SupervisionpartHistory'
 import SupervisionpartForm from '@/components/supervisionParts/SupervisionpartForm'
 import SupervisionpartsControl from '@/components/supervisionParts/SupervisionpartControl'
-import SupervisionpartResumen from '@/components/supervisionParts/SupervisionpartResumen'
+import SupervisionpartTotal from '@/components/supervisionParts/SupervisionpartTotal'
+import SupervisionpartTotales from '@/components/supervisionParts/SupervisionpartTotales'
+// import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView'
+import SupervisionpartsResumen from '@/components/supervisionParts/SupervisionpartResumen'
+import SupervisionpartResume from '@/components/supervisionParts/SupervisionpartResume'
 import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal'
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
@@ -96,6 +100,12 @@ import OccurrenceEdition from '@/components/occurrences/OccurrenceEdition'
 
 // Administracion fabrica
 import FabricManagement from '@/components/fabric/FabricManagement'
+
+// Reporte de fallas
+import BugReportIndex from '@/components/fails/BugReportIndex'
+import BugReportCreation from '@/components/fails/BugReportCreation'
+import BugReportHistory from '@/components/fails/BugReportHistory'
+import BugReportResume from '@/components/fails/BugReportResume'
 
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
@@ -319,9 +329,18 @@ const router = new Router({
               }
             },
             {
-              path: 'supervisionparts',
+              path: 'supervisionparts-resume',
               name: 'control-resume-supervisionparts',
-              component: SupervisionpartResumen,
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-totals',
+              name: 'control-totales-supervisionparts',
+              component: SupervisionpartTotales,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
@@ -342,6 +361,24 @@ const router = new Router({
               component: PersonalManager,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SECTOR_PANOL, ROLES.SUPERVISORES),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts',
+              name: 'control-supervisionparts-historico',
+              component: SupervisionpartsControl,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-resume',
+              name: 'control-oficial-control',
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
                 fail: '/error'
               }
             },
@@ -506,25 +543,34 @@ const router = new Router({
               name: 'supervisionpartsHistory',
               component: SupervisionpartHistory,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
             {
-              path: 'historial/:date',
+              path: 'historial-resume-total/:date',
               name: 'supervisionpartResumeHistoryTotal',
               component: SupervisionpartResumeHistoryTotal,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
             {
-              path: 'historial/:date',
-              name: 'supervisionpartsResume',
-              component: SupervisionpartResumen,
+              path: 'historial-totales-total/:date',
+              name: 'supervisionpartTotalesView',
+              component: SupervisionpartTotal,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume/:date',
+              name: 'supervisionpartsResumen',
+              component: SupervisionpartResume,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
@@ -818,6 +864,47 @@ const router = new Router({
             permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
             fail: '/error'
           }
+        },
+        {
+          path: 'fallas',
+          component: BugReportIndex,
+          name: 'bug-report-index',
+          redirect: {
+            name: 'bug-report-creation'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: 'creacion',
+              name: 'bug-report-creation',
+              component: BugReportCreation,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-fallas',
+              name: 'bug-report-history',
+              component: BugReportHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'resumen-fallas',
+              name: 'bug-report-resume',
+              component: BugReportResume,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            }
+          ]
         },
         {
           path: 'reuniones',

@@ -1,5 +1,5 @@
 <template>
-  <div class="Supervisionpart-resume">
+  <div class="Supervisionpart-total">
     <navigation :title="title"></navigation>
 
     <div v-if="!validateDate" class="container-fluid">
@@ -12,13 +12,13 @@
     <div v-else class="container-fluid">
       <header>
         <div class="day">
-          <router-link :to="{ name: 'supervisionpartsResumen', params: { date: prevDate}}">
+          <router-link :to="{ name: 'supervisionpartTotalesView', params: { date: prevDate}}">
             {{ prevDate | formatDate }}
           </router-link>
         </div>
         <div class="current">{{ date | formatDate }}</div>
         <div class="day">
-          <router-link :to="{ name: 'supervisionpartsResumen', params: { date: nextDate}}">
+          <router-link :to="{ name: 'supervisionpartTotalesView', params: { date: nextDate}}">
             {{ nextDate | formatDate }}
           </router-link>
         </div>
@@ -39,18 +39,18 @@
 
 <script>
   import Navigation from '@/components/Navigation.vue'
-  import SupervisionpartResumeView from '@/components/supervisionParts/SupervisionpartResumeView.vue'
+  import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapGetters } from 'vuex'
 
   export default {
-    name: 'SupervisionpartResume',
+    name: 'SupervisionpartTotal',
     components: {
       Navigation,
       Tabs,
       Tab,
-      detailView: SupervisionpartResumeView
+      detailView: SupervisionpartTotalesView
     },
     data () {
       return {

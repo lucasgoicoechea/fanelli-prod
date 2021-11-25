@@ -77,13 +77,17 @@ const controller = {
   getAllPassMe: async(function (req, res, next) {
     let meetings
     var idus = req.user.id;
-    meetings = awaitFor(meetingService.listMyMeetingsAllPass(idus, {
+    if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {
+      meetings = awaitFor(meetingService.list({perPage: req.query.per_page, page: req.query.page, teamOf: req.user.id}))
+    }else {
+     meetings = awaitFor(meetingService.listMyMeetingsAllPass(idus, {
         perPage: req.query.per_page,
         page: req.query.page,
         date: req.query.date,
         type: req.query.type,
         frecuency: req.query.frecuency
-      }))
+        })) 
+    }
     res.json({success: true, meetings})
   }),
   getById: async(function (req, res) {

@@ -566,7 +566,7 @@ function getEmployeeCompanyTable (employee) {
 function getSecurityElementsTable (securityElements) {
   let securityElementsData = getRequestDataAsString(securityElements)
 
-  let headers = ['', 'Tipo', 'Modelo', 'Marca', 'Certificación', 'Cantidad', 'Fecha de entrega', 'Firma del trabajador']
+  let headers = ['', 'Producto', 'Tipo/Modelo', 'Marca', 'Certificación', 'Cantidad', 'Fecha de entrega', 'Firma del trabajador']
 
   return {
     style: 'tableExample',

@@ -106,6 +106,7 @@ function dayShiftDistribution (date) {
 module.exports = {
   getShift: getShift,
   getSchedule: getSchedule,
+  getShiftForSchedule: getShiftForSchedule,
   dayShiftDistribution: dayShiftDistribution,
   getScheduleForShift: getScheduleForShift,
   SCHEDULE: SCHEDULE,
