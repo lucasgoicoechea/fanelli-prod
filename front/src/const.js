@@ -406,6 +406,20 @@ export default {
     REJECTED: 'REJECTED',
     CANCELED: 'CANCELED'
   },
+  BUG_REPORT_LINES: {
+    LINE_0: 'Linea 0',
+    LINE_1: 'Linea 1',
+    LINE_2: 'Linea 2',
+    LINE_3: 'Linea 3'
+  },
+  BUG_REPORT_SUBSECTORS: {
+  },
+  BUG_REPORT_TEAM: {
+  },
+  BUG_REPORT_PARTS: {
+  },
+  BUG_REPORT_SUBPARTS: {
+  },
   MEETING_NAME: {
     T1L1: 'T1-L1',
     T1L2: 'T1-L2',
