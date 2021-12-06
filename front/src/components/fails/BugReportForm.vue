@@ -5,7 +5,7 @@
       <div class="row">
       
         <div class="col-xs-12">
-          <h3>Seleccion de linea</h3>
+          <h3>Selección de linea</h3>
           <div class="row">
             <div
               class="col-md-6"
@@ -18,130 +18,57 @@
                 :val="value"
                 :label="label"></check-box>
             </div>
-      
+          </div>
+        </div>
+
+        <div>
         <div class="col-xs-12">
           <h3>Selección de sector</h3>
-          <collaborator-selector
+          <sector-selector
             :multipleSelection="true"
              typeList="full"
-            :preSelection="editable.collaborators"></collaborator-selector>
+            :preSelection="editable.collaborators"></sector-selector>
         </div>
-           
-          </div>
-        </div>
-        <div class="col-xs-12" v-if="meeting.type && meeting.type ==='FRECUENCY'">
-          <h3>Frecuencia</h3>
-          <div class="row">
-              <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.MEETING_FRECUENCY"
-              :key="value">
-              <check-box
-                class="margin"
-                 type="radio"
-                v-model="meeting.frecuency"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-             <div
-              class="col-md-6" v-show="meeting.frecuency && meeting.frecuency ==='MONTHLY'">
-              Se generá reunión para el día {{datePicker.latestSelectedDateObj.getDate()}} de cada mes hasta la fecha {{datePickerFrom.latestSelectedDateObj.getDate()}}/{{datePickerFrom.latestSelectedDateObj.getMonth()+1}}/{{datePickerFrom.latestSelectedDateObj.getFullYear()}}
-            </div>
-          </div>
-  
-        </div>
-        <div class="col-xs-12" v-show="meeting.frecuency  && meeting.type ==='FRECUENCY'">
-          <h3>Nombre</h3>
-          <div class="row">
-              <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.MEETING_NAME"
-              :key="value">
-              <check-box
-                class="margin"
-                v-model="meeting.names"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
-        </div>
-         <div class="col-xs-12" v-show="meeting.frecuency  && meeting.frecuency ==='WEEKLY'">
-          <h3>Días de la Semana</h3>
-          <div class="row">
-              <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.WEEKLY_MEETING_FRECUENCY"
-              :key="value">
-              <check-box
-                class="margin"
-                v-model="meeting.weeklys"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12">
-          <h3>Seleccion de Sub-Sector</h3>
-          <div class="row">
-            <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_SUBSECTORS"
-              :key="value">
-              <check-box
-                class="margin"
-                v-model="meeting.recommendations"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
         </div>
 
+        <div>
         <div class="col-xs-12">
-          <h3>Seleccion de Equipo</h3>
-          <div class="row">
-            <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_TEAM"
-              :key="value">
-              <check-box
-                class="margin"
-                v-model="meeting.recommendations"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
+          <h3>Selección de sub-sector</h3>
+          <sub-sector-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></sub-sector-selector>
+        </div>
+        </div>
+        
+        <div>
+        <div class="col-xs-12">
+          <h3>Selección de equipo</h3>
+          <equipo-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></equipo-selector>
+        </div>
+        </div>
+        
+        <div>
+        <div class="col-xs-12">
+          <h3>Selección de partes</h3>
+          <part-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></part-selector>
+        </div>
         </div>
 
+        <div>
         <div class="col-xs-12">
-          <h3>Seleccion de Partes</h3>
-          <div class="row">
-            <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_PARTS"
-              :key="value">
-              <check-box
-                class="margin"
-                v-model="meeting.recommendations"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
+          <h3>Selección de sub-partes</h3>
+          <sub-part-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></sub-part-selector>
         </div>
-
-        <div class="col-xs-12">
-          <h3>Seleccion de Sub-Partes</h3>
-          <div class="row">
-            <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_SUBPARTS"
-              :key="value">
-              <check-box
-                class="margin"
-                v-model="meeting.recommendations"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
         </div>
 
         <div class="col-xs-12">
@@ -161,16 +88,24 @@
 
 <script>
   import { mapState, mapGetters } from 'vuex'
-  import CollaboratorSelector from '@/components/fails/sector/SectorSelector'
+  import SectorSelector from '@/components/fails/sector/SectorSelector'
+  import SubSectorSelector from '@/components/fails/subsector/SubSectorSelector'
+  import EquipoSelector from '@/components/fails/equipo/EquipoSelector'
+  import PartSelector from '@/components/fails/part/PartSelector'
+  import SubPartSelector from '@/components/fails/subpart/SubPartSelector'
   import CheckBox from '@/components/CheckBoxInput'
   import { VueEditor } from 'vue2-editor'
   import { Spanish } from 'flatpickr/dist/l10n/es'
 
   export default {
-    name: 'MeetingForm',
+    name: 'BugReportForm',
     components: {
       VueEditor,
-      CollaboratorSelector,
+      SectorSelector,
+      SubSectorSelector,
+      EquipoSelector,
+      PartSelector,
+      SubPartSelector,
       CheckBox
     },
     props: {
