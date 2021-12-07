@@ -3,7 +3,7 @@
     <header v-if="reduced" class="reduced">
       <a @click="show">
         <span v-show="!hasSelected">Presione aquí para seleccionar una sub-parte</span>
-        <span v-show="hasSelected">{{ collaboratorSelected.lastname }} {{ collaboratorSelected.name }}</span>
+        <span v-show="hasSelected">{{ collaboratorSelected.lastname }} {{ collaboratorSelected.name }}</span> 
         <div class="actions">
           <img :src="showIcon" alt="buscar">
           <img @click.stop="clear" v-show="hasSelected" src="/static/img/checklists/cross.svg" alt="limpiar">
