@@ -1,17 +1,17 @@
 <template>
   <transition name="slide-fade">
-    <div class="sector-list" v-show="show" :style="pushed">
+    <div class="sub-part-list" v-show="show" :style="pushed">
       <div class="overlay-content">
         <search-navigation></search-navigation>
         <section>
           <div class="container-fluid">
             <div class="row">
               <div class="col-xs-12" v-if="!multipleSelection">
-                <h3>Seleccione un sector</h3>
+                <h3>Seleccione una sub-parte</h3>
                 <p v-show="!hasMatchs">No se encontrado resultados para su búsqueda</p>
               </div>
               <div class="col-xs-12" v-else>
-                <h3>Lista de sectores</h3>
+                <h3>Lista de sub-partes</h3>
                 <p v-show="!hasMatchs">No se encontrado resultados para su búsqueda</p>
               </div>
             </div>
@@ -47,12 +47,12 @@
 
 <script>
   import SearchNavigation from '@/components/selectors/collaborator/SearchNavigation.vue'
-  import SectorListItem from '@/components/fails/sector/SectorListItem.vue'
+  import SubPartListItem from '@/components/fails/subpart/SubPartListItem.vue'
   import { mapGetters, mapState } from 'vuex'
 
   export default {
-    name: 'SectorList',
-    components: {SearchNavigation, SectorListItem},
+    name: 'SubPartList',
+    components: {SearchNavigation, SubPartListItem},
     props: {
       show: {
         type: Boolean,

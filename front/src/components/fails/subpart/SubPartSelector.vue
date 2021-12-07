@@ -1,9 +1,9 @@
 <template>
-  <div class="sector-selector">
+  <div class="sub-part-selector">
     <header v-if="reduced" class="reduced">
       <a @click="show">
-        <span v-show="!hasSelected">Presione aquí para seleccionar sectores</span>
-        <span v-show="hasSelected">{{ collaboratorSelected.lastname }} {{ collaboratorSelected.name }}</span>
+        <span v-show="!hasSelected">Presione aquí para seleccionar una sub-parte</span>
+        <span v-show="hasSelected">{{ collaboratorSelected.lastname }} {{ collaboratorSelected.name }}</span> 
         <div class="actions">
           <img :src="showIcon" alt="buscar">
           <img @click.stop="clear" v-show="hasSelected" src="/static/img/checklists/cross.svg" alt="limpiar">
@@ -12,8 +12,8 @@
     </header>
     <div v-else-if="multipleSelection" class="multiple">
       <a @click="show" v-show="!disabled">
-        <span v-show="!hasSelected">Presione aquí para seleccionar sectores</span>
-        <span v-show="hasSelected">Presione aquí para cambiar sectores</span>
+        <span v-show="!hasSelected">Presione aquí para seleccionar sub-partes</span>
+        <span v-show="hasSelected">Presione aquí para cambiar sub-partes</span>
         <div class="actions">
           <img :src="showIcon" alt="buscar">
           <img @click.stop="clear" v-show="hasSelected" src="/static/img/checklists/cross.svg" alt="limpiar">
@@ -31,8 +31,8 @@
       <img :src="collaboratorImage" alt="Foto del colaborador" @click="show">
       <div class="information">
         <a @click="show">
-          <span v-show="!hasSelected">Presione aquí para seleccionar sectores</span>
-          <span v-show="hasSelected">Presione aquí para cambiar sectores</span>
+          <span v-show="!hasSelected">Presione aquí para seleccionar sub-partes</span>
+          <span v-show="hasSelected">Presione aquí para cambiar sub-partes</span>
           <div class="actions">
             <img :src="showIcon" alt="buscar">
             <img @click.stop="clear" v-show="hasSelected" src="/static/img/checklists/cross.svg" alt="limpiar">
@@ -44,21 +44,21 @@
         <input v-else placeholder="Turno" readonly>
       </div>
     </div>
-    <sector-list
+    <sub-part-list
       :multipleSelection="multipleSelection"
       :show="showList"
       :typeList="typeList"
-      :preSelection="preSelection"></sector-list>
+      :preSelection="preSelection"></sub-part-list>
   </div>
 </template>
 
 <script>
-  import SectorList from './SectorList.vue'
+  import SubPartList from './SubPartList.vue'
   import { mapState, mapGetters } from 'vuex'
 
   export default {
-    name: 'SectorSelector',
-    components: {SectorList},
+    name: 'SubPartSelector',
+    components: {SubPartList},
     props: {
       reduced: {
         type: Boolean,

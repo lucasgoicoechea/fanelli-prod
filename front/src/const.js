@@ -412,6 +412,22 @@ export default {
     LINE_2: 'Linea 2',
     LINE_3: 'Linea 3'
   },
+  BUG_REPORT_SECTORS: {
+    S1: 'Preparación Mat. Primas',
+    S2: 'Prelaboración',
+    S3: 'Silo',
+    S4: 'Producción',
+    S5: 'Automatismo de Carga y Corte',
+    S6: 'Secado',
+    S7: 'Movimentación de Secadero',
+    S8: 'Apilado',
+    S9: 'Horno',
+    S10: 'Movimentación de Horno',
+    S11: 'Desapilado y Empaque',
+    S12: 'Playa y Expedición',
+    S13: 'Instalaciones y Edificios',
+    S14: 'Servicios Auxiliares'
+  },
   BUG_REPORT_SUBSECTORS: {
   },
   BUG_REPORT_TEAM: {
