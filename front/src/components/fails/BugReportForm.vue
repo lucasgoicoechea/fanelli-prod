@@ -4,21 +4,14 @@
 
       <div class="row">
       
+       <div>
         <div class="col-xs-12">
           <h3>Selección de linea</h3>
-          <div class="row">
-            <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_LINES"
-              :key="value">
-              <check-box
-                class="margin"
-                type="radio"
-                v-model="meeting.type"
-                :val="value"
-                :label="label"></check-box>
-            </div>
-          </div>
+          <line-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></line-selector>
+        </div>
         </div>
 
         <div>
@@ -38,6 +31,7 @@
             :multipleSelection="true"
              typeList="full"
             :preSelection="editable.collaborators"></sub-sector-selector>
+          <request-matching-card></request-matching-card>
         </div>
         </div>
         
@@ -88,12 +82,14 @@
 
 <script>
   import { mapState, mapGetters } from 'vuex'
+  import LineSelector from '@/components/fails/line/LineSelector'
   import SectorSelector from '@/components/fails/sector/SectorSelector'
   import SubSectorSelector from '@/components/fails/subsector/SubSectorSelector'
   import EquipoSelector from '@/components/fails/equipo/EquipoSelector'
   import PartSelector from '@/components/fails/part/PartSelector'
   import SubPartSelector from '@/components/fails/subpart/SubPartSelector'
   import CheckBox from '@/components/CheckBoxInput'
+  import LastUserEPPRequests from '@/components/epp/LastUserEPPRequests'
   import { VueEditor } from 'vue2-editor'
   import { Spanish } from 'flatpickr/dist/l10n/es'
 
@@ -101,11 +97,13 @@
     name: 'BugReportForm',
     components: {
       VueEditor,
+      LineSelector,
       SectorSelector,
       SubSectorSelector,
       EquipoSelector,
       PartSelector,
       SubPartSelector,
+      LastUserEPPRequests,
       CheckBox
     },
     props: {
