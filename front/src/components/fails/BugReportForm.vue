@@ -89,7 +89,6 @@
   import PartSelector from '@/components/fails/part/PartSelector'
   import SubPartSelector from '@/components/fails/subpart/SubPartSelector'
   import CheckBox from '@/components/CheckBoxInput'
-  import LastUserEPPRequests from '@/components/epp/LastUserEPPRequests'
   import { VueEditor } from 'vue2-editor'
   import { Spanish } from 'flatpickr/dist/l10n/es'
 
@@ -103,7 +102,6 @@
       EquipoSelector,
       PartSelector,
       SubPartSelector,
-      LastUserEPPRequests,
       CheckBox
     },
     props: {

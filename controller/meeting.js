@@ -2,6 +2,7 @@ const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 const path = require('path')
 const scheduler = require('node-schedule')
+const BugReportModel = require('../model/bugReport')
 const meetingService = require(path.join(__dirname, '../service')).meeting
 const AppError = require(path.join(__dirname, '../libs/error')).AppError
 const Const = require(path.join(__dirname, '/../libs/const'))
