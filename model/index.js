@@ -48,5 +48,6 @@ module.exports = {
   occurrence: require(path.join(__dirname, '/occurrence')),
   supervisionPart: require(path.join(__dirname, '/supervisionPart')),
   hour: require(path.join(__dirname, '/hour')),
-  fail: require(path.join(__dirname, '/fail'))
+  fail: require(path.join(__dirname, '/fail')),
+  bugReport: require(path.join(__dirname, '/bugReport'))
 }
