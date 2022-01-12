@@ -1,3 +1,4 @@
+const { await } = require('asyncawait')
 const { badData } = require('boom')
 const { Db } = require('mongodb')
 const path = require('path')
@@ -21,18 +22,33 @@ const BugReportSchema = new Schema({
     equipo: {
         type: String
     },
-    part: {
+    group: {
         type: String
     },
-    sub_part: {
+    part: {
         type: String
     },
     resume: {
         type: String
-    },
-    timestamps: {
-        type: true
+    } 
+    }, {
+        timestamps: {
+          createdAt: 'created_at',
+          updatedAt: 'updated_at'
     }
-})
+}) 
 const BugReportModel = mongoose.model('BugReport', BugReportSchema)
 module.exports = BugReportModel
+
+/*
+BugReportModel.create(
+    {
+        line: '2',
+        sector: 'Produccion',
+        sub_sector: 'Laminado',
+        equipo: 'Laminador Primario LA9 Planta 2',
+        group: 'Lado Lento',
+        part: 'Motor',
+        resume: 'Resumen de Falla'
+    }
+)*/
