@@ -39,16 +39,3 @@ const BugReportSchema = new Schema({
 }) 
 const BugReportModel = mongoose.model('BugReport', BugReportSchema)
 module.exports = BugReportModel
-
-/*
-BugReportModel.create(
-    {
-        line: '2',
-        sector: 'Produccion',
-        sub_sector: 'Laminado',
-        equipo: 'Laminador Primario LA9 Planta 2',
-        group: 'Lado Lento',
-        part: 'Motor',
-        resume: 'Resumen de Falla'
-    }
-)*/

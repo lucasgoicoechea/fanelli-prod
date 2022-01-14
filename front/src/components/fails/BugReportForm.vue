@@ -7,68 +7,81 @@
        <div>
         <div class="col-xs-12">
           <h3>Selección de linea</h3>
-          <line-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></line-selector>
+          <select v-model="bugReport.line" id="line">
+              <option v-for="(label, value) in $constants.BUG_REPORT_LINES"  :key="value" :value="value"> {{label}}</option>
+          </select>
         </div>
         </div>
 
         <div>
         <div class="col-xs-12">
           <h3>Selección de sector</h3>
-          <sector-selector
+          <!--<sector-selector
             :multipleSelection="true"
              typeList="full"
-            :preSelection="editable.collaborators"></sector-selector>
+            :preSelection="editable.collaborators"></sector-selector>-->
+            <select v-model="bugReport.sector" id="sector">
+              <option v-for="(label, value) in $constants.BUG_REPORT_SECTORS"  :key="value" :value="value"> {{label}}</option>
+          </select>
         </div>
         </div>
 
         <div>
         <div class="col-xs-12">
           <h3>Selección de sub-sector</h3>
-          <sub-sector-selector
+          <!--<sub-sector-selector
             :multipleSelection="true"
              typeList="full"
-            :preSelection="editable.collaborators"></sub-sector-selector>
-          <request-matching-card></request-matching-card>
+            :preSelection="editable.collaborators"></sub-sector-selector>-->
+            <select v-model="bugReport.sub_sector" id="sub_sector">
+              <option v-for="(label, value) in $constants.BUG_REPORT_SUBSECTORS"  :key="value" :value="value"> {{label}}</option>
+          </select>
         </div>
         </div>
         
         <div>
         <div class="col-xs-12">
           <h3>Selección de equipo</h3>
-          <equipo-selector
+          <!--<equipo-selector
             :multipleSelection="true"
              typeList="full"
-            :preSelection="editable.collaborators"></equipo-selector>
+            :preSelection="editable.collaborators"></equipo-selector>-->
+            <select v-model="bugReport.equipo" id="equipo">
+              <option v-for="(label, value) in $constants.BUG_REPORT_TEAM"  :key="value" :value="value"> {{label}}</option>
+          </select>
         </div>
         </div>
         
         <div>
         <div class="col-xs-12">
-          <h3>Selección de partes</h3>
-          <part-selector
+          <h3>Selección de grupos</h3>
+          <!--<part-selector
             :multipleSelection="true"
              typeList="full"
-            :preSelection="editable.collaborators"></part-selector>
+            :preSelection="editable.collaborators"></part-selector>-->
+            <select v-model="bugReport.group" id="group">
+              <option v-for="(label, value) in $constants.BUG_REPORT_GROUPS"  :key="value" :value="value"> {{label}}</option>
+          </select>
         </div>
         </div>
 
         <div>
         <div class="col-xs-12">
-          <h3>Selección de sub-partes</h3>
-          <sub-part-selector
+          <h3>Selección de partes</h3>
+          <!--<sub-part-selector
             :multipleSelection="true"
              typeList="full"
-            :preSelection="editable.collaborators"></sub-part-selector>
+            :preSelection="editable.collaborators"></sub-part-selector>-->
+            <select v-model="bugReport.parts" id="parts">
+              <option v-for="(label, value) in $constants.BUG_REPORT_PARTS"  :key="value" :value="value"> {{label}}</option>
+          </select>
         </div>
         </div>
 
         <div class="col-xs-12">
           <h3>Resumen/Fallas</h3>
           <vue-editor
-          v-model="meeting.description"
+          v-model="bugReport.resume"
           placeholder="Escriba aquí el resumen de la falla"
           :editorToolbar="defaultToolbar"></vue-editor>
         </div>
@@ -90,7 +103,6 @@
   import SubPartSelector from '@/components/fails/subpart/SubPartSelector'
   import CheckBox from '@/components/CheckBoxInput'
   import { VueEditor } from 'vue2-editor'
-  import { Spanish } from 'flatpickr/dist/l10n/es'
 
   export default {
     name: 'BugReportForm',
@@ -123,17 +135,7 @@
     },
     data () {
       return {
-        meeting: this.generateData(),
-        confPicker: {
-          inline: true,
-          locale: Spanish,
-          dateFormat: 'd-m-Y',
-          disableMobile: true
-        },
-        datePicker: null,
-        datePickerFrom: null,
-        datesPicker: [],
-        isFrecuency: false,
+        bugReport: this.generateData(),
         customToolbar: [
           ['bold', 'italic', 'underline'],
           [{ list: 'ordered' }, { list: 'bullet' }],
@@ -158,119 +160,45 @@
       }
     },
     mounted () {
-      this.datePicker = this.$refs._flatpickr.fp
-      this.datePickerFrom = (this.$refs._flatpickrFrom)
-      ? this.$refs._flatpickrFrom.fp
-      : null
-      if (this.$refs._flatpickrs) {
-        for (var i = 0; i <= 10; i++) {
-          var efp = this.$refs._flatpickrs[i]
-          this.datesPicker[i] = (efp)
-          ? efp.fp
-          : null
-        }
-      }
       this.$emit('update', {
         validation: this.validate(),
-        form: this.meeting
+        form: this.bugReport
       })
     },
     methods: {
       generateData () {
         return {
-          collaborators: this.editable.collaborators || [],
-          editors: this.editable.editors || [],
-          type: this.editable.type || [],
-          frecuency: this.editable.frecuency || [],
-          weeklys: this.editable.weeklys || [],
-          names: this.editable.names || [],
-          recommendations: this.editable.recommendations || [],
-          description: this.editable.description || '',
-          date: this.editable.date || new Date(),
-          dateFrom: this.editable.dateFrom || new Date(),
-          dates: this.editable.dates || [],
-          time: this.editable.time || this.getTime(),
-          repeatEdit: false
-        }
-      },
-      getTime () {
-        const d = new Date()
-        let h = d.getHours()
-        let m = d.getMinutes()
-        if (h < 10) h = '0' + h
-        if (m < 10) m = '0' + m
-        return h + ':' + m
-      },
-      clearDatePicker (picker) {
-        this.$refs[picker].fp.clear()
-      },
-      initPickers () {
-        this.datePicker.setDate(this.editable.date)
-        if (this.datePickerFrom == null && this.$refs._flatpickrFrom) {
-          this.datePickerFrom = this.$refs._flatpickrFrom.fp
-        }
-        if (this.datePickerFrom !== null) {
-          this.datePickerFrom.setDate(this.editable.dateFrom)
-        }
-        for (var i = 0; i <= 10; i++) {
-          var efp = this.$refs._flatpickrs[i]
-          if (this.datePickers[i] == null && efp) {
-            this.datePickers[i] = efp.fp
-          }
-          if (this.datePickers[i] !== null) {
-            this.datePickers[i].setDate(this.editable.dates[i])
-          }
+          line: this.editable.line || '',
+          sector: this.editable.sector || '',
+          sub_sector: this.editable.sub_sector || '',
+          equipo: this.editable.equipo || '',
+          group: this.editable.group || '',
+          part: this.editable.part || '',
+          resume: this.editable.resume || ''
         }
       },
       validate () {
-        if (!this.hasSelected) {
+        /* if (!this.hasSelected) {
           return {valid: false, msg: 'Seleccione un/unos colaborador/es'}
         }
-        if (this.meeting.type.length === 0) {
+        if (this.bugReport.type.length === 0) {
           return {valid: false, msg: 'Seleccione un tipo de reunión'}
         }
-        if (this.meeting.recommendations.length === 0) {
+        if (this.bugReport.recommendations.length === 0) {
           return {valid: false, msg: 'Seleccione al menos un objetivo'}
         }
-        if (this.meeting.description.length === 0) {
+        if (this.bugReport.description.length === 0) {
           return {valid: false, msg: 'Ingrese un resumen de la reunión'}
-        }
+        } */
         return {valid: true, msg: 'OK'}
-      },
-      /* setEditors () {
-        this.meeting.editors = this.getSelectedEditorsIds
-      }, */
-      setCollaborators () {
-        this.meeting.collaborators = this.getSelectedIds
-      },
-      setDateRange () {
-        this.meeting.date =
-          (this.datePicker.latestSelectedDateObj)
-            ? this.datePicker.latestSelectedDateObj.getTime()
-            : ''
-        this.meeting.dateFrom =
-          (this.datePickerFrom && this.datePickerFrom.latestSelectedDateObj)
-            ? this.datePickerFrom.latestSelectedDateObj.getTime()
-            : ''
-        for (var i = 0; i <= 10; i++) {
-          this.meeting.dates[i] = (this.datesPicker[i] && this.datesPicker[i].latestSelectedDateObj)
-            ? this.datesPicker[i].latestSelectedDateObj.getTime()
-            : ''
-        }
-      },
-      prepareMeeting () {
-        // this.setEditors()
-        this.setCollaborators()
-        this.setDateRange()
       }
     },
     watch: {
-      meeting: {
+      bugReport: {
         handler: function () {
-          this.prepareMeeting()
           this.$emit('update', {
             validation: this.validate(),
-            form: this.meeting
+            form: this.bugReport
           })
         },
         deep: true
@@ -280,7 +208,7 @@
           this.prepareMeeting()
           this.$emit('update', {
             validation: this.validate(),
-            form: this.meeting
+            form: this.bugReport
           })
         },
         deep: true
@@ -290,14 +218,14 @@
           this.prepareMeeting()
           this.$emit('update', {
             validation: this.validate(),
-            form: this.meeting
+            form: this.bugReport
           })
         },
         deep: true
       }, */
       editable: {
         handler: function () {
-          this.meeting = this.generateData()
+          this.bugReport = this.generateData()
           this.initPickers()
         },
         deep: true
