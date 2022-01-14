@@ -48,7 +48,7 @@
         form: {},
         validation: {},
         loading: false,
-        sendStoreAction: 'bugs/create'
+        sendStoreAction: 'bugReport/create'
       }
     },
     methods: {
@@ -66,7 +66,7 @@
       successfulCreation (res) {
         this.loading = false
         if (res.success) {
-          this.$snotifyWrapper.success('La reunión se ha creado con exito')
+          this.$snotifyWrapper.success('La falla se ha creado con exito')
           this.$router.push({name: 'home'})
         } else {
           this.$snotifyWrapper.error(res.message)
@@ -94,7 +94,7 @@
 
         this.$modal.show('dialog', {
           title: 'Confirmación',
-          text: '¿Esta seguro de generar esta reunión?',
+          text: '¿Esta seguro de generar esta falla?',
           buttons: [
             {
               title: 'Aceptar',
