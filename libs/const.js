@@ -224,6 +224,23 @@ const constants = {
     'DIN27': 6.89,
     'COLUMNA': 6.535
   },
+  SUPERVISION_PART_INDEX_MATERIALS: {
+    '8': 'total_MOLDE_8',
+    '12-6A': 'total_MOLDE_12_6A',
+    '12-9A': 'total_MOLDE_12_8A',
+    '18': 'total_MOLDE_18',
+    'P12': 'total_MOLDE_P12',
+    'P18': 'total_MOLDE_P18',
+    'L11': 'total_MOLDE_L11',
+    'C': 'total_MOLDE_C',
+    'DM20': 'total_MOLDE_DM20',
+    'DM27': 'total_MOLDE_DM27',
+    'DM24': 'total_MOLDE_DM24',
+    'DM4': 'total_MOLDE_DM4',
+    'DIN18': 'total_MOLDE_DIN18',
+    'DIN27': 'total_MOLDE_DIN27',
+    'COLUMNA': 'total_MOLDE_COLUMNA'
+  },
   SUPERVISION_PART_MATERIALS: {
     '8': 1,
     '12-6A': 2,
