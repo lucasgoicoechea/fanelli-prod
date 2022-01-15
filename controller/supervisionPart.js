@@ -965,6 +965,7 @@ const updateReminders = async(function (hours) {
 const generateReportForDay = async(function (date) {
   let sector =  'DESAPILADORA'   
   let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+  supervisionparts = _.orderBy(supervisionparts, c => c.date)
   //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
   let totalesMaterialDesapiladora = new Array()
   supervisionparts.forEach(supervisonpart => {
@@ -973,11 +974,14 @@ const generateReportForDay = async(function (date) {
   let totales = []
   totalesMaterialDesapiladora.forEach( total => {
       if (total != null){
+        total.toneladas = total.toneladas==0?0:((total.toneladas/1000).toFixed(2))
         totales.push(total)
       }
   }) 
+  
   sector =  'APILADORA'   
   supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+  supervisionparts = _.orderBy(supervisionparts, c => c.date)
   //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
   let totalesMaterialApiladora = new Array()
   supervisionparts.forEach(supervisonpart => {
@@ -985,11 +989,13 @@ const generateReportForDay = async(function (date) {
   })
   totalesMaterialApiladora.forEach( total => {
       if (total != null){
+        total.toneladas = total.toneladas==0?0:((total.toneladas/1000).toFixed(2))
         totales.push(total)
       }
   }) 
   sector =  'EXTRUSORA'   
   supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
+  supervisionparts = _.orderBy(supervisionparts, c => c.date)
   //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
   let totalesMaterialExtrusora  = new Array()
   supervisionparts.forEach(supervisonpart => {
@@ -997,6 +1003,7 @@ const generateReportForDay = async(function (date) {
   })
   totalesMaterialExtrusora.forEach( total => {
       if (total != null){
+        total.toneladas = total.toneladas==0?0:((total.toneladas/1000).toFixed(2))
         totales.push(total)
       }
   })
@@ -1005,6 +1012,8 @@ const generateReportForDay = async(function (date) {
         (arr, events) => arr.concat(events),
         []
       ))*/
+
+  //totales = _.orderBy(totales,['sector','created_at'],['desc','desc']);
   return excel.generateExcelSupervisionPartByDay(totales)
 })
 
@@ -1435,6 +1444,37 @@ function completeTotalesMaterialApiladora(supervisonpart,totalesMaterial) {
   return totalesMaterial
 }
 
+function getTotalDesapiladora(supervisionPart, material){
+  if (material == '8')
+    return supervisionPart.total_MOLDE_8;
+  if (material == '12-6A')
+   return supervisionPart.total_MOLDE_12_6A;
+  if (material == '12-9A')
+   return supervisionPart.total_MOLDE_12_8A;
+  if (material == '18')
+   return supervisionPart.total_MOLDE_18;
+  if (material == 'P12')
+    return supervisionPart.total_MOLDE_P12;
+  if (material == 'P18')
+    return supervisionPart.total_MOLDE_P18;
+  if (material == 'L11')
+    return supervisionPart.total_MOLDE_L11;
+  if (material == 'C')
+    return supervisionPart.total_MOLDE_C;
+  if (material == 'DM20')
+   return supervisionPart.total_MOLDE_DM20;
+  if (material == 'DM24')
+   return supervisionPart.total_MOLDE_DM24;
+  if (material == 'DM4')
+     return supervisionPart.total_MOLDE_DM4;
+  if (material == 'DIN18')
+     return supervisionPart.total_MOLDE_DIN18;
+  if (material == 'DIN27')
+    return supervisionPart.total_MOLDE_DIN27;
+  if (material == 'COLUMNA')
+    return supervisionPart.total_MOLDE_COLUMNA;
+ return 1;
+}
 
 function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
   if (supervisonpart.totals.length > 0 ) {
@@ -1452,6 +1492,7 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
       if (supervisonpart.schedule=='MANIANA'){
         indice=indice+30;
       }
+      let materialTotal = getTotalDesapiladora(supervisonpart,ht.material);
       if(totalesMaterial[indice]) {
         totalesMaterial[indice] = { 
           sector: 'DESAPILADORA',
@@ -1459,8 +1500,8 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
           turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
           schedule: supervisonpart.schedule,
           material: ht.material,
-          unidades: totalesMaterial[indice].unidades + ht.count,
-          toneladas: totalesMaterial[indice].unidades + (ladrillosXPallet * ht.count * pesoLadrillo),
+          unidades: totalesMaterial[indice].unidades + materialTotal,
+          toneladas: totalesMaterial[indice].unidades + (ladrillosXPallet * materialTotal * pesoLadrillo),
           pesoLadrillo: pesoLadrillo,
           tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
         }
@@ -1472,8 +1513,8 @@ function completeTotalesMaterialDesapiladora(supervisonpart,totalesMaterial) {
           turno: shift.getShiftForSchedule( supervisonpart.schedule, supervisonpart.date),
           schedule: supervisonpart.schedule,
           material: ht.material, 
-          unidades: ht.count,
-          toneladas: ladrillosXPallet * ht.count * pesoLadrillo,
+          unidades: materialTotal,
+          toneladas: ladrillosXPallet * materialTotal * pesoLadrillo,
           pesoLadrillo: pesoLadrillo,
           tiempoMarcha: supervisonpart.totalMinutesWithoutStopping
         }
