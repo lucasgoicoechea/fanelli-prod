@@ -338,7 +338,9 @@ supervisionpartSchema.statics.getSupervisionPartForDayAndSector = function (date
     .populate('hours.comments.supervisor', ['name', 'lastname'])
     .populate('observations.supervisor', ['name', 'lastname'])
     .populate('hours.stoppings.supervisor', ['name', 'lastname'])
+    //.sort({created_at: 1})
     .lean()
+    
 }
 
 supervisionpartSchema.statics.getSupervisionPartForDay = function (date) {

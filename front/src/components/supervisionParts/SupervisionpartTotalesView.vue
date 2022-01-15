@@ -185,7 +185,11 @@
           }, */
           {
             name: 'toneladas',
-            title: 'Toneladas'
+            title: 'Toneladas',
+            callback: function (value) {
+              value = (value === 0) ? 0 : ((value / 1000).toFixed(2))
+              return '<b>' + value + ' </b>'
+            }
           }
         ],
         camposDesapiladora: [
@@ -233,7 +237,11 @@
           }, */
           {
             name: 'toneladas',
-            title: 'Toneladas'
+            title: 'Toneladas',
+            callback: function (value) {
+              value = (value === 0) ? 0 : ((value / 1000).toFixed(2))
+              return '<b>' + value + ' </b>'
+            }
           },
           {
             name: 'palletReposicion',
@@ -280,11 +288,11 @@
           },
           {
             name: 'toneladas',
-            title: 'Toneladas'
-          },
-          {
-            name: 'palletReposicion',
-            title: 'Pallet Repos'
+            title: 'Toneladas',
+            callback: function (value) {
+              value = (value === 0) ? 0 : ((value / 1000).toFixed(2))
+              return '<b>' + value + ' </b>'
+            }
           }
         ],
         css: {
