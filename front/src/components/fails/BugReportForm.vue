@@ -21,7 +21,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></sector-selector>-->
             <select v-model="bugReport.sector" id="sector">
-              <option v-for="(label, value) in $constants.BUG_REPORT_SECTORS"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in listSector(bugReport.line)"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -234,6 +234,12 @@
     computed: {
       frecuency () {
         return this.isFrecuency
+      },
+      listSector (line) {
+        if (line === 'PRODUCCION') {
+          return this.$constants.BUG_REPORT_SUBSECTORS_PRODUCCION
+        }
+        return this.$constants.BUG_REPORT_SUBSECTORS
       },
       ...mapGetters('collaborators', [
         'hasSelected',
