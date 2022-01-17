@@ -72,7 +72,7 @@
             :multipleSelection="true"
              typeList="full"
             :preSelection="editable.collaborators"></sub-part-selector>-->
-            <select v-model="bugReport.parts" id="parts">
+            <select v-model="bugReport.part" id="part">
               <option v-for="(label, value) in $constants.BUG_REPORT_PARTS"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
