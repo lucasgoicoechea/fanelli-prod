@@ -337,6 +337,7 @@
         }
       },
       init () {
+        this.supervisionpartTotales = []
         if (this.validateDate) {
           this.loading = true
           this.$store.dispatch('supervisionparts/totales', {date: this.convertedDate})
