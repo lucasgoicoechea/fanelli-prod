@@ -1044,3 +1044,164 @@ export default {
     T4: 'T4 (13)'
   }
 }
+
+/* produccion TERMINADA :)
+
+BUG_REPORT_SECTORS: {
+    PRODUCCION: 'Producción',
+    AUTOMATISMO_CORTE_Y_CARGA: 'Automatismo de Corte y Carga',
+    SECADO: 'Secado',
+    MOVIMENTACION_SECADERO: 'Movimentación de Secadero',
+    APILADO: 'Apilado',
+    HORNO: 'Horno',
+    MOVIMENTACION_HORNO: 'Movimentación de Horno',
+    DESAPILADO_Y_EMPAQUE: 'Desapilado y Empaque',
+    SERVICIOS_AUXILIARES: 'Servicios Auxiliares'
+},
+
+BUG_REPORT_SUBSECTORS_PRODUCCION: {
+    DOSIFICACION: 'Dosificación',
+    EXTRUSION: 'Extrusión',
+    LAMINADO: 'Laminado',
+    MEZCLADO: 'Mezclado',
+    TRANSPORTE: 'Transporte'
+},
+
+BUG_REPORT_TEAM_PRODUCCION_DOSIFICACION: {
+    CAJON_ALIMENTADOR_1_PLANTA_3: 'Cajón Alimentador 1 Planta 3',
+    DOSIFICADOR_6_PLANTA_2: 'Dosificador 6 Planta 2',
+    DOSIFICADOR_8_PLANTA_2: 'Dosificador 8 Planta 2',
+    DOSIFICADOR_4_PLANTA_2: 'Dosificador 4 Planta 2'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_DOSIFICACION: {
+    MOTOR_MOTORRED_GIRO: 'Motor/Motorred Giro',
+    MOTOR_MOTORRED_ASPAS: 'Motor/Motorred Aspas',
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda'
+},
+
+BUG_REPORT_TEAM_PRODUCCION_EXTRUSION:{
+    DESMENUZADOR_DESCARTE_F2: 'Desmenuzador Descarte F2',
+    EXTRUSORA_2_750_PLANTA_2: 'Extrusora 2 750 Planta 2',
+    EXTRUSORA_3_850_PLANTA_2: 'Extrusora 3 850 Planta 2',
+    VACIO_PLANTA_2: 'Vacio Planta 2',
+    MEZCLADOR_13B_PLANTA_2: 'Mezclador 13B Planta 2',
+    MEZCLADOR_BATEA_EXTERNA_2_750: 'Mezclador Batea Externa 2 750',
+    MEZCLADOR_BATEA_EXTERNA_3_850: 'Mezclador Batea Externa 3 850'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_DESMENUZADOR_DESCARTE_F2:{
+    MOTORRED: 'Motorred',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_EXTRUSORA_2_750_PLANTA_2:{
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    REDUCTORA: 'Reductora',
+    MOTORRED_ASPAS_DER: 'Motorred Aspas Derecha',
+    MOTORRED_ASPAS_IZQ: 'Motorred Aspas Izquierda',
+    ASPAS: 'Aspas'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_EXTRUSORA_3_850_PLANTA_2:{
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    REDUCTORA: 'Reductora',
+    ASPAS: 'Aspas',
+    MOTORRED_ASPAS: 'Motorred Aspas'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_VACIO_PLANTA_2:{
+    BOMBA_1: 'Bomba 1',
+    BOMBA_2: 'Bomba 2'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_MEZCLADOR_13B_PLANTA_2:{
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    REDUCTORA: 'Reductora'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_MEZCLADOR_BATEA_EXTERNA_2_750:{
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    REDUCTORA: 'Reductora'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_MEZCLADOR_BATEA_EXTERNA_3_850:{
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    REDUCTORA: 'Reductora'
+},
+
+BUG_REPORT_TEAM_PRODUCCION_LAMINADO:{
+    LAMINADOR_PRIMARIO_LA9_PLANTA_2: 'Laminador Primario LA9 Planta 2',
+    LAMINADOR_3_PLANTA_2: 'Laminador 3 Planta 2',
+    LAMINADOR_7_PLANTA_2: 'Laminador 7 Planta 2',
+    LAMINADOR_9_PLANTA_2: 'Laminador 9 Planta 2',
+    LAMINADOR_PRIMARIO_BEDESCHI_1210_PLANTA_3: 'Laminador Primario Bedeschi 1210 Planta 3'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_LAMINADO:{
+    LADO_LENTO: 'Lado Lento',
+    LADO_VELOZ: 'Lado Veloz',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_LAMINADO_LAMINADOR_PRIMARIO_BEDESCHI_1210_PLANTA_3:{
+    LADO_LENTO: 'Lado Lento',
+    LADO_VELOZ: 'Lado Veloz'
+},
+
+BUG_REPORT_PARTS_PRODUCCION_LAMINADO:{
+    MOTOR: 'Motor',
+    RODILLO: 'Rodillo'
+},
+
+BUG_REPORT_TEAM_PRODUCCION_MEZCLADO:{
+    MEZCLADOR_FILTRO_BONGIOANNI_PLANTA_2: 'Mezclador Filtro Bongioanni Planta 2'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_MEZCLADO:{
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    REDUCTORA: 'Reductora'
+},
+
+BUG_REPORT_TEAM_PRODUCCION_TRANSPORTE:{
+    CINTA_PLANTA_2: 'Cinta Planta 2',
+    CINTA_2_PLANTA_2: 'Cinta 2 Planta 2',
+    CINTA_2A_PLANTA_2: 'Cinta 2A Planta 2',
+    CINTA_2C_PLANTA_2: 'Cinta 2C Planta 2',
+    CINTA_2D_PLANTA_2: 'Cinta 2D Planta 2',
+    CINTA_3_PLANTA_2: 'Cinta 3 Planta 2',
+    CINTA_4_PLANTA_2: 'Cinta 4 Planta 2',
+    CINTA_5_PLANTA_2: 'Cinta 5 Planta 2',
+    CINTA_10_PLANTA_2: 'Cinta 10 Planta 2',
+    CINTA_11_PLANTA_2: 'Cinta 11 Planta 2',
+    CINTA_12_PLANTA_2: 'Cinta 12 Planta 2',
+    CINTA_BYPASS_MIXER_PLANTA_2: 'Cinta By Pass Mixer Planta 2',
+    CINTA_16_PLANTA_2: 'Cinta 16 Planta 2',
+    CINTA_17_PLANTA_2: 'Cinta 17 Planta 2',
+    CINTA_18_PLANTA_2: 'Cinta 18 Planta 2',
+    CINTA_19_PLANTA_2: 'Cinta 19 Planta 2',
+    CINTA_DESCARTE_VERDE_2_PLANTA_2: 'Cinta Descarte Verde 2 Planta 2',
+    CINTA_DESCARTE_VERDE_3_PLANTA_2: 'Cinta Descarte Verde 3 Planta 2',
+    CINTA_DESCARTE_VERDE_4_PLANTA_2: 'Cinta Descarte Verde 4 Planta 2',
+    CINTA_DESCARTE_VERDE_5_PLANTA_2: 'Cinta Descarte Verde 5 Planta 2',
+    CINTA_DESCARTE_VERDE_6_PLANTA_2: 'Cinta Descarte Verde 6 Planta 2',
+    CINTA_DESCARTE_VERDE_7_PLANTA_2: 'Cinta Descarte Verde 7 Planta 2',
+    CINTA_DESCARTE_VERDE_8_PLANTA_2: 'Cinta Descarte Verde 8 Planta 2',
+    CINTA_DESCARTE_SECO_1_PLANTA_2: 'Cinta Descarte Seco 1 Planta 2',
+    CINTA_DESCARTE_SECO_2_PLANTA_2: 'Cinta Descarte Seco 2 Planta 2'
+},
+
+BUG_REPORT_GROUPS_PRODUCCION_TRANSPORTE:{
+    MOTOR_MOTORRED: 'Motor/Motorred',
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda'
+},
+
+*/
