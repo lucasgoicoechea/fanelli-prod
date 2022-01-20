@@ -21,7 +21,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></sector-selector>-->
             <select v-model="bugReport.sector" id="sector">
-              <option v-for="(label, value) in listSector(bugReport.line)"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in $constants.BUG_REPORT_SECTORS" :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -34,7 +34,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></sub-sector-selector>-->
             <select v-model="bugReport.sub_sector" id="sub_sector">
-              <option v-for="(label, value) in $constants.BUG_REPORT_SUBSECTORS"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in subSectorList"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -47,7 +47,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></equipo-selector>-->
             <select v-model="bugReport.equipo" id="equipo">
-              <option v-for="(label, value) in $constants.BUG_REPORT_TEAM"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in equipoList"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -60,7 +60,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></part-selector>-->
             <select v-model="bugReport.group" id="group">
-              <option v-for="(label, value) in $constants.BUG_REPORT_GROUPS"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in groupList"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -73,7 +73,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></sub-part-selector>-->
             <select v-model="bugReport.part" id="part">
-              <option v-for="(label, value) in $constants.BUG_REPORT_PARTS"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in partList"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -235,11 +235,184 @@
       frecuency () {
         return this.isFrecuency
       },
-      listSector (line) {
-        if (line === 'PRODUCCION') {
+      subSectorList () {
+        if (this.bugReport.sector === 'PRODUCCION') { // Lista de Sub-Sectores, Sector Produccion
           return this.$constants.BUG_REPORT_SUBSECTORS_PRODUCCION
+        } else {
+          if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA') { // Lista de Sub-Sectores, Sector Automatismo Corte y Carga
+            return this.$constants.BUG_REPORT_SUBSECTORS_AUTOMATISMO_CORTE_Y_CARGA
+          }
         }
         return this.$constants.BUG_REPORT_SUBSECTORS
+      },
+      equipoList () { // Lista de Equipos, Sector Produccion
+        if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'DOSIFICACION') {
+          return this.$constants.BUG_REPORT_TEAM_PRODUCCION_DOSIFICACION
+        } else {
+          if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'EXTRUSION') {
+            return this.$constants.BUG_REPORT_TEAM_PRODUCCION_EXTRUSION
+          } else {
+            if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'LAMINADO') {
+              return this.$constants.BUG_REPORT_TEAM_PRODUCCION_LAMINADO
+            } else {
+              if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'MEZCLADO') {
+                return this.$constants.BUG_REPORT_TEAM_PRODUCCION_MEZCLADO
+              } else {
+                if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'TRANSPORTE') {
+                  return this.$constants.BUG_REPORT_TEAM_PRODUCCION_TRANSPORTE
+                } else { // Lista de Equipos, Sector Automatismo Corte y Carga
+                  if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.sub_sector === 'CORTADORA') {
+                    return this.$constants.BUG_REPORT_TEAM_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA
+                  } else {
+                    if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.sub_sector === 'MESA_DE_TRANSPORTE') {
+                      return this.$constants.BUG_REPORT_TEAM_AUTOMATISMO_CORTE_Y_CARGA_MESA_DE_TRANSPORTE
+                    } else {
+                      if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.sub_sector === 'MECANISMO_DE_CARGA') {
+                        return this.$constants.BUG_REPORT_TEAM_AUTOMATISMO_CORTE_Y_CARGA_MECANISMO_DE_CARGA
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        return this.$constants.BUG_REPORT_TEAM
+      },
+      groupList () {
+        if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'DOSIFICACION') { // Lista de Grupos, Sector Produccion
+          return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_DOSIFICACION
+        } else {
+          if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'DESMENUZADOR_DESCARTE_F2') {
+            return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_DESMENUZADOR_DESCARTE_F2
+          } else {
+            if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'EXTRUSORA_2_750_PLANTA_2') {
+              return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_EXTRUSORA_2_750_PLANTA_2
+            } else {
+              if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'EXTRUSORA_3_850_PLANTA_2') {
+                return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_EXTRUSORA_3_850_PLANTA_2
+              } else {
+                if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'VACIO_PLANTA_2') {
+                  return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_VACIO_PLANTA_2
+                } else {
+                  if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'MEZCLADOR_13B_PLANTA_2' || this.bugReport.equipo === 'MEZCLADOR_BATEA_EXTERNA_2_750' || this.bugReport.equipo === 'MEZCLADOR_BATEA_EXTERNA_3_850') {
+                    return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_EXTRUSION_MEZCLADORES_13_P2_BATEA_EXTERNA_2_750_BATEA_EXTERNA_3_850
+                  } else {
+                    if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'LAMINADOR_PRIMARIO_LA9_PLANTA_2' || this.bugReport.equipo === 'LAMINADOR_3_PLANTA_2' || this.bugReport.equipo === 'LAMINADOR_7_PLANTA_2' || this.bugReport.equipo === 'LAMINADOR_9_PLANTA_2') {
+                      return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_LAMINADO
+                    } else {
+                      if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.equipo === 'LAMINADOR_PRIMARIO_BEDESCHI_1210_PLANTA_3') {
+                        return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_LAMINADO_LAMINADOR_PRIMARIO_BEDESCHI_1210_PLANTA_3
+                      } else {
+                        if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'MEZCLADO') {
+                          return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_MEZCLADO
+                        } else {
+                          if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'TRANSPORTE') {
+                            return this.$constants.BUG_REPORT_GROUPS_PRODUCCION_TRANSPORTE
+                          } else { // Lista de Grupos, Sector Automatismo Corte y Carga
+                            if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_750' || this.bugReport.equipo === 'CORTADORA_EXTERNA_751' || this.bugReport.equipo === 'CORTADORA_EXTERNA_752') {
+                              return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_750_751_752
+                            } else {
+                              if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_753' || this.bugReport.equipo === 'CORTADORA_EXTERNA_754' || this.bugReport.equipo === 'CORTADORA_EXTERNA_755') {
+                                return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_753_754_755
+                              } else {
+                                if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_756' || this.bugReport.equipo === 'CORTADORA_EXTERNA_757' || this.bugReport.equipo === 'CORTADORA_EXTERNA_758') {
+                                  return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_756_757_758
+                                } else {
+                                  if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_759' || this.bugReport.equipo === 'CORTADORA_EXTERNA_760' || this.bugReport.equipo === 'CORTADORA_EXTERNA_761') {
+                                    return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_759_760_761
+                                  } else {
+                                    if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_762' || this.bugReport.equipo === 'CORTADORA_EXTERNA_763' || this.bugReport.equipo === 'CORTADORA_EXTERNA_764' || this.bugReport.equipo === 'CORTADORA_EXTERNA_765' || this.bugReport.equipo === 'CORTADORA_EXTERNA_766') {
+                                      return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_762_763_764_765_766
+                                    } else {
+                                      if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_767' || this.bugReport.equipo === 'CORTADORA_EXTERNA_768') {
+                                        return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_767_768
+                                      } else {
+                                        if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_769' || this.bugReport.equipo === 'CORTADORA_EXTERNA_770') {
+                                          return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_769_770
+                                        } else {
+                                          if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CORTADORA_EXTERNA_850') {
+                                            return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_EXTERNA_850
+                                          } else {
+                                            if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'MESA_1' || this.bugReport.equipo === 'MESA_1A' || this.bugReport.equipo === 'MESA_2' || this.bugReport.equipo === 'MESA_5' || this.bugReport.equipo === 'MESA_6') {
+                                              return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_MESA_DE_TRANSPORTE_MESA_1_1A_2_5_6
+                                            } else {
+                                              if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'MESA_3' || this.bugReport.equipo === 'MESA_4') {
+                                                return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_MESA_DE_TRANSPORTE_MESA_3_4
+                                              } else {
+                                                if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'RODILLOS_DESVIADORES') {
+                                                  return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_MECANISMO_DE_CARGA_RODILLOS_DESVIADORES
+                                                } else {
+                                                  if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CINTA_PULMON_MOVIL' || this.bugReport.equipo === 'CINTA_MOVIL_CARGA') {
+                                                    return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_MECANISMO_DE_CARGA_CINTA_PULMON_MOVIL_Y_MOVIL_CARGA
+                                                  } else {
+                                                    if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'CINTA_PULMON_FIJA') {
+                                                      return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_CORTE_Y_CARGA_MECANISMO_DE_CARGA_CINTA_PULMON_FIJA
+                                                    } else {
+                                                      if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'MECANISMO_DE_CARGA') {
+                                                        return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_DE_CORTE_Y_CARGA_MECANISMO_DE_CARGA
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        return this.$constants.BUG_REPORT_GROUPS
+      },
+      partList () { // Lista de Partes, Sector Produccion
+        if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'EXTRUSION') {
+          return '-'
+        } else {
+          if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'LAMINADO') {
+            return this.$constants.BUG_REPORT_PARTS_PRODUCCION_LAMINADO
+          } else {
+            if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'MEZCLADO') {
+              return '-'
+            } else {
+              if (this.bugReport.sector === 'PRODUCCION' && this.bugReport.sub_sector === 'TRANSPORTE') {
+                return '-'
+              } else { // Lista de Partes, Sector Automatismo Corte y Carga
+                if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.group === 'CINTA_PUENTE_750' || this.bugReport.group === 'CINTA_LANZADORA_1_750' || this.bugReport.group === 'CINTA_LANZADORA_2_750' || this.bugReport.group === 'CINTA_PUENTE_850' || this.bugReport.group === 'CINTA_LANZADORA_1_850' || this.bugReport.group === 'CINTA_LANZADORA_2_850') {
+                  return this.$constants.BUG_REPORT_PARTS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_CINTA_PUENTE_750_Y_850_LANZADORA_1_Y_2_750_Y_850
+                } else {
+                  if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.group === 'CORTADORA_SIMPLE_750' || this.bugReport.group === 'CORTADORA_SIMPLE_850') {
+                    return this.$constants.BUG_REPORT_PARTS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_SIMPLE_750_Y_850
+                  } else {
+                    if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.group === 'CORTADORA_MULTIPLE_750' || this.bugReport.group === 'CORTADORA_MULTIPLE_850') {
+                      return this.$constants.BUG_REPORT_PARTS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_MULTIPLE_750_Y_850
+                    } else {
+                      if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.group === 'LIMPIADOR_DE_ALAMBRE_750' || this.bugReport.group === 'LIMPIADOR_DE_ALAMBRE_850') {
+                        return this.$constants.BUG_REPORT_PARTS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_LIMPIADOR_ALAMBRE_750_Y_850
+                      } else {
+                        if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.group === 'RODILLOS_DESVIADORES_750' || this.bugReport.group === 'RODILLOS_DESVIADORES_850') {
+                          return this.$constants.BUG_REPORT_PARTS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_RODILLOS_DESVIADORES_750_Y_850
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       ...mapGetters('collaborators', [
         'hasSelected',
