@@ -819,6 +819,20 @@ const controller = {
           totales.push(total)
         }
     }) 
+
+    totales.sort(function(a, b) {
+      let aSchedule = a.schedule;
+      let bSchedule = b.schedule;
+      if (aSchedule === 'MANIANA')
+        return -1;
+      if (bSchedule === 'MANIANA')
+        return 1;
+      if (aSchedule === 'TARDE')
+        return -1;
+      if (bSchedule === 'TARDE')
+        return 1;
+      return 0;
+    })
     res.json({success: true,  totales:  totales})
   }),
 
@@ -845,6 +859,20 @@ const controller = {
           totales.push(total)
         }
     }) 
+
+    totales.sort(function(a, b) {
+      let aSchedule = a.schedule;
+      let bSchedule = b.schedule;
+      if (aSchedule === 'MANIANA')
+        return -1;
+      if (bSchedule === 'MANIANA')
+        return 1;
+      if (aSchedule === 'TARDE')
+        return -1;
+      if (bSchedule === 'TARDE')
+        return 1;
+      return 0;
+    })
     res.json({success: true,  totales:  totales})
   }),
 
@@ -871,6 +899,20 @@ const controller = {
           totales.push(total)
         }
     }) 
+
+    totales.sort(function(a, b) {
+      let aSchedule = a.schedule;
+      let bSchedule = b.schedule;
+      if (aSchedule === 'MANIANA')
+        return -1;
+      if (bSchedule === 'MANIANA')
+        return 1;
+      if (aSchedule === 'TARDE')
+        return -1;
+      if (bSchedule === 'TARDE')
+        return 1;
+      return 0;
+    })
     res.json({success: true,  totales:  totales})
   }),
 
