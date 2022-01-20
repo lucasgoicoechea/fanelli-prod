@@ -242,11 +242,12 @@
               value = (value === 0) ? 0 : ((value / 1000).toFixed(2))
               return '<b>' + value + ' </b>'
             }
-          },
+          }
+          /* ,
           {
             name: 'palletReposicion',
             title: 'Pallet Repos'
-          }
+          } */
         ],
         camposApiladora: [
           {
