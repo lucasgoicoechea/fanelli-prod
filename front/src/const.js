@@ -1470,3 +1470,548 @@ BUG_REPORT_GROUP_MOVIMENTACION_SECADERO_TRASBORDO: {
     ESTRUCTURA: 'Estructura'
 },
 */ 
+
+
+
+
+/*
+BUG_REPORT_SUBSECTORS_APILADO: {
+    MECANISMO_DESCARGA: 'Mecanismo de Descarga',
+    MESA_TRANSPORTE: 'Mesa de Transporte',
+    PINZA: 'Pinza'
+},
+
+BUG_REPORT_TEAM_APILADO_MECANISMO_DESCARGA: {
+    RODILLOS_DESCARGA: 'Rodillos Descarga',
+    CINTA_MOVIL: 'Cinta Movil',
+    RODILLOS_MOVILES: 'Rodillos Moviles'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_RODILLOS_DESCARGA: {
+    ESTRUCTURA: 'Estructura',
+    MOTOR_ELEVACION: 'Motor Elevacion',
+    REDUCTORA_ELEVACION_DER: 'Reductora Elevacion Derecha',
+    REDUCTORA_ELEVACION_IZQ: 'Reductora Elevacion Izquierda',
+    MOTORRED_TRASLACION_PLANCHA: 'Motorred Traslacion Plancha',
+    MOTORRED_TRASLACION_PALA: 'Motorred Traslacion Pala'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_CINTA_MOVIL: {
+    ESTRUCTURA: 'Estructura',
+    BANDA_IZQ: 'Banda Izquierda',
+    BANDA_DER: 'Banda Derecha',
+    MOTOR_ELEVACION: 'Motor Elevacion',
+    REDUCTORA_ELEVACION_DER: 'Reductora Elevacion Derecha',
+    REDUCTORA_ELEVACION_IZQ: 'Reductora Elevacion Izquierda',
+    MOTORRED_BANDA_IZQ: 'Motorred Banda Izquierda',
+    MOTORRED_BANDA_DER: 'Motorred Banda Derecha'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_RODILLOS_MOVILES: {
+    ESTRUCTURA: 'Estructura',
+    MOTOR_ELEVACION: 'Motor Elevacion',
+    REDUCTORA_ELEVACION_DER: 'Reductora Elevacion Derecha',
+    REDUCTORA_ELEVACION_IZQ: 'Reductora Elevacion Izquierda',
+    MOTORRED_RODILLOS: 'Motorred Rodillos',
+    MOTORRED_ALINEADO_IZQ: 'Motorred Alineado Izquierdo',
+    MOTORRED_ALINEADO_DER: 'Motorred Alineado Derecho'
+},
+
+BUG_REPORT_TEAM_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE: {
+    Z1: 'Z1',
+    Z2: 'Z2',
+    Z3: 'Z3',
+    Z4: 'Z4',
+    Z5: 'Z5',
+    Z6: 'Z6'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1: {
+    Z1_RODILLOS_1: 'Z1 Rodillos 1',
+    Z1_CINTA_1: 'Z1 Cinta 1',
+    Z1_RODILLOS_2: 'Z1 Rodillos 2',
+    Z1_RODILLOS_1_Z1_A_Z6: 'Z1 Rodillos 1 A Z6',
+    Z1_RODILLOS_2_Z1_A_Z6: 'Z1 Rodillos 1 A Z6',
+    Z1_BARRERA_Z1_A_Z2: 'Z1 Barrera Z1 A Z2',
+    Z1_BARRERA_Z1_A_Z6: 'Z1 Barrera Z1 A Z6'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1_RODILLOS_1: {
+    ESTRUCTURA: 'Estructura',
+    RODILLOS_IZQ: 'Rodillos Izquierdos',
+    RODILLOS_DER: 'Rodillos Derechos',
+    MOTORRED_IZQ: 'Motorred Izquierdo',
+    MOTORRED_DER: 'Motorred Derecho'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1_CINTA_1: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_IZQ: 'Motorred Izquierdo',
+    MOTORRED_DER: 'Motorred Derecho',
+    BANDA_IZQ: 'Banda Izquierda',
+    BANDA_DER: 'Banda Derecha'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1_RODILLOS_2: {
+    RODILLOS_IZQ: 'Rodillos Izquierdos',
+    RODILLOS_DER: 'Rodillos Derechos',
+    MOTORRED_IZQ: 'Motorred Izquierdo'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1_RODILLOS_1_Z1_A_Z6: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_DER: 'Motorred Derecho',
+    RODILLOS: 'Rodillos'
+
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1_RODILLOS_2_Z1_A_Z6: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred',
+    RODILLOS: 'Rodillos'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z1_BARRERA_Z1_A_Z2_Y_Z1_A_Z6: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z2: {
+    Z2_MESA_1: 'Z2 Mesa 1',
+    Z2_MESA_2: 'Z2 Mesa 2',
+    Z2_MESA_3: 'Z2 Mesa 3',
+    Z2_MESA_4: 'Z2 Mesa 4',
+    Z2_MESA_5: 'Z2 Mesa 5',
+    Z2_MESA_6: 'Z2 Mesa 6',
+    Z2_BARRERA_FRONTAL: 'Z2 Barrera Frontal',
+    Z2_RODILLOS_DESV_A_25: 'Z2 Rodillos Desv A Z5'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z2_MESA_Y_BARRERA: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z2_RODILLOS: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_TRASLACION: 'Motorred Traslacion',
+    RODILLOS: 'Rodillos'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z3: {
+    Z3_CADENA_1: 'Z3 Cadena 1',
+    Z3_RODILLOS_1: 'Z3 Rodillos 1',
+    Z3_RODILLOS_2_Z3_Z2: 'Z3 Rodillos 2 (Z3 a Z2)',
+    Z3_RODILLOS_3: 'Z3 Rodillos 3',
+    Z3_RODILLOS_4_Z3_Z6: 'Z3 Rodillos 4 (Z3 a Z6)',
+    Z3_BARRERA_Z3_Z6: 'Z3 Barrera Z3 a Z6',
+    Z3_BARRERA_Z3_Z2: 'Z3 Barrera Z3 a Z2'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z3: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z4: {
+    Z4_CINTA_1: 'Z4 Cinta 1',
+    Z4_CINTA_2: 'Z4 Cinta 2',
+    Z4_RODILLO_COMPACTADOR: 'Z4 Rodillo con Compactador',
+    Z4_CINTA_PROGRAMACION: 'Z4 Cinta Programación'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z4_CINTA: {
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z4_RODILLO: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred',
+    RODILLO: 'Rodillo',
+    MOTORRED_RODILLO: 'Motorred Rodillo'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z5: {
+    Z5_CINTA_1: 'Z5 Cinta 1',
+    Z5_CINTA_2: 'Z5 Cinta 2',
+    Z5_RODILLO_COMPACTADOR: 'Z5 Rodillo con Compactador',
+    Z5_CINTA_PROGRAMACION: 'Z5 Cinta Programación',
+    CINTA_CARRELO: 'Cinta Carrelo'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z5_CINTA_1: {
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda',
+    MOTORRED_COMPACTADOR: 'Motorred Compactador'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z5_CINTA_2_Y_PROGRAMACION: {
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z5_RODILLO_COMPACTADOR: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred',
+    RODILLO: 'Rodillo',
+    MOTORRED_RODILLO: 'Motorred Rodillo',
+    MOTORRED_COMPACTADOR: 'Motorred Compactador'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_CINTA_CARRELO: {
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda',
+    MOTORRED_TRASLACION: 'Motorred Traslacion',
+    MOTORRED_GIRO: 'Motorred Giro'
+},
+
+BUG_REPORT_GROUP_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z6: {
+    Z6_MESA_1: 'Z6 Mesa 1',
+    Z6_MESA_2: 'Z6 Mesa 2',
+    Z6_MESA_3: 'Z6 Mesa 3',
+    Z6_MESA_4: 'Z6 Mesa 4',
+    Z6_MESA_5: 'Z6 Mesa 5',
+    Z6_MESA_6: 'Z6 Mesa 6',
+    Z6_BARRERA_FRONTAL: 'Z6 Barrera Frontal',
+    Z6_RODILLO_DESV_Z4: 'Z6 Rodillo Desv a Z4'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_MESA: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z6_BARRERA_FRONTAL: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_TRASLACION: 'Motorred Traslacion'
+},
+
+BUG_REPORT_PARTS_APILADO_MECANISMO_DESCARGA_MESA_TRANSPORTE_Z6_RODILLO_DESV_Z4: {
+    ESTRUCTURA: 'Estructura',
+    RODILLO: 'Rodillo',
+    MOTORRED_TRASLACION: 'Motorred Traslacion'
+},
+
+BUG_REPORT_TEAM_APILADO_PINZA: {
+    ROBOT: 'Robot'
+},
+
+BUG_REPORT_GROUP_APILADO_PINZA: {
+    ROBOT_1: 'Robot 1',
+    ROBOT_2: 'Robot 2',
+},
+
+BUG_REPORT_PARTS_APILADO_PINZA: {
+    ESTRUCTURA: 'Estructura',
+    PINZA: 'Pinza',
+    J1: 'J1',
+    J2: 'J2',
+    J3: 'J3',
+    J4: 'J4'
+},
+
+*/
+
+
+
+
+/*
+BUG_REPORT_SUBSECTORS_HORNO: {
+    HORNO: 'Horno',
+    VAGONETAS: 'Vagonetas',
+    VENTILACION: 'Ventilación',
+    QUEMADORES: 'Quemadores'
+},
+
+BUG_REPORT_TEAM_HORNO: {
+    PORTONES: 'Portones',
+    TUBERIAS_CONDUCTOS: 'Tuberias/Conductos',
+    VALVULAS: 'Valvulas',
+    RAMPA_GAS: 'Rampa de Gas'
+},
+
+BUG_REPORT_GROUP_HORNO_PORTONES: {
+    PUERTA_PRE_HORNO_ENTRADA: 'Puerta Pre Horno Entrada',
+    PUERTA_HORNO_ENTRADA: 'Puerta Horno Entrada',
+    PUERTA_SALIDA_HORNO: 'Puerta Salida Horno',
+    PUERTA_POST_SALIDA_HORNO: 'Puerta Post Salida Horno'
+},
+
+BUG_REPORT_TEAM_VAGONETAS: {
+    VAGONETAS_PLANTA_2: 'Vagonetas Planta 2'
+},
+
+BUG_REPORT_TEAM_VENTILACION: {
+    M1_CHIMENEA: 'M1 Chimenea',
+    M3_RECICLO: 'M3 Reciclo',
+    M2_EXTRACCION_BAJO_BAGONETA: 'M2 Extracción Bajo Vagoneta',
+    M25_REFRIGERACION_BAJO_BAGONETA: 'M25 Refrigeración Bajo Bagoneta',
+    M26_REFRIGERACION_BAJO_BAGONETA: 'M26 Refrigeración Bajo Bagoneta',
+    M27_REFRIGERACION_BAJO_BAGONETA: 'M27 Refrigeración Bajo Bagoneta',
+    M28_REFRIGERACION_BAJO_BAGONETA: 'M28 Refrigeración Bajo Bagoneta',
+    M29_REFRIGERACION_BAJO_BAGONETA: 'M29 Refrigeración Bajo Bagoneta',
+    M30_REFRIGERACION_BAJO_BAGONETA: 'M30 Refrigeración Bajo Bagoneta',
+    M4_COMBURENTE_QUEM_LATERALES: 'M4 Comburente QUEM Laterales',
+    M5_COMBURENTE_QUEM_LATERALES: 'M5 Comburente QUEM Laterales',
+    M6_INMISION_BOVEDA: 'M6 Inmisión Boveda',
+    M7_INMISION_BOVEDA: 'M7 Inmisión Boveda',
+    M8_INMISION_BOVEDA: 'M8 Inmisión Boveda',
+    M9_INMISION_BOVEDA: 'M9 Inmisión Boveda',
+    M10_INMISION_BOVEDA: 'M10 Inmisión Boveda',
+    M11_INMISION_BOVEDA: 'M11 Inmisión Boveda',
+    M12_INMISION_BOVEDA: 'M12 Inmisión Boveda',
+    M13_INMISION_BOVEDA: 'M13 Inmisión Boveda',
+    M14_INMISION_BOVEDA: 'M14 Inmisión Boveda',
+    M15_INMISION_BOVEDA: 'M15 Inmisión Boveda',
+    M16_INMISION_BOVEDA: 'M16 Inmisión Boveda',
+    M17_ENFRIAMIENTO_LATERAL: 'M17 Enfriamiento Lateral',
+    M18_ENFRIAMIENTO_LATERAL: 'M18 Enfriamiento Lateral',
+    M19_ENFRIAMIENTO_LATERAL: 'M19 Enfriamiento Lateral',
+    M20_ENFRIAMIENTO_LATERAL: 'M20 Enfriamiento Lateral',
+    M21_RECUPERO_ALTA: 'M21 Recupero Alta',
+    M22_RECUPERO_BAJA: 'M22 Recupero Baja',
+    M23_CONTRAPRESION: 'M23 Contrapresión',
+    M24_CONTRAPRESION: 'M24 Contrapresión'
+},
+
+BUG_REPORT_GROUP_VENTILACION: {
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor'
+},
+
+BUG_REPORT_TEAM_QUEMADORES: {
+    LATERALES: 'Laterales',
+    BOVEDA: 'Boveda'
+},
+
+*/
+
+
+
+/*
+BUG_REPORT_SUBSECTORS_MOVIMENTACION_HORNO: {
+    EXTERNA: 'Externa',
+    TRASBORDO: 'Trasnbordo'
+},
+
+BUG_REPORT_TEAM_MOVIMENTACION_HORNO_EXTERNA: {
+    ESLINGA_COCIDO: 'Eslinga Cocido',
+    ESLINGA_VACIAS: 'Eslinga Vacias',
+    ESLINGA_SECO: 'Eslinga Seco',
+    FRENOS_BALLESTA: 'Frenos Ballesta',
+    EMPUJADORES_BLOQUEADORES: 'Empujadores/Bloqueadores'
+},
+
+BUG_REPORT_GROUP_MOVIMENTACION_HORNO_EXTERNA: {
+    ESTRUCTURA: 'Estructura',
+    MOTOR: 'Motor',
+    CENTRALINA: 'Centralina'
+},
+
+BUG_REPORT_TEAM_MOVIMENTACION_HORNO_TRASBORDO: {
+    HORNO_PLANTA_MOVIMIENTO_TRASBORDO: 'Horno Planta Movimiento Trasbordo'
+},
+
+BUG_REPORT_GROUP_MOVIMENTACION_HORNO_TRASBORDO: {
+    TRB_ENTRADA: 'TRB Entrada',
+    TRB_SALIDA: 'TRB Salida'
+},
+
+BUG_REPORT_PARTS_MOVIMENTACION_HORNO_TRASBORDO: {
+    ESTRUCTURA: 'Estructura',
+    EMPUJADOR_1: 'Empujador 1',
+    EMPUJADOR_2: 'Empujador 2',
+    CENTRALINA: 'Centralina'
+},
+
+*/
+
+
+/*
+
+BUG_REPORT_SUBSECTORS_DESAPILADO_EMPAQUE: {
+    PINZA: 'Pinza',
+    LIMPIEZA_VAGONETAS: 'Limpieza Vagonetas',
+    ENVOLVEDORA: 'Envolvedora',
+    PEGADO_FILM: 'Pegado de Film',
+    MESA_TRANSPORTE: 'Mesa de Transporte',
+    FLEJADORA: 'Flejadora',
+    REMOJADORA: 'Remojadora'
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_PINZA: {
+    PINZA_1: 'Pinza 1',
+    PINZA_COMPOSICION: 'Pinza Composición',
+},
+
+BUG_REPORT_GROUP_DESAPILADO_EMPAQUE_PINZA_1: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_ELEVACION: 'Motorred Elevacion',
+    MOTORRED_GIRO_1: 'Motorred Giro 1',
+    MOTORRED_GIRO_2: 'Motorred Giro 2',
+    MOTORRED_TRASLACION: 'Motorred Traslacion'
+},
+
+BUG_REPORT_GROUP_DESAPILADO_EMPAQUE_PINZA_COMPOSICION: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_ELEVACION: 'Motorred Elevacion',
+    MOTORRED_TRASLACION: 'Motorred Traslacion'
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_LIMPIEZA_VAGONETAS: {
+    ASPIRADORA: 'Aspiradora'
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_ENVOLVEDORA: {
+    ENVOLVERODA_1_P2: 'Envolvedora 1 P2',
+    ENVOLVERODA_2_P2: 'Envolvedora 2 P2',
+    ENVOLVERODA_3_P2: 'Envolvedora 3 P2'
+},
+
+BUG_REPORT_GROUP_DESAPILADO_EMPAQUE_ENVOLVEDORA: {
+    MOTORRED_GIRO: 'Motorred Giro',
+    MOTORRED_MOV_VERTICAL: 'Motorred Movimiento Vertical',
+    MOTOR_TENSION_FILM: 'Motor Tension Film',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_PEGADO_FILM: {
+    RODILLOS_CALENTADORES_Z2: 'Rodillos Calentadores Z2',
+    RODILLOS_CALENTADORES_Z6: 'Rodillos Calentadores Z6',
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_MESA_TRANSPORTE: {
+    Z2: 'Z2',
+    Z6: 'Z6'
+},
+
+BUG_REPORT_GROUP_DESAPILADO_EMPAQUE_MESA_TRANSPORTE: {
+    MESA_1: 'Mesa 1',
+    MESA_2: 'Mesa 2',
+    MESA_3: 'Mesa 3',
+    MESA_4: 'Mesa 4',
+    MESA_5: 'Mesa 5',
+    MESA_6: 'Mesa 6',
+    MESA_7: 'Mesa 7',
+    MESA_8: 'Mesa 8',
+    MESA_9: 'Mesa 9',
+    MESA_10: 'Mesa 10',
+    MESA_11: 'Mesa 11',
+    MESA_12: 'Mesa 12',
+    MESA_13: 'Mesa 13',
+    MESA_14: 'Mesa 14'
+},
+
+BUG_REPORT_PARTS_DESAPILADO_EMPAQUE_MESA_TRANSPORTE: {
+    MOTORRED: 'Motorred',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_FLEJADORA: {
+    ETIQUETADORA_2: 'Etiquetadora 2'
+},
+
+BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_REMOJADORA: {
+    PINZA_BAÑATURA_2: 'Pinza Bañatura 2'
+},
+
+BUG_REPORT_PARTS_DESAPILADO_EMPAQUE_REMOJADORA: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED_TRASLACION: 'Motorred Traslacion',
+    MOTORRED_ELEVACION: 'Motorred Elevacion'
+},
+
+*/
+
+
+
+/*
+BUG_REPORT_SUBSECTORS_SERVICIOS_AUXILIARES: {
+    ENERGIA_ELECTRICA: 'Energia Electrica',
+    MOLDES: 'Moldes',
+    GAS: 'Gas',
+    VAPOR: 'Vapor',
+    AIRE: 'Aire',
+    AUTOELEVADORES_PRODUCCION: 'Autoelevadores Produccion',
+    MAQ_LIMPIEZA: 'Maq. Limpieza',
+    GENERADORES: 'Generadores',
+    OTROS_SERVICIOS: 'Otros Servicios'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_ENERGIA_ELECTRICA: {
+    TABLEROS_PLANTA_2: 'Tableros Planta 2',
+    TABLERO_PREELABORACION: 'Tablero Preelaboracion',
+    TABLEROS_SILO: 'Tableros Silo',
+    TABLEROS_HORNO_PLANTA: 'Tableros Horno Planta',
+    TABLEROS_DESAPILADORA_ENVOLVEDORA: 'Tableros desapiladora/Envolvedora',
+    TGBT_2: 'TGBT 2',
+    TGBT_3: 'TGBT 3',
+    TABLERO_MOLINO: 'Tablero Molino',
+    CAMARA_TRANSFORMADORES: 'Camara Transformadores'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_MOLDES: {
+    LAVADORA_MOLDES_850: 'Lavadora de Moldes 850',
+    MOLDES_750: 'Moldes 750',
+    MOLDES_850: 'Moldes 850'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_GAS: {
+    INSTALACIONES_GAS: 'Instalaciones Gas'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_VAPOR: {
+    INSTALACIONES_AGUA_CALDERA: 'Instalaciones de Agua Y Caldera'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_AUTOELEVADORES_PRODUCCION: {
+    AE_N8_HYSTER: 'AE N8 HYSTER H190HD 2007-3041',
+    AE_N9_HYSTER: 'AE N9 HYSTER H190HD2 1751-2012',
+    AE_N15_HYSTER: 'AE N15 HYSTER H190HD2 2577-2016'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_MAQ_LIMPIEZA: {
+    EQUIPO_LIMPIEZA_DULEVO_120DK: 'Equipo Limpieza DULEVO 120DK'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_GENERADORES: {
+    GRUPOS_ELECTROGENOS_1: 'Grupos Electrogenos 1 Marca GM',
+    GRUPOS_ELECTROGENOS_2: 'Grupos Electrogenos 2 Marca CAT'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_AIRE: {
+    INSTALACIONES_AIRE_COMP: 'Instalaciones de Aire y Comp.'
+},
+
+BUG_REPORT_GROUP_SERVICIOS_AUXILIARES_AIRE: {
+    INSTALACION_NEUMATICA: 'Instalacion Neumatica',
+    COMPRESOR_1_12: 'Compresor 1 12-60 8738 SULLAIR',
+    COMPRESOR_2_12: 'Compresor 2 12-60 10134 SULLAIR',
+    COMPRESOR_3: 'Compresor 3 60/12 CECCATO 60/12',
+    COMPRESOR_4: 'Compresor 4 SE4509 11775 SULLAIR',
+    COMPRESOR_5: 'Compresor 5 50/8 CECCATO',
+    COMPRESOR_6: 'Compresor 6 SE5509V SULLAIR'
+},
+
+BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_OTROS_SERVICIOS: {
+    MINICARGADOR_BOBCAT: 'MiniCargador BOBCAT -S 530-DBS 03',
+    INSTALACIONES_COMBUSTIBLE: 'Instalaciones de Combustible',
+    AE_N3: 'AE N3 YALE 4500 1978',
+    AE_N4: 'AE N4 YALE GDPT 30 1998',
+    AE_N6: 'AE N6 HYSTER H 60XM 1997',
+    AE_N7: 'AE N7 HYSTER H 60XM 1998',
+    AE_N11: 'AE N11 HYSTER H 90 FT 3117 2010',
+    AE_N18: 'AE N18 HYSTER H2,5UT 2021',
+    AE_N19: 'AE N19 HYSTER H2,5UT 2021'
+},
+
+BUG_REPORT_GROUP_SERVICIOS_AUXILIARES_INSTALACIONES: {
+    TANQUE: 'Tanque',
+    SURTIDOR: 'Surtidor',
+    CAÑERIAS: 'Cañerias'
+},
+
+*/
