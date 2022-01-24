@@ -1354,3 +1354,119 @@ export default {
   }
 
 }
+
+/*
+BUG_REPORT_SUBSECTORS_SECADO: {
+    SECADERO_TUNEL_PLANTA_2: 'Secadero Tunel Planta 2',
+    VENTILACION_INTERNA: 'Ventilación Interna',
+    VENTILACION_EXTERNA: 'Ventilación Externa'
+},
+
+BUG_REPORT_TEAM_SECADO_SECADERO_TUNEL_PLANTA_2: {
+    ESTRUCTURA: 'Estructura',
+    VAISALA: 'Vaisala',
+    TERMOCUPLA: 'Termocupla',
+    PRESOSTATOS: 'Presostatos',
+    QUEMADORES: 'Quemadores'
+},
+
+BUG_REPORT_GROUP_SECADO_SECADERO_TUNEL_PLANTA_2_ESTRUCTURA: {
+    PORTON_EXTERNO_ENTRADA: 'Portón Externo Entrada',
+    PORTON_INTERNO_ENTRADA: 'Portón Interno Entrada',
+    PORTON_INTERNO_SALIDA: 'Portón Interno Salida',
+    PORTON_EXTERNO_SALIDA: 'Portón Externo Salida'
+},
+
+BUG_REPORT_GROUP_SECADO_SECADERO_TUNEL_PLANTA_2_QUEMADORES: {
+    QUEMADOR_1: 'Quemador 1',
+    QUEMADOR_2: 'Quemador 2',
+    QUEMADOR_3: 'Quemador 3',
+    QUEMADOR_6: 'Quemador 6',
+    QUEMADOR_7: 'Quemador 7',
+    QUEMADOR_4_RECICLO: 'Quemador 4 Reciclo',
+    QUEMADOR_5_RECICLO: 'Quemador 5 Reciclo'
+},
+
+BUG_REPORT_TEAM_VENTILACION_EXTERNA: {
+    EXTRACCION_1: 'Extracción 1',
+    EXTRACCION_2: 'EXtracción 2',
+    EXTRACCION_3: 'Extracción 3',
+    EXTRACCION_4: 'Extracción 4',
+    EXTRACCION_5: 'Extracción 5',
+    EXTRACCION_6: 'Extracción 6',
+    EXTRACCION_7: 'Extracción 7',
+    RECICLO_2: 'Reciclo 2',
+    RECICLO_4: 'Reciclo 4',
+    INYECTOR_C1: 'Inyector C1',
+    INYECTOR_C2: 'Inyector C2',
+    INYECTOR_C3: 'Inyector C3',
+    CALEFACCION: 'Calefacción',
+    INMISION_1: 'Inmisión 1',
+    INMISION_2: 'Inmisión 2',
+    INMISION_3: 'Inmisión 3',
+    INMISION_6: 'Inmisión 6',
+    INMISION_7: 'Inmisión 7',
+    VALVULAS_AMBIENTE: 'Valvulas Ambiente',
+    VALVULAS_ADMISION: 'Valvulas Admisión'
+},
+
+BUG_REPORT_GROUP_VENTILACION_EXTERNA: {
+    EXTRUCTURA: 'Extructura',
+    MOTOR: 'Motor'
+},
+
+BUG_REPORT_TEAM_VENTILACION_INTERNA: {
+    CANAL_1: 'Canal 1',
+    CANAL_2: 'Canal 2',
+    CANAL_3: 'Canal 3',
+    CANAL_4: 'Canal 4',
+    CANAL_5: 'Canal 5',
+    CANAL_6: 'Canal 6',
+    CANAL_7: 'Canal 7',
+    CANAL_8: 'Canal 8',
+    CANAL_9: 'Canal 9'
+},
+
+BUG_REPORT_GROUP_VENTILACION_INTERNA: {
+    TRASLACION: 'Traslacion',
+    VENTOLAS: 'Ventolas'
+},
+
+
+
+*/
+
+/*BUG_REPORT_SUBSECTORS_MOVIMENTACION_SECADERO: {
+    EXTERNA: 'Externa',
+    TRASBORDO: 'Trasbordo'
+},
+
+BUG_REPORT_TEAM_MOVIMENTACION_SECADERO_EXTERNA: {
+    CADENA_1_PULMON_VERDE: 'Cadena 1 Pulmon de Verde',
+    CADENA_2_PULMON_VERDE: 'Cadena 2 Pulmon de Verde',
+    CADENA_PRE_CARGA_TRB_ENTRADA: 'Cadena pre Carga TRB Entrada',
+    CADENA_1_PULMON_SECO: 'Cadena 1 Pulmon de Seco',
+    CADENA_2_PULMON_SECO: 'Cadena 2 Pulmon de Seco',
+    CADENA_3_SECO: 'Cadena 3 Seco',
+    CADENA_CAMBIO_CARRO_APILADORA: 'Cadena Cambio Carro Apiladora',
+    CADENA_CARROS_VACIOS: 'Cadena Carros Vacios',
+    CADENA_POSICIONA_CARGA_VERDE: 'Cadena Posiciona Carga Verde'
+},
+
+BUG_REPORT_GROUP_MOVIMENTACION_SECADERO_EXTERNA: {
+    ESTRUCTURA: 'Estructura',
+    MOTORRED: 'Motorred'
+},
+
+BUG_REPORT_TEAM_MOVIMENTACION_SECADERO_TRASBORDO: {
+    TRB_ENTRADA: 'TRB Entrada',
+    TRB_SALIDA: 'TRB Salida'
+},
+
+BUG_REPORT_GROUP_MOVIMENTACION_SECADERO_TRASBORDO: {
+    EMPUJADOR_1: 'Empujador 1',
+    EMPUJADOR_2: 'Empujador 2',
+    CENTRALINA: 'Centralina',
+    ESTRUCTURA: 'Estructura'
+},
+*/ 
