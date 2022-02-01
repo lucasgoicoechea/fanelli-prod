@@ -241,6 +241,34 @@
         } else {
           if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA') { // Lista de Sub-Sectores, Sector Automatismo Corte y Carga
             return this.$constants.BUG_REPORT_SUBSECTORS_AUTOMATISMO_CORTE_Y_CARGA
+          } else {
+            if (this.bugReport.sector === 'SECADO') { // Lista de Sub-Sectores, Sector Secado
+              return this.$constants.BUG_REPORT_SUBSECTORS_SECADO
+            } else {
+              if (this.bugReport.sector === 'MOVIMENTACION_SECADERO') { // Lista de Sub-Sectores, Sector Movimentacion de Secadero
+                return this.$constants.BUG_REPORT_SUBSECTORS_MOVIMENTACION_SECADERO
+              } else {
+                if (this.bugReport.sector === 'APILADO') { // Lista de Sub-Sectores, Sector Apilado
+                  return this.$constants.BUG_REPORT_SUBSECTORS_APILADO
+                } else {
+                  if (this.bugReport.sector === 'HORNO') { // Lista de Sub-Sectores, Sector Horno
+                    return this.$constants.BUG_REPORT_SUBSECTORS_HORNO
+                  } else { // Lista de Sub-Sectores, Sector Movimentacion de Horno
+                    if (this.bugReport.sector === 'MOVIMENTACION_HORNO') {
+                      return this.$constants.BUG_REPORT_SUBSECTORS_MOVIMENTACION_HORNO
+                    } else { // Lista de Sub-Sectores, Sector Desapilado y Empaque
+                      if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE') {
+                        return this.$constants.BUG_REPORT_SUBSECTORS_DESAPILADO_EMPAQUE
+                      } else { // Lista de Sub-Sectores, Sector Servicios Auxiliares
+                        if (this.bugReport.sector === 'SERVICIOS_AUXILIARES') {
+                          return this.$constants.BUG_REPORT_SUBSECTORS_SERVICIOS_AUXILIARES
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
         return this.$constants.BUG_REPORT_SUBSECTORS
@@ -269,6 +297,126 @@
                     } else {
                       if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.sub_sector === 'MECANISMO_DE_CARGA') {
                         return this.$constants.BUG_REPORT_TEAM_AUTOMATISMO_CORTE_Y_CARGA_MECANISMO_DE_CARGA
+                      } else { // Lista de Equipos, Sector Secado
+                        if (this.bugReport.sector === 'SECADO' && this.bugReport.sub_sector === 'SECADERO_TUNEL_PLANTA_2') {
+                          return this.$constants.BUG_REPORT_TEAM_SECADO_SECADERO_TUNEL_PLANTA_2
+                        } else {
+                          if (this.bugReport.sector === 'SECADO' && this.bugReport.sub_sector === 'VENTILACION_INTERNA') {
+                            return this.$constants.BUG_REPORT_TEAM_SECADO_VENTILACION_INTERNA
+                          } else {
+                            if (this.bugReport.sector === 'SECADO' && this.bugReport.sub_sector === 'VENTILACION_EXTERNA') {
+                              return this.$constants.BUG_REPORT_TEAM_SECADO_VENTILACION_EXTERNA
+                            } else { // Lista de Equipos, Sector Movimentacion de Secadero
+                              if (this.bugReport.sector === 'MOVIMENTACION_SECADERO' && this.bugReport.sub_sector === 'EXTERNA') {
+                                return this.$constants.BUG_REPORT_TEAM_MOVIMENTACION_SECADERO_EXTERNA
+                              } else {
+                                if (this.bugReport.sector === 'MOVIMENTACION_SECADERO' && this.bugReport.sub_sector === 'TRASBORDO') {
+                                  return this.$constants.BUG_REPORT_TEAM_MOVIMENTACION_SECADERO_TRASBORDO
+                                } else { // Lista de Equipos, Sector Apilado
+                                  if (this.bugReport.sector === 'APILADO' && this.bugReport.sub_sector === 'MECANISMO_DESCARGA') {
+                                    return this.$constants.BUG_REPORT_TEAM_APILADO_MECANISMO_DESCARGA
+                                  } else {
+                                    if (this.bugReport.sector === 'APILADO' && this.bugReport.sub_sector === 'MESA_TRANSPORTE') {
+                                      return this.$constants.BUG_REPORT_TEAM_APILADO_MESA_TRANSPORTE
+                                    } else { // Lista de Equipos, Sector Horno
+                                      if (this.bugReport.sector === 'APILADO' && this.bugReport.sub_sector === 'PINZA') {
+                                        return this.$constants.BUG_REPORT_TEAM_APILADO_PINZA
+                                      } else {
+                                        if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'HORNO') {
+                                          return this.$constants.BUG_REPORT_TEAM_HORNO
+                                        } else {
+                                          if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'VAGONETAS') {
+                                            return this.$constants.BUG_REPORT_TEAM_HORNO_VAGONETAS
+                                          } else {
+                                            if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'VENTILACION') {
+                                              return this.$constants.BUG_REPORT_TEAM_HORNO_VENTILACION
+                                            } else {
+                                              if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'QUEMADORES') {
+                                                return this.$constants.BUG_REPORT_TEAM_HORNO_QUEMADORES
+                                              } else { // Lista de Equipos, Sector Movimentacion de Horno
+                                                if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.sub_sector === 'EXTERNA') {
+                                                  return this.$constants.BUG_REPORT_TEAM_MOVIMENTACION_HORNO_EXTERNA
+                                                } else {
+                                                  if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.sub_sector === 'TRASBORDO') {
+                                                    return this.$constants.BUG_REPORT_TEAM_MOVIMENTACION_HORNO_TRASBORDO
+                                                  } else { // Lista de Equipos, Sector Desapilado y Empaque
+                                                    if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'PINZA') {
+                                                      return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_PINZA
+                                                    } else {
+                                                      if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'LIMPIEZA_VAGONETAS') {
+                                                        return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_LIMPIEZA_VAGONETAS
+                                                      } else {
+                                                        if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'ENVOLVEDORA') {
+                                                          return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_ENVOLVEDORA
+                                                        } else {
+                                                          if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'PEGADO_FILM') {
+                                                            return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_PEGADO_FILM
+                                                          } else {
+                                                            if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'MESA_TRANSPORTE') {
+                                                              return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_MESA_TRANSPORTE
+                                                            } else {
+                                                              if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'FLEJADORA') {
+                                                                return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_FLEJADORA
+                                                              } else {
+                                                                if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'REMOJADORA') {
+                                                                  return this.$constants.BUG_REPORT_TEAM_DESAPILADO_EMPAQUE_REMOJADORA
+                                                                } else { // Lista de Equipos, Sector Servicios Auxiliares
+                                                                  if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'ENERGIA_ELECTRICA') {
+                                                                    return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_ENERGIA_ELECTRICA
+                                                                  } else {
+                                                                    if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'MOLDES') {
+                                                                      return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_MOLDES
+                                                                    } else {
+                                                                      if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'GAS') {
+                                                                        return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_GAS
+                                                                      } else {
+                                                                        if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'VAPOR') {
+                                                                          return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_VAPOR
+                                                                        } else {
+                                                                          if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'AIRE') {
+                                                                            return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_AIRE
+                                                                          } else {
+                                                                            if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'AUTOELEVADORES_PRODUCCION') {
+                                                                              return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_AUTOELEVADORES_PRODUCCION
+                                                                            } else {
+                                                                              if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'MAQ_LIMPIEZA') {
+                                                                                return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_MAQ_LIMPIEZA
+                                                                              } else {
+                                                                                if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'GENERADORES') {
+                                                                                  return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_GENERADORES
+                                                                                } else {
+                                                                                  if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'OTROS_SERVICIOS') {
+                                                                                    return this.$constants.BUG_REPORT_TEAM_SERVICIOS_AUXILIARES_OTROS_SERVICIOS
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -351,6 +499,138 @@
                                                     } else {
                                                       if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.equipo === 'MECANISMO_DE_CARGA') {
                                                         return this.$constants.BUG_REPORT_GROUPS_AUTOMATISMO_DE_CORTE_Y_CARGA_MECANISMO_DE_CARGA
+                                                      } else { // Lista de Grupos, Sector Secado
+                                                        if (this.bugReport.sector === 'SECADO' && this.bugReport.equipo === 'ESTRUCTURA') {
+                                                          return this.$constants.BUG_REPORT_GROUPS_SECADO_SECADERO_TUNEL_PLANTA_2_ESTRUCTURA
+                                                        } else {
+                                                          if (this.bugReport.sector === 'SECADO' && this.bugReport.equipo === 'QUEMADORES') {
+                                                            return this.$constants.BUG_REPORT_GROUPS_SECADO_SECADERO_TUNEL_PLANTA_2_QUEMADORES
+                                                          } else {
+                                                            if (this.bugReport.sector === 'SECADO' && this.bugReport.equipo === 'VAISALA' || this.bugReport.equipo === 'TERMOCUPLA' || this.bugReport.equipo === 'PRESOSTATOS') {
+                                                              return '-'
+                                                            } else {
+                                                              if (this.bugReport.sector === 'SECADO' && this.bugReport.sub_sector === 'VENTILACION_INTERNA') {
+                                                                return this.$constants.BUG_REPORT_GROUPS_SECADO_VENTILACION_INTERNA
+                                                              } else {
+                                                                if (this.bugReport.sector === 'SECADO' && this.bugReport.sub_sector === 'VENTILACION_EXTERNA') {
+                                                                  return this.$constants.BUG_REPORT_GROUPS_SECADO_VENTILACION_EXTERNA
+                                                                } else { // Lista de Grupos, Sector Movimentacion Secadero
+                                                                  if (this.bugReport.sector === 'MOVIMENTACION_SECADERO' && this.bugReport.sub_sector === 'EXTERNA') {
+                                                                    return this.$constants.BUG_REPORT_GROUPS_MOVIMENTACION_SECADERO_EXTERNA
+                                                                  } else {
+                                                                    if (this.bugReport.sector === 'MOVIMENTACION_SECADERO' && this.bugReport.sub_sector === 'TRASBORDO') {
+                                                                      return this.$constants.BUG_REPORT_GROUPS_MOVIMENTACION_SECADERO_TRASBORDO
+                                                                    } else { // Lista de Grupos, Sector Apilado
+                                                                      if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'RODILLOS_DESCARGA') {
+                                                                        return this.$constants.BUG_REPORT_GROUPS_APILADO_MECANISMO_DESCARGA_RODILLOS_DESCARGA
+                                                                      } else {
+                                                                        if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'CINTA_MOVIL') {
+                                                                          return this.$constants.BUG_REPORT_GROUPS_APILADO_MECANISMO_DESCARGA_CINTA_MOVIL
+                                                                        } else {
+                                                                          if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'RODILLOS_MOVILES') {
+                                                                            return this.$constants.BUG_REPORT_GROUPS_APILADO_MECANISMO_DESCARGA_RODILLOS_MOVILES
+                                                                          } else {
+                                                                            if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z1') {
+                                                                              return this.$constants.BUG_REPORT_GROUPS_APILADO_MESA_TRANSPORTE_Z1
+                                                                            } else {
+                                                                              if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z2') {
+                                                                                return this.$constants.BUG_REPORT_GROUPS_APILADO_MESA_TRANSPORTE_Z2
+                                                                              } else {
+                                                                                if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z3') {
+                                                                                  return this.$constants.BUG_REPORT_GROUPS_APILADO_MESA_TRANSPORTE_Z3
+                                                                                } else {
+                                                                                  if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z4') {
+                                                                                    return this.$constants.BUG_REPORT_GROUPS_APILADO_MESA_TRANSPORTE_Z4
+                                                                                  } else {
+                                                                                    if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z5') {
+                                                                                      return this.$constants.BUG_REPORT_GROUPS_APILADO_MESA_TRANSPORTE_Z5
+                                                                                    } else {
+                                                                                      if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z6') {
+                                                                                        return this.$constants.BUG_REPORT_GROUPS_APILADO_MESA_TRANSPORTE_Z6
+                                                                                      } else {
+                                                                                        if (this.bugReport.sector === 'APILADO' && this.bugReport.sub_sector === 'PINZA') {
+                                                                                          return this.$constants.BUG_REPORT_GROUPS_APILADO_PINZA
+                                                                                        } else { // Lista de Grupos, Sector Horno
+                                                                                          if (this.bugReport.sector === 'HORNO' && this.bugReport.equipo === 'PORTONES') {
+                                                                                            return this.$constants.BUG_REPORT_GROUPS_HORNO_PORTONES
+                                                                                          } else {
+                                                                                            if (this.bugReport.sector === 'HORNO' && this.bugReport.equipo === 'TUBERIAS_CONDUCTOS' || this.bugReport.equipo === 'VALVULAS' || this.bugReport.equipo === 'RAMPA_GAS') {
+                                                                                              return '-'
+                                                                                            } else {
+                                                                                              if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'VAGONETAS') {
+                                                                                                return '-'
+                                                                                              } else {
+                                                                                                if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'VENTILACION') {
+                                                                                                  return this.$constants.BUG_REPORT_GROUPS_HORNO_VENTILACION
+                                                                                                } else {
+                                                                                                  if (this.bugReport.sector === 'HORNO' && this.bugReport.sub_sector === 'QUEMADORES') {
+                                                                                                    return '-'
+                                                                                                  } else { // Lista de Grupos, Sector Movimentacion de Horno
+                                                                                                    if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.equipo === 'ESLINGA_COCIDO' || this.bugReport.equipo === 'ESLINGA_VACIAS' || this.bugReport.equipo === 'ESLINGA_SECO') {
+                                                                                                      return this.$constants.BUG_REPORT_GROUPS_MOVIMENTACION_HORNO_EXTERNA
+                                                                                                    } else {
+                                                                                                      if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.equipo === 'FRENOS_BALLESTA' || this.bugReport.equipo === 'EMPUJADORES_BLOQUEADORES') {
+                                                                                                        return '-'
+                                                                                                      } else {
+                                                                                                        if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.sub_sector === 'TRASBORDO') {
+                                                                                                          return this.$constants.BUG_REPORT_GROUPS_MOVIMENTACION_HORNO_TRASBORDO
+                                                                                                        } else { // Lista de Grupos, Sector Desapilado y Empaque
+                                                                                                          if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.equipo === 'PINZA_1') {
+                                                                                                            return this.$constants.BUG_REPORT_GROUPS_DESAPILADO_EMPAQUE_PINZA_1
+                                                                                                          } else {
+                                                                                                            if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.equipo === 'PINZA_COMPOSICION' || this.bugReport.sub_sector === 'REMOJADORA') {
+                                                                                                              return this.$constants.BUG_REPORT_GROUPS_DESAPILADO_EMPAQUE_PINZA_COMPOSICION_Y_REMOJADORA
+                                                                                                            } else {
+                                                                                                              if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'LIMPIEZA_VAGONETAS' || this.bugReport.sub_sector === 'PEGADO_FILM' || this.bugReport.sub_sector === 'FLEJADORA') {
+                                                                                                                return '-'
+                                                                                                              } else {
+                                                                                                                if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'ENVOLVEDORA') {
+                                                                                                                  return this.$constants.BUG_REPORT_GROUPS_DESAPILADO_EMPAQUE_ENVOLVEDORA
+                                                                                                                } else {
+                                                                                                                  if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'MESA_TRANSPORTE') {
+                                                                                                                    return this.$constants.BUG_REPORT_GROUPS_DESAPILADO_EMPAQUE_MESA_TRANSPORTE
+                                                                                                                  } else { // Lista de Grupos, Sector Servicios Auxiliares
+                                                                                                                    if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector !== 'AIRE' && this.bugReport.sub_sector !== 'OTROS_SERVICIOS') {
+                                                                                                                      return '-'
+                                                                                                                    } else {
+                                                                                                                      if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'AIRE') {
+                                                                                                                        return this.$constants.BUG_REPORT_GROUPS_SERVICIOS_AUXILIARES_AIRE
+                                                                                                                      } else {
+                                                                                                                        if (this.bugReport.sector === 'SERVICIOS_AUXILIARES' && this.bugReport.sub_sector === 'OTROS_SERVICIOS') {
+                                                                                                                          return this.$constants.BUG_REPORT_GROUPS_SERVICIOS_AUXILIARES_OTROS_SERVICIOS_INSTALACIONES
+                                                                                                                        }
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                }
+                                                                                                              }
+                                                                                                            }
+                                                                                                          }
+                                                                                                        }
+                                                                                                      }
+                                                                                                    }
+                                                                                                  }
+                                                                                                }
+                                                                                              }
+                                                                                            }
+                                                                                          }
+                                                                                        }
+                                                                                      }
+                                                                                    }
+                                                                                  }
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
                                                       }
                                                     }
                                                   }
@@ -404,6 +684,118 @@
                       } else {
                         if (this.bugReport.sector === 'AUTOMATISMO_CORTE_Y_CARGA' && this.bugReport.group === 'RODILLOS_DESVIADORES_750' || this.bugReport.group === 'RODILLOS_DESVIADORES_850') {
                           return this.$constants.BUG_REPORT_PARTS_AUTOMATISMO_CORTE_Y_CARGA_CORTADORA_RODILLOS_DESVIADORES_750_Y_850
+                        } else { // Lista de Partes, Sector Secado
+                          if (this.bugReport.sector === 'SECADO') {
+                            return '-'
+                          } else { // Lista de Partes, Sector Movimentacion de Secadero
+                            if (this.bugReport.sector === 'MOVIMENTACION_SECADERO') {
+                              return '-'
+                            } else { // Lista de Partes, Sector Apilado
+                              if (this.bugReport.sector === 'APILADO' && this.bugReport.sub_sector === 'MECANISMO_DESCARGA') {
+                                return '-'
+                              } else {
+                                if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z1_RODILLOS_1') {
+                                  return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z1_RODILLOS_1
+                                } else {
+                                  if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z1_CINTA_1') {
+                                    return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z1_CINTA_1
+                                  } else {
+                                    if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z1_RODILLOS_2') {
+                                      return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z1_RODILLOS_2
+                                    } else {
+                                      if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z1_RODILLOS_1_Z1_A_Z6') {
+                                        return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z1_RODILLOS_1_Z1_A_Z6
+                                      } else {
+                                        if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z1_RODILLOS_2_Z1_A_Z6') {
+                                          return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z1_RODILLOS_2_Z1_A_Z6
+                                        } else {
+                                          if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z1_BARRERA_Z1_A_Z2' || this.bugReport.group === 'Z1_BARRERA_Z1_A_Z6') {
+                                            return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z1_BARRERA_Z1_A_Z2_Y_Z1_A_Z6
+                                          } else {
+                                            if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z2_MESA_1' || this.bugReport.group === 'Z2_MESA_2' || this.bugReport.group === 'Z2_MESA_3' || this.bugReport.group === 'Z2_MESA_4' || this.bugReport.group === 'Z2_MESA_5' || this.bugReport.group === 'Z2_MESA_6' || this.bugReport.group === 'Z2_BARRERA_FRONTAL') {
+                                              return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z2_MESA_Y_BARRERA
+                                            } else {
+                                              if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z2_RODILLOS_DESV_A_25') {
+                                                return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z2_RODILLOS
+                                              } else {
+                                                if (this.bugReport.sector === 'APILADO' && this.bugReport.equipo === 'Z3') {
+                                                  return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z3
+                                                } else {
+                                                  if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z4_CINTA_1' || this.bugReport.group === 'Z4_CINTA_2' || this.bugReport.group === 'Z4_CINTA_PROGRAMACION') {
+                                                    return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z4_CINTA
+                                                  } else {
+                                                    if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z4_RODILLO_COMPACTADOR') {
+                                                      return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z4_RODILLO
+                                                    } else {
+                                                      if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z5_CINTA_1') {
+                                                        return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z5_CINTA_1
+                                                      } else {
+                                                        if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z5_CINTA_2' || this.bugReport.group === 'Z5_CINTA_PROGRAMACION') {
+                                                          return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z5_CINTA_2_Y_PROGRAMACION
+                                                        } else {
+                                                          if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z5_RODILLO_COMPACTADOR') {
+                                                            return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z5_RODILLO_COMPACTADOR
+                                                          } else {
+                                                            if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'CINTA_CARRELO') {
+                                                              return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z5_CINTA_CARRELO
+                                                            } else {
+                                                              if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z6_MESA_1' || this.bugReport.group === 'Z6_MESA_2' || this.bugReport.group === 'Z6_MESA_3' || this.bugReport.group === 'Z6_MESA_4' || this.bugReport.group === 'Z6_MESA_5' || this.bugReport.group === 'Z6_MESA_6') {
+                                                                return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z6_MESA
+                                                              } else {
+                                                                if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z6_BARRERA_FRONTAL') {
+                                                                  return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z6_BARRERA_FRONTAL
+                                                                } else {
+                                                                  if (this.bugReport.sector === 'APILADO' && this.bugReport.group === 'Z6_RODILLO_DESV_Z4') {
+                                                                    return this.$constants.BUG_REPORT_PARTS_APILADO_MESA_TRANSPORTE_Z6_RODILLO_DESV_Z4
+                                                                  } else {
+                                                                    if (this.bugReport.sector === 'APILADO' && this.bugReport.sub_sector === 'PINZA') {
+                                                                      return this.$constants.BUG_REPORT_PARTS_APILADO_PINZA
+                                                                    } else { // Lista de Partes, Sector Horno
+                                                                      if (this.bugReport.sector === 'HORNO') {
+                                                                        return '-'
+                                                                      } else { // Lista de Partes, Sector Movimentacion de Horno
+                                                                        if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.sub_sector === 'EXTERNA') {
+                                                                          return '-'
+                                                                        } else {
+                                                                          if (this.bugReport.sector === 'MOVIMENTACION_HORNO' && this.bugReport.sub_sector === 'TRASBORDO') {
+                                                                            return this.$constants.BUG_REPORT_PARTS_MOVIMENTACION_HORNO_TRASBORDO
+                                                                          } else { // Lista de Partes, Sector Desapilado y Empaque
+                                                                            if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector !== 'MESA_TRANSPORTE') {
+                                                                              return '-'
+                                                                            } else {
+                                                                              if (this.bugReport.sector === 'DESAPILADO_Y_EMPAQUE' && this.bugReport.sub_sector === 'MESA_TRANSPORTE') {
+                                                                                return this.$constants.BUG_REPORT_PARTS_DESAPILADO_EMPAQUE_MESA_TRANSPORTE
+                                                                              } else { // Lista de Partes, Sector Servicios Auxiliares
+                                                                                if (this.bugReport.sector === 'SERVICIOS_AUXILIARES') {
+                                                                                  return '-'
+                                                                                }
+                                                                              }
+                                                                            }
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     }
