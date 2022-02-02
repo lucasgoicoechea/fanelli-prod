@@ -1045,9 +1045,17 @@ export default {
   },
 
   BUG_REPORT_PRIORIDAD: {
-    PRIORIDAD_1: 'Prioridad 1',
-    PRIORIDAD_2: 'Prioridad 2',
-    PRIORIDAD_3: 'Prioridad 3'
+    SOLUCIONADO: 'Solucionado',
+    SOLUCION_TEMPORAL: 'Solución Temporal',
+    NO_SOLUCIONADO: 'No Solucionado'
+  },
+
+  BUG_REPORT_PRIORIDAD_NO_SOLUCIONADO: {
+    COMPLEJIDAD: 'Complejidad',
+    PARADA: 'Parada',
+    TIEMPO: 'Tiempo',
+    PERSONAL: 'Personal',
+    FALTA_RECURSOS: 'Falta de Recuersos'
   },
 // LINEA 2
 // SECTOR PRODUCCION

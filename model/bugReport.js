@@ -31,6 +31,9 @@ const BugReportSchema = new Schema({
     prioridad: {
         type: String
     },
+    inconveniente: {
+        type: String
+    },
     resume: {
         type: String
     } 

@@ -26,9 +26,9 @@ const controller = {
       group: req.body.bugReport.group,
       part: req.body.bugReport.part,
       prioridad: req.body.bugReport.prioridad,
+      inconveniente: req.body.bugReport.inconveniente,
       resume: req.body.bugReport.resume
     }
-    console.log('Hola Mundo')
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
   })

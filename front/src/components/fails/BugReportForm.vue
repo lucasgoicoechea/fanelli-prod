@@ -90,6 +90,19 @@
           </select>
         </div>
         </div>
+        
+        <div>
+        <div class="col-xs-12">
+          <h3>Selección de Inconveniente</h3>
+          <!--<sub-part-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></sub-part-selector>-->
+            <select v-model="bugReport.inconveniente" id="inconveniente">
+              <option v-for="(label, value) in inconvenienteList"  :key="value" :value="value"> {{label}}</option>
+          </select>
+        </div>
+        </div>
 
         <div class="col-xs-12">
           <h3>Resumen/Fallas</h3>
@@ -188,6 +201,7 @@
           group: this.editable.group || '',
           part: this.editable.part || '',
           prioridad: this.editable.prioridad || '',
+          inconveniente: this.editable.inconveniente || '',
           resume: this.editable.resume || ''
         }
       },
@@ -833,6 +847,19 @@
                   }
                 }
               }
+            }
+          }
+        }
+      },
+      inconvenienteList () {
+        if (this.bugReport.prioridad === 'SOLUCIONADO') {
+          return '-'
+        } else {
+          if (this.bugReport.prioridad === 'SOLUCION_TEMPORAL') {
+            return '-'
+          } else {
+            if (this.bugReport.prioridad === 'NO_SOLUCIONADO') {
+              return this.$constants.BUG_REPORT_PRIORIDAD_NO_SOLUCIONADO
             }
           }
         }
