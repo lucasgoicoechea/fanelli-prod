@@ -1044,9 +1044,15 @@ export default {
     T4: 'T4 (13)'
   },
 
+  BUG_REPORT_PRIORIDAD: {
+    PRIORIDAD_1: 'Prioridad 1',
+    PRIORIDAD_2: 'Prioridad 2',
+    PRIORIDAD_3: 'Prioridad 3'
+  },
+// LINEA 2
 // SECTOR PRODUCCION
 
-  BUG_REPORT_SECTORS1: {
+  BUG_REPORT_SECTORS_LINE_2: {
     PRODUCCION: 'Producción',
     AUTOMATISMO_CORTE_Y_CARGA: 'Automatismo de Corte y Carga',
     SECADO: 'Secado',
@@ -1182,7 +1188,9 @@ export default {
     CINTA_DESCARTE_VERDE_7_PLANTA_2: 'Cinta Descarte Verde 7 Planta 2',
     CINTA_DESCARTE_VERDE_8_PLANTA_2: 'Cinta Descarte Verde 8 Planta 2',
     CINTA_DESCARTE_SECO_1_PLANTA_2: 'Cinta Descarte Seco 1 Planta 2',
-    CINTA_DESCARTE_SECO_2_PLANTA_2: 'Cinta Descarte Seco 2 Planta 2'
+    CINTA_DESCARTE_SECO_2_PLANTA_2: 'Cinta Descarte Seco 2 Planta 2',
+    CINTA_DESCARTE_SECO: 'Cinta Descarte Seco',
+    CINTA_DESCARTE_VERDE: 'Cinta Descarte Verde'
   },
 
   BUG_REPORT_GROUPS_PRODUCCION_TRANSPORTE: {
@@ -1973,6 +1981,263 @@ export default {
     TANQUE: 'Tanque',
     SURTIDOR: 'Surtidor',
     CAÑERIAS: 'Cañerias'
+  },
+  // LINEA 0
+  BUG_REPORT_SECTORS_LINE_0: {
+    PRELABORACION: 'Prelaboracion',
+    SILO: 'Silo',
+    PRODUCCION: 'Produccion',
+    MOVIMENTACION_HORNO: 'Movimentacion de Horno',
+    PLAYA_EXPEDICION: 'Playa Expedicion',
+    INSTALACIONES_EDIFICIOS: 'Instalaciones y Edificios',
+    SERVICIOS_AUXILIARES: 'Servicios Auxiliares',
+    PREPARACION_MAT_PRIMAS: 'Preparacion de Materias Primas'
+  },
+  // SECTOR INSTALACIONES Y EDIFICIOS
+  BUG_REPORT_SUBSECTORS_INSTALACIONES_EDIFICIOS: {
+    INSTALACIONES: 'Instalaciones'
+  },
+
+  BUG_REPORT_TEAM_INSTALACIONES_EDIFICIOS: {
+    EDIFICIOS: 'Edificios',
+    INSTALACIONES_ELECTRICAS: 'Instalaciones electrias',
+    SISTEMA_CONTRA_INCENDIO: 'Sistema Contra Incendio'
+  },
+
+  BUG_REPORT_SUBSECTORS_PLAYA_EXPEDICION: {
+    MANTENIMIENTO_PLAYA: 'Mantenimiento Playa',
+    AUTOELEVADORES_PLAYA: 'Autoelevadores Playa'
+  },
+
+  BUG_REPORT_TEAM_PLAYA_EXPEDICION_MANTENIMIENTO_PLAYA: {
+    PLAYAS: 'Playas'
+  },
+
+  BUG_REPORT_TEAM_PLAYA_EXPEDICION_AUTOELEVADORES_PLAYA: {
+    AE_N10: 'AE N10 HYSTER H 90 FT 3115 2010',
+    AE_N12: 'AE N12 HYSTER 80FT 2424 2013',
+    AE_N13: 'AE N13 HYSTER 80FT 2418 2013',
+    AE_N16: 'AE N16 HYSTER H80 FT 2805 2016',
+    AE_N117: 'AE N17 HYSTER H80 FT 2808 2016'
+  },
+
+  BUG_REPORT_SUBSECTORS_PREPARACION_MAT_PRIMAS: {
+    PREPARACION: 'Preparacion'
+  },
+
+  BUG_REPORT_TEAM_PREPARACION_MAT_PRIMAS: {
+    PALA_N5: 'PALA N5 CAT 950 H 2008-1147 MI',
+    PALA_N6: 'PALA N6 CAT 980H 2008-JM3262',
+    PALA_N7: 'PALA N7 CAT 966 H 2012-1148',
+    PALA_N8: 'PALA N8 CAT 966H 2015 BS0289'
   }
 
 }
+
+/*
+
+BUG_REPORT_SUBSECTORS_SILO: {
+    TRANSPORTE: 'Transporte',
+    DRAGA: 'Draga'
+},
+
+BUG_REPORT_TEAM_SILO_TRANSPORTE: {
+    SILO_2_STACKER_1: 'Silo 2 Stacker 1',
+    SILO_2_STACKER_2: 'Silo 2 Stacker 2',
+},
+
+BUG_REPORT_GROUP_SILO_TRANSPORTE: {
+    CINTA_MOVIL: 'Cinta Movil',
+    CINTA_FIJA: 'Cinta Fija',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_PART_SILO_TRANSPORTE_MOVIL: {
+    MOTORRED_GIRO:' Motorred Giro',
+    MOTORRED_TRASLACION: 'Motorred Traslacion',
+    BANDA: 'Banda',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_PART_SILO_TRANSPORTE_FIJA: {
+    MOTORRED_GIRO:' Motorred Giro',
+    BANDA: 'Banda',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_TEAM_SILO_DRAGA: {
+    SILO_2_EXCAVADOR: 'Silo 2 Excavador'
+},
+
+BUG_REPORT_GROUP_SILO_DRAGA: {
+    CINTA_MOVIL: 'Cinta Movil',
+    CINTA_FIJA: 'Cinta Fija',
+    PUENTE: 'Puente',
+    CARRO_BRAZO: 'Carro Brazo'
+},
+
+BUG_REPORT_PARTS_SILO_DRAGA_PUENTE_CARRO:{
+    MOTORRED_TRASLACION: 'Motorred Traslacion',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_PARTS_SILO_DRAGA_BRAZO:{
+    MOTORRED_ELEVACION: 'Motorred Elevacion',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_PARTS_SILO_DRAGA_FIJA: {
+    MOTORRED_GIRO:' Motorred Giro',
+    BANDA: 'Banda',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_PARTS_SILO_DRAGA_MOVIL: {
+    MOTORRED_GIRO:' Motorred Giro',
+    MOTORRED_TRASLACION: 'Motorred Traslacion',
+    BANDA: 'Banda',
+    ESTRUCTURA: 'Estructura'
+},
+
+*/
+
+/*
+
+BUG_REPORT_SUBSECTORS_PRELABORACION: {
+    ADITIVO: 'Aditivo',
+    PREPARACION: 'Preparacion',
+    TRANSPORTE: 'Transporte',
+    BALANZA: 'Balanza',
+    MOLIENDA_CHAMOTE: 'Molienda Chamote'
+},
+
+BUG_REPORT_TEAM_PRELABORACION_ADITIVO: {
+    DOSIFICADOR_CASCARA_1: 'Dosificador de Cascara 1',
+    DOSIFICADOR_CASCARA_2: 'Dosificador de Cascara 2',
+    DOSIFICADOR_CASCARA_3: 'Dosificador de Cascara 3',
+    DOSIFICADOR_CASCARA_4: 'Dosificador de Cascara 4',
+    DOSIFICADOR_ARENA_1: 'Dosificador de Arena 1',
+    DOSIFICADOR_ARENA_2: 'Dosificador de Arena 2'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_ADITIVO: {
+    MOTOR_MOTORRED: 'Motor/Motorred',
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda'
+},
+
+BUG_REPORT_TEAM_PRELABORACION_PREPARACION: {
+    CAJON_1_MP1: 'Cajon 1 Preelaboracion Linea MP 1',
+    CAJON_1_MP2: 'Cajon 1 Preelaboracion Linea MP 2',
+    CAJON_1_MP3: 'Cajon 1 Preelaboracion Linea MP 3',
+    CAJON_1_MP4: 'Cajon 1 Preelaboracion Linea MP 4',
+    CAJON_1_MP5: 'Cajon 1 Preelaboracion Linea MP 5',
+    ROTOFILTRO_1: 'Rotofiltro Preelaboracion L 1 MP',
+    ROTOFILTRO_2: 'Rotofiltro Preelaboracion L 2 MP',
+    ROTOFILTRO_3: 'Rotofiltro Preelaboracion L 3 MP',
+    ROTOFILTRO_4: 'Rotofiltro Preelaboracion L 4 MP',
+    ROTOFILTRO_5: 'Rotofiltro Preelaboracion L 5 MP',
+    MEZCLADOR_1: 'Mezclador 6 Preelab. L 1 MP',
+    MEZCLADOR_2: 'Mezclador 6 Preelab. L 2 MP',
+    MEZCLADOR_3: 'Mezclador BEDESCHI 4500 L 3 MP',
+    MEZCLADOR_4: 'Mezclador BEDESCHI 4500 L 4 MP',
+    MEZCLADOR_5: 'Mezclador BEDESCHI 4500 L 5 MP',
+    TRITURADOR: 'Triturador',
+    DIVISOR_TIERRA: 'Divisor de Tierra'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_PREPARACION_CAJON: {
+    MOTOR_MOTORRED: 'Motor/Motorred',
+    MOTOR_MOTORRED_ASPAS: 'Motor/Motorred Aspas',
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_PREPARACION_ROTOFILTRO: {
+    MOTOR_MOTORRED: 'Motor/Motorred',
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_PREPARACION_MEZCLADOR_TRITURADOR: {
+    MOTOR_MOTORRED: 'Motor/Motorred',
+    ESTRUCTURA: 'Estructura',
+    CAJA_REDUCTORA: 'Caja Reductora'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_PREPARACION_DIVISOR: {
+    ESTRUCTURA: 'Estructura'
+},
+
+BUG_REPORT_TEAM_PRELABORACION_BALANZA: {
+    BALANZA_1: 'Balanza 1',
+    BALANZA_2: 'Balanza 2'
+},
+
+BUG_REPORT_TEAM_PRELABORACION_MOLIENDA: {
+    MOLIENDA_CHAMOTE: 'MoliendA Chamote'
+},
+
+BUG_REPORT_TEAM_PRELABORACION_TRANSPORTE: {
+    CINTAS_PREELABORACION: 'Cintas Preelaboracion',
+    CINTAS_1: 'Cintas 1',
+    CINTA_DESCARTE_ROTOFILTRO_5: 'Cinta Descarte Rotofiltro 5',
+    CINTA_DESCARTE_ROTOFILTRO_4: 'Cinta Descarte Rotofiltro 4',
+    CINTA_DESCARTE_5: 'Cinta Descarte 5',
+    CINTA_DESCARTE_4: 'Cinta Descarte 4',
+    CINTA_DESCARTE_3: 'Cinta Descarte 3',
+    CINTA_DESCARTE_2: 'Cinta Descarte 2',
+    CINTA_DESCARTE_1: 'Cinta Descarte 1',
+    CINTA_9: 'Cinta 9',
+    CINTA_8: 'Cinta 8',
+    CINTA_7: 'Cinta 7',
+    CINTA_6_16: 'Cinta 6.16',
+    CINTA_6_15: 'Cinta 6.15',
+    CINTA_6_14: 'Cinta 6.14',
+    CINTA_6_13: 'Cinta 6.13',
+    CINTA_6_12: 'Cinta 6.12',
+    CINTA_6_11: 'Cinta 6.11',
+    CINTA_6_10: 'Cinta 6.10',
+    CINTA_5_29: 'Cinta 5.29',
+    CINTA_5_28: 'Cinta 5.28',
+    CINTA_5_27: 'Cinta 5.27',
+    CINTA_5_26: 'Cinta 5.26',
+    CINTA_5_25: 'Cinta 5.25',
+    CINTA_5_24: 'Cinta 5.24',
+    CINTA_5_21: 'Cinta 5.21',
+    CINTA_20: 'Cinta 20',
+    CINTA_5_10: 'Cinta 5.10',
+    CINTA_5_11: 'Cinta 5.11',
+    CINTA_5_12: 'Cinta 5.12',
+    CINTA_5_13: 'Cinta 5.13',
+    CINTA_5_14: 'Cinta 5.14',
+    CINTA_5_15: 'Cinta 5.15',
+    CINTA_5_16: 'Cinta 5.16',
+    CINTA_5_17: 'Cinta 5.17',
+    CINTA_5_18: 'Cinta 5.18',
+    CINTA_5_19: 'Cinta 5.19',
+    CINTA_5_20: 'Cinta 5.20',
+    CINTA_5: 'Cinta 5',
+    CINTA_4: 'Cinta 4',
+    CINTA_3: 'Cinta 3',
+    CINTA_24: 'Cinta 24',
+    CINTA_23: 'Cinta 23',
+    CINTA_2_10: 'Cinta 2.10',
+    CINTA_2: 'Cinta 2',
+    CINTA_14: 'Cinta 14',
+    CINTA_13: 'Cinta 13',
+    CINTA_12: 'Cinta 12',
+    CINTA_11: 'Cinta 11',
+    CINTA_10: 'Cinta 10'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_TRANSPORTE: {
+    MOTOR_MOTORRED: 'Motor/Motorred',
+    ESTRUCTURA: 'Estructura',
+    BANDA: 'Banda'
+},
+
+BUG_REPORT_GROUP_PRELABORACION_TRANSPORTE_CINTAS_PREELABORACION: {
+    MOTOR_MOTORRED: 'Motor/Motorred'
+},
+
+*/

@@ -25,6 +25,7 @@ const controller = {
       equipo: req.body.bugReport.equipo,
       group: req.body.bugReport.group,
       part: req.body.bugReport.part,
+      prioridad: req.body.bugReport.prioridad,
       resume: req.body.bugReport.resume
     }
     console.log('Hola Mundo')

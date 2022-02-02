@@ -28,6 +28,9 @@ const BugReportSchema = new Schema({
     part: {
         type: String
     },
+    prioridad: {
+        type: String
+    },
     resume: {
         type: String
     } 

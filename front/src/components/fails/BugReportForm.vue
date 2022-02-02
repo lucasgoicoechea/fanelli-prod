@@ -21,7 +21,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></sector-selector>-->
             <select v-model="bugReport.sector" id="sector">
-              <option v-for="(label, value) in $constants.BUG_REPORT_SECTORS" :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in sectorList" :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -74,6 +74,19 @@
             :preSelection="editable.collaborators"></sub-part-selector>-->
             <select v-model="bugReport.part" id="part">
               <option v-for="(label, value) in partList"  :key="value" :value="value"> {{label}}</option>
+          </select>
+        </div>
+        </div>
+        
+        <div>
+        <div class="col-xs-12">
+          <h3>Selección de Prioridad</h3>
+          <!--<sub-part-selector
+            :multipleSelection="true"
+             typeList="full"
+            :preSelection="editable.collaborators"></sub-part-selector>-->
+            <select v-model="bugReport.prioridad" id="prioridad">
+              <option v-for="(label, value) in $constants.BUG_REPORT_PRIORIDAD"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -174,6 +187,7 @@
           equipo: this.editable.equipo || '',
           group: this.editable.group || '',
           part: this.editable.part || '',
+          prioridad: this.editable.prioridad || '',
           resume: this.editable.resume || ''
         }
       },
@@ -234,6 +248,23 @@
     computed: {
       frecuency () {
         return this.isFrecuency
+      },
+      sectorList () { // Lista de Sectores, Linea 0
+        if (this.bugReport.line === 'LINE_0') {
+          return this.$constants.BUG_REPORT_SECTORS_LINE_0
+        } else { // Lista de Sectores, Linea 1
+          if (this.bugReport.line === 'LINE_1') {
+            return '-'
+          } else { // Lista de Sectores, Linea 2
+            if (this.bugReport.line === 'LINE_2') {
+              return this.$constants.BUG_REPORT_SECTORS_LINE_2
+            } else { // Lista de Sectores, Linea 3
+              if (this.bugReport.line === 'LINE_3') {
+                return '-'
+              }
+            }
+          }
+        }
       },
       subSectorList () {
         if (this.bugReport.sector === 'PRODUCCION') { // Lista de Sub-Sectores, Sector Produccion
