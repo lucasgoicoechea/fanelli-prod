@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
   <div class="epp-history-list container-fluid">
+=======
+  <div class="bugReport-history-list container-fluid">
+>>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
 
     <div class="spinner-container">
       <spinner
@@ -8,6 +12,7 @@
         loadingMessage="Cargando solicitudes pendientes..."></spinner>
     </div>
 
+<<<<<<< HEAD
     <div class="empty" v-show="!loadingActiveRequest && getActivedAndReceivedRequests.length === 0">
       <p>No hay solicitudes Pendiente de aprobación</p>
     </div>
@@ -28,6 +33,32 @@
       :key="request._id"
       :request="request">
     </epp-card>
+=======
+    <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
+      <p>No hay solicitudes Pendiente de aprobación</p>
+    </div>
+
+    <bugReport-card
+      v-for="request in getActivedAndReceivedRequests"
+      :key="request._id"
+      :request="request"></bugReport-card>
+
+    <hr>
+
+    <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
+      <p>No hay solicitudes Activas</p>
+    </div>
+
+    <!--<bugReport-card
+      v-for="request in bugReportList"
+      :key="request._id"
+      :request="request">
+    </bugReport-card>-->
+    {{bugReportList.length}}
+    <div v-for="request in bugReportList"
+      :key="request._id"
+      :request="request"></div>
+>>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
   </div>
 </template>
 
@@ -41,11 +72,19 @@
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import SpinnerLittle from '@/components/Spinner.vue'
+<<<<<<< HEAD
   import EppCard from '@/components/epp/EPPCard'
 
   export default {
     name: 'EPPHistoryList',
     components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, EppCard},
+=======
+  import BugReportCard from '@/components/fails/BugReportCard'
+
+  export default {
+    name: 'BugReportHistoryList',
+    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCard},
+>>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     props: {
       type: {
         type: String,
@@ -58,11 +97,20 @@
     },
     data () {
       return {
+<<<<<<< HEAD
         date: ''
       }
     },
     created: function () {
       this.$store.dispatch('requests/fetchActiveRequest')
+=======
+        date: '',
+        bugReportList: []
+      }
+    },
+    created: function () {
+      this.bugReportList = this.$store.dispatch('bugReport/fetchActive')
+>>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     },
     destroyed: function () {},
     methods: {
@@ -149,7 +197,11 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/variables";
 
+<<<<<<< HEAD
   .epp-history-list {
+=======
+  .bugReport-history-list {
+>>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     width: 80%;
   }
 
@@ -229,4 +281,8 @@
     margin: 15px 0;
   }
 
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f

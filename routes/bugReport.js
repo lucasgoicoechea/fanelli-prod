@@ -18,6 +18,7 @@ const ROLE = require(path.join(__dirname, '/../libs/const')).ROLE
  *
  */
 router.post('', bugReportController.create)
+router.get('/fetchActive', bugReportController.fetchActive)
 
 
 

@@ -31,6 +31,18 @@ const controller = {
     }
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
+  }),
+
+  fetchActive: async(function (req, res, next) {
+    let bugReports
+    bugReports = awaitFor(bugReportService.listAllPass({
+        perPage: req.query.per_page,
+        page: req.query.page,
+        date: req.query.date,
+        type: req.query.type,
+        frecuency: req.query.frecuency
+      }))
+    res.json({success: true, bugReports})
   })
 }
   

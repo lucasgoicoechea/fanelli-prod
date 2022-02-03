@@ -172,7 +172,7 @@ const actions = {
     const handleError = (error) => {
       return Promise.reject(error)
     }
-    return Vue.http.get('meeting/by-me/active', {params})
+    return Vue.http.get('bugReport/fetchActive', {params})
       .then(fetched)
       .catch(handleError)
   },

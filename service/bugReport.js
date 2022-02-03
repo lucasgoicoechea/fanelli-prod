@@ -14,7 +14,23 @@ const service = {
     let bugReportTmp = awaitFor(BugReportModel.create(bugReport))
     return bugReportTmp
     }
-  )
+  ),
+
+  listAllPass : async(function (options) {
+    let bugReports = BugReportModel
+    .find({
+      /*created_at:{$lte:new Date(new Date().getTime()+(24*60*60*1000))}*/
+    })
+    /*.populate({
+      path: 'collaborators',
+      populate: {path: 'shift', select: 'value'},
+      select: {name: 1, lastname: 1, legajo: 1}
+    })
+    .populate('creator', 'name lastname legajo')*/
+   /*bugReports = filterMeeting(bugReports,options)*/
+  // return paginateAndSort(bugReports, options,-1)
+  return bugReports
+  })
 }
   /* getPdf: async(function (meetingId) {
     const meeting = awaitFor(MeetingModel
@@ -205,12 +221,11 @@ function filterMeeting (meetingss, filters) {
     eppCursor = awaitFor(eppCursor.teamOf(filters.teamOf)).query
   }
   return meetingss
-}
+} */
 
 const paginateAndSort = function (cursor, options = {},asc=1) {
   cursor = cursor
-      .sort({date: asc})
-   // .sort({created_at: -1})
+    .sort({created_at: -1})
   if (options.page !== undefined) {
     options.perPage = options.perPage || 15
     cursor = cursor
@@ -220,7 +235,7 @@ const paginateAndSort = function (cursor, options = {},asc=1) {
   return cursor
 }
 
-const createRepetitionsMeeting = function (meeting) {
+/*const createRepetitionsMeeting = function (meeting) {
   if (meeting.frecuency === 'DAILY') {
      //desde hasta crear reuniones con el meeting_origin
      var firts = true;
