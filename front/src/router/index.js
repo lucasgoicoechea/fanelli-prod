@@ -106,6 +106,8 @@ import BugReportIndex from '@/components/fails/BugReportIndex'
 import BugReportCreation from '@/components/fails/BugReportCreation'
 import BugReportHistory from '@/components/fails/BugReportHistory'
 import BugReportResume from '@/components/fails/BugReportResume'
+import BugReportView from '@/components/fails/BugReportView'
+import BugReportVisualization from '@/components/fails/BugReportVisualization'
 
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
@@ -901,6 +903,25 @@ const router = new Router({
               component: BugReportResume,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':id',
+              name: 'bugReport-request',
+              component: BugReportVisualization,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':id/edicion',
+              name: 'bugReport-edition',
+              component: BugReportView,
+              props: { edition: true },
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
                 fail: '/error'
               }
             }

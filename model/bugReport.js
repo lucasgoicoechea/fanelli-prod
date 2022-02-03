@@ -1,6 +1,4 @@
-const { await } = require('asyncawait')
-const { badData } = require('boom')
-const { Db } = require('mongodb')
+'use strict'
 const path = require('path')
 const mongoose = require(path.join(__dirname, '/../mongoConnection')).getMongoose()
 const Schema = mongoose.Schema
