@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-  <div class="epp-history-list-delivered container-fluid">
-=======
   <div class="bugReport-history-list-delivered container-fluid">
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     <h3><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filtros</h3>
     <div class="filters">
       <div class="filter">
@@ -20,19 +16,11 @@
          v-infinite-scroll="filter"
          infinite-scroll-disabled="deliveredNotUpdate"
          infinite-scroll-distance="0">
-<<<<<<< HEAD
-      <epp-card
-        v-for="request in this.deliveredRequest.requests"
-        :key="request._id"
-        :request="request">
-      </epp-card>
-=======
       <bugReport-card
         v-for="request in this.deliveredRequest.requests"
         :key="request._id"
         :request="request">
       </bugReport-card>
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
       <div class="empty">
         <spinner
           class="spinner"
@@ -51,19 +39,11 @@
   import CardFooter from '@/components/cards/CardFooter.vue'
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
-<<<<<<< HEAD
-  import EppCard from '@/components/epp/EPPCard'
-
-  export default {
-    name: 'EPPHistoryListDelivered',
-    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, CollaboratorSelector, EppCard},
-=======
   import BugReportCard from '@/components/fails/BugReportCard'
 
   export default {
     name: 'BugReportHistoryListDelivered',
     components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, CollaboratorSelector, BugReportCard},
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     props: {
       current: {
         type: Boolean,
@@ -85,26 +65,11 @@
     destroyed: function () {},
     methods: {
       goToRequest (req) {
-<<<<<<< HEAD
-        this.$router.push({name: 'epp-request', params: {id: req._id}})
-=======
         this.$router.push({name: 'bugReport-request', params: {id: req._id}})
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
       },
       delivered (req) {
         return req.hasOwnProperty('delivered') && req.delivered
       },
-<<<<<<< HEAD
-      eppType (request) {
-        if (this.delivered(request)) return 'Entregada'
-        else return 'Estado'
-      },
-      eppTypeColor (request) {
-        if (this.delivered(request)) return '#e28c44'
-        else return '#e28c44'
-      },
-      eppTypeSubColor (request) {
-=======
       bugReportType (request) {
         if (this.delivered(request)) return 'Entregada'
         else return 'Estado'
@@ -114,7 +79,6 @@
         else return '#e28c44'
       },
       bugReportTypeSubColor (request) {
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
         if (this.delivered(request)) return '#fbc697'
         else return '#e2cea4'
       },
@@ -170,11 +134,7 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/variables";
 
-<<<<<<< HEAD
-  .epp-history-list-delivered {
-=======
   .bugReport-history-list-delivered {
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     width: 80%;
   }
 
@@ -252,11 +212,7 @@
       }
     }
 
-<<<<<<< HEAD
-    .epp-history-list-delivered {
-=======
     .bugReport-history-list-delivered {
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
       width: 100%;
     }
   }
@@ -273,8 +229,4 @@
     padding-bottom: 68px;
   }
 
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f

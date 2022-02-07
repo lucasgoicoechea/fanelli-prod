@@ -1,64 +1,22 @@
 <template>
-<<<<<<< HEAD
-  <div class="epp-history-list container-fluid">
-=======
   <div class="bugReport-history-list container-fluid">
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
 
     <div class="spinner-container">
       <spinner
         class="spinner"
         :show="loadingActiveRequest"
-        loadingMessage="Cargando solicitudes pendientes..."></spinner>
+        loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
 
-<<<<<<< HEAD
-    <div class="empty" v-show="!loadingActiveRequest && getActivedAndReceivedRequests.length === 0">
-      <p>No hay solicitudes Pendiente de aprobación</p>
-    </div>
-
-    <epp-card
-      v-for="request in getActivedAndReceivedRequests"
-      :key="request._id"
-      :request="request"></epp-card>
-
-    <hr>
-
-    <div class="empty" v-show="!loadingActiveRequest && getOnlyActivedRequest.length === 0">
-      <p>No hay solicitudes Activas</p>
-    </div>
-
-    <epp-card
-      v-for="request in getOnlyActivedRequest"
-      :key="request._id"
-      :request="request">
-    </epp-card>
-=======
     <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
-      <p>No hay solicitudes Pendiente de aprobación</p>
+      <p>No hay solicitudes de fallas</p>
     </div>
 
     <bugReport-card
-      v-for="request in getActivedAndReceivedRequests"
-      :key="request._id"
-      :request="request"></bugReport-card>
-
-    <hr>
-
-    <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
-      <p>No hay solicitudes Activas</p>
-    </div>
-
-    <!--<bugReport-card
       v-for="request in bugReportList"
       :key="request._id"
       :request="request">
-    </bugReport-card>-->
-    {{bugReportList.length}}
-    <div v-for="request in bugReportList"
-      :key="request._id"
-      :request="request"></div>
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
+    </bugReport-card>
   </div>
 </template>
 
@@ -72,19 +30,11 @@
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import SpinnerLittle from '@/components/Spinner.vue'
-<<<<<<< HEAD
-  import EppCard from '@/components/epp/EPPCard'
-
-  export default {
-    name: 'EPPHistoryList',
-    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, EppCard},
-=======
   import BugReportCard from '@/components/fails/BugReportCard'
 
   export default {
     name: 'BugReportHistoryList',
     components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCard},
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     props: {
       type: {
         type: String,
@@ -97,25 +47,41 @@
     },
     data () {
       return {
-<<<<<<< HEAD
-        date: ''
-      }
-    },
-    created: function () {
-      this.$store.dispatch('requests/fetchActiveRequest')
-=======
         date: '',
         bugReportList: []
       }
     },
-    created: function () {
-      this.bugReportList = this.$store.dispatch('bugReport/fetchActive')
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
+    created () {
+      // this.bugReportList = this.$store.dispatch('bugReport/fetchActive')
+      this.fetch()
     },
     destroyed: function () {},
     methods: {
+      fetch () {
+        // this.bugReport.loading = true
+        const action = 'bugReport/fetchActive'
+        this.$store.dispatch(action, {})
+          .then(this.successFetch)
+          .catch(this.failFetch)
+      },
+      successFetch (response) {
+        if (response.bugReports.length === 0) {
+          // this.bugReport.lastOne = true
+          console.log('vacio')
+        } else {
+          response.bugReports.forEach(e => {
+            this.bugReportList.push(e)
+          })
+          // this.bugReport.page += 1
+        }
+        // this.bugReport.loading = false
+      },
+      failFetch (error) {
+        this.$snotifyWrapper.error(error)
+        // this.bugReport.loading = false
+      },
       goToRequest (req) {
-        this.$router.push({name: 'epp-request', params: {id: req._id}})
+        this.$router.push({name: 'bugReport-request', params: {id: req._id}})
       },
       received (req) {
         return !req.hasOwnProperty('approved')
@@ -197,11 +163,7 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/variables";
 
-<<<<<<< HEAD
-  .epp-history-list {
-=======
   .bugReport-history-list {
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f
     width: 80%;
   }
 
@@ -281,8 +243,4 @@
     margin: 15px 0;
   }
 
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> fe21cf6d0f69181d9226e7bb3c31236c8cbf2f1f

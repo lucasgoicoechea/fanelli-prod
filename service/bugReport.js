@@ -30,6 +30,10 @@ const service = {
    /*bugReports = filterMeeting(bugReports,options)*/
   // return paginateAndSort(bugReports, options,-1)
   return bugReports
+  }),
+
+  findOne: async(function (meetingId) {
+    return awaitFor(BugReportModel.findById(meetingId))
   })
 }
   /* getPdf: async(function (meetingId) {
@@ -42,15 +46,6 @@ const service = {
       })
       .populate('creator', 'name lastname legajo'))
     return pdf.createPdf(pdf.getMeetingContent(meeting))
-  }),
-  getById: async(function (meetingId) {
-    return awaitFor(MeetingModel.findById(meetingId)
-      .populate({
-        path: 'collaborators',
-        populate: {path: 'shift', select: 'value'},
-        select: {name: 1, lastname: 1, legajo: 1, s3Key: 1}
-      })
-      .populate('creator', 'name lastname legajo s3Key'))
   }),
   getByIdOrigin: async(function (meetingId) {
     let meetings = MeetingModel

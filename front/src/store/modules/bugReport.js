@@ -70,7 +70,7 @@ const actions = {
     })
 
     startLoading(dispatch, 'meeting getDetail')
-    return Vue.http.get(`meeting/${payload.id}`)
+    return Vue.http.get(`bugReport/${payload.id}`)
       .then(fetched)
       .catch(handleError)
   },

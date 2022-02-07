@@ -33,6 +33,11 @@ const controller = {
     res.json({success: true, bugReport})
   }),
 
+  getId: async(function (req, res, next) {
+      let bugReport = awaitFor(bugReportService.findOne(req.params.id))
+      res.json({success: true, bugReport: bugReport})
+  }),
+
   fetchActive: async(function (req, res, next) {
     let bugReports
     bugReports = awaitFor(bugReportService.listAllPass({
