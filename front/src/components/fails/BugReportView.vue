@@ -49,7 +49,7 @@
     },
     data () {
       return {
-        title: 'Solicitud de EPP',
+        title: 'Listado de Fallas',
         step: 1
       }
     },
