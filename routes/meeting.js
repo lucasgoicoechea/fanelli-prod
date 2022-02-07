@@ -57,6 +57,11 @@ router.get('/:id', meetingController.getById)
  *
  */
 router.get('', meetingController.listMyMeetings)
+router.get('/manager/all', meetingController.listMyMeetingsManager)
+
+router.get('/manager/sector', meetingController.listMyMeetingsSector)
+router.get('/manager/calendar', meetingController.listMyMeetingsCalendar)
+
 
 /**
  * @api {get} /api/meeting/notpassed Get meetings

@@ -26,7 +26,7 @@
   import { mapState, mapGetters } from 'vuex'
 
   export default {
-    name: 'SupervisionpartsList',
+    name: 'SupervisionpartsFullList',
     components: {Spinner, SupervisionpartDateButton},
     data () {
       return {

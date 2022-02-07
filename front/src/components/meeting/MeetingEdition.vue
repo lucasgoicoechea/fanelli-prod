@@ -99,6 +99,7 @@
         this.loading = true
         this.$modal.hide('dialog')
         this.form._id = this.fetched._id
+        this.form.state = this.fetched.state
         this.$store.dispatch(this.editStoreAction, this.form)
           .then(this.successfulEdition)
           .catch(this.failedEdition)

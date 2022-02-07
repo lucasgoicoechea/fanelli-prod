@@ -19,6 +19,7 @@ import sanctions from './modules/sanctions'
 import occurrences from './modules/occurrences'
 import fabric from './modules/fabric'
 import meetings from './modules/meetings'
+import bugReport from './modules/bugReport'
 
 Vue.use(Vuex)
 
@@ -45,7 +46,8 @@ export const modules = {
   sanctions,
   occurrences,
   fabric,
-  meetings
+  meetings,
+  bugReport
 }
 
 const actions = {

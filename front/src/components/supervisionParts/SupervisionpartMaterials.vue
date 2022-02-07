@@ -31,13 +31,13 @@
               <option v-for="(label, value) in $constants.SUPERVISION_PART_MATERIAL"  :key="value" :value="value"> {{label}}</option>
           </select>
           </span></div>  
-          <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'EXTRUSORA'" >Nro. {{unidades}}<span>
+          <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'EXTRUSORA'" >Nro. {{unidades}}<span>
                 <input  type="number"   v-mask="'###'" class="active" v-model="value" autofocus></span>
           </div> 
-          <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'EXTRUSORA'" >Cantidad<span>
+          <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'EXTRUSORA'" >Cantidad<span>
                 <input  type="number"  v-mask="'###'"  class="active" v-model="prod" autofocus></span>
           </div> 
-         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'DESAPILADORA'" >Cantidad
+         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'DESAPILADORA'" >Cantidad
            <span>
               <select v-model="prod" >
                 <option v-for="(label, value) in $constants.SUPERVISION_PART_COUNT_DESAPILADORA"  :key="value" :value="value"> {{label}}</option>
@@ -88,15 +88,15 @@
           </button>
         </div>
 </div> 
-      <div v-for="v in m.vagons" v-bind:key="v._id" >
+      <div v-for="(v,idenx) in m.vagons" v-bind:key="v._id" >
      <div  class="row"> 
         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector === 'EXTRUSORA'" >------  <span>-----</span></div>
-        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">------ <span>-----</span></div>
+        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'EXTRUSORA'">#{{idenx+1}}<span>---</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Unidad: <span>{{v.unit}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'EXTRUSORA'" >Numero: <span>{{v.number}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector !== 'APILADORA'" >Cantidad: <span>{{v.count}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector && sector == 'APILADORA'" >Pisos: <span>{{v.count}}</span></div>
-       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA'">
+       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" >
           <button @click="delVagon(m._id, v.number)" >
                 <span  class="action "><img src="/static/img/checklists/sumary/mal.svg"></span>
           </button>

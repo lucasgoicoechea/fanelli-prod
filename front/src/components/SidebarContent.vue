@@ -97,6 +97,20 @@
             can: authorize(ROLES.RRHH, ROLES.SUPERVISORES)
           },
           {
+            name: 'Partes Historico',
+            type: 'control-supervisionparts',
+            routeName: 'control-supervisionparts-historico',
+            route: {name: 'control-supervisionparts-historico'},
+            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
+            name: 'Partes Control',
+            type: 'control-oficial-supervisionpart',
+            routeName: 'control-oficial-control',
+            route: {name: 'control-oficial-control'},
+            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
             name: 'Panel de Control',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanel',
@@ -112,6 +126,18 @@
                 name: 'Partes',
                 type: 'control-supervisionparts',
                 route: {name: 'control-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Control',
+                type: 'control-resume-supervisionparts',
+                route: {name: 'control-resume-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Totales',
+                type: 'control-totales-supervisionparts',
+                route: {name: 'control-totales-supervisionparts'},
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
@@ -238,6 +264,33 @@
             ]
           },
           {
+            name: 'Reporte de Fallas',
+            img: '/static/img/icons-sidebar/news.svg',
+            type: 'bugnews',
+            can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH),
+            routeName: 'bug-report-index',
+            submenu: [
+              {
+                name: 'Creacion',
+                type: 'bug-report-creation',
+                route: {name: 'bug-report-creation'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Historial de Fallas',
+                type: 'bug-report-history',
+                route: {name: 'bug-report-history'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Resumen de Fallas',
+                type: 'bug-report-resume',
+                route: {name: 'bug-report-resume'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              }
+            ]
+          },
+          {
             name: 'Reuniones',
             img: '/static/img/icons-sidebar/staffRequests.svg',
             type: 'meeting',
@@ -263,6 +316,27 @@
                 img: '/static/img/icons-sidebar/staffRequests.svg',
                 type: 'meeting-history',
                 route: {name: 'meeting-history'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Control',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-manager',
+                route: {name: 'meeting-manager'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Sectores',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-sector',
+                route: {name: 'meeting-sector'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Calendario',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-calendar',
+                route: {name: 'meeting-calendar'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
               }
             ]

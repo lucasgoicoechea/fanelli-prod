@@ -13,6 +13,19 @@
           </div>
           <p slot="subHeader" class="name-header-text"></p>
           <p slot="subHeader" class="subheader-text">{{ recommendations }}
+            <blockable-button
+              v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+              class="button-done margin"
+              icon="/static/img/icon-forms/checklists-form.svg"
+              title="Pasar a REALIZADA"
+              :click="done"
+              :isLoading="loaderCancelAll"
+              buttonBackgroundColor="rgb(55, 235, 92)"
+              iconPadding="10px"
+              buttonRadius="50px"
+              buttonWidth="55px"
+              buttonHeight="45px">
+            </blockable-button>
             <span  class="name-subheader-text">{{meetingState}}</span>
           </p>
            
@@ -35,6 +48,7 @@
   import CardSection from '@/components/cards/CardSection.vue'
   import CardFooter from '@/components/cards/CardFooter.vue'
   import dateAndTime from '@/utils/dateAndTime.js'
+  import BlockableButton from '@/components/buttons/blockableButton'
   import Spinner from 'vue-simple-spinner'
   import { mapState } from 'vuex'
 
@@ -45,7 +59,8 @@
       CardHeader,
       CardSection,
       CardFooter,
-      Spinner
+      Spinner,
+      BlockableButton
     },
     props: {
       meeting: {
@@ -55,10 +70,44 @@
     },
     data () {
       return {
+        loaderCancelAll: false,
         redirect: {
           name: 'meeting-detail',
           params: {id: this.meeting._id}
         }
+      }
+    },
+    methods: {
+      doneModalAll (event) {
+        event.preventDefault()
+        event.stopPropagation()
+        this.$modal.show('dialog', {
+          title: 'Realizada',
+          text: '¿Esta seguro que fue REALIZADA esta reunión?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.done()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      done () {
+        this.loaderCancel = true
+        // paso a estado REalizada
+        this.meeting.state = 2
+        return this.$store.dispatch('meetings/edit', this.meeting)
+          .then(this.successfulNoRealize)
+          .catch(this.failedReProgramed)
       }
     },
     computed: {
@@ -169,7 +218,9 @@
     background: #d3def7;
     float: right;
   }
-
+  .button-done {
+    float: right;
+  }
   .time {
     font-family: monospace;
     color: #5d5d5d;

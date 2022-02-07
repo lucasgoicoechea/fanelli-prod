@@ -4,9 +4,9 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-6 col-sm-4" v-for="supervisionpart in types" :key="supervisionpart.sector">
+          <div class="col-xs-6 col-sm-4" v-for="supervisionpart in types" :key="supervisionpart.sector">         
+              <!-- v-if="permission || isOficial(supervisionpart.sector)" -->
             <card-button 
-               v-if="permission || isOficial(supervisionpart.sector)"
               :to="{ name: 'supervisionpart', params: { sector: supervisionpart.sector } }"
               :title="supervisionpart.sector | pretty"
               :icon="`/static/img/checklists/${supervisionpart.sector}.svg`"

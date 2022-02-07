@@ -31,6 +31,19 @@
           <h4>
             <span>ESTADO:</span>
             <span :class="meetingStateClass"> {{ meetingState }}</span></h4>
+            <blockable-button
+            v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+            class="margin"
+            icon="/static/img/icon-forms/checklists-form.svg"
+            title="Pasar a REALIZADA"
+            :clickMethod="doneModalAll"
+            :isLoading="loaderCancelAll"
+            buttonBackgroundColor="rgb(55, 235, 92)"
+            iconPadding="10px"
+            buttonRadius="50px"
+            buttonWidth="120px"
+            buttonHeight="50px">
+            </blockable-button>
         </div>
 
         <div class="reason">
@@ -106,6 +119,32 @@
         buttonRadius="50px"
         buttonWidth="100px"
         buttonHeight="50px"></blockable-button>
+
+        <blockable-button
+        v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+        class="margin"
+        title="Pasar a NO REALIZADA"
+        :clickMethod="noRealizeModalAll"
+        :isLoading="loaderCancelAll"
+        buttonBackgroundColor="#F44336"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px">Cancelar
+        </blockable-button>
+        
+        <blockable-button
+        v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+        class="margin"
+        title="Pasar a REPROGRAMADA"
+        :clickMethod="reProgramedModalAll"
+        :isLoading="loaderCancelAll"
+        buttonBackgroundColor="rgb(55, 96, 162)"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="120px"
+        buttonHeight="50px">Reprograma
+        </blockable-button>
     </div>
 
   </div>
@@ -208,6 +247,27 @@
         this.loaderCancel = false
         this.$snotifyWrapper.error('No se pudo eliminar la reunión')
       },
+      successfulNoRealize (res) {
+        this.loaderCancel = false
+        this.$snotifyWrapper.success('Se canceló correctamente la reunión')
+        this.$router.push({name: 'meeting-list'})
+      },
+      successfulReProgramed (res) {
+        this.loaderCancel = false
+        this.$snotifyWrapper.success('Pasara a Reprogramar la reunión')
+        this.$router.push({
+          name: 'meeting-edition',
+          params: {id: this.meeting._id}
+        })
+      },
+      failedNoRealize () {
+        this.loaderCancel = false
+        this.$snotifyWrapper.error('No se pudo cancelar la reunión')
+      },
+      failedReProgramed () {
+        this.loaderCancel = false
+        this.$snotifyWrapper.error('No se pudo reprogramar la reunión')
+      },
       cancel () {
         this.loaderCancel = true
         return this.$store.dispatch('meetings/cancel', this.meeting)
@@ -230,6 +290,93 @@
               handler: () => {
                 this.$modal.hide('dialog')
                 this.cancelAll()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      done () {
+        this.loaderCancel = true
+        // paso a estado REalizada
+        this.meeting.state = 2
+        return this.$store.dispatch('meetings/edit', this.meeting)
+          .then(this.successfulNoRealize)
+          .catch(this.failedReProgramed)
+      },
+      reProgramed () {
+        this.loaderCancel = true
+        // paso a estado REPROGRAMADA
+        this.meeting.state = 4
+        return this.$store.dispatch('meetings/edit', this.meeting)
+          .then(this.successfulReProgramed)
+          .catch(this.failedReProgramed)
+      },
+      noRealize () {
+        this.loaderCancel = true
+        // paso a estado NO REALIZADA
+        this.meeting.state = 3
+        return this.$store.dispatch('meetings/edit', this.meeting)
+          .then(this.successfulNoRealize)
+          .catch(this.failedNoRealize)
+      },
+      doneModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Realizada',
+          text: '¿Esta seguro que fue REALIZADA esta reunión?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.done()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      reProgramedModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Reprogramacion',
+          text: '¿Esta seguro de Reprogramar esta reunión?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.reProgramed()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      noRealizeModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Cancelacion',
+          text: '¿Esta seguro de Cancelar esta reunión?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.noRealize()
               }
             },
             {

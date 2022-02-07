@@ -9,13 +9,19 @@
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Tiempo Marcha<span><input @input="update"  style="width: 82px " type="time" v-mask="'##:##'" v-model="supervisionPart.totalMinutesWithoutStopping" min="00:00" max="10:30" autofocus></span></div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">Tiempo Carga: <span>{{tiempoCarga}}</span></div>
       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >
-        Peso Nylon<span> 
+        Peso Nylon 1<span> 
         <input @input="update" type="number" v-model="supervisionPart.totalBobin"  v-mask="'###'"  autofocus>
         <!--<select v-model="supervisionPart.totalBobin"  id="position" @change="update" style="color: black;" >
                 <option v-for="(label, value) in $constants.SUPERVISION_PART_UNIT_NYLON"  :key="value" :value="value">{{label}}</option>
               </select>-->
         </span>
       </div>
+       <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >
+        Peso Nylon 2<span> 
+        <input @input="update" type="number" v-model="supervisionPart.totalBobinTwo"  v-mask="'###'"  autofocus>
+        </span>
+      </div>
+      <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'APILADORA'" >Cantidad Vagonetas: <span>{{supervisionPart.countVagon}}</span> </div>
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición {{unidades}} Maquina<span><input @input="update" type="number" v-model="supervisionPart.totalUnitsMachine" autofocus></span> </div>-->
       <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"   v-show="supervisionPart && supervisionPart.sector && supervisionPart.sector === 'DESAPILADORA'" >Reposición Pallets<span><input @input="update" type="number" v-model="supervisionPart.totalRepositionPallet" autofocus></span> </div>-->
       
@@ -37,6 +43,87 @@
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Total Sistema {{unidades}}: {{supervisionPart.totalUnits | decimalFormat}}</div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Total Paradas: {{supervisionPart.totalStoppings}} minutos</div>
     </div>
+    <hr> 
+    <div class="container-fluid">
+         <div class="row" >
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_8:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_8" v-mask="mask"  style="width: 83px;" autofocus>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_12_6A:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_12_6A"   style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_12_9A:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_12_8A"  style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_18:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_18" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>     
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_P12:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_P12" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_P18:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_P18"  style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_L11:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_L11" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_C:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_C" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_DM4:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_DM4"  style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div> 
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_DM20:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_DM20" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_DM24:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_DM24" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_DM27:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_DM27" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_DIN18:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_DIN18" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>  
+            <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_DIN27:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_DIN27" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>
+             <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  
+                v-show="supervisionPart && supervisionPart.sector" >
+                Total MOLDE_COLUMNA:
+                  <input @input="update" type="number" v-model="supervisionPart.total_MOLDE_COLUMNA" style="width: 83px;"  v-mask="'###.##'" autofocus>
+            </div>                                                                                                                                         
+         </div>              
+    </div>  
+    <hr>
     <hr>
     <div class="container-fluid">
        <div class="row" >
@@ -91,6 +178,7 @@
       init () {
         this.current = Const.currentSchedule().value
         this.supervisionPart.totalBobin = 105
+        this.supervisionPart.totalBobinTwo = 105
       },
       currentSchedule (header) {
         return header.schedule === this.current && !this.date
@@ -144,8 +232,25 @@
             totalMinutesWithoutStopping: this.supervisionPart.totalMinutesWithoutStopping,
             totalCountUnitMaterials: this.supervisionPart.totalCountUnitMaterials,
             totalBobin: this.supervisionPart.totalBobin,
+            totalBobinTwo: this.supervisionPart.totalBobinTwo,
             totalPalletsCamara: this.supervisionPart.totalPalletsCamara,
             totalPalletsContador: this.supervisionPart.totalPalletsContador,
+            total: this.supervisionPart.totalPalletsContador,
+            total_MOLDE_8: this.supervisionPart.total_MOLDE_8,
+            total_MOLDE_12_6A: this.supervisionPart.total_MOLDE_12_6A,
+            total_MOLDE_12_8A: this.supervisionPart.total_MOLDE_12_8A,
+            total_MOLDE_18: this.supervisionPart.total_MOLDE_18,
+            total_MOLDE_P12: this.supervisionPart.total_MOLDE_P12,
+            total_MOLDE_P18: this.supervisionPart.total_MOLDE_P18,
+            total_MOLDE_L11: this.supervisionPart.total_MOLDE_L11,
+            total_MOLDE_C: this.supervisionPart.total_MOLDE_C,
+            total_MOLDE_DM4: this.supervisionPart.total_MOLDE_DM4,
+            total_MOLDE_DM20: this.supervisionPart.total_MOLDE_DM20,
+            total_MOLDE_DM24: this.supervisionPart.total_MOLDE_DM24,
+            total_MOLDE_DM27: this.supervisionPart.total_MOLDE_DM27,
+            total_MOLDE_DIN18: this.supervisionPart.total_MOLDE_DIN18,
+            total_MOLDE_DIN27: this.supervisionPart.total_MOLDE_DIN27,
+            total_MOLDE_COLUMNA: this.supervisionPart.total_MOLDE_COLUMNA,
             supervisionpart_id: this.supervisionPart._id
           }
           this.$store.dispatch('supervisionparts/updateTotals', {sector: this.supervisionPart.sector, totals})

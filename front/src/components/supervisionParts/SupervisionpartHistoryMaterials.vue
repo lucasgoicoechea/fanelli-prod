@@ -15,13 +15,21 @@
         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"><span  class="negro"  >Molde: </span><span>{{m.material}}</span></div> 
         <!--<div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">+ {{unidades}}-></div>-->
     </div> 
-      <div v-for="v in m.vagons" v-bind:key="v._id" >
+      <div v-for="(v,idenx) in m.vagons" v-bind:key="v._id" >
      <div  class="row"> 
-         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2">--></div>
+         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" v-show="sector && sector !== 'EXTRUSORA'">#{{idenx+1}} --></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3">Unidad: <span>{{v.unit}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="  sector &&  sector !== 'EXTRUSORA'" >Numero: <span>{{v.number}}</span></div>
        <div class="col-xs-8 col-sm-4 col-md-3 col-lg-3"  v-show="sector &&  sector !== 'APILADORA'" >Cantidad: <span>{{v.count}}</span></div>
         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2"  v-show="sector &&  sector == 'APILADORA'" >Pisos: <span>{{v.count}}</span></div>
+         <div class="col-xs-8 col-sm-4 col-md-3 col-lg-2" >
+          <button 
+           @click="delVagon(m._id, v.number)" 
+           v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.JEFE_LINEA ) "   
+           >
+                <span  class="action "><img src="/static/img/checklists/sumary/mal.svg"></span>
+          </button>
+       </div> 
      </div> 
       </div> 
      <hr> 
@@ -101,6 +109,20 @@
       },
       showLoadObservation: function () {
         this.loadObservation = !this.loadObservation
+      },
+      delVagon: function (id, nm) {
+        const observation = {
+          material_id: id,
+          vagon_number: nm,
+          supervisionpart_id: this.supervisionpart_id
+        }
+        this.$store.dispatch('supervisionparts/delVagon', {sector: this.sector, observation})
+          .then(() => {
+            this.loadingObservationVagon[id] = false
+            this.editadosVagon[id] = false
+            location.reload()
+          })
+        this.editadosVagon[id] = false
       },
       arrow: function (id) {
         return {
@@ -260,6 +282,25 @@
     margin-left: -30px;
   }
 
+  .action {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 9px;
+    color: white;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+    img {
+      width: 25px;
+      height: 25px;
+    }
+
+    &.true {
+      background: $success-color;
+    }
+
+    &.false {
+      background: $danger-color;
+    }
+  }
   @media (max-width: 340px) { // iphone 6plus landscape
     header {
 

@@ -89,6 +89,51 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
+  fetchManager (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+
+    return Vue.http.get('meeting/manager/all', {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
+  fetchCalendarSector (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+
+    return Vue.http.get('meeting/manager/calendar', {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
+  fetchManagerSector (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+
+    return Vue.http.get('meeting/manager/sector', {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
   fetchPass (context, payload) {
     const fetched = (response) => {
       return response.body
