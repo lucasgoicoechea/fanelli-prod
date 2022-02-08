@@ -1,17 +1,14 @@
 <template>
   <card-container @click.native="goToRequest(request)">
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
-      <p slot="header">Estado de Falla {{ bugReportType(request) }}</p>
+      <p slot="header">Estado de falla {{ bugReportType(request) }}</p>
       <p slot="subHeader" v-if="approved(request)">Por {{ request.approved_by.lastname }}</p>
       <p slot="subHeader" v-if="denied(request)">Por {{ request.approved_by.lastname }}</p>
     </card-header>
     <card-section>
       <p slot="content">
-        <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }}</span>
-        de {{ request.supervisor.lastname
-        }} para {{ request.collaborator.lastname }} </p>
-
-      <div @click.stop slot="actions" v-if="received(request)" v-show="$can(permission)">
+        <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }}</span> </p>
+      <!--<div @click.stop slot="actions" v-if="received(request)" v-show="$can(permission)">
         <button class="reject" @click="reject(request)" :disabled="request.rejectLoading || request.acceptLoading">
           <img v-if="!request.rejectLoading" src="/static/img/checklists/cross.svg" alt="">
           <spinner-little v-else :show="request.rejectLoading"></spinner-little>
@@ -20,7 +17,8 @@
           <img v-if="!request.acceptLoading" src="/static/img/checklists/tick.svg" alt="">
           <spinner-little v-else :show="request.acceptLoading"></spinner-little>
         </button>
-      </div>
+        ACA ESTA EL BOTON de Aprobado o Denegado
+      </div>-->   
     </card-section>
   </card-container>
 </template>
@@ -74,15 +72,17 @@
         return req.hasOwnProperty('delivered') && req.delivered
       },
       bugReportType (request) {
-        if (this.received(request)) return 'Pendiente de aprobación'
+        return request.prioridad
+        /* if (this.received(request)) return 'Pendiente de aprobación'
         if (this.denied(request)) return 'Denegada'
         if (this.approved(request)) return 'Aprobada'
         if (this.pending(request)) return 'Pendiente de entrega'
         if (this.delivered(request)) return 'Entregada'
-        else return 'Estado'
+        else return 'Estado' */
       },
+      // ACOMODAR LOS COLORES DE LA PRIORIDAD
       bugReportTypeColor (request) {
-        if (this.received(request)) return '#1e3773'
+        if (request.prioridad === 'SOLUCIONADO') return '#1e3773'
         if (this.denied(request)) return '#f86567'
         if (this.approved(request)) return '#65c25a'
         if (this.pending(request)) return '#3063ac'

@@ -1,10 +1,11 @@
 <template>
   <div class="bugReport-visualization">
+    <a> p </a>
     <navigation :title="title"></navigation>
     <section v-if="Object.keys(request).length > 0">
       <p>Fecha: {{ request.created_at | moment($constants.FORMAT_DATE) }}</p>
-      <p>De: {{ request.supervisor.lastname }} {{ request.supervisor.name }}</p>
-      <p>Para: {{ request.collaborator.lastname }} {{ request.collaborator.name }}</p>
+      <!--<p>De: {{ request.supervisor.lastname }} {{ request.supervisor.name }}</p>
+      <p>Para: {{ request.collaborator.lastname }} {{ request.collaborator.name }}</p>-->
       <div v-if="isPendingApproval">
         <b>Estado:</b> {{ status }}
       </div>
@@ -19,9 +20,8 @@
           <a class="accept" @click="accept">Aceptar</a>
         </div>
       </div>
-      <table-preview :elements="request.items"></table-preview>
-      <h3> Últimas solicitudes para {{ request.collaborator.lastname}}</h3>
-      <last-user-e-p-p-requests :request="request"></last-user-e-p-p-requests>
+      <!--<table-preview :elements="request.items"></table-preview>
+      <h3> Últimas solicitudes para {{ request.collaborator.lastname}}</h3>-->
       <a class="print" v-if="$can('PANOL')" @click="print">IMPRIMIR</a>
     </section>
   </div>
@@ -29,36 +29,39 @@
 
 <script>
   import Navigation from '../Navigation.vue'
-  import TablePreview from './TablePreview.vue'
-  import LastUserEPPRequests from './LastUserEPPRequests.vue'
+  // import TablePreview from './TablePreview.vue'
+  // import LastUserEPPRequests from './LastUserEPPRequests.vue'
   import { mapState } from 'vuex'
   import Vue from 'vue'
-  import auth from '@/auth'
+  // import auth from '@/auth'
 
   export default {
     name: 'BugReportVisualization',
     components: {
-      TablePreview,
-      Navigation,
-      LastUserEPPRequests
+      // TablePreview,
+      Navigation
+      // LastUserEPPRequests
     },
     data () {
       return {
-        title: 'Solicitud de EPP'
+        title: 'Detalle de Falla',
+        request: Object
       }
     },
     created: function () {
-      this.$store.dispatch('requests/fetch', {id: this.$route.params.id})
+      this.$store.dispatch('bugReport/getDetail', {id: this.$route.params.id}).then(response => {
+        this.request = response.bugReport
+      })
     },
     methods: {
       reject () {
-        this.$store.dispatch('requests/approval', {approved: false})
+        this.$store.dispatch('bugReport/approval', {approved: false})
       },
       accept () {
-        this.$store.dispatch('requests/approval', {approved: true})
+        this.$store.dispatch('bugReport/approval', {approved: true})
       },
       print () {
-        Vue.http.get('security-element/get-pdf/' + this.request._id,
+        Vue.http.get('bugReport/get-pdf/' + this.request._id,
           {responseType: 'arraybuffer'}
         ).then(function (response) {
           var blob = new Blob([response.data], {type: response.headers.get['content-type']})
@@ -71,7 +74,7 @@
     },
     computed: {
       status: function () {
-        if (this.request.delivered) {
+        /* if (this.request.delivered) {
           return 'Entregada'
         } else if (this.request.resolved) {
           return 'Para entregar'
@@ -81,17 +84,16 @@
           return `Denegada por: ${this.request.approved_by.lastname}`
         } else {
           return 'Pendiente de aprobación'
-        }
+        } */
+        return this.request.prioridad
       },
       isPendingApproval: function () {
         return this.request.hasOwnProperty('approved')
       },
       ...mapState('requests', [
-        'request'
       ]),
       editPermission () {
-        return this.request.supervisor._id === auth.getUser().id &&
-          this.request.isEditable
+        return true
       }
     }
   }

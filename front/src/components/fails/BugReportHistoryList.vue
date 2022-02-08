@@ -5,22 +5,11 @@
       <spinner
         class="spinner"
         :show="loadingActiveRequest"
-        loadingMessage="Cargando solicitudes pendientes..."></spinner>
+        loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
 
     <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
-      <p>No hay solicitudes Pendiente de aprobación</p>
-    </div>
-
-    <bugReport-card
-      v-for="request in getActivedAndReceivedRequests"
-      :key="request._id"
-      :request="request"></bugReport-card>
-
-    <hr>
-
-    <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
-      <p>No hay solicitudes Activas</p>
+      <p>No hay solicitudes de fallas</p>
     </div>
 
     <bugReport-card
@@ -28,10 +17,6 @@
       :key="request._id"
       :request="request">
     </bugReport-card>
-    
-    <div v-for="request in bugReportList"
-      :key="request._id"
-      :request="request"></div>
   </div>
 </template>
 
@@ -66,11 +51,35 @@
         bugReportList: []
       }
     },
-    created: function () {
-      this.bugReportList = this.$store.dispatch('bugReport/fetchActive')
+    created () {
+      // this.bugReportList = this.$store.dispatch('bugReport/fetchActive')
+      this.fetch()
     },
     destroyed: function () {},
     methods: {
+      fetch () {
+        // this.bugReport.loading = true
+        const action = 'bugReport/fetchActive'
+        this.$store.dispatch(action, {})
+          .then(this.successFetch)
+          .catch(this.failFetch)
+      },
+      successFetch (response) {
+        if (response.bugReports.length === 0) {
+          // this.bugReport.lastOne = true
+          console.log('vacio')
+        } else {
+          response.bugReports.forEach(e => {
+            this.bugReportList.push(e)
+          })
+          // this.bugReport.page += 1
+        }
+        // this.bugReport.loading = false
+      },
+      failFetch (error) {
+        this.$snotifyWrapper.error(error)
+        // this.bugReport.loading = false
+      },
       goToRequest (req) {
         this.$router.push({name: 'bugReport-request', params: {id: req._id}})
       },
@@ -94,7 +103,7 @@
       delivered (req) {
         return req.hasOwnProperty('delivered') && req.delivered
       },
-      bugReportType (request) {
+      eppType (request) {
         if (this.received(request)) return 'Recibida'
         if (this.denied(request)) return 'Denegada'
         if (this.approved(request)) return 'Aprobada'
@@ -102,7 +111,7 @@
         if (this.delivered(request)) return 'Entregada'
         else return 'Estado'
       },
-      bugReportTypeColor (request) {
+      eppTypeColor (request) {
         if (this.received(request)) return '#1e3773'
         if (this.denied(request)) return '#f86567'
         if (this.approved(request)) return '#65c25a'
@@ -110,7 +119,7 @@
         if (this.delivered(request)) return '#e28c44'
         else return '#e28c44'
       },
-      bugReportTypeSubColor (request) {
+      eppTypeSubColor (request) {
         if (this.received(request)) return '#2b4a9f'
         if (this.denied(request)) return '#f78384'
         if (this.approved(request)) return '#a2da9b'
@@ -208,7 +217,7 @@
       }
     }
 
-    .bugReport-history-list {
+    .epp-history-list {
       width: 100%;
     }
   }
