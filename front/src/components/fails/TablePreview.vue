@@ -9,8 +9,8 @@
         </thead>
         <tbody>
         <tr v-for="bugReport in bugReports" :key="bugReport._id">
-          <td>
-            <span v-if="bugReport.line"><br>Linea: {{bugReport.line}}</span>
+            {{bugReport}}
+            <!--<span v-if="bugReport.line"><br>Linea: {{bugReport.line}}</span>
             <span v-if="bugReport.sector"><br>Sector: {{bugReport.sector}}</span>
             <span v-if="bugReport.sub_sector"><br>Sub Sector: {{bugReport.sub_sector}}</span>
             <span v-if="bugReport.equipo"><br>Equipo: {{bugReport.equipo}}</span>
@@ -18,8 +18,7 @@
             <span v-if="bugReport.part"><br>Parte: {{bugReport.part}}</span>
             <span v-if="bugReport.prioridad"><br>Prioridad: {{bugReport.prioridad}}</span>
             <span v-if="bugReport.inconveniente"><br>Inconveniente: {{bugReport.inconveniente}}</span>
-            <span v-if="bugReport.resume"><br>Resumen: {{bugReport.resume}}</span>
-          </td>
+            <span v-if="bugReport.resume"><br>Resumen: {{bugReport.resume}}</span>-->
         </tr>
         </tbody>
       </table>
@@ -31,8 +30,8 @@
   export default {
     name: 'TablePreview',
     props: {
-      elements: {
-        type: Array
+      bugReports: {
+        type: Object
       }
     },
     methods: {},

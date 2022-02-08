@@ -5,10 +5,10 @@
       <p>Fecha: {{ request.created_at | moment($constants.FORMAT_DATE) }}</p>
       <!--<p>De: {{ request.supervisor.lastname }} {{ request.supervisor.name }}</p>
       <p>Para: {{ request.collaborator.lastname }} {{ request.collaborator.name }}</p>-->
-      <div v-if="isPendingApproval">
-        <b>Estado:</b> {{ request.line }}
+      <div>
+        <b>Estado:</b> {{ status }}
       </div>
-      <div class="actions" v-else>
+      <div class="actions">
         <div v-if="editPermission">
           <router-link class="edit" :to="{ name: 'epp-edition', params: { id: request._id }}">
             Editar
