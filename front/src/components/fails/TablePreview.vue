@@ -5,17 +5,21 @@
         <thead>
         <tr>
           <th>Descripción</th>
-          <th>Cantidad</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="element in elements" :key="element._id">
+        <tr v-for="bugReport in bugReports" :key="bugReport._id">
           <td>
-            <span>{{element.type | capitalize}} ({{element.model}})</span>
-            <span v-if="element.colour"><br>Color: {{element.colour}}</span>
-            <span v-if="element.size"><br>Tamaño: {{element.size}}</span>
+            <span v-if="bugReport.line"><br>Linea: {{bugReport.line}}</span>
+            <span v-if="bugReport.sector"><br>Sector: {{bugReport.sector}}</span>
+            <span v-if="bugReport.sub_sector"><br>Sub Sector: {{bugReport.sub_sector}}</span>
+            <span v-if="bugReport.equipo"><br>Equipo: {{bugReport.equipo}}</span>
+            <span v-if="bugReport.group"><br>Grupo: {{bugReport.group}}</span>
+            <span v-if="bugReport.part"><br>Parte: {{bugReport.part}}</span>
+            <span v-if="bugReport.prioridad"><br>Prioridad: {{bugReport.prioridad}}</span>
+            <span v-if="bugReport.inconveniente"><br>Inconveniente: {{bugReport.inconveniente}}</span>
+            <span v-if="bugReport.resume"><br>Resumen: {{bugReport.resume}}</span>
           </td>
-          <td>{{element.cant}}</td>
         </tr>
         </tbody>
       </table>

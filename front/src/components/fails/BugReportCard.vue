@@ -72,7 +72,9 @@
         return req.hasOwnProperty('delivered') && req.delivered
       },
       bugReportType (request) {
-        return request.prioridad
+        if (request.prioridad === 'SOLUCIONADO') return this.$constants.BUG_REPORT_PRIORIDAD.SOLUCIONADO
+        if (request.prioridad === 'NO_SOLUCIONADO') return this.$constants.BUG_REPORT_PRIORIDAD.NO_SOLUCIONADO
+        if (request.prioridad === 'SOLUCION_TEMPORAL') return this.$constants.BUG_REPORT_PRIORIDAD.SOLUCION_TEMPORAL
         /* if (this.received(request)) return 'Pendiente de aprobación'
         if (this.denied(request)) return 'Denegada'
         if (this.approved(request)) return 'Aprobada'
@@ -82,12 +84,9 @@
       },
       // ACOMODAR LOS COLORES DE LA PRIORIDAD
       bugReportTypeColor (request) {
-        if (request.prioridad === 'SOLUCIONADO') return '#1e3773'
-        if (this.denied(request)) return '#f86567'
-        if (this.approved(request)) return '#65c25a'
-        if (this.pending(request)) return '#3063ac'
-        if (this.delivered(request)) return '#e28c44'
-        else return '#e28c44'
+        if (request.prioridad === 'SOLUCIONADO') return '#65c25a'
+        if (request.prioridad === 'NO_SOLUCIONADO') return '#f86567'
+        if (request.prioridad === 'SOLUCION_TEMPORAL') return '#e28c44'
       },
       bugReportTypeSubColor (request) {
         if (this.received(request)) return '#2b4a9f'

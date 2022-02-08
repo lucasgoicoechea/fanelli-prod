@@ -1,13 +1,12 @@
 <template>
   <div class="bugReport-visualization">
-    <a> p </a>
     <navigation :title="title"></navigation>
     <section v-if="Object.keys(request).length > 0">
       <p>Fecha: {{ request.created_at | moment($constants.FORMAT_DATE) }}</p>
       <!--<p>De: {{ request.supervisor.lastname }} {{ request.supervisor.name }}</p>
       <p>Para: {{ request.collaborator.lastname }} {{ request.collaborator.name }}</p>-->
       <div v-if="isPendingApproval">
-        <b>Estado:</b> {{ status }}
+        <b>Estado:</b> {{ request.line }}
       </div>
       <div class="actions" v-else>
         <div v-if="editPermission">
@@ -15,21 +14,21 @@
             Editar
           </router-link>
         </div>
-        <div v-if="$can('JEFE_PLANTA|JEFE_LINEA')">
+        <!--<div v-if="$can('JEFE_PLANTA|JEFE_LINEA')">
           <a class="cancel-button" @click="reject">Rechazar</a>
           <a class="accept" @click="accept">Aceptar</a>
-        </div>
+        </div>-->
       </div>
-      <!--<table-preview :elements="request.items"></table-preview>
-      <h3> Últimas solicitudes para {{ request.collaborator.lastname}}</h3>-->
-      <a class="print" v-if="$can('PANOL')" @click="print">IMPRIMIR</a>
+      <table-preview :bugReports="request"></table-preview>
+      <!--<h3> Últimas solicitudes para {{ request.collaborator.lastname}}</h3>
+      <a class="print" v-if="$can('PANOL')" @click="print">IMPRIMIR</a>-->
     </section>
   </div>
 </template>
 
 <script>
   import Navigation from '../Navigation.vue'
-  // import TablePreview from './TablePreview.vue'
+  import TablePreview from './TablePreview.vue'
   // import LastUserEPPRequests from './LastUserEPPRequests.vue'
   import { mapState } from 'vuex'
   import Vue from 'vue'
@@ -38,7 +37,7 @@
   export default {
     name: 'BugReportVisualization',
     components: {
-      // TablePreview,
+      TablePreview,
       Navigation
       // LastUserEPPRequests
     },
