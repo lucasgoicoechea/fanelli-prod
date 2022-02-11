@@ -6,7 +6,7 @@
       
        <div>
         <div class="col-xs-12">
-          <h3>Selección de linea</h3>
+          <h3>Selección de Linea</h3>
           <select v-model="bugReport.line" id="line">
               <option v-for="(label, value) in $constants.BUG_REPORT_LINES"  :key="value" :value="value"> {{label}}</option>
           </select>
@@ -15,7 +15,7 @@
 
         <div>
         <div class="col-xs-12">
-          <h3>Selección de sector</h3>
+          <h3>Selección de Sector</h3>
           <!--<sector-selector
             :multipleSelection="true"
              typeList="full"
@@ -28,7 +28,7 @@
 
         <div>
         <div class="col-xs-12">
-          <h3>Selección de sub-sector</h3>
+          <h3>Selección de Sub-Sector</h3>
           <!--<sub-sector-selector
             :multipleSelection="true"
              typeList="full"
@@ -41,7 +41,7 @@
         
         <div>
         <div class="col-xs-12">
-          <h3>Selección de equipo</h3>
+          <h3>Selección de Equipo</h3>
           <!--<equipo-selector
             :multipleSelection="true"
              typeList="full"
@@ -54,7 +54,7 @@
         
         <div>
         <div class="col-xs-12">
-          <h3>Selección de grupos</h3>
+          <h3>Selección de Grupos</h3>
           <!--<part-selector
             :multipleSelection="true"
              typeList="full"
@@ -67,7 +67,7 @@
 
         <div>
         <div class="col-xs-12">
-          <h3>Selección de partes</h3>
+          <h3>Selección de Partes</h3>
           <!--<sub-part-selector
             :multipleSelection="true"
              typeList="full"

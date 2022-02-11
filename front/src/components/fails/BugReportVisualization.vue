@@ -8,6 +8,7 @@
       <div>
         <b>Estado:</b> {{ status }}
       </div>
+      <table-preview :bugReports="request"></table-preview>
       <div class="actions">
         <div v-if="editPermission">
           <router-link class="edit" :to="{ name: 'epp-edition', params: { id: request._id }}">
@@ -19,7 +20,6 @@
           <a class="accept" @click="accept">Aceptar</a>
         </div>-->
       </div>
-      <table-preview :bugReports="request"></table-preview>
       <!--<h3> Últimas solicitudes para {{ request.collaborator.lastname}}</h3>
       <a class="print" v-if="$can('PANOL')" @click="print">IMPRIMIR</a>-->
     </section>

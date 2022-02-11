@@ -8,17 +8,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="bugReport in bugReports" :key="bugReport._id">
-            {{bugReport}}
-            <!--<span v-if="bugReport.line"><br>Linea: {{bugReport.line}}</span>
-            <span v-if="bugReport.sector"><br>Sector: {{bugReport.sector}}</span>
-            <span v-if="bugReport.sub_sector"><br>Sub Sector: {{bugReport.sub_sector}}</span>
-            <span v-if="bugReport.equipo"><br>Equipo: {{bugReport.equipo}}</span>
-            <span v-if="bugReport.group"><br>Grupo: {{bugReport.group}}</span>
-            <span v-if="bugReport.part"><br>Parte: {{bugReport.part}}</span>
-            <span v-if="bugReport.prioridad"><br>Prioridad: {{bugReport.prioridad}}</span>
-            <span v-if="bugReport.inconveniente"><br>Inconveniente: {{bugReport.inconveniente}}</span>
-            <span v-if="bugReport.resume"><br>Resumen: {{bugReport.resume}}</span>-->
+        <tr>
+            <span v-if="bugReports.line">Linea: {{bugReports.line}}</span>
+            <span v-if="bugReports.sector"><br>Sector: {{bugReports.sector}}</span>
+            <span v-if="bugReports.sub_sector"><br>Sub Sector: {{bugReports.sub_sector}}</span>
+            <span v-if="bugReports.equipo"><br>Equipo: {{bugReports.equipo}}</span>
+            <span v-if="bugReports.group"><br>Grupo: {{bugReports.group}}</span>
+            <span v-if="bugReports.part"><br>Parte: {{bugReports.part}}</span>
+            <span v-if="bugReports.prioridad"><br>Prioridad: {{$constants.BUG_REPORT_PRIORIDAD[bugReports.prioridad]}}</span>
+            <span v-if="bugReports.inconveniente"><br>Inconveniente: {{bugReports.inconveniente}}</span>
+            <span v-if="bugReports.resume"><br>Resumen: {{bugReports.resume}}</span>
         </tr>
         </tbody>
       </table>
