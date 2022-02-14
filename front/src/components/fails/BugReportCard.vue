@@ -7,13 +7,11 @@
     </card-header>
     <card-section>
       <p slot="content">
-        <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }}</span> </p>
+        <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }}, <span class="time">{{ request.line }}</span></span>, <span class="time">{{ request.sector }}</span>, <span class="time">{{ request.sub_sector }}</span> </p>
       <p slot="content">
-        <span class="time">{{ request.line }}</span> </p>
+         </p>
       <p slot="content">
-        <span class="time">{{ request.sector }}</span> </p>
-      <p slot="content">
-        <span class="time">{{ request.sub_sector }}</span> </p>
+         </p>
       <!--<div @click.stop slot="actions" v-if="received(request)" v-show="$can(permission)">
         <button class="reject" @click="reject(request)" :disabled="request.rejectLoading || request.acceptLoading">
           <img v-if="!request.rejectLoading" src="/static/img/checklists/cross.svg" alt="">

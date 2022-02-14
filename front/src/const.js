@@ -664,7 +664,29 @@ export default {
     PARADA: 'Parada',
     TIEMPO: 'Tiempo',
     PERSONAL: 'Personal',
-    FALTA_RECURSOS: 'Falta de Recursos'
+    FALTA_RECURSOS: 'Falta de Conocimiento'
+  },
+
+  BUG_REPORT_PRIORIDAD2: {
+    ALTO: 'Alto',
+    MEDIO: 'Medio',
+    BAJA: 'Baja'
+  },
+  BUG_REPORT_TURNOS: {
+    T1: 'T1',
+    T2: 'T2',
+    T3: 'T3',
+    T4: 'T4',
+    ME: 'ME',
+    MM: 'MM'
+  },
+  BUG_REPORT_TURNOS2: {
+    T1: 'T1',
+    T2: 'T2',
+    T3: 'T3',
+    T4: 'T4',
+    ME: 'ME',
+    MM: 'MM'
   },
 // LINEA 2
 // SECTOR PRODUCCION
