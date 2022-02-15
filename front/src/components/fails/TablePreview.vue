@@ -15,7 +15,8 @@
             <span v-if="bugReports.equipo"><br>Equipo: {{bugReports.equipo}}</span>
             <span v-if="bugReports.group"><br>Grupo: {{bugReports.group}}</span>
             <span v-if="bugReports.part"><br>Parte: {{bugReports.part}}</span>
-            <span v-if="bugReports.prioridad"><br>Prioridad: {{$constants.BUG_REPORT_PRIORIDAD[bugReports.prioridad]}}</span>
+            <span v-if="bugReports.estado"><br>Estado: {{bugReports.estado}}</span>
+            <span v-if="bugReports.prioridad"><br>Prioridad: {{bugReports.prioridad}}</span>
             <span v-if="bugReports.inconveniente"><br>Inconveniente: {{bugReports.inconveniente}}</span>
             <span v-if="bugReports.resume"><br>Resumen: {{bugReports.resume}}</span>
         </tr>

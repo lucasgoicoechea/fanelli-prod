@@ -80,24 +80,25 @@
         
         <div>
         <div class="col-xs-12">
-          <h3>Estado de falla</h3>
+          <h3>Estado de Falla</h3>
           <!--<sub-part-selector
             :multipleSelection="true"
              typeList="full"
             :preSelection="editable.collaborators"></sub-part-selector>-->
-            <select v-model="bugReport.prioridad" id="estado">
-              <option v-for="(label, value) in $constants.BUG_REPORT_PRIORIDAD"  :key="value" :value="value"> {{label}}</option>
+            <select v-model="bugReport.estado" id="estado">
+              <option v-for="(label, value) in $constants.BUG_REPORT_ESTADO"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
         
+        <div>
         <div class="col-xs-12">
           <h3>Selección de Prioridad</h3>
           <!--<sub-part-selector
             :multipleSelection="true"
              typeList="full"
             :preSelection="editable.collaborators"></sub-part-selector>-->
-            <select v-model="bugReport.prioridad2" id="prioridad">
+            <select v-model="bugReport.prioridad" id="prioridad">
               <option v-for="(label, value) in $constants.BUG_REPORT_PRIORIDAD2"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
@@ -147,6 +148,7 @@
             </div>
           </div>
         </div>        
+
         <div class="col-xs-12">
           <h3>Resumen/Fallas</h3>
           <vue-editor
@@ -243,8 +245,8 @@
           equipo: this.editable.equipo || '',
           group: this.editable.group || '',
           part: this.editable.part || '',
+          estado: this.editable.estado || '',
           prioridad: this.editable.prioridad || '',
-          prioridad2: this.editable.prioridad2 || '',
           inconveniente: this.editable.inconveniente || '',
           resume: this.editable.resume || ''
         }
@@ -896,14 +898,14 @@
         }
       },
       inconvenienteList () {
-        if (this.bugReport.prioridad === 'SOLUCIONADO') {
+        if (this.bugReport.estado === 'SOLUCIONADO') {
           return '-'
         } else {
-          if (this.bugReport.prioridad === 'SOLUCION_TEMPORAL') {
+          if (this.bugReport.estado === 'SOLUCION_TEMPORAL') {
             return '-'
           } else {
-            if (this.bugReport.prioridad === 'NO_SOLUCIONADO') {
-              return this.$constants.BUG_REPORT_PRIORIDAD_NO_SOLUCIONADO
+            if (this.bugReport.estado === 'NO_SOLUCIONADO') {
+              return this.$constants.BUG_REPORT_ESTADO_NO_SOLUCIONADO
             }
           }
         }

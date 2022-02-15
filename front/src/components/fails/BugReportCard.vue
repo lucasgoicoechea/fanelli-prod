@@ -76,9 +76,9 @@
         return req.hasOwnProperty('delivered') && req.delivered
       },
       bugReportType (request) {
-        if (request.prioridad === 'SOLUCIONADO') return this.$constants.BUG_REPORT_PRIORIDAD.SOLUCIONADO
-        if (request.prioridad === 'NO_SOLUCIONADO') return this.$constants.BUG_REPORT_PRIORIDAD.NO_SOLUCIONADO
-        if (request.prioridad === 'SOLUCION_TEMPORAL') return this.$constants.BUG_REPORT_PRIORIDAD.SOLUCION_TEMPORAL
+        if (request.estado === 'SOLUCIONADO') return this.$constants.BUG_REPORT_ESTADO.SOLUCIONADO
+        if (request.estado === 'NO_SOLUCIONADO') return this.$constants.BUG_REPORT_ESTADO.NO_SOLUCIONADO
+        if (request.estado === 'SOLUCION_TEMPORAL') return this.$constants.BUG_REPORT_ESTADO.SOLUCION_TEMPORAL
         /* if (this.received(request)) return 'Pendiente de aprobación'
         if (this.denied(request)) return 'Denegada'
         if (this.approved(request)) return 'Aprobada'
@@ -88,9 +88,9 @@
       },
       // ACOMODAR LOS COLORES DE LA PRIORIDAD
       bugReportTypeColor (request) {
-        if (request.prioridad === 'SOLUCIONADO') return '#65c25a'
-        if (request.prioridad === 'NO_SOLUCIONADO') return '#f86567'
-        if (request.prioridad === 'SOLUCION_TEMPORAL') return '#e28c44'
+        if (request.estado === 'SOLUCIONADO') return '#65c25a'
+        if (request.estado === 'NO_SOLUCIONADO') return '#f86567'
+        if (request.estado === 'SOLUCION_TEMPORAL') return '#e28c44'
       },
       bugReportTypeSubColor (request) {
         if (this.received(request)) return '#2b4a9f'
