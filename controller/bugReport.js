@@ -25,6 +25,7 @@ const controller = {
       equipo: req.body.bugReport.equipo,
       group: req.body.bugReport.group,
       part: req.body.bugReport.part,
+      estado: req.body.bugReport.estado,
       prioridad: req.body.bugReport.prioridad,
       inconveniente: req.body.bugReport.inconveniente,
       resume: req.body.bugReport.resume
