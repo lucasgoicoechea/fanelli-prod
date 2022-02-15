@@ -86,7 +86,7 @@
              typeList="full"
             :preSelection="editable.collaborators"></sub-part-selector>-->
             <select v-model="bugReport.estado" id="estado">
-              <option v-for="(label, value) in $constants.BUG_REPORT_PRIORIDAD"  :key="value" :value="value"> {{label}}</option>
+              <option v-for="(label, value) in $constants.BUG_REPORT_ESTADO"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
         </div>
@@ -904,7 +904,7 @@
             return '-'
           } else {
             if (this.bugReport.estado === 'NO_SOLUCIONADO') {
-              return this.$constants.BUG_REPORT_PRIORIDAD_NO_SOLUCIONADO
+              return this.$constants.BUG_REPORT_ESTADO_NO_SOLUCIONADO
             }
           }
         }

@@ -653,18 +653,18 @@ export default {
     LINE_3: 'Linea 3'
   },
 
-  BUG_REPORT_PRIORIDAD: {
+  BUG_REPORT_ESTADO: {
     SOLUCIONADO: 'Solucionado',
     SOLUCION_TEMPORAL: 'Solución Temporal',
     NO_SOLUCIONADO: 'No Solucionado'
   },
 
-  BUG_REPORT_PRIORIDAD_NO_SOLUCIONADO: {
+  BUG_REPORT_ESTADO_NO_SOLUCIONADO: {
     COMPLEJIDAD: 'Complejidad',
     PARADA: 'Parada',
     TIEMPO: 'Tiempo',
     PERSONAL: 'Personal',
-    FALTA_RECURSOS: 'Falta de Conocimiento'
+    FALTA_CONOCIMIENTO: 'Falta de Conocimiento'
   },
 
   BUG_REPORT_PRIORIDAD2: {
