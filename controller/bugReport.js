@@ -28,6 +28,8 @@ const controller = {
       estado: req.body.bugReport.estado,
       prioridad: req.body.bugReport.prioridad,
       inconveniente: req.body.bugReport.inconveniente,
+      detectado: req.body.bugReport.detectado,
+      resuelto: req.body.bugReport.resuelto,
       resume: req.body.bugReport.resume
     }
     bugReport = awaitFor(bugReportService.create(bugReport))

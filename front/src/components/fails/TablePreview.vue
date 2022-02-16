@@ -18,6 +18,8 @@
             <span v-if="bugReports.estado"><br>Estado: {{bugReports.estado}}</span>
             <span v-if="bugReports.prioridad"><br>Prioridad: {{bugReports.prioridad}}</span>
             <span v-if="bugReports.inconveniente"><br>Inconveniente: {{bugReports.inconveniente}}</span>
+            <span v-if="bugReports.detectado"><br>Detectado por: {{bugReports.detectado}}</span>
+            <span v-if="bugReports.resuelto"><br>Resuelto por: {{bugReports.resuelto}}</span>
             <span v-if="bugReports.resume"><br>Resumen: {{bugReports.resume}}</span>
         </tr>
         </tbody>

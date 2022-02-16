@@ -117,7 +117,7 @@
         </div>
         </div>
 
-        <div class="col-xs-12">
+       <div class="col-xs-12">
           <h3>Detectado por</h3>
           <div class="row">
             <div
@@ -126,28 +126,30 @@
               :key="value">
               <check-box
                 class="margin"
-                v-model="bugReport.turnos"
+                type="radio"
+                v-model="bugReport.detectado"
                 :val="value"
                 :label="label"></check-box>
-            </div>
+            </div>      
           </div>
-        </div>
+       </div>
         
-        <div class="col-xs-12">
+       <div class="col-xs-12">
           <h3>Resuelto por</h3>
           <div class="row">
             <div
               class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_TURNOS2"
+              v-for="(label, value) in $constants.BUG_REPORT_TURNOS"
               :key="value">
               <check-box
                 class="margin"
-                v-model="bugReport.turnos"
+                type="radio"
+                v-model="bugReport.resuelto"
                 :val="value"
                 :label="label"></check-box>
-            </div>
+            </div>      
           </div>
-        </div>        
+        </div>
 
         <div class="col-xs-12">
           <h3>Resumen/Fallas</h3>
@@ -248,6 +250,8 @@
           estado: this.editable.estado || '',
           prioridad: this.editable.prioridad || '',
           inconveniente: this.editable.inconveniente || '',
+          detectado: this.editable.detectado || '',
+          resuelto: this.editable.resuelto || '',
           resume: this.editable.resume || ''
         }
       },

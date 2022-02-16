@@ -36,6 +36,12 @@ const BugReportSchema = new Schema({
     inconveniente: {
         type: String
     },
+    detectado: {
+        type: String
+    },
+    resuelto: {
+        type: String
+    },
     resume: {
         type: String
     } 

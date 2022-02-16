@@ -680,14 +680,7 @@ export default {
     ME: 'ME',
     MM: 'MM'
   },
-  BUG_REPORT_TURNOS2: {
-    T1: 'T1',
-    T2: 'T2',
-    T3: 'T3',
-    T4: 'T4',
-    ME: 'ME',
-    MM: 'MM'
-  },
+
 // LINEA 2
 // SECTOR PRODUCCION
 
