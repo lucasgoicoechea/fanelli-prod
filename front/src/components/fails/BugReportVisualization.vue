@@ -11,7 +11,7 @@
       <table-preview :bugReports="request"></table-preview>
       <div class="actions">
         <div v-if="editPermission">
-          <router-link class="edit" :to="{ name: 'bug-report-edit', params: { BugReportEdit }}">
+          <router-link class="edit" :to="{ name: 'bug-report-edit', params: { id: request._id }}">
             Editar
           </router-link>
         </div>

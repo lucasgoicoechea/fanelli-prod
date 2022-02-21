@@ -4,7 +4,7 @@
       :title="title"></navigation>
 
     <form-component
-      @update="update"></form-component>
+      @update="update" :bugReport="request"></form-component>
 
     <bottom-navbar>
       <div class="submit">
@@ -12,12 +12,12 @@
           v-if="!loading"
           class="msg pointer"
           @click="confirm">
-          <h5 class="items">Reporte falla</h5>
+          <h5 class="items">Edicion de falla</h5>
           <span class="glyphicon glyphicon-send items icon-action"></span>
         </div>
 
         <div class="msg" v-else>
-          <h5 class="items">Reportando falla</h5>
+          <h5 class="items">Editando falla</h5>
           <spinner
             class="items"
             :show="loading"></spinner>
@@ -32,7 +32,7 @@
   import Navigation from '@/components/Navigation.vue'
   import BottomNavbar from '@/components/BottomNavbar.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
-  import FormComponent from '@/components/fails/BugReportForm'
+  import FormComponent from '@/components/fails/BugReportFormEdit'
 
   export default {
     name: 'BugReportEdit',
@@ -48,8 +48,14 @@
         form: {},
         validation: {},
         loading: false,
-        sendStoreAction: 'bugReport/edit'
+        sendStoreAction: 'bugReport/edit',
+        request: Object
       }
+    },
+    created: function () {
+      this.$store.dispatch('bugReport/getDetail', {id: this.$route.params.id}).then(response => {
+        this.request = response.bugReport
+      })
     },
     methods: {
       update (data) {

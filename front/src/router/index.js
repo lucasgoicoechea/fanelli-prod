@@ -108,6 +108,7 @@ import BugReportHistory from '@/components/fails/BugReportHistory'
 import BugReportResume from '@/components/fails/BugReportResume'
 import BugReportView from '@/components/fails/BugReportView'
 import BugReportVisualization from '@/components/fails/BugReportVisualization'
+import BugReportEdit from '@/components/fails/BugReportEdit'
 
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
@@ -920,6 +921,15 @@ const router = new Router({
               name: 'bugReport-edition',
               component: BugReportView,
               props: { edition: true },
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'edicion/:id',
+              name: 'bug-report-edit',
+              component: BugReportEdit,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
                 fail: '/error'
