@@ -44,32 +44,32 @@ const actions = {
       .then(created)
       .catch(handleError)
   },
-  edit ({dispatch}, meeting) {
+  edit ({dispatch}, bugReport) {
     const edited = (response) => {
-      endLoading(dispatch, 'meeting edit')
+      endLoading(dispatch, 'bugReport edit')
       return response.body
     }
 
     const handleError = beforeFallback(() => {
-      endLoading(dispatch, 'meeting edit')
+      endLoading(dispatch, 'bugReport edit')
     })
 
-    startLoading(dispatch, 'meeting edit')
-    return Vue.http.put(`meeting/${meeting._id}`, {meeting})
+    startLoading(dispatch, 'bugReport edit')
+    return Vue.http.put(`bugReport/${bugReport._id}`, {bugReport})
       .then(edited)
       .catch(handleError)
   },
   getDetail ({dispatch}, payload) {
     const fetched = (response) => {
-      endLoading(dispatch, 'meeting getDetail')
+      endLoading(dispatch, 'bugReport getDetail')
       return response.body
     }
 
     const handleError = beforeFallback(() => {
-      endLoading(dispatch, 'meeting getDetail')
+      endLoading(dispatch, 'bugReport getDetail')
     })
 
-    startLoading(dispatch, 'meeting getDetail')
+    startLoading(dispatch, 'bugReport getDetail')
     return Vue.http.get(`bugReport/${payload.id}`)
       .then(fetched)
       .catch(handleError)
@@ -83,7 +83,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting', {
+    return Vue.http.get('bugReport', {
       params: payload
     })
       .then(fetched)
@@ -98,7 +98,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting/manager/all', {
+    return Vue.http.get('bugReport/manager/all', {
       params: payload
     })
       .then(fetched)
@@ -113,7 +113,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting/manager/calendar', {
+    return Vue.http.get('bugReport/manager/calendar', {
       params: payload
     })
       .then(fetched)
@@ -128,7 +128,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting/manager/sector', {
+    return Vue.http.get('bugReport/manager/sector', {
       params: payload
     })
       .then(fetched)
@@ -143,7 +143,7 @@ const actions = {
       return Promise.reject(error)
     }
     // console.dir(context)
-    return Vue.http.get('meeting/pass/' + payload.userId, {
+    return Vue.http.get('bugReport/pass/' + payload.userId, {
       params: payload
     })
       .then(fetched)
@@ -158,7 +158,7 @@ const actions = {
       return Promise.reject(error)
     }
     // console.dir(context)
-    return Vue.http.get('meeting/pass-me/' + payload.userId, {
+    return Vue.http.get('bugReport/pass-me/' + payload.userId, {
       params: payload
     })
       .then(fetched)
@@ -176,7 +176,7 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
-  print ({dispatch}, meeting) {
+  print ({dispatch}, bugReport) {
     const success = (response) => {
       const blob = new Blob([response.data], {type: response.headers.get['content-type']})
       return blob
@@ -186,13 +186,13 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting/pdf/' + meeting._id,
+    return Vue.http.get('bugReport/pdf/' + bugReport._id,
       {responseType: 'arraybuffer'}
     )
       .then(success)
       .catch(handleError)
   },
-  cancel (context, meeting) {
+  cancel (context, bugReport) {
     const deleted = (response) => {
       return response.body
     }
@@ -201,11 +201,11 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.delete(`meeting/${meeting._id}`)
+    return Vue.http.delete(`bugReport/${bugReport._id}`)
       .then(deleted)
       .catch(handleError)
   },
-  cancelAll (context, meeting) {
+  cancelAll (context, bugReport) {
     const deleted = (response) => {
       return response.body
     }
@@ -214,7 +214,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.delete(`meeting/${meeting._id}/all`)
+    return Vue.http.delete(`bugReport/${bugReport._id}/all`)
       .then(deleted)
       .catch(handleError)
   },
@@ -227,7 +227,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting/to/' + payload.userId, {
+    return Vue.http.get('bugReport/to/' + payload.userId, {
       params: payload
     })
       .then(fetched)
@@ -242,7 +242,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('meeting/all/' + payload.userId, {
+    return Vue.http.get('bugReport/all/' + payload.userId, {
       params: payload
     })
       .then(fetched)

@@ -37,7 +37,7 @@
         <div class="col-xs-12">
           <h3>Resumen/Resolucion</h3>
           <vue-editor
-          v-model="bugReport.resume"
+          v-model="bugReport.resolucion"
           placeholder="Escriba aquí el resumen de la resolucion de la falla"
           :editorToolbar="defaultToolbar"></vue-editor>
         </div>
@@ -73,7 +73,7 @@
       CheckBox
     },
     props: {
-      bugReports: {
+      bugReport: {
         type: Object
       },
       preSelection: {
@@ -94,7 +94,7 @@
     },
     data () {
       return {
-        bugReport: this.generateData(),
+        // bugReport: this.generateData(),
         customToolbar: [
           ['bold', 'italic', 'underline'],
           [{ list: 'ordered' }, { list: 'bullet' }],
@@ -138,7 +138,8 @@
           inconveniente: this.editable.inconveniente || '',
           detectado: this.editable.detectado || '',
           resuelto: this.editable.resuelto || '',
-          resume: this.editable.resume || ''
+          resume: this.editable.resume || '',
+          resolucion: this.editable.resolucion || ''
         }
       },
       validate () {

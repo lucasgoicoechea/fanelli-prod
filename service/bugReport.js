@@ -16,6 +16,12 @@ const service = {
     }
   ),
 
+  edit: async(function (bugReport, id) {
+    awaitFor(BugReportModel.update({_id: id}, {$set: bugReport}))
+    // let bugReportTmp = awaitFor(BugReportModel.update(bugReport))
+    return bugReport
+  }),
+
   listAllPass : async(function (options) {
     let bugReports = BugReportModel
     .find({

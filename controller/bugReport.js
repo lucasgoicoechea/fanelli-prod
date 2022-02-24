@@ -30,7 +30,8 @@ const controller = {
       inconveniente: req.body.bugReport.inconveniente,
       detectado: req.body.bugReport.detectado,
       resuelto: req.body.bugReport.resuelto,
-      resume: req.body.bugReport.resume
+      resume: req.body.bugReport.resume,
+      resolucion: req.body.bugReport.resolucion
     }
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
@@ -51,6 +52,22 @@ const controller = {
         frecuency: req.query.frecuency
       }))
     res.json({success: true, bugReports})
+  }),
+
+  edit: async(function (req, res, next) {
+    /*if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !bugReportService.isCreator(req.user.id, req.params.id)) {
+      return next(new AppError('Impossible to edit', 'No se puede editar', Const.ERROR.DOCUMENT_CANT_BE_EDITED))
+    }
+    if (req.body.bugReport.state == null){
+      req.body.bugReport.state = 2
+    }*/
+    let bugReport = awaitFor(bugReportService.findOne(req.params.id))
+      bugReport.estado = req.body.bugReport.estado
+      bugReport.resuelto = req.body.bugReport.resuelto
+      bugReport.resolucion = req.body.bugReport.resolucion
+    // let repeatEdit = req.body.bugReport.repeatEdit || false
+    bugReport = awaitFor(bugReportService.edit(bugReport, req.params.id))
+    res.json({success: true, bugReport})
   })
 }
   

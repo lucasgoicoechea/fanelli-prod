@@ -44,6 +44,9 @@ const BugReportSchema = new Schema({
     },
     resume: {
         type: String
+    },
+    resolucion: {
+        type: String
     } 
     }, {
         timestamps: {
