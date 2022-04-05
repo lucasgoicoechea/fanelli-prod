@@ -5,7 +5,9 @@ import notifications from './modules/notifications'
 import catalog from './modules/catalog'
 import requests from './modules/requests'
 import checklists from './modules/checklists'
+import checklistsLTres from './modules/checklistsLTres'
 import supervisionparts from './modules/supervisionparts'
+import supervisionpartsLTres from './modules/supervisionpartsLTres'
 import collaborators from './modules/collaborators'
 import users from './modules/users'
 import news from './modules/news'
@@ -33,7 +35,9 @@ export const modules = {
   catalog,
   requests,
   checklists,
+  checklistsLTres,
   supervisionparts,
+  supervisionpartsLTres,
   collaborators,
   users,
   tasksQueue,

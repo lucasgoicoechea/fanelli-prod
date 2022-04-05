@@ -117,25 +117,49 @@
             routeName: 'control-panel',
             submenu: [
               {
-                name: 'Checklists',
+                name: 'Checklists L2',
                 type: 'control-checklists',
                 route: {name: 'control-checklists'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Partes',
+                name: 'Partes L2',
                 type: 'control-supervisionparts',
                 route: {name: 'control-supervisionparts'},
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Partes Control',
+                name: 'Partes Control L2',
                 type: 'control-resume-supervisionparts',
                 route: {name: 'control-resume-supervisionparts'},
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Partes Totales',
+                name: 'Partes Totales L2',
+                type: 'control-totales-supervisionparts',
+                route: {name: 'control-totales-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Checklists L3',
+                type: 'control-checklists',
+                route: {name: 'control-checklists'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes L3',
+                type: 'control-supervisionparts',
+                route: {name: 'control-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Control L3',
+                type: 'control-resume-supervisionparts',
+                route: {name: 'control-resume-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Totales L3',
                 type: 'control-totales-supervisionparts',
                 route: {name: 'control-totales-supervisionparts'},
                 can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
@@ -180,26 +204,26 @@
             can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
           },
           {
-            name: 'Checklist',
+            name: 'Checklist L2',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'checklist',
             can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'checklistsIndex',
             submenu: [
               {
-                name: 'Extrusora',
+                name: 'Extrusora L2',
                 type: 'extrusora',
                 route: {name: 'checklist', params: {sector: 'EXTRUSORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Apiladora',
+                name: 'Apiladora L2',
                 type: 'apiladora',
                 route: {name: 'checklist', params: {sector: 'APILADORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Desapiladora',
+                name: 'Desapiladora L2',
                 type: 'desapiladora',
                 route: {name: 'checklist', params: {sector: 'DESAPILADORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
@@ -207,26 +231,26 @@
             ]
           },
           {
-            name: 'Partes',
+            name: 'Partes L2',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'checklist',
             can: authorize(ROLES.OFICIALES, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'supervisionpartsIndex',
             submenu: [
               {
-                name: 'Extrusora',
+                name: 'Extrusora L2',
                 type: 'extrusora',
                 route: {name: 'supervisionpart', params: {sector: 'EXTRUSORA'}},
                 can: authorize(ROLES.OFICIAL_EXTRUSORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Apiladora',
+                name: 'Apiladora L2',
                 type: 'apiladora',
                 route: {name: 'supervisionpart', params: {sector: 'APILADORA'}},
                 can: authorize(ROLES.OFICIAL_APILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Desapiladora',
+                name: 'Desapiladora L2',
                 type: 'desapiladora',
                 route: {name: 'supervisionpart', params: {sector: 'DESAPILADORA'}},
                 can: authorize(ROLES.OFICIAL_DESAPILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)

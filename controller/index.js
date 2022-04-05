@@ -30,6 +30,7 @@ module.exports = {
   securityElement: require(path.join(__dirname, '/securityElement')),
   user: require(path.join(__dirname, '/user')),
   checklist: require(path.join(__dirname, '/checklist')),
+  checklistLTres: require(path.join(__dirname, '/checklistLTres')),
   staffNews: require(path.join(__dirname, '/staffNews')),
   staffRequest: require(path.join(__dirname, '/staffRequest')),
   eventsTimeline: require(path.join(__dirname, '/eventsTimeline')),
@@ -46,5 +47,6 @@ module.exports = {
   line: require(path.join(__dirname, '/line')),
   occurrence: require(path.join(__dirname, '/occurrence')),
   supervisionPart: require(path.join(__dirname, '/supervisionPart')),
+  supervisionPartLTres: require(path.join(__dirname, '/supervisionPartLTres')),
   bugReport: require(path.join(__dirname, '/bugReport'))
 }

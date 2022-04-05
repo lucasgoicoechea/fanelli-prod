@@ -26,6 +26,12 @@ import ChecklistsList from '@/components/checklists/ChecklistsList'
 import ChecklistHistory from '@/components/checklists/ChecklistHistory'
 import ChecklistForm from '@/components/checklists/ChecklistForm'
 import ChecklistsControl from '@/components/checklists/ChecklistsControl'
+// Checklist
+import ChecklistsL3Index from '@/components/checklistsLTres/ChecklistsIndex'
+import ChecklistsL3List from '@/components/checklistsLTres/ChecklistsList'
+import ChecklistL3History from '@/components/checklistsLTres/ChecklistHistory'
+import ChecklistL3Form from '@/components/checklistsLTres/ChecklistForm'
+import ChecklistsL3Control from '@/components/checklistsLTres/ChecklistsControl'
 // Supervisionparts
 import SupervisionpartIndex from '@/components/supervisionParts/SupervisionpartIndex'
 import SupervisionpartList from '@/components/supervisionParts/SupervisionpartList'
@@ -38,6 +44,18 @@ import SupervisionpartTotales from '@/components/supervisionParts/Supervisionpar
 import SupervisionpartsResumen from '@/components/supervisionParts/SupervisionpartResumen'
 import SupervisionpartResume from '@/components/supervisionParts/SupervisionpartResume'
 import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal'
+// Supervisionparts
+import SupervisionpartL3Index from '@/components/supervisionPartsL3/SupervisionpartIndex'
+import SupervisionpartL3List from '@/components/supervisionPartsL3/SupervisionpartList'
+import SupervisionpartL3History from '@/components/supervisionPartsL3/SupervisionpartHistory'
+import SupervisionpartL3Form from '@/components/supervisionPartsL3/SupervisionpartForm'
+import SupervisionpartsL3Control from '@/components/supervisionPartsL3/SupervisionpartControl'
+import SupervisionpartL3Total from '@/components/supervisionPartsL3/SupervisionpartTotal'
+import SupervisionpartL3Totales from '@/components/supervisionPartsL3/SupervisionpartTotales'
+// import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView'
+import SupervisionpartsL3Resumen from '@/components/supervisionPartsL3/SupervisionpartResumen'
+import SupervisionpartL3Resume from '@/components/supervisionPartsL3/SupervisionpartResume'
+import SupervisionpartResumeHistoryL3Total from '@/components/supervisionPartsL3/SupervisionpartResumeHistoryTotal'
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
 import ControlPanelIndex from '@/components/control/ControlPanelIndex'
@@ -350,6 +368,42 @@ const router = new Router({
               }
             },
             {
+              path: 'checklistsLTres',
+              name: 'control-checklists-LTres',
+              component: ChecklistsL3Control,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionpartsLTres',
+              name: 'control-supervisionparts-LTres',
+              component: SupervisionpartsL3Control,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-resume-LTres',
+              name: 'control-resume-supervisionparts-LTres',
+              component: SupervisionpartsL3Resumen,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-totals-LTres',
+              name: 'control-totales-supervisionparts-LTres',
+              component: SupervisionpartL3Totales,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
               path: 'novedades',
               name: 'control-novedades',
               component: EventsIndex,
@@ -581,6 +635,115 @@ const router = new Router({
               path: ':sector',
               name: 'supervisionpart',
               component: SupervisionpartForm,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'checkL3',
+          component: ChecklistsL3Index,
+          name: 'checklistsL3Index',
+          redirect: {
+            name: 'checklistsL3'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'checklistsL3',
+              component: ChecklistsL3List,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial/:date',
+              name: 'checklistsL3History',
+              component: ChecklistL3History,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':sector',
+              name: 'checklistL3',
+              component: ChecklistL3Form,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'supervisionpartL3',
+          component: SupervisionpartL3Index,
+          name: 'supervisionpartsL3Index',
+          redirect: {
+            name: 'supervisionpartsL3'
+          },
+          meta: {
+            permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'supervisionparts',
+              component: SupervisionpartL3List,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial/:date',
+              name: 'supervisionpartsHistory',
+              component: SupervisionpartL3History,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume-total/:date',
+              name: 'supervisionpartResumeHistoryTotal',
+              component: SupervisionpartResumeHistoryL3Total,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-totales-total/:date',
+              name: 'supervisionpartTotalesView',
+              component: SupervisionpartL3Total,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume/:date',
+              name: 'supervisionpartsResumen',
+              component: SupervisionpartL3Resume,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':sector',
+              name: 'supervisionpart',
+              component: SupervisionpartL3Form,
               meta: {
                 permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
                 fail: '/error'
