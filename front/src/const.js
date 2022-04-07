@@ -678,7 +678,9 @@ export default {
     T3: 'T3',
     T4: 'T4',
     ME: 'ME',
-    MM: 'MM'
+    MM: 'MM',
+    JL: 'JL',
+    OT: 'OT'
   },
 
 // LINEA 2
