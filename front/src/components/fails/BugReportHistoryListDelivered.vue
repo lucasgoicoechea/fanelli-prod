@@ -1,33 +1,21 @@
 <template>
   <div class="bugReport-history-list-delivered container-fluid">
-    <h3><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filtros</h3>
-    <div class="filters">
-      <div class="filter">
-        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-        <input class="date" v-model="date" type="date">
-      </div>
-      <collaborator-selector class="filter" :reduced="true"></collaborator-selector>
+   <div class="spinner-container">
+      <spinner
+        class="spinner"
+        :show="loadingActiveRequest"
+        loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
 
-    <div class="empty" v-show="this.deliveredRequest.requests.length === 0 && !loadingDelivered">
-      <p>No hay solicitudes</p>
+    <div class="empty" v-show="!loadingActiveRequest && bugReportListDelivered.length === 0">
+      <p>No hay solicitudes de fallas</p>
     </div>
-    <div class="cards-container"
-         v-infinite-scroll="filter"
-         infinite-scroll-disabled="deliveredNotUpdate"
-         infinite-scroll-distance="0">
-      <bugReport-card
-        v-for="request in this.deliveredRequest.requests"
-        :key="request._id"
-        :request="request">
-      </bugReport-card>
-      <div class="empty">
-        <spinner
-          class="spinner"
-          :show="loadingDelivered"
-          loadingMessage="Cargando solicitudes..."></spinner>
-      </div>
-    </div>
+
+    <bugReport-card
+      v-for="request in bugReportListDelivered"
+      :key="request._id"
+      :request="request">
+    </bugReport-card>
   </div>
 </template>
 
@@ -54,16 +42,38 @@
       return {
         date: '',
         callFilter: false,
-        loadingDelivered: false
+        loadingDelivered: false,
+        bugReportListDelivered: []
       }
     },
     created: function () {
-      this.loadingDelivered = true
-      this.$store.dispatch('requests/fetchDelivered')
-        .then(() => { this.loadingDelivered = false })
+      this.fetch()
     },
     destroyed: function () {},
     methods: {
+      fetch () {
+        // this.bugReport.loading = true
+        const action = 'bugReport/fetchNoActive'
+        this.$store.dispatch(action, {})
+          .then(this.successFetch)
+          .catch(this.failFetch)
+      },
+      successFetch (response) {
+        if (response.bugReports.length === 0) {
+          // this.bugReport.lastOne = true
+          console.log('vacio')
+        } else {
+          response.bugReports.forEach(e => {
+            this.bugReportListDelivered.push(e)
+          })
+          // this.bugReport.page += 1
+        }
+        // this.bugReport.loading = false
+      },
+      failFetch (error) {
+        this.$snotifyWrapper.error(error)
+        // this.bugReport.loading = false
+      },
       goToRequest (req) {
         this.$router.push({name: 'bugReport-request', params: {id: req._id}})
       },
@@ -96,6 +106,9 @@
       }
     },
     computed: {
+      loadingActiveRequest () {
+        return this.$loading.isLoading('requests fetchActive')
+      },
       ...mapGetters('requests', [
         'deliveredRequestsFilter'
       ]),

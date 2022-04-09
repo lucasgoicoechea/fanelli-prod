@@ -38,6 +38,23 @@ const service = {
   return bugReports
   }),
 
+  listNoActive : async(function (options) {
+    let bugReports = BugReportModel
+    .find({
+      created_at:{$lte:new Date(new Date().getTime()+(24*60*60*1000))}
+      // estado: {$nin :["SOLUCIONADO"]}
+    })
+    /*.populate({
+      path: 'collaborators',
+      populate: {path: 'shift', select: 'value'},
+      select: {name: 1, lastname: 1, legajo: 1}
+    })
+    .populate('creator', 'name lastname legajo')*/
+   /*bugReports = filterMeeting(bugReports,options)*/
+  // return paginateAndSort(bugReports, options,-1)
+  return bugReports
+  }),
+
   findOne: async(function (meetingId) {
     return awaitFor(BugReportModel.findById(meetingId))
   })

@@ -21,6 +21,7 @@ router.post('', bugReportController.create)
 router.get('/fetchActive', bugReportController.fetchActive)
 router.get('/:id', bugReportController.getId)
 router.put('/:id', bugReportController.edit)
+router.get('/fetchNoActive', bugReportController.fetchNoActive)
 
 
 module.exports = router
