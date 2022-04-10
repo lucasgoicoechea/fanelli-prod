@@ -41,8 +41,8 @@
 <script>
   import { mapGetters, mapState } from 'vuex'
   import Spinner from '@/components/Spinner.vue'
-  import CheckValueBoolean from '@/components/checklists/CheckValueBoolean.vue'
-  import CheckValueNumber from '@/components/checklists/CheckValueNumber.vue'
+  import CheckValueBoolean from '@/components/checklistsLTres/CheckValueBoolean.vue'
+  import CheckValueNumber from '@/components/checklistsLTres/CheckValueNumber.vue'
 
   export default {
     name: 'CheckItem',
@@ -67,7 +67,7 @@
     },
     methods: {
       select: function () {
-        this.$store.commit('checklists/selectCheck', {check: this.item.check})
+        this.$store.commit('checklistsLTres/selectCheck', {check: this.item.check})
       },
       showLoadObservation: function () {
         this.loadObservation = !this.loadObservation
@@ -80,7 +80,7 @@
             comment: this.comment,
             text: this.item.check.text
           }
-          this.$store.dispatch('checklists/createComment', {sector: this.item.check.sector, check})
+          this.$store.dispatch('checklistsLTres/createComment', {sector: this.item.check.sector, check})
           this.comment = ''
           this.showLoadObservation()
         }
@@ -112,12 +112,12 @@
           return new Date(b.date) - new Date(a.date)
         })
       },
-      ...mapGetters('checklists', [
+      ...mapGetters('checklistsLTres', [
         'getSector',
         'currentCheck',
         'isCurrentCheck'
       ]),
-      ...mapState('checklists', [
+      ...mapState('checklistsLTres', [
         'loading'
       ])
     }

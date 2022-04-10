@@ -15,9 +15,9 @@
 </template>
 
 <script>
-  import ChecklistSummaryView from '@/components/checklists/ChecklistSummaryView.vue'
-  import ChecklistComparativeView from '@/components/checklists/ChecklistComparativeView.vue'
-  import ChecklistsFullList from '@/components/checklists/ChecklistsFullList.vue'
+  import ChecklistSummaryView from '@/components/checklistsLTres/ChecklistSummaryView.vue'
+  import ChecklistComparativeView from '@/components/checklistsLTres/ChecklistComparativeView.vue'
+  import ChecklistsFullList from '@/components/checklistsLTres/ChecklistsFullList.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapState } from 'vuex'
@@ -38,7 +38,7 @@
     },
     methods: {},
     computed: {
-      ...mapState('checklists', [
+      ...mapState('checklistsLTres', [
         'summaries'
       ])
     }

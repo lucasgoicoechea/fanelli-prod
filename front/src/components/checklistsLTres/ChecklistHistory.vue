@@ -39,8 +39,8 @@
 
 <script>
   import Navigation from '@/components/Navigation.vue'
-  import ChecklistSummaryView from '@/components/checklists/ChecklistSummaryView.vue'
-  import ChecklistComparativeView from '@/components/checklists/ChecklistComparativeView.vue'
+  import ChecklistSummaryView from '@/components/checklistsLTres/ChecklistSummaryView.vue'
+  import ChecklistComparativeView from '@/components/checklistsLTres/ChecklistComparativeView.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapGetters } from 'vuex'
@@ -83,7 +83,7 @@
         return this.$moment(this.date, 'DD-MM-YYYY', true).isValid()
       },
       ...mapGetters(
-        'checklists', [
+        'checklistsLTres', [
           'getComparativeHeaders'
         ]
       )

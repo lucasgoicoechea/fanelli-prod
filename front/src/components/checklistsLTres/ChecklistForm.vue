@@ -76,7 +76,7 @@
     },
     methods: {
       init (sector) {
-        this.$store.dispatch('checklists/fetch', {sector})
+        this.$store.dispatch('checklistsLTres/fetch', {sector})
         this.title = `Checklist ${this.$options.filters.capitalize(sector)}`
       },
       handleResizeAndInteractions () {
@@ -101,7 +101,7 @@
             observation: this.observation,
             checklist_id: this.getSector(this.sector).checklist._id
           }
-          this.$store.dispatch('checklists/createObservation', {sector: this.sector, observation})
+          this.$store.dispatch('checklistsLTres/createObservation', {sector: this.sector, observation})
             .then(() => {
               this.loadingObservation = false
             })
@@ -124,11 +124,11 @@
         return this.$route.params.sector
       },
       ...mapState(
-        'checklists', [
+        'checklistsLTres', [
           'data',
           'loading'
         ]),
-      ...mapGetters('checklists', [
+      ...mapGetters('checklistsLTres', [
         'getSector',
         'checklistHasObservation'
       ])

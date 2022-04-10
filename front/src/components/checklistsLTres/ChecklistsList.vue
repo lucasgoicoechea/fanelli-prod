@@ -32,7 +32,7 @@
     },
     computed: {
       ...mapState(
-        'checklists', [
+        'checklistsLTres', [
           'types'
         ])
     }

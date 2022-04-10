@@ -35,7 +35,7 @@
       }
     },
     created: function () {
-      this.$store.dispatch('checklists/fetchLast30days')
+      this.$store.dispatch('checklistsLTres/fetchLast30days')
     },
     methods: {
       redirect: function () {
@@ -59,13 +59,13 @@
         return this.lastOne || this.loading
       },
       ...mapState(
-        'checklists', [
+        'checklistsLTres', [
           'checklists',
           'loading',
           'lastOne'
         ]),
       ...mapGetters(
-        'checklists', [
+        'checklistsLTres', [
           'filterChecklistsByDate',
           'getDatesChecklists'
         ]

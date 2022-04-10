@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import CheckHistoryItem from '@/components/checklists/CheckHistoryItem'
+  import CheckHistoryItem from '@/components/checklistsLTres/CheckHistoryItem'
   import Spinner from '@/components/Spinner'
   import {mapState, mapGetters} from 'vuex'
   import Const from '@/const'
@@ -75,14 +75,14 @@
       init () {
         if (this.validateDate) {
           this.loading = true
-          this.$store.commit('checklists/cleanHistories')
-          this.$store.dispatch('checklists/addHistory', {sector: 'EXTRUSORA', date: this.convertedDate})
+          this.$store.commit('checklistsLTres/cleanHistories')
+          this.$store.dispatch('checklistsLTres/addHistory', {sector: 'EXTRUSORA', date: this.convertedDate})
             .then(() => {
               this.loading = false
             }, this.catchError)
-          this.$store.dispatch('checklists/addHistory', {sector: 'APILADORA', date: this.convertedDate})
+          this.$store.dispatch('checklistsLTres/addHistory', {sector: 'APILADORA', date: this.convertedDate})
             .catch(this.catchError)
-          this.$store.dispatch('checklists/addHistory', {sector: 'DESAPILADORA', date: this.convertedDate})
+          this.$store.dispatch('checklistsLTres/addHistory', {sector: 'DESAPILADORA', date: this.convertedDate})
             .catch(this.catchError)
           this.current = Const.currentSchedule().value
         }
@@ -101,12 +101,12 @@
     },
     computed: {
       ...mapState(
-        'checklists', [
+        'checklistsLTres', [
           'histories',
           'checklistOrder'
         ]),
       ...mapGetters(
-        'checklists', [
+        'checklistsLTres', [
           'getComparativeHeaders',
           'getHistoryBySector'
         ]

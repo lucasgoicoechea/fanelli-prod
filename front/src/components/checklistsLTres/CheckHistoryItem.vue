@@ -44,8 +44,8 @@
 </template>
 
 <script>
-  import CheckValueBoolean from '@/components/checklists/CheckValueBoolean.vue'
-  import CheckValueNumber from '@/components/checklists/CheckValueNumber.vue'
+  import CheckValueBoolean from '@/components/checklistsLTres/CheckValueBoolean.vue'
+  import CheckValueNumber from '@/components/checklistsLTres/CheckValueNumber.vue'
   import { mapState, mapGetters } from 'vuex'
 
   export default {
@@ -97,10 +97,10 @@
       }
     },
     computed: {
-      ...mapState('checklists', [
+      ...mapState('checklistsLTres', [
         'types'
       ]),
-      ...mapGetters('checklists', [
+      ...mapGetters('checklistsLTres', [
         'getComparativeHeaders'
       ])
     },

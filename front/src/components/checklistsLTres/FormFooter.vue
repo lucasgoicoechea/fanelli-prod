@@ -69,10 +69,10 @@
         if (this.currentCheck(this.sector).check.extra) {
           check.extra = this.currentCheck(this.sector).auxExtra
         }
-        this.$store.dispatch('checklists/updateCheck', {sector: this.sector, check})
+        this.$store.dispatch('checklistsLTres/updateCheck', {sector: this.sector, check})
       },
       undo () {
-        this.$store.commit('checklists/undo', {sector: this.sector})
+        this.$store.commit('checklistsLTres/undo', {sector: this.sector})
       },
       onClose () {
         this.$router.push({name: 'home'})
@@ -98,7 +98,7 @@
       sector: function () {
         return this.$route.params.sector
       },
-      ...mapGetters('checklists', [
+      ...mapGetters('checklistsLTres', [
         'currentCheck',
         'getSector'
       ]),

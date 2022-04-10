@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import ChecklistSummary from '@/components/checklists/ChecklistSummary.vue'
+  import ChecklistSummary from '@/components/checklistsLTres/ChecklistSummary.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import {mapState, mapGetters} from 'vuex'
 
@@ -39,7 +39,7 @@
           const formatDate = (this.isCurrentDate)
             ? this.date
             : this.$moment(this.date, 'DD-MM-YYYY').utc().format('YYYY-MM-DD')
-          this.$store.dispatch('checklists/summaries', {date: formatDate})
+          this.$store.dispatch('checklistsLTres/summaries', {date: formatDate})
         }
       },
       validateDate (date) {
@@ -59,11 +59,11 @@
       }
     },
     computed: {
-      ...mapState('checklists', [
+      ...mapState('checklistsLTres', [
         'summaries',
         'checklistOrder'
       ]),
-      ...mapGetters('checklists', [
+      ...mapGetters('checklistsLTres', [
         'filterChecklistsSummary'
       ]),
       isCurrentDate () {

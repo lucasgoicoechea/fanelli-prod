@@ -40,7 +40,7 @@
     },
     methods: {
       updateInput (e) {
-        this.$store.commit('checklists/updateAuxExtra', {sector: this.item.check.sector, value: e.target.value})
+        this.$store.commit('checklistsLTres/updateAuxExtra', {sector: this.item.check.sector, value: e.target.value})
       }
     },
     computed: {
