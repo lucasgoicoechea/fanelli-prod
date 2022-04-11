@@ -199,7 +199,7 @@ const actions = {
   fetch ({commit, dispatch}, {sector}) {
     startLoading(dispatch, 'checklist fetch')
     commit('loading', true)
-    Vue.http.get(`checklist/current/${sector}`)
+    Vue.http.get(`checklistLTres/current/${sector}`)
       .then(
         (res) => {
           if (res.body.success) {
@@ -218,7 +218,7 @@ const actions = {
   },
   fetchAll ({commit}) {
     commit('loading', true)
-    return Vue.http.get(`checklist`)
+    return Vue.http.get(`checklistLTres`)
       .then(
         (res) => {
           if (res.body.success) {
@@ -231,7 +231,7 @@ const actions = {
   },
   fetchLast30days ({commit}) {
     commit('loading', true)
-    return Vue.http.get(`checklist/dates`)
+    return Vue.http.get(`checklistLTres/dates`)
       .then(
         (res) => {
           if (res.body.success) {
@@ -251,7 +251,7 @@ const actions = {
     task.extra_data = {text: payload.check.text}
     commit('next', {sector: payload.sector})
     commit('loadingCheck', {sector: payload.sector, id: payload.check.id, value: true})
-    Vue.http.post('checklist/', {check: payload.check}, {headers: {'Idempotency-Key': guid}})
+    Vue.http.post('checklistLTres/', {check: payload.check}, {headers: {'Idempotency-Key': guid}})
       .then(
         function (res) {
           if (res.body.success) {
@@ -276,7 +276,7 @@ const actions = {
     task.extra_data = {text: payload.check.text}
 
     commit('loadingCheck', {sector: payload.sector, id: payload.check.id, value: true})
-    Vue.http.post('checklist/comment', {check: payload.check}, {headers: {'Idempotency-Key': guid}})
+    Vue.http.post('checklistLTres/comment', {check: payload.check}, {headers: {'Idempotency-Key': guid}})
       .then(
         function (res) {
           if (res.body.success) {
@@ -302,7 +302,7 @@ const actions = {
     task.data = payload.observation
     task.type = Constants.request_types.CHECKLIST_GENERAL_OBSERVATION
     task.extra_data = {sector: capitalize(payload.sector)}
-    return Vue.http.post('checklist/observation', {observation: payload.observation}, {headers: {'Idempotency-Key': guid}})
+    return Vue.http.post('checklistLTres/observation', {observation: payload.observation}, {headers: {'Idempotency-Key': guid}})
       .then(
         function (res) {
           if (res.body.success) {
@@ -323,7 +323,7 @@ const actions = {
   loadMore ({commit, state}) {
     commit('setPage', state.page + 1)
     commit('loading', true)
-    return Vue.http.get('checklist?page=' + state.page)
+    return Vue.http.get('checklistLTres?page=' + state.page)
       .then(
         (res) => {
           if (res.body.success) {
@@ -341,7 +341,7 @@ const actions = {
   summaries ({commit, dispatch}, payload) {
     startLoading(dispatch, 'checklist summaries')
     const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {}
-    Vue.http.get('checklist/summary', {
+    Vue.http.get('checklistLTres/summary', {
       params: params
     })
       .then(
@@ -359,7 +359,7 @@ const actions = {
   addHistory ({commit}, payload) {
     return new Promise((resolve, reject) => {
       const params = (payload.date !== null && payload.date !== undefined) ? {date: payload.date} : {}
-      Vue.http.get(`checklist/comparative/${payload.sector}`, {
+      Vue.http.get(`checklistLTres/comparative/${payload.sector}`, {
         params: params,
         before (request) {
           // abort previous request, if exists
