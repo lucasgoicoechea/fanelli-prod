@@ -105,13 +105,13 @@
     },
     methods: {
       init (sector) {
-        this.$store.dispatch('supervisionparts/fails', {sector})
-        this.$store.dispatch('supervisionparts/fetch', {sector})
+        this.$store.dispatch('supervisionpartsLTres/fails', {sector})
+        this.$store.dispatch('supervisionpartsLTres/fetch', {sector})
         this.title = `Supervisionpart ${this.$options.filters.capitalize(sector)}`
         // this.countHours = this.getSector(this.sector).supervisionpart.hours.length
       },
       loadFails: function () {
-        return this.$store.dispatch('supervisionparts/fails')
+        return this.$store.dispatch('supervisionpartsLTres/fails')
       },
       isNotLast (order, countHour) {
         // console.log(order + '-' + countHour)
@@ -139,7 +139,7 @@
             observation: this.observation,
             supervisionpart_id: this.getSector(this.sector).supervisionpart._id
           }
-          this.$store.dispatch('supervisionparts/createObservation', {sector: this.sector, observation})
+          this.$store.dispatch('supervisionpartsLTres/createObservation', {sector: this.sector, observation})
             .then(() => {
               this.loadingObservation = false
             })
@@ -162,11 +162,11 @@
         return this.$route.params.sector
       },
       ...mapState(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'data',
           'loading'
         ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getSector',
         'checklistHasObservation'
       ])

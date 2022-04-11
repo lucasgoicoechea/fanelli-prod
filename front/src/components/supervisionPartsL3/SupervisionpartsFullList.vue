@@ -22,7 +22,7 @@
 
 <script>
   import Spinner from '@/components/Spinner.vue'
-  import SupervisionpartDateButton from '@/components/supervisionParts/SupervisionpartDateButton.vue'
+  import SupervisionpartDateButton from '@/components/supervisionPartsL3/SupervisionpartDateButton.vue'
   import { mapState, mapGetters } from 'vuex'
 
   export default {
@@ -34,7 +34,7 @@
       }
     },
     created: function () {
-      this.$store.dispatch('supervisionparts/fetchLast30days')
+      this.$store.dispatch('supervisionpartsLTres/fetchLast30days')
     },
     methods: {
       redirect: function () {
@@ -58,13 +58,13 @@
         return this.lastOne || this.loading
       },
       ...mapState(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'supervisionparts',
           'loading',
           'lastOne'
         ]),
       ...mapGetters(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'filterSupervisionpartsByDate',
           'getDatesSupervisionparts'
         ]

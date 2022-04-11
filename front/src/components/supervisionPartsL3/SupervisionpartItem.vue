@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import SupervisionpartHour from '@/components/supervisionParts/SupervisionpartHour.vue'
+  import SupervisionpartHour from '@/components/supervisionPartsL3/SupervisionpartHour.vue'
   import { mapState, mapGetters } from 'vuex'
   import Const from '@/const'
 
@@ -117,10 +117,10 @@
       this.init()
     },
     computed: {
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

@@ -29,8 +29,8 @@
 </template>
 
 <script>
-  import SupervisionpartHistoryStoppings from '@/components/supervisionParts/SupervisionpartHistoryStoppings.vue'
-  import SupervisionpartHistoryObservations from '@/components/supervisionParts/SupervisionpartHistoryObservations.vue'
+  import SupervisionpartHistoryStoppings from '@/components/supervisionPartsL3/SupervisionpartHistoryStoppings.vue'
+  import SupervisionpartHistoryObservations from '@/components/supervisionPartsL3/SupervisionpartHistoryObservations.vue'
   import { mapState, mapGetters } from 'vuex'
   import Const from '@/const'
 
@@ -108,10 +108,10 @@
       isExtrusora () {
         return this.hour.sector && this.hour.sector === 'EXTRUSORA'
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

@@ -44,9 +44,9 @@
 </template>
 
 <script>
-  import SupervisionpartMaterials from '@/components/supervisionParts/SupervisionpartMaterials.vue'
-  import SupervisionpartStoppings from '@/components/supervisionParts/SupervisionpartStoppings.vue'
-  import SupervisionpartObservations from '@/components/supervisionParts/SupervisionpartObservations.vue'
+  import SupervisionpartMaterials from '@/components/supervisionPartsL3/SupervisionpartMaterials.vue'
+  import SupervisionpartStoppings from '@/components/supervisionPartsL3/SupervisionpartStoppings.vue'
+  import SupervisionpartObservations from '@/components/supervisionPartsL3/SupervisionpartObservations.vue'
   import SpinnerLittle from '../Spinner.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import { mapState, mapGetters } from 'vuex'
@@ -154,7 +154,7 @@
             hour_id: this.hour.hour._id,
             sector: this.hour.sector
           }
-          this.$store.dispatch('supervisionparts/updateHour', {totals})
+          this.$store.dispatch('supervisionpartsLTres/updateHour', {totals})
             .then(() => {
               this.editados = false
               this.loadingObservation = false
@@ -170,10 +170,10 @@
       isExtrusora () {
         return this.hour.sector && this.hour.sector === 'EXTRUSORA'
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

@@ -138,7 +138,7 @@
             material: this.material,
             supervisionpart_id: this.supervisionpart_id
           }
-          this.$store.dispatch('supervisionparts/createRepositionPallet', {sector: this.supervisionpart.sector, observation})
+          this.$store.dispatch('supervisionpartsLTres/createRepositionPallet', {sector: this.supervisionpart.sector, observation})
             .then(() => {
               this.loadingObservation = false
               this.showLoadObservation()
@@ -150,7 +150,7 @@
           reposition_pallet_id: id,
           supervisionpart_id: this.supervisionpart_id
         }
-        this.$store.dispatch('supervisionparts/delRepositionPallet', {sector: this.supervisionpart.sector, observation})
+        this.$store.dispatch('supervisionpartsLTres/delRepositionPallet', {sector: this.supervisionpart.sector, observation})
             .then(() => {
               this.loadingObservationVagon[id] = false
               this.editadosVagon[id] = false
@@ -182,10 +182,10 @@
       unidades: function () {
         return this.$constants.SUPERVISION_PART_UNIT_SECTOR[this.supervisionpart.sector]
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

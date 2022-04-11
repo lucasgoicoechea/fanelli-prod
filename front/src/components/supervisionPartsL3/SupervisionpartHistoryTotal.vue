@@ -207,10 +207,10 @@
       isExtrusora () {
         return this.hour.sector && this.hour.sector === 'EXTRUSORA'
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

@@ -148,7 +148,7 @@
             hour_id: this.hour.hour._id,
             supervisionpart_id: this.supervisionpart_id
           }
-          this.$store.dispatch('supervisionparts/createStopping', {sector: this.sector, stopping})
+          this.$store.dispatch('supervisionpartsLTres/createStopping', {sector: this.sector, stopping})
             .then(() => {
               this.loadingObservation = false
               this.showLoadObservation()
@@ -162,7 +162,7 @@
           stopping_id: id,
           supervisionpart_id: this.supervisionpart_id
         }
-        this.$store.dispatch('supervisionparts/delStopping', {sector: this.sector, observation})
+        this.$store.dispatch('supervisionpartsLTres/delStopping', {sector: this.sector, observation})
           .then(() => {
             // this.loadingObservationVagon[id] = false
             // this.editadosVagon[id] = false
@@ -208,10 +208,10 @@
       sector: function () {
         return this.$route.params.sector
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getSector',
         'getComparativeHeaders'
       ])

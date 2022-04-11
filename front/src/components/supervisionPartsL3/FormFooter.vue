@@ -67,7 +67,7 @@
         this.$store.dispatch('checklists/updateCheck', {sector: this.sector, check})
       }, */
       undo () {
-        this.$store.commit('checklists/undo', {sector: this.sector})
+        this.$store.commit('supervisionpartsLTres/undo', {sector: this.sector})
       },
       onClose () {
         this.$router.push({name: 'home'})
@@ -93,7 +93,7 @@
       sector: function () {
         return this.$route.params.sector
       },
-      ...mapGetters('checklists', [
+      ...mapGetters('supervisionpartsLTres', [
         'currentCheck',
         'getSector'
       ]),

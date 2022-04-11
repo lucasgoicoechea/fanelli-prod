@@ -116,7 +116,7 @@
           vagon_number: nm,
           supervisionpart_id: this.supervisionpart_id
         }
-        this.$store.dispatch('supervisionparts/delVagon', {sector: this.sector, observation})
+        this.$store.dispatch('supervisionpartsLTres/delVagon', {sector: this.sector, observation})
           .then(() => {
             this.loadingObservationVagon[id] = false
             this.editadosVagon[id] = false
@@ -144,10 +144,10 @@
       unidades: function () {
         return this.$constants.SUPERVISION_PART_UNIT_SECTOR[this.sector]
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

@@ -38,7 +38,7 @@
     },
     computed: {
       ...mapState(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'types'
         ]),
       permission () {

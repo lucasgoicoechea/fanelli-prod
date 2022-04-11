@@ -16,8 +16,8 @@
 
 <script>
   // import ChecklistSummaryView from '@/components/checklists/ChecklistSummaryView.vue'
-  import SupervisionpartResumeView from '@/components/supervisionParts/SupervisionpartResumeView.vue'
-  import SupervisionpartsResumeFullList from '@/components/supervisionParts/SupervisionpartsResumeFullList.vue'
+  import SupervisionpartResumeView from '@/components/supervisionPartsL3/SupervisionpartResumeView.vue'
+  import SupervisionpartsResumeFullList from '@/components/supervisionPartsL3/SupervisionpartsResumeFullList.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapState } from 'vuex'
@@ -38,7 +38,7 @@
     },
     methods: {},
     computed: {
-      ...mapState('supervisionparts', []) //, [ 'summaries' ])
+      ...mapState('supervisionpartsLTres', []) //, [ 'summaries' ])
     }
   }
 </script>

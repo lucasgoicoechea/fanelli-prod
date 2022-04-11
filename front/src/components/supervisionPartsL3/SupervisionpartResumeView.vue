@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal.vue'
+  import SupervisionpartResumeHistoryTotal from '@/components/supervisionPartsL3/SupervisionpartResumeHistoryTotal.vue'
   import Spinner from '@/components/Spinner'
   import {mapState, mapGetters} from 'vuex'
   import Const from '@/const'
@@ -71,14 +71,14 @@
       init () {
         if (this.validateDate) {
           this.loading = true
-          this.$store.commit('supervisionparts/cleanHistories')
-          this.$store.dispatch('supervisionparts/addHistory', {sector: 'EXTRUSORA', date: this.convertedDate})
+          this.$store.commit('supervisionpartsLTres/cleanHistories')
+          this.$store.dispatch('supervisionpartsLTres/addHistory', {sector: 'EXTRUSORA', date: this.convertedDate})
             .then(() => {
               this.loading = false
             }, this.catchError)
-          this.$store.dispatch('supervisionparts/addHistory', {sector: 'APILADORA', date: this.convertedDate})
+          this.$store.dispatch('supervisionpartsLTres/addHistory', {sector: 'APILADORA', date: this.convertedDate})
             .catch(this.catchError)
-          this.$store.dispatch('supervisionparts/addHistory', {sector: 'DESAPILADORA', date: this.convertedDate})
+          this.$store.dispatch('supervisionpartsLTres/addHistory', {sector: 'DESAPILADORA', date: this.convertedDate})
             .catch(this.catchError)
           this.current = Const.currentSchedule().value
         }
@@ -97,12 +97,12 @@
     },
     computed: {
       ...mapState(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'histories',
           'supervisionpartOrder'
         ]),
       ...mapGetters(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'getComparativeHeaders',
           'getHistoryBySector'
         ]

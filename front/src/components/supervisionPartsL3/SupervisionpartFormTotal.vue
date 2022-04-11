@@ -253,7 +253,7 @@
             total_MOLDE_COLUMNA: this.supervisionPart.total_MOLDE_COLUMNA,
             supervisionpart_id: this.supervisionPart._id
           }
-          this.$store.dispatch('supervisionparts/updateTotals', {sector: this.supervisionPart.sector, totals})
+          this.$store.dispatch('supervisionpartsLTres/updateTotals', {sector: this.supervisionPart.sector, totals})
             .then(() => {
               this.editados = false
               this.loadingObservation = false
@@ -283,12 +283,12 @@
         return this.hour.sector && this.hour.sector === 'EXTRUSORA'
       },
       ...mapState(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'data',
           'loading',
           'types'
         ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

@@ -111,7 +111,7 @@
             hour_id: this.hour.hour._id,
             supervisionpart_id: this.supervisionpart_id
           }
-          this.$store.dispatch('supervisionparts/createObservationHour', {sector: this.sector, observation})
+          this.$store.dispatch('supervisionpartsLTres/createObservationHour', {sector: this.sector, observation})
             .then(() => {
               this.loadingObservation = false
               this.showLoadObservation()
@@ -155,10 +155,10 @@
       this.init()
     },
     computed: {
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },

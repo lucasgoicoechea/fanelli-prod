@@ -39,7 +39,7 @@
 
 <script>
   import Navigation from '@/components/Navigation.vue'
-  import SupervisionpartResumeView from '@/components/supervisionParts/SupervisionpartResumeView.vue'
+  import SupervisionpartResumeView from '@/components/supervisionPartsL3/SupervisionpartResumeView.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapGetters } from 'vuex'
@@ -81,7 +81,7 @@
         return this.$moment(this.date, 'DD-MM-YYYY', true).isValid()
       },
       ...mapGetters(
-        'supervisionparts', [
+        'supervisionpartsLTres', [
           'getComparativeHeaders'
         ]
       )

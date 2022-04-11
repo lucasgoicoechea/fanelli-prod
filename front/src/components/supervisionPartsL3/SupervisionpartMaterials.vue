@@ -234,7 +234,7 @@
             material: this.material,
             supervisionpart_id: this.supervisionpart_id
           }
-          this.$store.dispatch('supervisionparts/createMaterial', {sector: this.sector, observation})
+          this.$store.dispatch('supervisionpartsLTres/createMaterial', {sector: this.sector, observation})
             .then(() => {
               if (this.sector === 'DESAPILADORA') {
                 this.prod = 16
@@ -250,7 +250,7 @@
           material_id: id,
           supervisionpart_id: this.supervisionpart_id
         }
-        this.$store.dispatch('supervisionparts/delMaterial', {sector: this.sector, observation})
+        this.$store.dispatch('supervisionpartsLTres/delMaterial', {sector: this.sector, observation})
           .then(() => {
             this.loadingObservationVagon[id] = false
             this.editadosVagon[id] = false
@@ -282,7 +282,7 @@
             material_id: id,
             supervisionpart_id: this.supervisionpart_id
           }
-          this.$store.dispatch('supervisionparts/addVagon', {sector: this.sector, observation})
+          this.$store.dispatch('supervisionpartsLTres/addVagon', {sector: this.sector, observation})
             .then(() => {
               this.loadingObservationVagon[id] = false
               this.editadosVagon[id] = false
@@ -298,7 +298,7 @@
           vagon_number: nm,
           supervisionpart_id: this.supervisionpart_id
         }
-        this.$store.dispatch('supervisionparts/delVagon', {sector: this.sector, observation})
+        this.$store.dispatch('supervisionpartsLTres/delVagon', {sector: this.sector, observation})
           .then(() => {
             this.loadingObservationVagon[id] = false
             this.editadosVagon[id] = false
@@ -346,10 +346,10 @@
       unidades: function () {
         return this.$constants.SUPERVISION_PART_UNIT_SECTOR[this.sector]
       },
-      ...mapState('supervisionparts', [
+      ...mapState('supervisionpartsLTres', [
         'types'
       ]),
-      ...mapGetters('supervisionparts', [
+      ...mapGetters('supervisionpartsLTres', [
         'getComparativeHeaders'
       ])
     },
