@@ -159,7 +159,7 @@
             name: 'Control Linea 2',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanellinea2',
-            routeName: 'control-panel-linea2',
+            routeName: 'control-checklists',
             submenu: [
               {
                 name: 'Checklists L2',
@@ -192,7 +192,7 @@
             name: 'Control Linea 3',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanellinea3',
-            routeName: 'control-panel-linea3',
+            routeName: 'control-checklists-LTres',
             submenu: [
               {
                 name: 'Checklists L3',
