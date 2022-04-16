@@ -25,6 +25,8 @@ const service = {
   listAllPass : async(function (options) {
     let bugReports = BugReportModel
     .find({
+      // tiempo o complejidad
+      estado: {$nin :["SOLUCIONADO"]}
       /*created_at:{$lte:new Date(new Date().getTime()+(24*60*60*1000))}*/
     })
     /*.populate({
@@ -41,8 +43,8 @@ const service = {
   listNoActive : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      created_at:{$lte:new Date(new Date().getTime()+(24*60*60*1000))}
-      // estado: {$nin :["SOLUCIONADO"]}
+      created_at:{$gte:new Date(new Date().getTime()+(24*60*60*1000))},
+      estado: "SOLUCIONADO"
     })
     /*.populate({
       path: 'collaborators',

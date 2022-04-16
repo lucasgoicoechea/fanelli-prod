@@ -19,9 +19,10 @@ const ROLE = require(path.join(__dirname, '/../libs/const')).ROLE
  */
 router.post('', bugReportController.create)
 router.get('/fetchActive', bugReportController.fetchActive)
+router.get('/fetchNoActive', bugReportController.fetchNoActive)
 router.get('/:id', bugReportController.getId)
 router.put('/:id', bugReportController.edit)
-router.get('/fetchNoActive', bugReportController.fetchNoActive)
+
 
 
 module.exports = router
