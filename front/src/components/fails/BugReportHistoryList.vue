@@ -9,7 +9,7 @@
     </div>
 
     <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
-      <p>No hay solicitudes de fallas</p>
+      <p>No hay fallas para mostrar</p>
     </div>
 
     <bugReport-card

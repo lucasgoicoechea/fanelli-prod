@@ -176,6 +176,18 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
+  fetchPassFails (context, payload) {
+    const params = (payload !== undefined) ? payload : {}
+    const fetched = (response) => {
+      return response.body
+    }
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get('bugReport/fetchPassFails', {params})
+      .then(fetched)
+      .catch(handleError)
+  },
   fetchNoActive (context, payload) {
     const params = (payload !== undefined) ? payload : {}
     const fetched = (response) => {

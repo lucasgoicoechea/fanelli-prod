@@ -127,6 +127,7 @@ import BugReportResume from '@/components/fails/BugReportResume'
 import BugReportView from '@/components/fails/BugReportView'
 import BugReportVisualization from '@/components/fails/BugReportVisualization'
 import BugReportEdit from '@/components/fails/BugReportEdit'
+import BugReportHistoryPass from '@/components/fails/BugReportHistoryPass'
 
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
@@ -1102,6 +1103,15 @@ const router = new Router({
               path: 'historial-fallas',
               name: 'bug-report-history',
               component: BugReportHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'posibles-solicitudes-repareacion',
+              name: 'bug-report-solicitudes-reparacion',
+              component: BugReportHistoryPass,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
