@@ -59,6 +59,8 @@ import SupervisionpartResumeHistoryL3Total from '@/components/supervisionPartsL3
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
 import ControlPanelIndex from '@/components/control/ControlPanelIndex'
+import ControlL2Index from '@/components/control/ControlL2Index'
+import ControlL3Index from '@/components/control/ControlL3Index'
 import EventsIndex from '@/components/control/events/EventsIndex'
 import NewsKanban from '@/components/news/NewsKanban'
 import StaffRequestsControlIndex from '@/components/control/staffRequests/Index'
@@ -326,7 +328,7 @@ const router = new Router({
             {
               path: '',
               name: 'control-panel-index-linea3',
-              component: ControlPanelIndex,
+              component: ControlL3Index,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
                 fail: '/error'
@@ -385,7 +387,7 @@ const router = new Router({
             {
               path: '',
               name: 'control-panel-index-linea2',
-              component: ControlPanelIndex,
+              component: ControlL2Index,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
                 fail: '/error'
