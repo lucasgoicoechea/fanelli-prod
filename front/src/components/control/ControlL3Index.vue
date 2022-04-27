@@ -8,6 +8,6 @@
 
   export default {
     components: {Navigation},
-    name: 'ControlL2Index'
+    name: 'ControlL3Index'
   }
 </script>
