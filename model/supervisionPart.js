@@ -182,7 +182,7 @@ const supervisionpartSchema = new Schema({
   totalUnitsMachine: {
     type: Number,
     default: 0
-  },
+  }, 
   totalDownloadedEstanterias: {
     type: Number,
     default: 0
