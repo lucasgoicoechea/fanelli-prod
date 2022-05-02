@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
 const ChecklistModel = require(path.join(__dirname, '/../model')).checklistLTres
-const CheckModel = require(path.join(__dirname, '/../model')).check
+const CheckModel = require(path.join(__dirname, '/../model')).checkLTres
 const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 const config = require(path.join(__dirname, '/../config'))

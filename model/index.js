@@ -51,5 +51,6 @@ module.exports = {
   supervisionPartLTres: require(path.join(__dirname, '/supervisionPartLTres')),
   hour: require(path.join(__dirname, '/hour')),
   fail: require(path.join(__dirname, '/fail')),
-  bugReport: require(path.join(__dirname, '/bugReport'))
+  bugReport: require(path.join(__dirname, '/bugReport')),
+  checkLTres: require(path.join(__dirname, '/checkLTres'))
 }

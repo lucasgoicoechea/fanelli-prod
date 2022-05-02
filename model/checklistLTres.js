@@ -3,11 +3,11 @@ const mongoose = require(path.join(__dirname, '/../mongoConnection')).getMongoos
 const constant = require(path.join(__dirname, '../libs/const'))
 const Schema = mongoose.Schema
 
-const checkLDos = {
+const check = {
   _id: false,
   check: {
     type: Schema.Types.ObjectId,
-    ref: 'Check'
+    ref: 'Checksltres'
   },
   last: {
     value: Boolean,
@@ -39,7 +39,7 @@ const checkLDos = {
     },
     check: {
       type: Schema.Types.ObjectId,
-      ref: 'Check'
+      ref: 'Checksltres'
     },
     supervisor: {
       type: Schema.Types.ObjectId,
@@ -62,7 +62,7 @@ const checklistLTresSchema = new Schema({
     enum: Object.getOwnPropertyNames(constant.CHECKS_SECTOR).map(s => constant.CHECKS_SECTOR[s]),
     required: true
   },
-  checks: [checkLDos],
+  checks: [check],
   late: {
     type: Boolean
   },
@@ -96,7 +96,7 @@ const checklistLTresSchema = new Schema({
 
 checklistLTresSchema.statics.getLastChecklistOfSector = function (sector) {
   return this.findOne({sector: sector})
-    .populate({path: 'checks.check', model: 'Checks'})
+    .populate({path: 'checks.check', model: 'Checksltres'})
     .populate('checks.comments.supervisor', ['name', 'lastname'])
     .populate('checks.values.supervisor', ['name', 'lastname'])
     .populate('observations.supervisor', ['name', 'lastname'])
