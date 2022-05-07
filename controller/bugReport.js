@@ -54,6 +54,18 @@ const controller = {
     res.json({success: true, bugReports})
   }),
 
+  fetchPassFails: async(function (req, res, next) {
+    let bugReports
+    bugReports = awaitFor(bugReportService.listPassFails({
+        perPage: req.query.per_page,
+        page: req.query.page,
+        date: req.query.date,
+        type: req.query.type,
+        frecuency: req.query.frecuency
+      }))
+    res.json({success: true, bugReports})
+  }),
+
   fetchNoActive: async(function (req, res, next) {
     let bugReports
     bugReports = awaitFor(bugReportService.listNoActive({

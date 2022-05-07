@@ -25,25 +25,25 @@ const service = {
   listAllPass : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      // tiempo o complejidad
+      inconveniente: {$nin :["COMPLEJIDAD"]},
+      created_at:{$gte:new Date().getTime()-(48*60*60*1000)},
       estado: {$nin :["SOLUCIONADO"]}
-      /*created_at:{$lte:new Date(new Date().getTime()+(24*60*60*1000))}*/
     })
-    /*.populate({
-      path: 'collaborators',
-      populate: {path: 'shift', select: 'value'},
-      select: {name: 1, lastname: 1, legajo: 1}
+  return bugReports
+  }),
+
+  listPassFails : async(function (options) {
+    let bugReports = BugReportModel
+    .find({
+      $or:[{inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}]
     })
-    .populate('creator', 'name lastname legajo')*/
-   /*bugReports = filterMeeting(bugReports,options)*/
-  // return paginateAndSort(bugReports, options,-1)
   return bugReports
   }),
 
   listNoActive : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      created_at:{$gte:new Date(new Date().getTime()+(24*60*60*1000))},
+      // created_at:{$gte:new Date(new Date().getTime()+(24*60*60*1000))},
       estado: "SOLUCIONADO"
     })
     /*.populate({

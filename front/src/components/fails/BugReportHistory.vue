@@ -1,11 +1,11 @@
 <template>
   <div class="bugReport-history">
     <tabs :history="false" @changeTab="getTab">
-      <tab name="Nuevas">
+      <tab name="Lista de Fallas">
         <bugReport-history-list type="active"></bugReport-history-list>
       </tab>
-      <tab name="Historial">
-        <bugReport-history-list-delivered :current="currentTab === 'Historial'"></bugReport-history-list-delivered>
+      <tab name="Fallas Reparadas">
+        <bugReport-history-list-delivered :current="currentTab === 'Fallas Reparadas'"></bugReport-history-list-delivered>
       </tab>
     </tabs>
   </div>

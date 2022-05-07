@@ -1,18 +1,19 @@
 <template>
-  <div class="bugReport-history-list-delivered container-fluid">
-   <div class="spinner-container">
+  <div class="bugReport-history-pass container-fluid">
+
+    <div class="spinner-container">
       <spinner
         class="spinner"
         :show="loadingActiveRequest"
         loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
 
-    <div class="empty" v-show="!loadingActiveRequest && bugReportListDelivered.length === 0">
-      <p>No hay fallas reparadas para mostrar</p>
+    <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
+      <p>No hay fallas para mostrar</p>
     </div>
 
     <bugReport-card
-      v-for="request in bugReportListDelivered"
+      v-for="request in bugReportList"
       :key="request._id"
       :request="request">
     </bugReport-card>
@@ -25,35 +26,40 @@
   import CardHeader from '@/components/cards/CardHeader.vue'
   import CardSection from '@/components/cards/CardSection.vue'
   import CardFooter from '@/components/cards/CardFooter.vue'
+  import auth from '@/auth'
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
+  import SpinnerLittle from '@/components/Spinner.vue'
   import BugReportCard from '@/components/fails/BugReportCard'
 
   export default {
-    name: 'BugReportHistoryListDelivered',
-    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, CollaboratorSelector, BugReportCard},
+    name: 'BugReportHistoryPass',
+    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCard},
     props: {
-      current: {
-        type: Boolean,
-        default: false
+      type: {
+        type: String,
+        default: 'active',
+        current: {
+          type: Boolean,
+          default: false
+        }
       }
     },
     data () {
       return {
         date: '',
-        callFilter: false,
-        loadingDelivered: false,
-        bugReportListDelivered: []
+        bugReportList: []
       }
     },
-    created: function () {
+    created () {
+      // this.bugReportList = this.$store.dispatch('bugReport/fetchActive')
       this.fetch()
     },
     destroyed: function () {},
     methods: {
       fetch () {
         // this.bugReport.loading = true
-        const action = 'bugReport/fetchNoActive'
+        const action = 'bugReport/fetchPassFails'
         this.$store.dispatch(action, {})
           .then(this.successFetch)
           .catch(this.failFetch)
@@ -64,7 +70,7 @@
           console.log('vacio')
         } else {
           response.bugReports.forEach(e => {
-            this.bugReportListDelivered.push(e)
+            this.bugReportList.push(e)
           })
           // this.bugReport.page += 1
         }
@@ -77,69 +83,79 @@
       goToRequest (req) {
         this.$router.push({name: 'bugReport-request', params: {id: req._id}})
       },
+      received (req) {
+        return !req.hasOwnProperty('approved')
+      },
+      denied (req) {
+        return req.hasOwnProperty('approved') && !req.approved
+      },
+      approved (req) {
+        return req.hasOwnProperty('approved') &&
+          req.approved &&
+          req.hasOwnProperty('delivered') &&
+          !req.delivered
+      },
+      pending (req) {
+        return req.hasOwnProperty('resolved') &&
+          req.resolved &&
+          !req.hasOwnProperty('delivered')
+      },
       delivered (req) {
         return req.hasOwnProperty('delivered') && req.delivered
       },
-      bugReportType (request) {
+      eppType (request) {
+        if (this.received(request)) return 'Recibida'
+        if (this.denied(request)) return 'Denegada'
+        if (this.approved(request)) return 'Aprobada'
+        if (this.pending(request)) return 'Pendiente'
         if (this.delivered(request)) return 'Entregada'
         else return 'Estado'
       },
-      bugReportTypeColor (request) {
+      eppTypeColor (request) {
+        if (this.received(request)) return '#1e3773'
+        if (this.denied(request)) return '#f86567'
+        if (this.approved(request)) return '#65c25a'
+        if (this.pending(request)) return '#3063ac'
         if (this.delivered(request)) return '#e28c44'
         else return '#e28c44'
       },
-      bugReportTypeSubColor (request) {
+      eppTypeSubColor (request) {
+        if (this.received(request)) return '#2b4a9f'
+        if (this.denied(request)) return '#f78384'
+        if (this.approved(request)) return '#a2da9b'
+        if (this.pending(request)) return '#3c7ed9'
         if (this.delivered(request)) return '#fbc697'
         else return '#e2cea4'
       },
-      filter () {
-        this.loadingDelivered = true
-        const params = {
-          ...((this.hasSelected) ? {collaborator: this.collaboratorSelected._id} : {}),
-          ...((this.date !== '') ? {date: this.date} : {})
-        }
-        this.$store.dispatch('requests/fetchDelivered', params)
-          .then(() => {
-            this.loadingDelivered = false
-            this.callFilter = false
-          })
+      reject (req) {
+        this.$store.dispatch('requests/approvalById', {id: req._id, approved: false, user: auth.getUser()})
+      },
+      accept (req) {
+        this.$store.dispatch('requests/approvalById', {id: req._id, approved: true, user: auth.getUser()})
       }
     },
     computed: {
       loadingActiveRequest () {
         return this.$loading.isLoading('requests fetchActive')
       },
+      isActiveList: function () {
+        return this.type === 'active'
+      },
+      ...mapState('requests', [
+        'activeRequests',
+        'deliveredRequests'
+      ]),
       ...mapGetters('requests', [
+        'getActivedAndReceivedRequests',
+        'getOnlyActivedRequest',
         'deliveredRequestsFilter'
       ]),
-      ...mapState('requests', {
-        'deliveredRequest': 'delivered'
-      }),
-      deliveredNotUpdate () {
-        return this.deliveredRequest.lastOne || this.deliveredRequest.loading || !this.current || this.callFilter
-      },
       ...mapState('collaborators', [
         'collaboratorSelected'
       ]),
       ...mapGetters('collaborators', [
         'hasSelected'
       ])
-    },
-    watch: {
-      collaboratorSelected () {
-        this.callFilter = true
-        if (this.current) {
-          this.$store.commit('requests/clear', 'delivered')
-          this.filter()
-        }
-      },
-      date (newValue) {
-        this.callFilter = true
-        if (this.current && newValue[0] !== '0') {
-          this.$store.commit('requests/clear', 'delivered')
-          this.filter()
-        }
-      }
     }
   }
 </script>
@@ -147,7 +163,7 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/variables";
 
-  .bugReport-history-list-delivered {
+  .bugReport-history-list {
     width: 80%;
   }
 
@@ -188,30 +204,6 @@
   .empty {
     text-align: center;
     margin: 20px;
-
-    .spinner {
-      font-size: xx-large;
-    }
-  }
-
-  .filters {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    border-bottom: 4px solid $secondary-color;
-
-    .filter {
-      max-width: 50%;
-
-      .glyphicon {
-        margin-left: 10px;
-      }
-    }
-
-    .date {
-      width: auto;
-    }
   }
 
   @media (max-width: 500px) {
@@ -225,7 +217,7 @@
       }
     }
 
-    .bugReport-history-list-delivered {
+    .epp-history-list {
       width: 100%;
     }
   }
@@ -239,7 +231,16 @@
   }
 
   .cards-container {
-    padding-bottom: 68px;
+    height: 100%;
+  }
+
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .spinner {
+    margin: 15px 0;
   }
 
 </style>

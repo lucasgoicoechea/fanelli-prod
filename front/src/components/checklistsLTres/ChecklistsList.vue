@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-xs-6 col-sm-4" v-for="checklist in types" :key="checklist.sector">
             <card-button
-              :to="{ name: 'checklist', params: { sector: checklist.sector } }"
+              :to="{ name: 'checklistL3', params: { sector: checklist.sector } }"
               :title="checklist.sector | pretty"
               :icon="`/static/img/checklists/${checklist.sector}.svg`"
               background-color="#ec6e25"></card-button>
