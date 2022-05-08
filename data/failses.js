@@ -1820,5 +1820,419 @@ module.exports = [
       'text': 'Silo 2 Excavador',
       'father': 'Draga'
    },
-   
+    {
+      'text': 'Cinta Movil',
+      'father': 'Draga'
+   },{
+      'text': 'Cinta Fija',
+      'father': 'Draga'
+   },{
+      'text': 'Puente',
+      'father': 'Draga'
+   },{
+      'text': 'Carro Brazo',
+      'father': 'Draga'
+   },
+    {
+      'text': 'Motorred Traslacion',
+      'father': 'Puente'
+   },{
+      'text': 'Estructura',
+      'father': 'Puente'
+   },
+   {
+     'text': 'Motorred Traslacion',
+     'father': 'Carro Brazo'
+  },{
+     'text': 'Estructura',
+     'father': 'Carro Brazo'
+  },
+   {
+      'text': 'Estructura',
+      'father': 'Draga Fija'
+   },
+   {
+      'text': 'Banda',
+      'father': 'Draga Fija'
+   },
+   {
+      'text': 'Motorred Giro',
+      'father': 'Draga Fija'
+   },
+   {
+      'text': 'Motorred Giro',
+      'father': 'Draga Movil'
+   },
+   {
+      'text': 'Motorred Traslacion',
+      'father': 'Draga Movil'
+   },
+   {
+      'text': 'Banda',
+      'father': 'Draga Movil'
+   },
+   {
+      'text': 'Estructura',
+      'father': 'Draga Movil'
+   },
+   {
+      'text': 'Aditivio',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Preparacion',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Prelaboracion Transporte',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Balanza',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Molienda Chamote',
+      'father': 'Prelaboracion'
+   }
+   ,{
+      'text': 'Dosificador de Cascara 1',
+      'father': 'Aditivo'
+   },{
+      'text': 'Dosificador de Cascara 2',
+      'father': 'Aditivo'
+   },{
+      'text': 'Dosificador de Cascara 3',
+      'father': 'Aditivo'
+   },{
+      'text': 'Dosificador de Arena 1',
+      'father': 'Aditivo'
+   },{
+      'text': 'Dosificador de Arena 2',
+      'father': 'Aditivo'
+   },{
+      'text': 'Estructura',
+      'father': 'Aditivo'
+   },{
+      'text': 'Motor/Motorred',
+      'father': 'Aditivo'
+   },{
+      'text': 'Banda',
+      'father': 'Aditivo'
+   }
+    ,{
+      'text': 'Cajon 1 Preelaboracion Linea MP 1',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Cajon 1 Preelaboracion Linea MP 2',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Cajon 1 Preelaboracion Linea MP 3',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Cajon 1 Preelaboracion Linea MP 4',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Cajon 1 Preelaboracion Linea MP 5',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Rotofiltro Preelaboracion L 1 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Rotofiltro Preelaboracion L 2 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Rotofiltro Preelaboracion L 3 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Rotofiltro Preelaboracion L 4 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Rotofiltro Preelaboracion L 5 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Mezclador 6 Preelab. L 1 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Mezclador 6 Preelab. L 2 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Mezclador BEDESCHI 4500 L 3 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Mezclador BEDESCHI 4500 L 4 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Mezclador BEDESCHI 4500 L 5 MP',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Triturador',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Divisor de Tierra',
+      'father': 'Prelaboracion'
+   },{
+      'text': 'Motor/Motorred',
+      'father': 'Cajon'
+   },{
+      'text': 'Motor/Motorred Aspas',
+      'father': 'Cajon'
+   },{
+      'text': 'Estructura',
+      'father': 'Cajon'
+   },{
+      'text': 'Banda',
+      'father': 'Cajon'
+   },{
+      'text': 'Motor/Motorred',
+      'father': 'Rotofiltro'
+   },{
+      'text': 'Estructura',
+      'father': 'Rotofiltro'
+   },{
+      'text': 'Motor/Motorred',
+      'father': 'Triturador'
+   },{
+      'text': 'Estructura',
+      'father': 'Triturador'
+   },{
+      'text': 'Caja Reductora',
+      'father': 'Triturador'
+   },{
+      'text': 'Balanza 1',
+      'father': 'Balanza'
+   },{
+      'text': 'Balanza 2',
+      'father': 'Balanza'
+   },{
+      'text': 'Molienda Chamote',
+      'father': 'Molienda'
+   },{
+      'text': 'Motor/Motorred',
+      'father': 'Transporte'
+   },{
+      'text': 'Estructura',
+      'father': 'Transporte'
+   },{
+      'text': 'Banda',
+      'father': 'Transporte'
+   },{
+      'text': 'Estructura',
+      'father': 'Transporte'
+   },{
+      'text': 'Motor/Motorred',
+      'father': 'Cintas Preelaboracion'
+   },
+   {
+      'text': 'Cintas Preelaboracion',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cintas 1',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte Rotofiltro 5',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte Rotofiltro 4',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte 5',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte 4',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte 3',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte 2',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta Descarte 1',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 9',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 8',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 7',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.16',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.15',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.14',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.13',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.12',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.11',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 6.10',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.29',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.28',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.27',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.26',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.25',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.24',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.23',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.22',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.21',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 20',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.10',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.11',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.12',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.13',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.14',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.15',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.16',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.17',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.18',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.197',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5.20',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 5',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 4',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 3',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 24',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 23',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 2.10',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 2',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 14',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 13',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 12',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Cinta 10',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Motor/Motorred',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Estructura',
+      'father': 'Prelaboracion Transporte'
+   },
+   {
+      'text': 'Banda',
+      'father': 'Prelaboracion Transporte'
+   }
 ]
