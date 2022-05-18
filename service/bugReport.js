@@ -2,6 +2,7 @@ const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 const path = require('path')
 const BugReportModel = require(path.join(__dirname, '../model')).bugReport
+const FailedModel = require(path.join(__dirname, '../model')).failed
 const notification = require(path.join(__dirname, '/../libs/notification'))
 const pdf = require(path.join(__dirname, '/../libs/pdf'))
 const moment = require('moment')
@@ -39,6 +40,16 @@ const service = {
     })
   return bugReports
   }),
+
+  getFailsForFather : async(function (options) {
+    let bugReports = FailedModel
+    .find({
+      $or:[{inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}]
+    })
+  return bugReports
+  }),
+
+  
 
   listNoActive : async(function (options) {
     let bugReports = BugReportModel

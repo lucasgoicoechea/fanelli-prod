@@ -269,6 +269,12 @@
           return {valid: false, msg: 'Ingrese un resumen de la reunión'}
         } */
         return {valid: true, msg: 'OK'}
+      },
+      getFailsForFather: function (id) {
+        this.$store.dispatch('bugReport/getFailsForFather', {father: id})
+          .then(() => {
+            
+          })
       }
     },
     watch: {
