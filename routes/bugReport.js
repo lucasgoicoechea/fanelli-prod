@@ -23,6 +23,8 @@ router.get('/fetchNoActive', bugReportController.fetchNoActive)
 router.get('/fetchPassFails', bugReportController.fetchPassFails)
 router.get('/:id', bugReportController.getId)
 router.put('/:id', bugReportController.edit)
+router.get('/excel/delivered', bugReportController.getReportDelivered)
+
 
 
 

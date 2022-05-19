@@ -5,6 +5,7 @@ const scheduler = require('node-schedule')
 const bugReportService = require(path.join(__dirname, '../service')).bugReport
 const AppError = require(path.join(__dirname, '../libs/error')).AppError
 const Const = require(path.join(__dirname, '/../libs/const'))
+const excel = require(path.join(__dirname, '../libs/excel'))
 const controller = {
 
   /**
@@ -92,8 +93,44 @@ const controller = {
     // let repeatEdit = req.body.bugReport.repeatEdit || false
     bugReport = awaitFor(bugReportService.edit(bugReport, req.params.id))
     res.json({success: true, bugReport})
+  }),
+
+  getReportDelivered: async(function (req, res, next) {
+    try {
+      /*let date
+      if (req.params.day) {
+        date = new Date(new Date(req.params.day).getTime() + 1000 * 60 * 60 * 3)
+      } else {
+        date = new Date(new Date().toDateString())
+      }*/
+      const excel = awaitFor(generateReportForDelivered())
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+      res.setHeader('Content-Disposition', 'attachment; filename=Report.xlsx')
+      console.log(excel)
+      awaitFor(excel.xlsx.write(res))
+      res.end()
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
   })
+
 }
-  
+
+
+
+const generateReportForDelivered = async(function () {
+  let bugReports
+  bugReports = awaitFor(bugReportService.listNoActive({ }))
+ 
+  /*const data = awaitFor(Bluebird.all([totalesMaterialExtrusora,totalesMaterialApiladora ,totalesMaterialDesapiladora])
+      .reduce(
+        (arr, events) => arr.concat(events),
+        []
+      ))*/
+
+  //totales = _.orderBy(totales,['sector','created_at'],['desc','desc']);
+  return excel.generateExcelBugReportDelivered(bugReports)
+})
 
 module.exports = controller
