@@ -123,6 +123,12 @@
                 can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
               },
               {
+                name: 'Novedades Archivadas',
+                type: 'control-novedades',
+                route: {name: 'control-novedades-archivadas'},
+                can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
+              },
+              {
                 name: 'Personal',
                 type: 'control-personal',
                 route: {name: 'control-personal'},

@@ -12,6 +12,11 @@
         title="Archivar evento"
         v-show="permission"
         @click="archiveTimeline()"> ARCHIVAR </h5>
+      <h5
+        class="archive"
+        title="Archivar evento"
+        v-show="permission && eventLineData.archive"
+        @click="desarchiveTimeline()"> DESARCHIVAR </h5>  
     </div>
 
     <horizontal-scrolling-container ref="containerRef" class="horizontal-container">
@@ -94,6 +99,27 @@
               title: 'Si',
               handler: () => {
                 this.$store.dispatch('events/archiveTimeline', {timeline: this.eventLineData._id})
+                  .then(() => {
+                  })
+                  .catch(() => {
+                  })
+                this.closeModal()
+              }
+            },
+            {
+              title: 'No'
+            }
+          ]
+        })
+      },
+      desarchiveTimeline: function () {
+        this.$modal.show('dialog', {
+          text: '¿Desea desarchivar los eventos en el historial permanente del colaborador?',
+          buttons: [
+            {
+              title: 'Si',
+              handler: () => {
+                this.$store.dispatch('events/desarchiveTimeline', {timeline: this.eventLineData._id})
                   .then(() => {
                   })
                   .catch(() => {

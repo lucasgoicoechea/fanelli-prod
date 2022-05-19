@@ -82,6 +82,9 @@ const service = {
   archive: async(function (timelineId) {
     return awaitFor(EventsTimelineModel.findByIdAndUpdate(timelineId, {$set: {archived: true}}, {new: true}))
   }),
+  desarchive: async(function (timelineId) {
+    return awaitFor(EventsTimelineModel.findByIdAndUpdate(timelineId, {$set: {archived: false}}, {new: true}))
+  }),
   removeEvent: async(function (eventId, timelineId) {
     const timeline = awaitFor(EventsTimelineModel.findOne({
       _id: timelineId,

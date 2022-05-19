@@ -62,6 +62,7 @@ import ControlPanelIndex from '@/components/control/ControlPanelIndex'
 import ControlL2Index from '@/components/control/ControlL2Index'
 import ControlL3Index from '@/components/control/ControlL3Index'
 import EventsIndex from '@/components/control/events/EventsIndex'
+import EventsIndexArchivadas from '@/components/control/events/EventsIndexArchivadas'
 import NewsKanban from '@/components/news/NewsKanban'
 import StaffRequestsControlIndex from '@/components/control/staffRequests/Index'
 
@@ -474,6 +475,15 @@ const router = new Router({
               path: 'novedades',
               name: 'control-novedades',
               component: EventsIndex,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'novedadesas',
+              name: 'control-novedades-archivadas',
+              component: EventsIndexArchivadas,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.RRHH),
                 fail: '/error'

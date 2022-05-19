@@ -13,6 +13,10 @@ const initialState = () => ({
    **/
   timelines: [],
   /**
+  * timelines represents the events from each collaborator
+  **/
+  timelines_archived: [],
+  /**
    * selectedTimeline represents the timeline that is currently 'active' for manipulation
    */
   selectedTimeline: '',
@@ -302,6 +306,29 @@ const actions = {
         }
       )
   },
+      /**
+   * Fetch the event lines for each collaborator
+   * @param commit
+   * @param state
+   */
+  fetchEventLinesArchived ({commit, dispatch}) {
+    startLoading(dispatch, 'timeline fetch')
+    return Vue.http.get('events-timeline/archived')
+      .then(
+        (res) => {
+          if (res.body.success) {
+            commit('loadEventLine', res.body.eventsTimeline)
+            endLoading(dispatch, 'timeline fetch')
+          } else {
+            endLoading(dispatch, 'timeline fetch')
+          }
+        },
+        (err) => {
+          endLoading(dispatch, 'timeline fetch')
+          return Promise.reject(err)
+        }
+      )
+  },
   /**
    * Add a new event to the timeline
    * @param commit
@@ -415,6 +442,22 @@ const actions = {
    */
   archiveTimeline ({commit, state}, payload) {
     return Vue.http.post('events-timeline/archive', {eventsTimelineId: payload.timeline})
+      .then(
+        (res) => {
+          if (res.body.success) {
+            commit('deleteTimeline', payload)
+          }
+        },
+        (err) => Promise.reject(err))
+  },
+  /**
+   * Archive a timeline
+   * @param commit
+   * @param state
+   * @param payload
+   */
+  desarchiveTimeline ({commit, state}, payload) {
+    return Vue.http.post('events-timeline/desarchive', {eventsTimelineId: payload.timeline})
       .then(
         (res) => {
           if (res.body.success) {
