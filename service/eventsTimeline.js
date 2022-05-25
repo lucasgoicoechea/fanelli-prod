@@ -51,14 +51,14 @@ const service = {
         }
       })
       .sort({created_at: -1})
-
+    console.dir(timelines)
     timelines = awaitFor(filter(timelines, options))
     // We need to remove the events that are archived. It can't be done with a query
     // We can't use the mongoose object, so for each result we use toObject to get a plain object of the document and filter the archived events
     const objectTimelines = []
     timelines.forEach(t => {
       let objectTimeline = t.toObject()
-      objectTimeline.events = objectTimeline.events.filter(e => !e.archived)
+      //objectTimeline.events = objectTimeline.events.filter(e => e.archived)
       objectTimelines.push(objectTimeline)
     })
     return objectTimelines

@@ -128,6 +128,14 @@ const mutations = {
   loadEventLine (state, payload) {
     state.timelines = payload
   },
+    /**
+   * Saves the payload to the state
+   * @param state
+   * @param payload
+   */
+  loadEventLineArchived (state, payload) {
+    state.timelines_archived = payload
+  },
   /**
    * Updates the current timeline for adding a new event to it later
    * @param state
@@ -317,7 +325,7 @@ const actions = {
       .then(
         (res) => {
           if (res.body.success) {
-            commit('loadEventLine', res.body.eventsTimeline)
+            commit('loadEventLineArchived', res.body.eventsTimeline)
             endLoading(dispatch, 'timeline fetch')
           } else {
             endLoading(dispatch, 'timeline fetch')

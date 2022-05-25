@@ -4,9 +4,12 @@
       <spinner class="spinner" :show="isTimelineLoading" loadingMessage="Cargando novedades..."></spinner>
     </div>
     <div v-else>
-      <event-line-container v-for="timeline in timelines_archived" :key="timeline._id"
-                            :eventLineData="timeline"></event-line-container>
-      <div class="empty-timelines" v-if="!isTimelineLoading && !timelines_archived.length">No hay novedades
+    <div  v-if="!isTimelineLoading && timelines_archived.length!=0" > 
+      <div v-for="(item, index) in timelines_archived"   :key="index" >   
+      <event-line-container :eventLineData="item"></event-line-container>
+      </div>
+    </div>
+      <div class="empty-timelines" v-if="!isTimelineLoading && timelines_archived.length==0">No hay novedades
       </div>
       <div v-else>
         <new-event-modal></new-event-modal>
@@ -32,8 +35,14 @@
       NewEventModal,
       EventInformationModal
     },
+    data () {
+      return {
+        timelinesArchivedLocal: []
+      }
+    },
     created: function () {
       this.$store.dispatch('events/fetchEventLinesArchived')
+      this.timelinesArchivedLocal = this.timelines_archived
     },
     destroyed: function () {
       this.$store.commit('events/reset')

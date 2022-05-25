@@ -1,4 +1,4 @@
-<template>
+<template>  
   <div class="line-container" :style="getLineStyle()">
     <div class="top-text">
       <h2 class="line-title">
@@ -10,12 +10,12 @@
       <h5
         class="archive"
         title="Archivar evento"
-        v-show="permission"
+        v-show="permission && !eventLineData.archived"
         @click="archiveTimeline()"> ARCHIVAR </h5>
       <h5
         class="archive"
         title="Archivar evento"
-        v-show="permission && eventLineData.archive"
+        v-show="permission && eventLineData.archived"
         @click="desarchiveTimeline()"> DESARCHIVAR </h5>  
     </div>
 
@@ -60,26 +60,28 @@
     methods: {
       getLineStyle: function () {
         let color
-        switch (this.eventLineData.events[0].item.type) {
-          case Constants.news_types.ABSENT:
-            color = '#4672a3'
-            break
-          case Constants.news_types.ACCIDENT:
-            color = '#ff5453'
-            break
-          case Constants.news_types.EARLY:
-            color = '#ed8d47'
-            break
-          case Constants.news_types.LATE:
-            color = '#33547a'
-            break
-          default:
-            color = '#6b6b6b'
-        }
-
+        if (this.eventLineData.events[0] !== undefined) {
+          switch (this.eventLineData.events[0].item.type) {
+            case Constants.news_types.ABSENT:
+              color = '#4672a3'
+              break
+            case Constants.news_types.ACCIDENT:
+              color = '#ff5453'
+              break
+            case Constants.news_types.EARLY:
+              color = '#ed8d47'
+              break
+            case Constants.news_types.LATE:
+              color = '#33547a'
+              break
+            default:
+              color = '#6b6b6b'
+          }
+        } else { color = '#6b6b6b' }
         return {'background-color': color}
       },
       getTypeText () {
+        if (this.eventLineData.events[0] === undefined) { return 'OBSERVATION' }
         return Constants.news_types_text[this.eventLineData.events[0].item.type]
       },
       showEventInformation: function (timelineData, eventData) {
@@ -89,6 +91,7 @@
         this.$modal.hide('dialog')
       },
       getEventType () {
+        if (this.eventLineData.events[0] === undefined) { return 'OBSERVATION' }
         return this.eventLineData.events[0].item.type
       },
       archiveTimeline: function () {
