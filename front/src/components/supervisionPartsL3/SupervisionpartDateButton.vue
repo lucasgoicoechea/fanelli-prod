@@ -1,6 +1,6 @@
 <template>
   <article class="supervisionpart-date-button">
-    <router-link :to="{ name: 'supervisionpartsHistory', params: { date: formatedDate }}">
+    <router-link :to="{ name: 'supervisionpartsHistory-linea3', params: { date: formatedDate }}">
       <header>{{ formatedDate }}</header>
       <div class="fill">
         <hr class="red">

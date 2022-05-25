@@ -12,13 +12,13 @@
     <div v-else class="container-fluid">
       <header>
         <div class="day">
-          <router-link :to="{ name: 'supervisionpartsHistory', params: { date: prevDate}}">
+          <router-link :to="{ name: 'supervisionpartsHistory-linea3', params: { date: prevDate}}">
             {{ prevDate | formatDate }}
           </router-link>
         </div>
         <div class="current">{{ date | formatDate }}</div>
         <div class="day">
-          <router-link :to="{ name: 'supervisionpartsHistory', params: { date: nextDate}}">
+          <router-link :to="{ name: 'supervisionpartsHistory-linea3', params: { date: nextDate}}">
             {{ nextDate | formatDate }}
           </router-link>
         </div>
