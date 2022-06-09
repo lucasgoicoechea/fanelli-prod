@@ -6,6 +6,7 @@ const bugReportService = require(path.join(__dirname, '../service')).bugReport
 const AppError = require(path.join(__dirname, '../libs/error')).AppError
 const Const = require(path.join(__dirname, '/../libs/const'))
 const excel = require(path.join(__dirname, '../libs/excel'))
+const ObjectId = require('mongoose').Types.ObjectId
 const controller = {
 
   /**
@@ -113,7 +114,22 @@ const controller = {
       console.log(error)
       next(error)
     }
-  })
+  }),
+
+  approval: async(function (req, res, next) {
+    if (!ObjectId.isValid(req.params.id)) {
+      next(Boom.notFound('ID inválido'))
+      return
+    }
+    let bugReport = awaitFor(bugReportService.findOne(req.params.id))
+    if (bugReport === null) {
+      next(Boom.notFound('Solicitud inexistente'))
+      return
+    }
+    bugReport = setApproval(bugReport, req.body.approved, req.user.id)
+    let message = req.body.approved ? 'Solicitud aprobada' : 'Solicitud rechazada'
+    res.json({success: true, message: message, request: bugReport})
+  }),
 
 }
 
@@ -132,5 +148,12 @@ const generateReportForDelivered = async(function () {
   //totales = _.orderBy(totales,['sector','created_at'],['desc','desc']);
   return excel.generateExcelBugReportDelivered(bugReports)
 })
+
+function setApproval (bugReport, approval) {
+  bugReport.set({betadas: approval})
+  // bugReport.set({approved_by: approver})
+  bugReport = awaitFor(bugReport.save())
+  return bugReport
+}
 
 module.exports = controller

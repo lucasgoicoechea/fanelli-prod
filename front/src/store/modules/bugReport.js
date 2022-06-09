@@ -74,6 +74,19 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
+  approvalById ({commit}, payload) {
+    // commit('loadingById', {id: payload.id, approved: payload.approved, loading: true})
+    setTimeout(() => {}, 7000)
+    Vue.http.post('bugReport/approval/' + payload.id, {approved: payload.approved})
+      .then(
+        function (res) {
+          if (res.body.success) {
+            commit('fetchPassFails', {})
+            // commit('loadingById', {id: payload.id, approved: payload.approved, loading: false})
+          }
+        }
+      )
+  },
   fetch (context, payload) {
     const fetched = (response) => {
       return response.body

@@ -1121,7 +1121,7 @@ const router = new Router({
               }
             },
             {
-              path: 'posibles-solicitudes-repareacion',
+              path: 'posibles-solicitudes-reparacion',
               name: 'bug-report-solicitudes-reparacion',
               component: BugReportHistoryPass,
               meta: {
@@ -1129,6 +1129,15 @@ const router = new Router({
                 fail: '/error'
               }
             },
+            /* {
+              path: 'solicitudes-trabajo',
+              name: 'bug-report-jobs-request',
+              component: BugReportJobsRequest,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            }, */
             {
               path: 'resumen-fallas',
               name: 'bug-report-resume',

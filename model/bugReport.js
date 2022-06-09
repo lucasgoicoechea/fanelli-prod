@@ -47,7 +47,10 @@ const BugReportSchema = new Schema({
     },
     resolucion: {
         type: String
-    } 
+    },
+    betadas: {
+        type: Boolean
+    },
     }, {
         timestamps: {
           createdAt: 'created_at',

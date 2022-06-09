@@ -391,6 +391,12 @@
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
+                name: 'Solicitudes Trabajo',
+                type: 'bug-report-jobs-request',
+                route: {name: 'bug-report-jobs-request'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
                 name: 'Resumen de Fallas',
                 type: 'bug-report-resume',
                 route: {name: 'bug-report-resume'},

@@ -1,5 +1,5 @@
 <template>
-  <div class="bugReport-history-pass container-fluid">
+  <div class="bug-report-jobs-request container-fluid">
 
     <div class="spinner-container">
       <spinner
@@ -12,11 +12,11 @@
       <p>No hay fallas para mostrar</p>
     </div>
 
-    <bugReport-card-betadas
+    <bugReport-card
       v-for="request in bugReportList"
       :key="request._id"
       :request="request">
-    </bugReport-card-betadas>
+    </bugReport-card>
   </div>
 </template>
 
@@ -30,11 +30,11 @@
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import SpinnerLittle from '@/components/Spinner.vue'
-  import BugReportCardBetadas from '@/components/fails/BugReportCardBetadas'
+  import BugReportCard from '@/components/fails/BugReportCard'
 
   export default {
-    name: 'BugReportHistoryPass',
-    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCardBetadas},
+    name: 'BugReportJobsRequest',
+    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCard},
     props: {
       type: {
         type: String,
@@ -59,7 +59,7 @@
     methods: {
       fetch () {
         // this.bugReport.loading = true
-        const action = 'bugReport/fetchPassFails'
+        const action = 'bugReport/fetchActive'
         this.$store.dispatch(action, {})
           .then(this.successFetch)
           .catch(this.failFetch)
