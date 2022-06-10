@@ -68,7 +68,6 @@
         </div> 
       <!-- </router-link> -->
     </div>
-
     <div class="box-section buttons-container">
       <blockable-button
         class="margin"
@@ -93,7 +92,8 @@
         buttonRadius="50px"
         buttonWidth="100px"
         buttonHeight="50px"></blockable-button>
-
+    </div>
+    <div class="box-section buttons-container">
       <blockable-button
         v-show="$can($constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH)"
         class="margin"

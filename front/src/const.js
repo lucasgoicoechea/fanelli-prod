@@ -91,7 +91,7 @@ export default {
   },
 
   lines: {
-    L1: 'Linea 1',
+    L1: 'Linea 3',
     L2: 'Linea 2'
   },
 
