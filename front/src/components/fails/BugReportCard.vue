@@ -1,14 +1,18 @@
 <template>
   <card-container @click.native="goToRequest(request)">
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
-      <p slot="header">Estado de falla: {{ bugReportType(request) }}</p>
+      <p slot="header">Estado de falla: {{ bugReportType(request) }} 
+        <span v-show="showObservationSection(request)">[BETADA]</span>
+      </p>
       <p slot="subHeader" v-if="approved(request)">Por {{ request.approved_by.lastname }}</p>
       <p slot="subHeader" v-if="denied(request)">Por {{ request.approved_by.lastname }}</p>
+              
     </card-header>
     <card-section>
       <p slot="content">
         <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }} - <span class="time">{{ request.line }}</span> - <span class="time">{{ request.sector }}</span> - <span class="time">{{ request.sub_sector }}</span> - <span class="time">{{ request.detectado }}</span> - <span class="time">{{ request.resuelto }}</span> </span></p>
       <p slot="content">
+           
          </p>
       <p slot="content">
          </p>   
@@ -119,6 +123,9 @@
           })
         }
         this.confirmation('¿Esta seguro de APROBAR esta solicitud?', action)
+      },
+      showObservationSection (request) {
+        return request.betadas
       },
       confirmation (text, action) {
         this.$modal.show('dialog', {

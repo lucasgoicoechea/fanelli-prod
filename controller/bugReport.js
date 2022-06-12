@@ -33,7 +33,8 @@ const controller = {
       detectado: req.body.bugReport.detectado,
       resuelto: req.body.bugReport.resuelto,
       resume: req.body.bugReport.resume,
-      resolucion: req.body.bugReport.resolucion
+      resolucion: req.body.bugReport.resolucion,
+      betadas: false
     }
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
