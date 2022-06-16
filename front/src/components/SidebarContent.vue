@@ -391,7 +391,7 @@
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Solicitudes Trabajo',
+                name: 'Orden de Trabajo',
                 type: 'bug-report-jobs-request',
                 route: {name: 'bug-report-jobs-request'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)

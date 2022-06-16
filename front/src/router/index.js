@@ -131,6 +131,7 @@ import BugReportView from '@/components/fails/BugReportView'
 import BugReportVisualization from '@/components/fails/BugReportVisualization'
 import BugReportEdit from '@/components/fails/BugReportEdit'
 import BugReportHistoryPass from '@/components/fails/BugReportHistoryPass'
+import BugReportJobsRequest from '@/components/fails/BugReportJobsRequest'
 
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
@@ -1129,7 +1130,7 @@ const router = new Router({
                 fail: '/error'
               }
             },
-            /* {
+            {
               path: 'solicitudes-trabajo',
               name: 'bug-report-jobs-request',
               component: BugReportJobsRequest,
@@ -1137,7 +1138,7 @@ const router = new Router({
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
               }
-            }, */
+            },
             {
               path: 'resumen-fallas',
               name: 'bug-report-resume',
