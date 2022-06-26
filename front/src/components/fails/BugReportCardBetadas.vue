@@ -1,22 +1,21 @@
 <template>
   <card-container @click.native="goToRequest(request)">
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
-      <p slot="header">Estado de falla: {{ bugReportType(request) }} 
+      <p slot="header">Estado de falla: {{ bugReportType(request) }}
         <span v-show="showObservationSection(request)">[BETADA]</span>
       </p>
       <p slot="subHeader" v-if="approved(request)">Por {{ request.approved_by.lastname }}</p>
       <p slot="subHeader" v-if="denied(request)">Por {{ request.approved_by.lastname }}</p>
-              
     </card-header>
     <card-section>
       <p slot="content">
         <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }} - <span class="time">{{ request.line }}</span> - <span class="time">{{ request.sector }}</span> - <span class="time">{{ request.sub_sector }}</span> - <span class="time">{{ request.detectado }}</span> - <span class="time">{{ request.resuelto }}</span> </span></p>
       <p slot="content">
-           
+        
          </p>
       <p slot="content">
-         </p>   
-      <!--<div @click.stop slot="actions" v-if="received(request)" v-show="$can(permission)">
+         </p>     
+      <div @click.stop slot="actions" v-if="received(request)" v-show="$can(permission)">
         <button class="reject" @click="reject(request)" :disabled="request.rejectLoading || request.acceptLoading">
           <img v-if="!request.rejectLoading" src="/static/img/checklists/cross.svg" alt="">
           <spinner-little v-else :show="request.rejectLoading"></spinner-little>
@@ -25,8 +24,7 @@
           <img v-if="!request.acceptLoading" src="/static/img/checklists/tick.svg" alt="">
           <spinner-little v-else :show="request.acceptLoading"></spinner-little>
         </button>
-        ACA ESTA EL BOTON de Aprobado o Denegado
-      </div>-->   
+      </div> 
     </card-section>
   </card-container>
 </template>
@@ -46,7 +44,7 @@
   const {ROLES} = Const
 
   export default {
-    name: 'BugReportCard',
+    name: 'BugReportCardBetadas',
     components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle},
     props: {
       request: {
@@ -106,21 +104,23 @@
       },
       reject (req) {
         const action = () => {
-          this.$store.dispatch('requests/approvalById', {
+          this.$store.dispatch('bugReport/approvalById', {
             id: req._id,
             approved: false,
             user: auth.getUser()
           })
+          .then(r => { window.location.reload() })
         }
         this.confirmation('¿Esta seguro de RECHAZAR esta solicitud?', action)
       },
       accept (req) {
         const action = () => {
-          this.$store.dispatch('requests/approvalById', {
+          this.$store.dispatch('bugReport/approvalById', {
             id: req._id,
             approved: true,
             user: auth.getUser()
           })
+          .then(r => { window.location.reload() })
         }
         this.confirmation('¿Esta seguro de APROBAR esta solicitud?', action)
       },

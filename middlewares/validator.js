@@ -170,6 +170,10 @@ const validator = {
       body('eventsTimelineId').exists(),
       validatorMiddleware
     ],
+    desarchive: [
+      body('eventsTimelineId').exists(),
+      validatorMiddleware
+    ],
     removeEvent: [
       body('eventsTimelineId').exists(),
       body('eventId').exists(),

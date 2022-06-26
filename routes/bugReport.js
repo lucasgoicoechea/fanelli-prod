@@ -24,6 +24,10 @@ router.get('/fetchPassFails', bugReportController.fetchPassFails)
 router.get('/getFailsForFather', bugReportController.getFailsForFather)
 router.get('/:id', bugReportController.getId)
 router.put('/:id', bugReportController.edit)
+router.get('/excel/delivered', bugReportController.getReportDelivered)
+router.post('/approval/:id', authorize([ROLE.JEFES, ROLE.RRHH]), bugReportController.approval)
+
+
 
 
 

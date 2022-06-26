@@ -1,6 +1,6 @@
 <template>
   <article class="checklist-date-button">
-    <router-link :to="{ name: 'checklistsHistory', params: { date: formatedDate }}">
+    <router-link :to="{ name: 'checklistsL3History', params: { date: formatedDate }}">
       <header>{{ formatedDate }}</header>
       <div class="fill">
         <hr class="red">

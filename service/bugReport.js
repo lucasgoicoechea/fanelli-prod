@@ -36,7 +36,7 @@ const service = {
   listPassFails : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      $or:[{inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}]
+      $or:[{betadas: true}, {inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}]
     })
   return bugReports
   }),
@@ -55,7 +55,7 @@ const service = {
     let bugReports = BugReportModel
     .find({
       // created_at:{$gte:new Date(new Date().getTime()+(24*60*60*1000))},
-      estado: "SOLUCIONADO"
+      $or:[{betadas: true}, { estado: "SOLUCIONADO"}]     
     })
     /*.populate({
       path: 'collaborators',

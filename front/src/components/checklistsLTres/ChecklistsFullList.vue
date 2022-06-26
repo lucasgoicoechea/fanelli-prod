@@ -23,7 +23,7 @@
 
 <script>
   import Spinner from '@/components/Spinner.vue'
-  import ChecklistDateButton from '@/components/checklists/ChecklistDateButton.vue'
+  import ChecklistDateButton from '@/components/checklistsLTres/ChecklistDateButton.vue'
   import { mapState, mapGetters } from 'vuex'
 
   export default {

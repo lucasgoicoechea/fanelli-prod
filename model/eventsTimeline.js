@@ -28,7 +28,7 @@ const EventsTimelineSchema = new Schema({
   },
   usePushEach: true
 })
-
+//mongoose.set('debug', true)
 EventsTimelineSchema.query.teamOf = queryTeam('collaborator')
 const EventTimelineModel = mongoose.model('EventTimeline', EventsTimelineSchema)
 

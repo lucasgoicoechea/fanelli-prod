@@ -6,7 +6,14 @@
         :show="loadingActiveRequest"
         loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
-
+    <div class="row" >
+            <button class="redirect" @click="generateReport">
+              <div>
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span class="text">Generar reporte</span>
+              </div>
+            </button>
+    </div>
     <div class="empty" v-show="!loadingActiveRequest && bugReportListDelivered.length === 0">
       <p>No hay fallas reparadas para mostrar</p>
     </div>
@@ -28,6 +35,7 @@
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import BugReportCard from '@/components/fails/BugReportCard'
+  import pdf from '@/utils/pdf'
 
   export default {
     name: 'BugReportHistoryListDelivered',
@@ -51,6 +59,12 @@
     },
     destroyed: function () {},
     methods: {
+      successfulPrint (blob) {
+        pdf.download(blob, 'report.xlsx')
+      },
+      errorPrint () {
+        this.$snotifyWrapper.warning('Error de impresión. Intente nuevamente')
+      },
       fetch () {
         // this.bugReport.loading = true
         const action = 'bugReport/fetchNoActive'
@@ -91,6 +105,11 @@
       bugReportTypeSubColor (request) {
         if (this.delivered(request)) return '#fbc697'
         else return '#e2cea4'
+      },
+      generateReport () {
+        this.$store.dispatch('bugReport/getAllReportDelivered')
+          .then(this.successfulPrint)
+          .catch(this.errorPrint)
       },
       filter () {
         this.loadingDelivered = true

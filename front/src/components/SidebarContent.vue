@@ -123,6 +123,12 @@
                 can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
               },
               {
+                name: 'Novedades Archivadas',
+                type: 'control-novedades',
+                route: {name: 'control-novedades-archivadas'},
+                can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
+              },
+              {
                 name: 'Personal',
                 type: 'control-personal',
                 route: {name: 'control-personal'},
@@ -159,7 +165,7 @@
             name: 'Control Linea 2',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanellinea2',
-            routeName: 'control-checklists',
+            routeName: 'control-panel-linea2',
             submenu: [
               {
                 name: 'Checklists L2',
@@ -192,7 +198,7 @@
             name: 'Control Linea 3',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanellinea3',
-            routeName: 'control-checklists-LTres',
+            routeName: 'control-panel-linea3',
             submenu: [
               {
                 name: 'Checklists L3',
@@ -382,6 +388,12 @@
                 name: 'Solicitudes Reparacion',
                 type: 'bug-report-creation',
                 route: {name: 'bug-report-solicitudes-reparacion'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Orden de Trabajo',
+                type: 'bug-report-jobs-request',
+                route: {name: 'bug-report-jobs-request'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {

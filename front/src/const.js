@@ -91,7 +91,7 @@ export default {
   },
 
   lines: {
-    L1: 'Linea 1',
+    L1: 'Linea 3',
     L2: 'Linea 2'
   },
 
@@ -416,7 +416,8 @@ export default {
     T4L1: 'T4-L1',
     T4L2: 'T4-L2',
     SUPERVISORES: 'Supervisores',
-    PRODUCCION: 'Producción',
+    PRODUCCION: 'Producción L2',
+    PRODUCCION_L3: 'Producción L3',
     EXTRUSORA: 'EXTRUSORA',
     APILADORA: 'APILADORA',
     DESAPILADORA: 'DESAPILADORA',

@@ -62,6 +62,7 @@ import ControlPanelIndex from '@/components/control/ControlPanelIndex'
 import ControlL2Index from '@/components/control/ControlL2Index'
 import ControlL3Index from '@/components/control/ControlL3Index'
 import EventsIndex from '@/components/control/events/EventsIndex'
+import EventsIndexArchivadas from '@/components/control/events/EventsIndexArchivadas'
 import NewsKanban from '@/components/news/NewsKanban'
 import StaffRequestsControlIndex from '@/components/control/staffRequests/Index'
 
@@ -130,6 +131,7 @@ import BugReportView from '@/components/fails/BugReportView'
 import BugReportVisualization from '@/components/fails/BugReportVisualization'
 import BugReportEdit from '@/components/fails/BugReportEdit'
 import BugReportHistoryPass from '@/components/fails/BugReportHistoryPass'
+import BugReportJobsRequest from '@/components/fails/BugReportJobsRequest'
 
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
@@ -474,6 +476,15 @@ const router = new Router({
               path: 'novedades',
               name: 'control-novedades',
               component: EventsIndex,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'novedadesas',
+              name: 'control-novedades-archivadas',
+              component: EventsIndexArchivadas,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.RRHH),
                 fail: '/error'
@@ -1111,9 +1122,18 @@ const router = new Router({
               }
             },
             {
-              path: 'posibles-solicitudes-repareacion',
+              path: 'posibles-solicitudes-reparacion',
               name: 'bug-report-solicitudes-reparacion',
               component: BugReportHistoryPass,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'solicitudes-trabajo',
+              name: 'bug-report-jobs-request',
+              component: BugReportJobsRequest,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'

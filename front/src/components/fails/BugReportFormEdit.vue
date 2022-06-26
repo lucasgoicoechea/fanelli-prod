@@ -11,7 +11,7 @@
             :multipleSelection="true"
              typeList="full"
             :preSelection="editable.collaborators"></sub-part-selector>-->
-            <select v-model="bugReport.estado" id="estado">
+            <select v-model="bugReport.estado" id="estado" @change="cambiarEstadoEdit()">
               <option v-for="(label, value) in $constants.BUG_REPORT_ESTADO"  :key="value" :value="value"> {{label}}</option>
           </select>
         </div>
@@ -19,19 +19,7 @@
 
        <div class="col-xs-12">
           <h3>Resuelto por</h3>
-          <div class="row">
-            <div
-              class="col-md-6"
-              v-for="(label, value) in $constants.BUG_REPORT_TURNOS"
-              :key="value">
-              <check-box
-                class="margin"
-                type="radio"
-                v-model="bugReport.resuelto"
-                :val="value"
-                :label="label"></check-box>
-            </div>      
-          </div>
+            {{bugReport.resuelto}}
         </div>
 
         <div class="col-xs-12">
@@ -50,6 +38,7 @@
 </template>
 
 <script>
+  import auth from '@/auth'
   import { mapState, mapGetters } from 'vuex'
   import LineSelector from '@/components/fails/line/LineSelector'
   import SectorSelector from '@/components/fails/sector/SectorSelector'
@@ -140,6 +129,13 @@
           resuelto: this.editable.resuelto || '',
           resume: this.editable.resume || '',
           resolucion: this.editable.resolucion || ''
+        }
+      },
+      cambiarEstadoEdit () {
+        if (this.bugReport.estado === 'SOLUCIONADO') {
+          this.bugReport.resuelto = auth.getUser().lastname + ',' + auth.getUser().name
+        } else {
+          this.bugReport.resuelto = ''
         }
       },
       validate () {
