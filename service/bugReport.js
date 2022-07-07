@@ -6,6 +6,7 @@ const notification = require(path.join(__dirname, '/../libs/notification'))
 const pdf = require(path.join(__dirname, '/../libs/pdf'))
 const moment = require('moment')
 const dateFns = require('date-fns')
+const { isNull } = require('lodash')
 const Const = require(path.join(__dirname, '../libs/const'))
 const NOTIFICATION_TYPE = Const.NOTIFICATION_TYPE
 const service = {
@@ -29,13 +30,31 @@ const service = {
       created_at:{$gte:new Date().getTime()-(48*60*60*1000)},
       estado: {$nin :["SOLUCIONADO"]}
     })
+    .sort({
+      created_at: -1
+    })
   return bugReports
   }),
 
   listPassFails : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      $or:[{betadas: true}, {inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}]
+      $or:[{inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}],
+      betadas: null
+    })
+    .sort({
+      created_at: -1
+    })
+  return bugReports
+  }),
+  
+  listBetadas : async(function (options) {
+    let bugReports = BugReportModel
+    .find({
+      betadas: true
+    })
+    .sort({
+      created_at: -1
     })
   return bugReports
   }),
@@ -44,7 +63,10 @@ const service = {
     let bugReports = BugReportModel
     .find({
       // created_at:{$gte:new Date(new Date().getTime()+(24*60*60*1000))},
-      $or:[{betadas: true}, { estado: "SOLUCIONADO"}]     
+      $or:[{ estado: "SOLUCIONADO"}]     
+    })
+    .sort({
+      created_at: -1
     })
     /*.populate({
       path: 'collaborators',

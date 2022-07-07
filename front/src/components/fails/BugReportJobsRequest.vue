@@ -12,11 +12,11 @@
       <p>No hay fallas para mostrar</p>
     </div>
 
-    <bugReport-card
+    <bug-report-card-job-request
       v-for="request in bugReportList"
       :key="request._id"
       :request="request">
-    </bugReport-card>
+    </bug-report-card-job-request>
   </div>
 </template>
 
@@ -30,11 +30,11 @@
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import SpinnerLittle from '@/components/Spinner.vue'
-  import BugReportCard from '@/components/fails/BugReportCard'
+  import BugReportCardJobRequest from '@/components/fails/BugReportCardJobRequest'
 
   export default {
     name: 'BugReportJobsRequest',
-    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCard},
+    components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle, CollaboratorSelector, BugReportCardJobRequest},
     props: {
       type: {
         type: String,
@@ -59,7 +59,7 @@
     methods: {
       fetch () {
         // this.bugReport.loading = true
-        const action = 'bugReport/fetchActive'
+        const action = 'bugReport/fetchActiveBetadas'
         this.$store.dispatch(action, {})
           .then(this.successFetch)
           .catch(this.failFetch)

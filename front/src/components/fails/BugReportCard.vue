@@ -2,7 +2,7 @@
   <card-container @click.native="goToRequest(request)">
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
       <p slot="header">Estado de falla: {{ bugReportType(request) }} 
-        <span v-show="showObservationSection(request)">[BETADA]</span>
+        <span v-show="showObservationSection(request)"></span>
       </p>
       <p slot="subHeader" v-if="approved(request)">Por {{ request.approved_by.lastname }}</p>
       <p slot="subHeader" v-if="denied(request)">Por {{ request.approved_by.lastname }}</p>
