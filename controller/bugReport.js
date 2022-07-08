@@ -68,6 +68,14 @@ const controller = {
       }))
     res.json({success: true, bugReports})
   }),
+  getFailsForFather: async(function (req, res, next) {
+    let bugReports
+    bugReports = awaitFor(bugReportService.getFailsForFather({
+        id: req.father
+      }))
+    res.json({success: true, bugReports})
+  }),
+  
 
   fetchNoActive: async(function (req, res, next) {
     let bugReports

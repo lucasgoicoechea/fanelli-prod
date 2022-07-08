@@ -52,5 +52,6 @@ module.exports = {
   hour: require(path.join(__dirname, '/hour')),
   fail: require(path.join(__dirname, '/fail')),
   bugReport: require(path.join(__dirname, '/bugReport')),
+  failed: require(path.join(__dirname, '/failed')),
   checkLTres: require(path.join(__dirname, '/checkLTres'))  
 }
