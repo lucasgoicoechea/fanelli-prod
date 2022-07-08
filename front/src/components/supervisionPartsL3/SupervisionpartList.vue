@@ -33,7 +33,7 @@
     },
     methods: {
       isOficial (sector) {
-        return (sector === 'EXTRUSORA' && this.$can(this.$constants.ROLES.OFICIAL_EXTRUSORA)) || (sector === 'APILADORA' && this.$can(this.$constants.ROLES.OFICIAL_APILADORA)) || (sector === 'DESAPILADORA' && this.$can(this.$constants.ROLES.OFICIAL_DESAPILADORA))
+        return (sector === 'EXTRUSORA' && this.$can(this.$constants.ROLES.OFICIAL_EXTRUSORA_L3)) || (sector === 'APILADORA' && this.$can(this.$constants.ROLES.OFICIAL_APILADORA)) || (sector === 'DESAPILADORA' && this.$can(this.$constants.ROLES.OFICIAL_DESAPILADORA))
       }
     },
     computed: {

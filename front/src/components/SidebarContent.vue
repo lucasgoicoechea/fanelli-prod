@@ -319,19 +319,19 @@
                 name: 'Extrusora L3',
                 type: 'extrusora',
                 route: {name: 'supervisionpart-linea3', params: {sector: 'EXTRUSORA'}},
-                can: authorize(ROLES.OFICIAL_EXTRUSORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+                can: authorize(ROLES.OFICIAL_EXTRUSORA_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
                 name: 'Apiladora L3',
                 type: 'apiladora',
                 route: {name: 'supervisionpart-linea3', params: {sector: 'APILADORA'}},
-                can: authorize(ROLES.OFICIAL_APILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+                can: authorize(ROLES.OFICIAL_APILADORA_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
                 name: 'Desapiladora L3',
                 type: 'desapiladora',
                 route: {name: 'supervisionpart-linea3', params: {sector: 'DESAPILADORA'}},
-                can: authorize(ROLES.OFICIAL_DESAPILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+                can: authorize(ROLES.OFICIAL_DESAPILADORA_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               }
             ]
           },
