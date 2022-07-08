@@ -258,7 +258,7 @@
             name: 'Partes L2',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'checklist',
-            can: authorize(ROLES.OFICIALES, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
+            can: authorize(ROLES.OFICIAL_L2, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'supervisionpartsIndex',
             submenu: [
               {
@@ -312,7 +312,7 @@
             name: 'Partes L3',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'supervisionpartsL3',
-            can: authorize(ROLES.OFICIALES, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
+            can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'supervisionpartsL3Index',
             submenu: [
               {
