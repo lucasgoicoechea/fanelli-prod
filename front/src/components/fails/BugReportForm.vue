@@ -257,7 +257,7 @@
       getFailsForFather: function (id) {
         this.$store.dispatch('bugReport/getFailsForFather', {father: id})
           .then(() => {
-            
+            console.log('ohla')
           })
       }
     },
