@@ -15,16 +15,6 @@
          </p>
       <p slot="content">
          </p>     
-      <div @click.stop slot="actions" v-if="received(request)" v-show="$can(permission)">
-        <button class="reject" @click="reject(request)" :disabled="request.rejectLoading || request.acceptLoading">
-          <img v-if="!request.rejectLoading" src="/static/img/checklists/cross.svg" alt="">
-          <spinner-little v-else :show="request.rejectLoading"></spinner-little>
-        </button>
-        <button class="accept" @click="accept(request)" :disabled="request.rejectLoading || request.acceptLoading">
-          <img v-if="!request.acceptLoading" src="/static/img/checklists/tick.svg" alt="">
-          <spinner-little v-else :show="request.acceptLoading"></spinner-little>
-        </button>
-      </div> 
     </card-section>
   </card-container>
 </template>
@@ -44,7 +34,7 @@
   const {ROLES} = Const
 
   export default {
-    name: 'BugReportCardBetadas',
+    name: 'BugReportCardJobRequest',
     components: {CardContainer, CardHeader, CardSection, CardFooter, Spinner, SpinnerLittle},
     props: {
       request: {
@@ -55,7 +45,7 @@
     methods: {
       fetch () {
         // this.bugReport.loading = true
-        const action = 'bugReport/fetchPassFails'
+        const action = 'bugReport/fetchActiveBetadas'
         this.$store.dispatch(action, {})
           .then(this.successFetch)
           .catch(this.failFetch)

@@ -201,6 +201,18 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
+  fetchActiveBetadas (context, payload) {
+    const params = (payload !== undefined) ? payload : {}
+    const fetched = (response) => {
+      return response.body
+    }
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get('bugReport/fetchActiveBetadas', {params})
+      .then(fetched)
+      .catch(handleError)
+  },
   fetchNoActive (context, payload) {
     const params = (payload !== undefined) ? payload : {}
     const fetched = (response) => {

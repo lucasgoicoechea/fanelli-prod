@@ -34,7 +34,7 @@ const controller = {
       resuelto: req.body.bugReport.resuelto,
       resume: req.body.bugReport.resume,
       resolucion: req.body.bugReport.resolucion,
-      betadas: false
+      betadas: null
     }
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
@@ -88,7 +88,19 @@ const controller = {
       }))
     res.json({success: true, bugReports})
   }),
-
+  
+  fetchActiveBetadas: async(function (req, res, next) {
+    let bugReports
+    bugReports = awaitFor(bugReportService.listBetadas({
+        perPage: req.query.per_page,
+        page: req.query.page,
+        date: req.query.date,
+        type: req.query.type,
+        frecuency: req.query.frecuency
+      }))
+    res.json({success: true, bugReports})
+  }),
+  
   edit: async(function (req, res, next) {
     /*if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !bugReportService.isCreator(req.user.id, req.params.id)) {
       return next(new AppError('Impossible to edit', 'No se puede editar', Const.ERROR.DOCUMENT_CANT_BE_EDITED))
