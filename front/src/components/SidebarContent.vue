@@ -108,7 +108,7 @@
             type: 'control-oficial-supervisionpart',
             routeName: 'control-oficial-control',
             route: {name: 'control-oficial-control'},
-            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+            can: authorize(ROLES.OFICIALES, ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
           },
           {
             name: 'Panel de Control',
@@ -210,22 +210,22 @@
                 name: 'Partes L3',
                 type: 'control-supervisionparts-LTres',
                 route: {name: 'control-supervisionparts-LTres'},
-                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Partes Control L3',
                 type: 'control-resume-supervisionparts-LTres',
                 route: {name: 'control-resume-supervisionparts-LTres'},
-                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Partes Totales L3',
                 type: 'control-totales-supervisionparts-LTres',
                 route: {name: 'control-totales-supervisionparts-LTres'},
-                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               }
             ],
-            can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
+            can: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.ADMINISTRACION)
           },
           {
             name: 'Checklist L2',
@@ -258,7 +258,7 @@
             name: 'Partes L2',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'checklist',
-            can: authorize(ROLES.OFICIAL_L2, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
+            can: authorize(ROLES.OFICIALES, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'supervisionpartsIndex',
             submenu: [
               {
