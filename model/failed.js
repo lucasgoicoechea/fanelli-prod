@@ -11,6 +11,10 @@ const FailedSchema = new Schema({
   father: {
     type: String,
     require: false
+  },
+  attribute: {
+    type: String,
+    require: true
   }
 })
 

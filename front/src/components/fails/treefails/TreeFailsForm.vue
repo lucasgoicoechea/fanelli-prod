@@ -98,9 +98,15 @@
         this.items.splice(index, 1, data)
       },
       selectFather (data) {
-        console.log('hi')
         this.$store.dispatch('bugReport/getFailsForFather', {father: data.text})
-            .then((response) => { this.items = response.faileds })
+            .then((response) => {
+              this.items = response.faileds
+              console.log(this.items[0].attribute)
+              // if (this.items.lenght > 0) {
+              this.$parent.attribute = this.items[0].attribute
+              this.$parent.father = this.items[0].father
+              // }
+            })
             .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
       },
       remove (data) {
