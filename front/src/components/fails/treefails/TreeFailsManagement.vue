@@ -1,8 +1,7 @@
 <template>
   <div class="treefails-management">
     <navigation
-      title="Configuración de Personal"></navigation>
-
+      title="Configuración de Fallas"></navigation>
     <section>
       <div class="buttons">
         <treefails-button
@@ -11,10 +10,10 @@
           :attribute="key"
           @update="changeForm"
           :current="attribute"
-          :icon="`/static/img/${key}.svg`"></treefails-button>
+          :icon="`/static/img/${key}.png`"></treefails-button>
       </div>
       <div class="content">
-        <treefails-form :attribute="attribute"></treefails-form>
+        <treefails-form :attribute="attribute" :father="father" ></treefails-form>
       </div>
     </section>
 
@@ -23,8 +22,8 @@
 
 <script>
   import Navigation from '@/components/Navigation'
-  import treefailsButton from '@/components/treefails/treeFailsButton'
-  import treefailsForm from '@/components/treefails/treeFailsForm.vue'
+  import treefailsButton from '@/components/fails/treefails/TreeFailsButton'
+  import treefailsForm from '@/components/fails/treefails/TreeFailsForm'
 
   export default {
     components: {
@@ -32,10 +31,11 @@
       Navigation,
       treefailsButton
     },
-    name: 'treefailsManagement',
+    name: 'treeFailsManagement',
     data () {
       return {
-        attribute: 'sector'
+        attribute: 'linea',
+        father: 'null'
       }
     },
     methods: {

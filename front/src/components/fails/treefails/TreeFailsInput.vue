@@ -4,7 +4,7 @@
     <input
       class="items"
       type="text"
-      v-model="itemEditable.value"
+      v-model="itemEditable.text"
       :disabled="loader"
       @keyup.enter="confirmUpdate"
       @focusout="confirmUpdate"

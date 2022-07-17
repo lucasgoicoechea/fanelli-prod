@@ -40,6 +40,15 @@ const controller = {
     res.json({success: true, bugReport})
   }),
 
+  createFails: async(function (req, res) {
+    let failed = {
+      text: req.body.failed.line,
+      father: req.body.failed.sector
+    }
+    failed = awaitFor(bugReportService.createFailed(failed))
+    res.json({success: true, failed})
+  }),
+
   getId: async(function (req, res, next) {
       let bugReport = awaitFor(bugReportService.findOne(req.params.id))
       res.json({success: true, bugReport: bugReport})
@@ -69,11 +78,11 @@ const controller = {
     res.json({success: true, bugReports})
   }),
   getFailsForFather: async(function (req, res, next) {
-    let bugReports
-    bugReports = awaitFor(bugReportService.getFailsForFather({
-        id: req.father
+    let faileds
+    faileds = awaitFor(bugReportService.getFailsForFather({
+        father: req.query.father=='null'?null:req.query.father
       }))
-    res.json({success: true, bugReports})
+    res.json({success: true, faileds})
   }),
   
 

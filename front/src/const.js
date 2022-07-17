@@ -650,6 +650,14 @@ export default {
     line: 'Linea'
   },
 
+  treefails_ATTRIBUTE: {
+    linea: 'Linea',
+    sector: 'Sector',
+    subsector: 'SubSector',
+    equipo: 'Equipo',
+    grupos: 'Grupos',
+    partes: 'Partes'
+  },
   PROTECTED_SHIFT: {
     T1: 'T1 (10)',
     T2: 'T2 (11)',

@@ -1,14 +1,18 @@
 <template>
   <div class="treefails-form">
     <div class="inputs">
+      <div v-for="(item, index) in items" :key="item._id">
       <component
         :is="typeInput"
-        v-for="(item, index) in items"
-        :key="item._id"
         :item="item"
         :attribute="attribute"
         @update="update"
         @remove="remove"></component>
+      <button @click="selectFather(item)">
+        <span v-show="!loader">HIJOS</span>
+        <spinner :show="loader" size="small"></spinner>
+      </button>
+       </div>
     </div>
 
     <div class="create">
@@ -35,10 +39,9 @@
 </template>
 
 <script>
-  import treefailsInput from '@/components/treefails/treeFailsInput'
-  import treefailsShiftInput from '@/components/treefails/treeFailsShiftInput'
+  import treeFailsInput from '@/components/fails/treefails/TreeFailsInput'
+  import treeFailsShiftInput from '@/components/fails/treefails/TreeFailsShiftInput'
   import Spinner from '@/components/SpinnerWrapper'
-
   export default {
     name: 'treeFailsForm',
     components: {
@@ -50,6 +53,10 @@
       attribute: {
         type: String,
         required: true
+      },
+      father: {
+        type: String,
+        required: true
       }
     },
     data () {
@@ -59,14 +66,18 @@
           value: '',
           description: ''
         },
-        loader: false
+        loader: false,
+        fatherSelected: {
+          type: String,
+          required: true
+        }
       }
     },
     methods: {
       add () {
         const payload = {data: this.form}
         this.loader = true
-        this.$store.dispatch('treefails/create', {
+        this.$store.dispatch('bugReport/createFails', {
           attribute: this.attribute,
           payload: payload
         })
@@ -85,6 +96,12 @@
       update (data) {
         const index = this.items.findIndex(e => e._id === data._id)
         this.items.splice(index, 1, data)
+      },
+      selectFather (data) {
+        console.log('hi')
+        this.$store.dispatch('bugReport/getFailsForFather', {father: data.text})
+            .then((response) => { this.items = response.faileds })
+            .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
       },
       remove (data) {
         const index = this.items.findIndex(e => e._id === data._id)
@@ -105,8 +122,8 @@
       attribute: {
         immediate: true,
         handler () {
-          this.$store.dispatch('treefails/fetch', {attribute: this.attribute})
-            .then((response) => { this.items = response.data })
+          this.$store.dispatch('bugReport/getFailsForFather', {father: this.father})
+            .then((response) => { this.items = response.faileds })
             .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
         }
       }

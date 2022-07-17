@@ -322,6 +322,73 @@ const actions = {
     })
       .then(fetched)
       .catch(handleError)
+  },
+  fetchFails (context, {params}) {
+    const success = (res) => {
+      if (res.body.success) {
+        return res.body
+      } else {
+        return Promise.reject(res.body.message)
+      }
+    }
+
+    const error = (err) => {
+      return Promise.reject(err)
+    }
+
+    return Vue.http.get('bugReport/getFailsForFather', {params})
+      .then(success)
+      .catch(error)
+  },
+  createFails (context, {attribute, payload}) {
+    const success = (res) => {
+      if (res.body.success) {
+        return res.body
+      } else {
+        return Promise.reject(res.body.message)
+      }
+    }
+
+    const error = (err) => {
+      return Promise.reject(err)
+    }
+
+    return Vue.http.post('bugReport/createFails', payload)
+      .then(success)
+      .catch(error)
+  },
+  updateFails (context, {attribute, payload}) {
+    const success = (res) => {
+      if (res.body.success) {
+        return res.body
+      } else {
+        return Promise.reject(res.body.message)
+      }
+    }
+
+    const error = (err) => {
+      return Promise.reject(err)
+    }
+    return Vue.http.put(`${attribute}/${payload.data._id}`, payload)
+      .then(success)
+      .catch(error)
+  },
+  remove (context, {attribute, payload}) {
+    const success = (res) => {
+      if (res.body.success) {
+        return res.body
+      } else {
+        return Promise.reject(res.body.message)
+      }
+    }
+
+    const error = (err) => {
+      return Promise.reject(err)
+    }
+
+    return Vue.http.delete(`${attribute}/${payload._id}`)
+      .then(success)
+      .catch(error)
   }
 }
 

@@ -143,6 +143,7 @@ import MeetingVisualization from '@/components/meeting/MeetingVisualization'
 import MeetingManager from '@/components/meeting/MeetingManager'
 import MeetingSector from '@/components/meeting/MeetingSector'
 import MeetingCalendar from '@/components/meeting/MeetingCalendar'
+import treeFailsManagement from '@/components/fails/treefails/TreeFailsManagement'
 
 const { ROLES } = Const
 
@@ -1143,6 +1144,15 @@ const router = new Router({
               path: 'resumen-fallas',
               name: 'bug-report-resume',
               component: BugReportResume,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'bug-report-config',
+              name: 'bug-report-config',
+              component: treeFailsManagement,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'

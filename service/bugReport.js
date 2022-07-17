@@ -17,7 +17,11 @@ const service = {
     return bugReportTmp
     }
   ),
-
+  createFailed: async(function (failed) {
+    let failesTmp = awaitFor(FailedModel.create(failed))
+    return failesTmp
+    }
+  ),
   edit: async(function (bugReport, id) {
     awaitFor(BugReportModel.update({_id: id}, {$set: bugReport}))
     // let bugReportTmp = awaitFor(BugReportModel.update(bugReport))
@@ -63,8 +67,7 @@ const service = {
   getFailsForFather : async(function (options) {
     let bugReports = FailedModel
     .find({
-      $or:[{inconveniente: "COMPLEJIDAD"}, {created_at:{$lte:new Date(new Date().getTime()-(48*60*60*1000))}, estado: {$nin :["SOLUCIONADO"]}}]
-    })
+      father: options.father   })
   return bugReports
   }),
 

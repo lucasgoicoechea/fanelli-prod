@@ -401,6 +401,12 @@
                 type: 'bug-report-resume',
                 route: {name: 'bug-report-resume'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Config de Fallas',
+                type: 'bug-report-config',
+                route: {name: 'bug-report-config'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               }
             ]
           },
