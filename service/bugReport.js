@@ -65,6 +65,9 @@ const service = {
   }),
 
   getFailsForFather : async(function (options) {
+    if (options.father == '') {
+      options.father = null;
+    }
     let bugReports = FailedModel
     .find({
       father: options.father   })

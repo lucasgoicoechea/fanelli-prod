@@ -39,7 +39,7 @@
 
 <script>
   import Navigation from '@/components/Navigation.vue'
-  import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView.vue'
+  import SupervisionpartTotalesView from '@/components/supervisionPartsL3/SupervisionpartTotalesView.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapGetters } from 'vuex'

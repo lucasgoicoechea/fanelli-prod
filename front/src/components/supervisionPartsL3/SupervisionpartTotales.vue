@@ -16,8 +16,8 @@
 
 <script>
   // import ChecklistSummaryView from '@/components/checklists/ChecklistSummaryView.vue'
-  import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView.vue'
-  import SupervisionpartsTotalesFullList from '@/components/supervisionParts/SupervisionpartsTotalesFullList.vue'
+  import SupervisionpartTotalesView from '@/components/supervisionPartsL3/SupervisionpartTotalesView.vue'
+  import SupervisionpartsTotalesFullList from '@/components/supervisionPartsL3/SupervisionpartsTotalesFullList.vue'
   import Tabs from '@/components/tabs/Tabs.vue'
   import Tab from '@/components/tabs/Tab.vue'
   import { mapState } from 'vuex'
