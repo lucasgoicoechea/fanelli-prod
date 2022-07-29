@@ -7,8 +7,8 @@
        <div>
         <div class="col-xs-12">
           <h3>Selección de Linea</h3>
-          <select v-model="bugReport.line" id="line">
-                <option v-for="p in lineList" :key="p._id" :value="p._id" > {{p.text}}</option>
+          <select v-model="bugReport.line" id="line" @change="getFailsForFather(bugReport.line, 'sector')">
+                <option v-for="p in lineList['line']" :key="p._id" :value="p" > {{p.text}}</option>
           </select>
         </div>
         </div>
@@ -16,12 +16,8 @@
         <div>
         <div class="col-xs-12">
           <h3>Selección de Sector</h3>
-          <!--<sector-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></sector-selector>-->
-            <select v-model="bugReport.sector" id="sector">
-              <option v-for="(label, value) in sectorList" :key="value" :value="value"> {{label}}</option>
+            <select v-model="bugReport.sector" id="sector"  @change="getFailsForFather(bugReport.sector, 'sub_sector')">
+              <option v-for="p in lineList['sector']"  :value="p" >{{p.text}}</option>
           </select>
         </div>
         </div>
@@ -29,25 +25,17 @@
         <div>
         <div class="col-xs-12">
           <h3>Selección de Sub-Sector</h3>
-          <!--<sub-sector-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></sub-sector-selector>-->
-            <select v-model="bugReport.sub_sector" id="sub_sector">
-              <option v-for="(label, value) in subSectorList"  :key="value" :value="value"> {{label}}</option>
-          </select>
+            <select v-model="bugReport.sub_sector" id="sub_sector"  @change="getFailsForFather(bugReport.sub_sector, 'equipo')">
+              <option v-for="p in lineList['sub_sector']"  :value="p" >{{p.text}}</option>          
+            </select>
         </div>
         </div>
         
         <div>
         <div class="col-xs-12">
           <h3>Selección de Equipo</h3>
-          <!--<equipo-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></equipo-selector>-->
-            <select v-model="bugReport.equipo" id="equipo">
-              <option v-for="(label, value) in equipoList"  :key="value" :value="value"> {{label}}</option>
+            <select v-model="bugReport.equipo" id="equipo"  @change="getFailsForFather(bugReport.equipo, 'group')">
+              <option v-for="p in lineList['equipo']"  :value="p"> {{p.text}}</option>
           </select>
         </div>
         </div>
@@ -55,12 +43,8 @@
         <div>
         <div class="col-xs-12">
           <h3>Selección de Grupos</h3>
-          <!--<part-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></part-selector>-->
-            <select v-model="bugReport.group" id="group">
-              <option v-for="(label, value) in groupList"  :key="value" :value="value"> {{label}}</option>
+            <select v-model="bugReport.group" id="group"  @change="getFailsForFather(bugReport.group, 'part')" >
+              <option v-for="p in lineList['group']"  :value="p"> {{p.text}}</option>
           </select>
         </div>
         </div>
@@ -68,12 +52,8 @@
         <div>
         <div class="col-xs-12">
           <h3>Selección de Partes</h3>
-          <!--<sub-part-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></sub-part-selector>-->
-            <select v-model="bugReport.part" id="part">
-              <option v-for="(label, value) in partList"  :key="value" :value="value"> {{label}}</option>
+            <select v-model="bugReport.part" id="part" >
+              <option v-for="p in lineList['part']"  :value="p"> {{p.text}}</option>
           </select>
         </div>
         </div>
@@ -81,10 +61,6 @@
         <div>
         <div class="col-xs-12">
           <h3>Estado de Falla</h3>
-          <!--<sub-part-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></sub-part-selector>-->
             <select v-model="bugReport.estado" id="estado" @change="cambiarEstado()">
               <option v-for="(label, value) in $constants.BUG_REPORT_ESTADO"  :key="value" :value="value"> {{label}}</option>
           </select>
@@ -94,10 +70,6 @@
         <div>
         <div class="col-xs-12">
           <h3>Selección de Prioridad</h3>
-          <!--<sub-part-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></sub-part-selector>-->
             <select v-model="bugReport.prioridad" id="prioridad">
               <option v-for="(label, value) in $constants.BUG_REPORT_PRIORIDAD2"  :key="value" :value="value"> {{label}}</option>
           </select>
@@ -107,10 +79,6 @@
         <div>
         <div class="col-xs-12">
           <h3>Inconveniente</h3>
-          <!--<sub-part-selector
-            :multipleSelection="true"
-             typeList="full"
-            :preSelection="editable.collaborators"></sub-part-selector>-->
             <select v-model="bugReport.inconveniente" id="inconveniente">
               <option v-for="(label, value) in inconvenienteList"  :key="value" :value="value"> {{label}}</option>
           </select>
@@ -186,7 +154,7 @@
     data () {
       return {
         bugReport: this.generateData(),
-        lineList: this.getFailsForFather(null),
+        lineList: {'line': []},
         customToolbar: [
           ['bold', 'italic', 'underline'],
           [{ list: 'ordered' }, { list: 'bullet' }],
@@ -219,7 +187,7 @@
     methods: {
       generateData () {
         return {
-          line: this.editable.line || '',
+          line: this.editable.line || null,
           sector: this.editable.sector || '',
           sub_sector: this.editable.sub_sector || '',
           equipo: this.editable.equipo || '',
@@ -233,6 +201,9 @@
           resume: this.editable.resume || ''
         }
       },
+      init () {
+        this.getFailsForFather(null, 'line')
+      },
       cambiarEstado () {
         if (this.bugReport.estado === 'SOLUCIONADO') {
           this.bugReport.resuelto = auth.getUser().lastname + ',' + auth.getUser().name
@@ -241,24 +212,18 @@
         }
       },
       validate () {
-        /* if (!this.hasSelected) {
-          return {valid: false, msg: 'Seleccione un/unos colaborador/es'}
-        }
-        if (this.bugReport.type.length === 0) {
-          return {valid: false, msg: 'Seleccione un tipo de reunión'}
-        }
-        if (this.bugReport.recommendations.length === 0) {
-          return {valid: false, msg: 'Seleccione al menos un objetivo'}
-        }
-        if (this.bugReport.description.length === 0) {
-          return {valid: false, msg: 'Ingrese un resumen de la reunión'}
-        } */
         return {valid: true, msg: 'OK'}
       },
-      getFailsForFather: function (id) {
+      getFailsForFather: function (id, lista) {
+        console.dir(this.lineList)
+        console.log(id)
+        if (id !== null) {
+          id = id.text
+        }
+        console.log(id)
         this.$store.dispatch('bugReport/getFailsForFather', {father: id})
-          .then(() => {
-            console.log('ohla')
+          .then(r => {
+            this.lineList[lista] = r.faileds
           })
       }
     },
@@ -300,24 +265,12 @@
         deep: true
       }
     },
+    created () {
+      this.init()
+    },
     computed: {
       frecuency () {
         return this.isFrecuency
-      },
-      sectorList () { // Lista de Sectores, Linea 0
-        return this.getFailsForFather(this.bugReport.line)
-      },
-      subSectorList () {
-        return this.getFailsForFather(this.bugReport.sector)
-      },
-      equipoList () { // Lista de Equipos, Sector Produccion
-        return this.getFailsForFather(this.bugReport.sub_sector)
-      },
-      groupList () {
-        return this.getFailsForFather(this.bugReport.equipo)
-      },
-      partList () { // Lista de Partes, Sector Produccion
-        return this.getFailsForFather(this.bugReport.group)
       },
       inconvenienteList () {
         if (this.bugReport.estado === 'SOLUCIONADO') {
