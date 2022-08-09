@@ -65,12 +65,12 @@ const service = {
   }),
 
   getFailsForFather : async(function (options) {
-    if (options.father == '') {
-      options.father = null;
+    if (options.father_id == null) {
+      options.father_id = null;
     }
     let bugReports = FailedModel
     .find({
-      father: options.father   })
+      father_id: options.father_id   })
   return bugReports
   }),
 

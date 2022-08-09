@@ -80,7 +80,7 @@ const controller = {
   getFailsForFather: async(function (req, res, next) {
     let faileds
     faileds = awaitFor(bugReportService.getFailsForFather({
-        father: req.query.father=='null'?null:req.query.father
+        father_id: req.query.father=='null'?null:req.query.father
       }))
     res.json({success: true, faileds})
   }),

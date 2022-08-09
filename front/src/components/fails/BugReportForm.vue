@@ -214,14 +214,14 @@
       validate () {
         return {valid: true, msg: 'OK'}
       },
-      getFailsForFather: function (id, lista) {
+      getFailsForFather: function (falla, lista) {
         console.dir(this.lineList)
-        console.log(id)
-        if (id !== null) {
-          id = id.text
+        console.log(falla)
+        if (falla !== null) {
+          falla = falla._id
         }
-        console.log(id)
-        this.$store.dispatch('bugReport/getFailsForFather', {father: id})
+        console.log(falla)
+        this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
           .then(r => {
             this.lineList[lista] = r.faileds
           })

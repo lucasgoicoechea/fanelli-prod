@@ -98,7 +98,7 @@
         this.items.splice(index, 1, data)
       },
       selectFather (data) {
-        this.$store.dispatch('bugReport/getFailsForFather', {father: data.text})
+        this.$store.dispatch('bugReport/getFailsForFather', {father: data._id})
             .then((response) => {
               this.items = response.faileds
               console.log(this.items[0].attribute)
