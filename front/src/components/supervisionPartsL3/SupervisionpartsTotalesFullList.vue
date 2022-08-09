@@ -40,7 +40,7 @@
       redirect: function () {
         if (this.date !== '') {
           const formatedDate = this.$moment(this.date).format('DD-MM-YYYY')
-          this.$router.push({name: 'supervisionpartsTotales', params: {date: formatedDate}})
+          this.$router.push({name: 'supervisionpartsTotales-linea3', params: {date: formatedDate}})
         } else {
           this.$modal.show('dialog', {
             text: 'Ingrese una fecha válida',

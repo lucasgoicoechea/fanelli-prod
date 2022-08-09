@@ -40,7 +40,6 @@ import SupervisionpartForm from '@/components/supervisionParts/SupervisionpartFo
 import SupervisionpartsControl from '@/components/supervisionParts/SupervisionpartControl'
 import SupervisionpartTotal from '@/components/supervisionParts/SupervisionpartTotal'
 import SupervisionpartTotales from '@/components/supervisionParts/SupervisionpartTotales'
-// import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView'
 import SupervisionpartsResumen from '@/components/supervisionParts/SupervisionpartResumen'
 import SupervisionpartResume from '@/components/supervisionParts/SupervisionpartResume'
 import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal'
@@ -52,7 +51,6 @@ import SupervisionpartL3Form from '@/components/supervisionPartsL3/Supervisionpa
 import SupervisionpartsL3Control from '@/components/supervisionPartsL3/SupervisionpartControl'
 import SupervisionpartL3Total from '@/components/supervisionPartsL3/SupervisionpartTotal'
 import SupervisionpartL3Totales from '@/components/supervisionPartsL3/SupervisionpartTotales'
-// import SupervisionpartTotalesView from '@/components/supervisionParts/SupervisionpartTotalesView'
 import SupervisionpartsL3Resumen from '@/components/supervisionPartsL3/SupervisionpartResumen'
 import SupervisionpartL3Resume from '@/components/supervisionPartsL3/SupervisionpartResume'
 import SupervisionpartResumeHistoryL3Total from '@/components/supervisionPartsL3/SupervisionpartResumeHistoryTotal'
@@ -766,7 +764,7 @@ const router = new Router({
               }
             },
             {
-              path: 'historial/:date',
+              path: 'historial-linea3/:date',
               name: 'supervisionpartsHistory-linea3',
               component: SupervisionpartL3History,
               meta: {
@@ -775,7 +773,7 @@ const router = new Router({
               }
             },
             {
-              path: 'historial-resume-total/:date',
+              path: 'historial-resume-total-linea3/:date',
               name: 'supervisionpartResumeHistoryTotal-linea3',
               component: SupervisionpartResumeHistoryL3Total,
               meta: {
@@ -784,7 +782,7 @@ const router = new Router({
               }
             },
             {
-              path: 'historial-totales-total/:date',
+              path: 'historial-totales-total-linea3/:date',
               name: 'supervisionpartTotalesView-linea3',
               component: SupervisionpartL3Total,
               meta: {
@@ -793,7 +791,7 @@ const router = new Router({
               }
             },
             {
-              path: 'historial-resume/:date',
+              path: 'historial-resume-linea3/:date',
               name: 'supervisionpartsResumen-linea3',
               component: SupervisionpartL3Resume,
               meta: {
