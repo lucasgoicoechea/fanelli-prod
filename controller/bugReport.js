@@ -42,8 +42,8 @@ const controller = {
 
   createFails: async(function (req, res) {
     let failed = {
-      text: req.body.failed.line,
-      father: req.body.failed.sector
+      text: req.body.data.value,
+      father_id: req.body.data.father_id
     }
     failed = awaitFor(bugReportService.createFailed(failed))
     res.json({success: true, failed})
@@ -79,8 +79,13 @@ const controller = {
   }),
   getFailsForFather: async(function (req, res, next) {
     let faileds
+    let ffid = req.query.father
+    if (req.query.father=='null' || req.query.father=='' || req.query.father=='undefined')
+    {
+      ffid = null
+    }
     faileds = awaitFor(bugReportService.getFailsForFather({
-        father_id: req.query.father=='null'?null:req.query.father
+        father_id: ffid
       }))
     res.json({success: true, faileds})
   }),
@@ -121,6 +126,7 @@ const controller = {
       bugReport.estado = req.body.bugReport.estado
       bugReport.resuelto = req.body.bugReport.resuelto
       bugReport.resolucion = req.body.bugReport.resolucion
+      bugReport.resume = req.body.bugReport.resume
     // let repeatEdit = req.body.bugReport.repeatEdit || false
     bugReport = awaitFor(bugReportService.edit(bugReport, req.params.id))
     res.json({success: true, bugReport})

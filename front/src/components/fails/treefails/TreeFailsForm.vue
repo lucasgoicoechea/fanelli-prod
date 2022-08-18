@@ -57,6 +57,10 @@
       father: {
         type: String,
         required: true
+      },
+      father_id: {
+        type: String,
+        required: false
       }
     },
     data () {
@@ -76,13 +80,14 @@
     methods: {
       add () {
         const payload = {data: this.form}
+        payload.father_id = this.items[0].father_id
         this.loader = true
         this.$store.dispatch('bugReport/createFails', {
           attribute: this.attribute,
           payload: payload
         })
           .then((response) => {
-            this.items.push(response.data)
+            this.items.push(response.failed)
             this.form.value = ''
             this.form.description = ''
             this.loader = false
@@ -101,10 +106,11 @@
         this.$store.dispatch('bugReport/getFailsForFather', {father: data._id})
             .then((response) => {
               this.items = response.faileds
-              console.log(this.items[0].attribute)
+              // console.log(this.items[0].attribute)
               // if (this.items.lenght > 0) {
               this.$parent.attribute = this.items[0].attribute
               this.$parent.father = this.items[0].father
+              this.$parent.father_id = this.items[0].father_id
               // }
             })
             .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
@@ -128,7 +134,7 @@
       attribute: {
         immediate: true,
         handler () {
-          this.$store.dispatch('bugReport/getFailsForFather', {father: this.father})
+          this.$store.dispatch('bugReport/getFailsForFather', {father: this.father_id})
             .then((response) => { this.items = response.faileds })
             .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
         }

@@ -154,7 +154,7 @@
     data () {
       return {
         bugReport: this.generateData(),
-        lineList: {'line': []},
+        lineList: {'line': [], 'sector': [], 'subsector': [], 'equipo': [], 'gruop': [], 'part': []},
         customToolbar: [
           ['bold', 'italic', 'underline'],
           [{ list: 'ordered' }, { list: 'bullet' }],
@@ -215,12 +215,12 @@
         return {valid: true, msg: 'OK'}
       },
       getFailsForFather: function (falla, lista) {
-        console.dir(this.lineList)
-        console.log(falla)
+        // console.dir(this.lineList)
+        // console.log(falla)
         if (falla !== null) {
           falla = falla._id
         }
-        console.log(falla)
+        // console.log(falla)
         this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
           .then(r => {
             this.lineList[lista] = r.faileds

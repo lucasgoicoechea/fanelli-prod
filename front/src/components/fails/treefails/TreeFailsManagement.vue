@@ -35,7 +35,8 @@
     data () {
       return {
         attribute: 'linea',
-        father: 'null'
+        father: 'null',
+        father_id: 'null'
       }
     },
     methods: {

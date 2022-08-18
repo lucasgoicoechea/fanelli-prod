@@ -12,6 +12,11 @@ const FailedSchema = new Schema({
     type: String,
     require: false
   },
+  father_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Failed',
+    require: false
+  },
   attribute: {
     type: String,
     require: true

@@ -40,6 +40,15 @@ const actions = {
     })
 
     startLoading(dispatch, 'bugReport create')
+    var bugReportTmp = bugReport
+    // console.log(bugReport.line)
+    bugReportTmp.line = bugReport.line != null ? bugReport.line.text : ''
+    bugReportTmp.sector = bugReport.sector != null ? bugReport.sector.text : ''
+    bugReportTmp.sub_sector = bugReport.sub_sector != null ? bugReport.sub_sector.text : ''
+    bugReportTmp.equipo = bugReport.equipo != null ? bugReport.equipo.text : ''
+    bugReportTmp.group = bugReport.group != null ? bugReport.group.text : ''
+    bugReportTmp.part = bugReport.part != null ? bugReport.part.text : ''
+    bugReport = bugReportTmp
     return Vue.http.post('bugReport', {bugReport})
       .then(created)
       .catch(handleError)
