@@ -23,7 +23,9 @@
         </div>
 
         <div class="col-xs-12">
-          <h3>Resumen/Resolucion</h3>
+          <h3>Resumen</h3>
+         <span>{{bugReport.resume}}</span> 
+          <h3>Resolución</h3>
           <vue-editor
           v-model="bugReport.resolucion"
           placeholder="Escriba aquí el resumen de la resolucion de la falla"
