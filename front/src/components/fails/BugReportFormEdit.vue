@@ -18,13 +18,22 @@
         </div>
 
        <div class="col-xs-12">
-          <h3>Resuelto por</h3>
-            {{bugReport.resuelto}}
+          <h3>Detectado por</h3>
+            {{bugReport.detectado}}
         </div>
 
         <div class="col-xs-12">
           <h3>Resumen</h3>
-         <span>{{bugReport.resume}}</span> 
+            <div  style="border-color: blue; border-style: double;" v-if="bugReport.resume">
+               <span  v-html="bugReport.resume"></span>
+            </div>
+       </div>
+
+       <div class="col-xs-12">
+          <h3>Resuelto por</h3>
+            {{bugReport.resuelto}}
+        </div>
+         <div class="col-xs-12">
           <h3>Resolución</h3>
           <vue-editor
           v-model="bugReport.resolucion"
@@ -128,7 +137,7 @@
           prioridad: this.editable.prioridad || '',
           inconveniente: this.editable.inconveniente || '',
           detectado: this.editable.detectado || '',
-          resuelto: this.editable.resuelto || '',
+          resuelto: this.editable.resuelto || 'SIN SOLUCION',
           resume: this.editable.resume || '',
           resolucion: this.editable.resolucion || ''
         }

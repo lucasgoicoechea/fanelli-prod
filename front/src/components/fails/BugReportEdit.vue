@@ -73,7 +73,7 @@
         this.loading = false
         if (res.success) {
           this.$snotifyWrapper.success('La falla se ha creado con exito')
-          this.$router.push({name: 'home'})
+          this.$router.push({name: 'bug-report-solicitudes-reparacion'})
         } else {
           this.$snotifyWrapper.error(res.message)
         }

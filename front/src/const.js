@@ -653,9 +653,9 @@ export default {
   treefails_ATTRIBUTE: {
     linea: 'Linea',
     sector: 'Sector',
-    subsector: 'SubSector',
+    'sub-sector': 'SubSector',
     equipo: 'Equipo',
-    grupos: 'Grupos',
+    grupo: 'Grupos',
     partes: 'Partes'
   },
   PROTECTED_SHIFT: {

@@ -90,10 +90,7 @@
             {{bugReport.detectado}}  
        </div>
         
-       <div class="col-xs-12">
-          <h3>Resuelto por</h3>
-            {{bugReport.resuelto}}
-        </div>
+       
 
         <div class="col-xs-12">
           <h3>Resumen/Fallas</h3>
@@ -102,13 +99,7 @@
           placeholder="Escriba aquí el resumen de la falla"
           :editorToolbar="defaultToolbar"></vue-editor>
         </div>
-         <div class="col-xs-12">
-          <h3>Resolucion</h3>
-          <vue-editor
-          v-model="bugReport.resolucion"
-          placeholder="Escriba aquí si hubo de la falla"
-          :editorToolbar="defaultToolbar"></vue-editor>
-        </div>
+        
       </div>
 
       <div class="separator"></div>

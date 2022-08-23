@@ -41,7 +41,9 @@
     },
     methods: {
       changeForm (attr) {
-        this.attribute = attr
+        // this.isAttributteSelect = true
+        // this.attribute = attr
+        this.attribute = 'linea'
       }
     }
   }

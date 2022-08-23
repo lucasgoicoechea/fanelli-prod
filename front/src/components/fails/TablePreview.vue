@@ -19,9 +19,17 @@
             <span v-if="bugReports.prioridad"><br>Prioridad: {{bugReports.prioridad}}</span>
             <span v-if="bugReports.inconveniente"><br>Inconveniente: {{bugReports.inconveniente}}</span>
             <span v-if="bugReports.detectado"><br>Detectado por: {{bugReports.detectado}}</span>
-            <span v-if="bugReports.resume"><br>Resumen: {{bugReports.resume}}</span>
+            <span v-if="bugReports.resume"><br>Resumen:</span>
+            <div  style="border-color: blue; border-style: double;" v-if="bugReports.resume">
+               <span  v-html="bugReports.resume"></span>
+            </div>
             <span v-if="bugReports.resuelto"><br>Resuelto por: {{bugReports.resuelto}}</span>
-            <span v-if="bugReports.resume"><br>Resolucion: {{bugReports.resolucion}}</span>
+            <span v-if="bugReports.resolucion"><br>Resuelto:</span>
+            <span>
+             <div  style="border-color: blue; border-style: double;" v-if="bugReports.resolucion">
+               <span  v-html="bugReports.resolucion"></span>
+            </div>
+            </span>
         </tr>
         </tbody>
       </table>

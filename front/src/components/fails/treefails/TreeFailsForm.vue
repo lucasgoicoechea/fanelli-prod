@@ -61,6 +61,14 @@
       father_id: {
         type: String,
         required: false
+      },
+      prefather_id: {
+        type: String,
+        required: false
+      },
+      isAttributteSelect: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -76,6 +84,9 @@
           required: true
         }
       }
+    },
+    created () {
+      this.selectFather(null)
     },
     methods: {
       add () {
@@ -103,13 +114,17 @@
         this.items.splice(index, 1, data)
       },
       selectFather (data) {
-        this.$store.dispatch('bugReport/getFailsForFather', {father: data._id})
+        console.log('selectFather' + data)
+        this.isAttributteSelect = false
+        let vfather = (data !== null) ? data._id : null
+        this.$store.dispatch('bugReport/getFailsForFather', {father: vfather})
             .then((response) => {
               this.items = response.faileds
               // console.log(this.items[0].attribute)
               // if (this.items.lenght > 0) {
               this.$parent.attribute = this.items[0].attribute
               this.$parent.father = this.items[0].father
+              this.$parent.prefather_id = this.$parent.father_id
               this.$parent.father_id = this.items[0].father_id
               // }
             })
@@ -134,9 +149,13 @@
       attribute: {
         immediate: true,
         handler () {
-          this.$store.dispatch('bugReport/getFailsForFather', {father: this.father_id})
-            .then((response) => { this.items = response.faileds })
-            .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
+          // console.log(this.father_id)
+          if (this.isAttributteSelect) {
+            this.$store.dispatch('bugReport/getFailsForFather', {father: null})
+              .then((response) => { this.items = response.faileds })
+              .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
+          }
+          this.isAttributteSelect = true
         }
       }
     }
