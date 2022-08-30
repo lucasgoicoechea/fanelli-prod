@@ -152,7 +152,7 @@
     data () {
       return {
         bugReport: this.generateData(),
-        lineList: {'line': [], 'sector': [], 'subsector': [], 'equipo': [], 'gruop': [], 'part': []},
+        lineList: {'line': [], 'sector': [], 'sub_sector': [], 'equipo': [], 'group': [], 'part': []},
         customToolbar: [
           ['bold', 'italic', 'underline'],
           [{ list: 'ordered' }, { list: 'bullet' }],
@@ -215,18 +215,33 @@
       getFailsForFather: function (falla, lista) {
         // console.dir(this.lineList)
         // console.log(falla)
-        if (falla !== null) {
+        if (falla !== null && falla !== 'undefined') {
           falla = falla._id
         }
         // console.log(falla)
         this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
           .then(r => {
             this.lineList[lista] = r.faileds
+            this.bugReport[lista] = this.lineList[lista][0]
+            if (lista === 'sub_sector') {
+              // this.bugReport.equipo = null
+              this.lineList['equipo'] = null
+              this.bugReport.group = null
+            }
           })
       }
     },
     watch: {
       bugReport: {
+        handler: function () {
+          this.$emit('update', {
+            validation: this.validate(),
+            form: this.bugReport
+          })
+        },
+        deep: true
+      },
+      lineList: {
         handler: function () {
           this.$emit('update', {
             validation: this.validate(),
