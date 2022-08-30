@@ -379,7 +379,7 @@
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Historial de Fallas',
+                name: 'Resumen de Fallas',
                 type: 'bug-report-history',
                 route: {name: 'bug-report-history'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
@@ -397,7 +397,7 @@
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Resumen de Fallas',
+                name: 'Historial de Fallas',
                 type: 'bug-report-resume',
                 route: {name: 'bug-report-resume'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
