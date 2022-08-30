@@ -10,10 +10,16 @@
           :attribute="key"
           @update="changeForm"
           :current="attribute"
+          :father_id="father_id"
           :icon="`/static/img/${key}.png`"></treefails-button>
       </div>
       <div class="content">
-        <treefails-form :attribute="attribute" :father="father" ></treefails-form>
+          <div class="action" v-show="attribute !== 'linea' || father_id !== 'null'" @click="cambiar(prefather_id)">
+            <div class="icon-action">
+              <span class="glyphicon glyphicon-arrow-left"> Volver al padre</span>
+            </div>
+        </div>
+        <treefails-form :father_id="father_id" :attribute="attribute" :father="father" ></treefails-form>
       </div>
     </section>
 
@@ -36,7 +42,8 @@
       return {
         attribute: 'linea',
         father: 'null',
-        father_id: 'null'
+        father_id: 'null',
+        prefather_id: 'null'
       }
     },
     methods: {
@@ -44,6 +51,11 @@
         // this.isAttributteSelect = true
         // this.attribute = attr
         this.attribute = 'linea'
+      },
+      cambiar (prefatheridd) {
+        console.log(prefatheridd)
+        this.father_id = prefatheridd
+        // this.attribute = 'linea'
       }
     }
   }

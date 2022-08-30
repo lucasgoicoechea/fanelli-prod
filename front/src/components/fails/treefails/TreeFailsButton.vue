@@ -20,6 +20,10 @@
       current: {
         type: String,
         default: ''
+      },
+      father_id: {
+        type: String,
+        required: false
       }
     },
     methods: {
@@ -34,8 +38,12 @@
       isCurrent () {
         return this.current === this.attribute
       },
+      isFather () {
+        return this.current === this.father_id
+      },
       classOptions () {
         return {
+          nactive: this.isFather,
           active: this.isCurrent
         }
       }

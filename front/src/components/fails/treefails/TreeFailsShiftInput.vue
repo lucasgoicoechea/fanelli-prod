@@ -82,7 +82,7 @@
         const payload = {
           data: this.itemEditable
         }
-        this.$store.dispatch('treefails/update', {
+        this.$store.dispatch('bugReport/updateFailed', {
           attribute: this.attribute,
           payload: payload
         })
@@ -96,7 +96,7 @@
           })
       },
       remove () {
-        this.$store.dispatch('treefails/remove', {
+        this.$store.dispatch('bugReport/removeFail', {
           attribute: this.attribute,
           payload: this.itemEditable
         })
