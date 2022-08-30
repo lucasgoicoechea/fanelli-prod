@@ -51,7 +51,7 @@ const controller = {
 
   updateFails: async(function (req, res) {
     let failed = awaitFor(bugReportService.findOneFail(req.params.id))
-    failed.text = req.body.data.text
+    failed.text = req.body.text
     failed = awaitFor(bugReportService.updateFailed(failed))
     res.json({success: true, failed})
   }),

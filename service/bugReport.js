@@ -101,8 +101,8 @@ const service = {
   }),
 
   updateFailed: async(function (failed) {
-    let failesTmp = awaitFor(FailedModel.update(failed))
-    return failesTmp
+    awaitFor(FailedModel.update({_id: failed._id}, {$set: failed}, {multi: true}))
+    return failed
     }
   ),
 

@@ -71,7 +71,7 @@
         }
         console.log(this.itemEditable)
         let data = this.itemEditable
-        this.$store.dispatch('bugReport/updateFail', data)
+        this.$store.dispatch('bugReport/updateFails', data)
             .then((response) => {
               // const index = this.items.findIndex(e => e._id === data._id)
               // this.items.splice(index, 1)
@@ -143,7 +143,7 @@
     },
     computed: {
       isUpdated () {
-        return this.item.value !== this.itemEditable.value
+        return this.item.text !== this.itemEditable.text
       }
     }
   }

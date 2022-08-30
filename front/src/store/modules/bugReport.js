@@ -378,7 +378,7 @@ const actions = {
     const error = (err) => {
       return Promise.reject(err)
     }
-    return Vue.http.put('bugReport/updateFails/' + payload.data._id, payload)
+    return Vue.http.put('bugReport/updateFails/' + payload._id, payload)
       .then(success)
       .catch(error)
   },

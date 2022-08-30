@@ -1,5 +1,10 @@
 <template>
   <div class="treefails-form">
+    <div class="action" v-show="attribute !== 'linea' || father_id !== 'null'" @click="cambiar()">
+      <div class="icon-action">
+        <span class="glyphicon glyphicon-arrow-left"> Volver al padre</span>
+      </div>
+    </div>
     <div class="inputs">
       <div v-for="(item, index) in items" :key="item._id">
       <component
@@ -121,18 +126,30 @@
           })
       },
       selectFather (data) {
-        // console.log('selectFather' + data)
         this.hasAttributteSelect = false
         let vfather = (data !== null) ? data._id : null
+        this.$parent.prefather_id = this.$parent.father_id
         this.$parent.father_id = vfather
+        this.$parent.arrPrefather[this.$parent.indexPrefather + 1] = vfather
+        this.$parent.indexPrefather = this.$parent.indexPrefather + 1
         this.$store.dispatch('bugReport/getFailsForFather', {father: vfather})
             .then((response) => {
               this.items = response.faileds
               this.$parent.attribute = this.items[0].attribute
               this.fattribute = this.$parent.attribute
-              this.$parent.prefather_id = this.$parent.father_id
-              this.$parent.father_id = vfather
-              console.log(this.$parent.prefather_id)
+            })
+            .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
+      },
+      cambiar () {
+        this.hasAttributteSelect = false
+        this.$parent.father_id = this.$parent.arrPrefather[this.$parent.indexPrefather - 1]
+        this.$parent.prefather_id = this.$parent.arrPrefather[this.$parent.indexPrefather - 2]
+        this.$parent.indexPrefather = this.$parent.indexPrefather - 1
+        this.$store.dispatch('bugReport/getFailsForFather', {father: this.$parent.father_id})
+            .then((response) => {
+              this.items = response.faileds
+              this.$parent.attribute = this.items[0].attribute
+              this.fattribute = this.$parent.attribute
             })
             .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
       }

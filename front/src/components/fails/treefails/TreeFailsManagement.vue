@@ -14,12 +14,13 @@
           :icon="`/static/img/${key}.png`"></treefails-button>
       </div>
       <div class="content">
-          <div class="action" v-show="attribute !== 'linea' || father_id !== 'null'" @click="cambiar(prefather_id)">
-            <div class="icon-action">
-              <span class="glyphicon glyphicon-arrow-left"> Volver al padre</span>
-            </div>
-        </div>
-        <treefails-form :father_id="father_id" :attribute="attribute" :father="father" ></treefails-form>
+        <treefails-form 
+          :father_id="father_id" 
+          :prefather_id="prefather_id"
+          :indexPrefather="indexPrefather" 
+          :attribute="attribute" 
+          :father="father" >
+        </treefails-form>
       </div>
     </section>
 
@@ -43,19 +44,14 @@
         attribute: 'linea',
         father: 'null',
         father_id: 'null',
-        prefather_id: 'null'
+        prefather_id: 'null',
+        indexPrefather: 0,
+        arrPrefather: [null]
       }
     },
     methods: {
       changeForm (attr) {
-        // this.isAttributteSelect = true
-        // this.attribute = attr
         this.attribute = 'linea'
-      },
-      cambiar (prefatheridd) {
-        console.log(prefatheridd)
-        this.father_id = prefatheridd
-        // this.attribute = 'linea'
       }
     }
   }
