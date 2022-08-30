@@ -1,14 +1,19 @@
 <template>
   <div class="treefails-form">
+    <div class="action" v-show="attribute !== 'linea' || father_id !== 'null'" @click="cambiar()">
+      <div class="icon-action">
+        <span class="glyphicon glyphicon-arrow-left"> Volver al padre</span>
+      </div>
+    </div>
     <div class="inputs">
       <div v-for="(item, index) in items" :key="item._id">
       <component
         :is="typeInput"
         :item="item"
         :attribute="attribute"
-        @update="update"
-        @remove="remove"></component>
-      <button @click="selectFather(item)">
+        :father_id="father_id">
+        </component>
+      <button @click="selectFather(item)" v-show="fattribute!='partes'">
         <span v-show="!loader">HIJOS</span>
         <spinner :show="loader" size="small"></spinner>
       </button>
@@ -82,16 +87,27 @@
         fatherSelected: {
           type: String,
           required: true
+        },
+        hasAttributteSelect: {
+          type: Boolean,
+          default: false
+        },
+        fattribute: {
+          type: String,
+          required: true
         }
       }
     },
     created () {
+      this.hasAttributteSelect = this.isAttributteSelect
       this.selectFather(null)
     },
     methods: {
       add () {
         const payload = {data: this.form}
-        payload.father_id = this.items[0].father_id
+        payload.data.father_id = this.$parent.father_id
+        payload.data.attribute = this.$parent.attribute
+        // this.items[0].father_id
         this.loader = true
         this.$store.dispatch('bugReport/createFails', {
           attribute: this.attribute,
@@ -109,30 +125,33 @@
             this.$snotifyWrapper.error(error)
           })
       },
-      update (data) {
-        const index = this.items.findIndex(e => e._id === data._id)
-        this.items.splice(index, 1, data)
-      },
       selectFather (data) {
-        console.log('selectFather' + data)
-        this.isAttributteSelect = false
+        this.hasAttributteSelect = false
         let vfather = (data !== null) ? data._id : null
+        this.$parent.prefather_id = this.$parent.father_id
+        this.$parent.father_id = vfather
+        this.$parent.arrPrefather[this.$parent.indexPrefather + 1] = vfather
+        this.$parent.indexPrefather = this.$parent.indexPrefather + 1
         this.$store.dispatch('bugReport/getFailsForFather', {father: vfather})
             .then((response) => {
               this.items = response.faileds
-              // console.log(this.items[0].attribute)
-              // if (this.items.lenght > 0) {
               this.$parent.attribute = this.items[0].attribute
-              this.$parent.father = this.items[0].father
-              this.$parent.prefather_id = this.$parent.father_id
-              this.$parent.father_id = this.items[0].father_id
-              // }
+              this.fattribute = this.$parent.attribute
             })
             .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
       },
-      remove (data) {
-        const index = this.items.findIndex(e => e._id === data._id)
-        this.items.splice(index, 1)
+      cambiar () {
+        this.hasAttributteSelect = false
+        this.$parent.father_id = this.$parent.arrPrefather[this.$parent.indexPrefather - 1]
+        this.$parent.prefather_id = this.$parent.arrPrefather[this.$parent.indexPrefather - 2]
+        this.$parent.indexPrefather = this.$parent.indexPrefather - 1
+        this.$store.dispatch('bugReport/getFailsForFather', {father: this.$parent.father_id})
+            .then((response) => {
+              this.items = response.faileds
+              this.$parent.attribute = this.items[0].attribute
+              this.fattribute = this.$parent.attribute
+            })
+            .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
       }
     },
     computed: {
@@ -150,12 +169,21 @@
         immediate: true,
         handler () {
           // console.log(this.father_id)
-          if (this.isAttributteSelect) {
+          if (this.hasAttributteSelect) {
             this.$store.dispatch('bugReport/getFailsForFather', {father: null})
               .then((response) => { this.items = response.faileds })
-              .catch(() => this.$snotifyWrapper.error('No se pudo recuperar la información'))
+              .catch(() => this.$snotifyWrapper.error('No encuentra hijos para ese padre'))
           }
-          this.isAttributteSelect = true
+          this.hasAttributteSelect = true
+        }
+      },
+      father_id: {
+        immediate: true,
+        handler () {
+          // console.log(this.father_id)
+          this.$store.dispatch('bugReport/getFailsForFather', {father: this.father_id})
+              .then((response) => { this.items = response.faileds })
+              .catch(() => this.$snotifyWrapper.error('No encuentra hijos para ese padre'))
         }
       }
     }

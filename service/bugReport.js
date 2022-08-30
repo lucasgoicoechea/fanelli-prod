@@ -96,6 +96,23 @@ const service = {
   return bugReports
   }),
 
+  findOneFail: async(function (id) {
+    return awaitFor(FailedModel.findById(id))
+  }),
+
+  updateFailed: async(function (failed) {
+    awaitFor(FailedModel.update({_id: failed._id}, {$set: failed}, {multi: true}))
+    return failed
+    }
+  ),
+
+
+  deleteFailed: async(function (failed) {
+    awaitFor(failed.remove())
+    return true
+    }
+  ),
+
   findOne: async(function (meetingId) {
     return awaitFor(BugReportModel.findById(meetingId))
   })

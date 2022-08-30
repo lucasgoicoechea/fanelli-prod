@@ -366,7 +366,7 @@ const actions = {
       .then(success)
       .catch(error)
   },
-  updateFails (context, {attribute, payload}) {
+  updateFails (context, payload) {
     const success = (res) => {
       if (res.body.success) {
         return res.body
@@ -378,11 +378,11 @@ const actions = {
     const error = (err) => {
       return Promise.reject(err)
     }
-    return Vue.http.put(`${attribute}/${payload.data._id}`, payload)
+    return Vue.http.put('bugReport/updateFails/' + payload._id, payload)
       .then(success)
       .catch(error)
   },
-  remove (context, {attribute, payload}) {
+  removeFail (context, payload) {
     const success = (res) => {
       if (res.body.success) {
         return res.body
@@ -395,7 +395,7 @@ const actions = {
       return Promise.reject(err)
     }
 
-    return Vue.http.delete(`${attribute}/${payload._id}`)
+    return Vue.http.delete('bugReport/removeFails/' + payload._id)
       .then(success)
       .catch(error)
   }

@@ -10,10 +10,17 @@
           :attribute="key"
           @update="changeForm"
           :current="attribute"
+          :father_id="father_id"
           :icon="`/static/img/${key}.png`"></treefails-button>
       </div>
       <div class="content">
-        <treefails-form :attribute="attribute" :father="father" ></treefails-form>
+        <treefails-form 
+          :father_id="father_id" 
+          :prefather_id="prefather_id"
+          :indexPrefather="indexPrefather" 
+          :attribute="attribute" 
+          :father="father" >
+        </treefails-form>
       </div>
     </section>
 
@@ -36,13 +43,14 @@
       return {
         attribute: 'linea',
         father: 'null',
-        father_id: 'null'
+        father_id: 'null',
+        prefather_id: 'null',
+        indexPrefather: 0,
+        arrPrefather: [null]
       }
     },
     methods: {
       changeForm (attr) {
-        // this.isAttributteSelect = true
-        // this.attribute = attr
         this.attribute = 'linea'
       }
     }

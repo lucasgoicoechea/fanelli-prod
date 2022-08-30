@@ -49,6 +49,20 @@ const controller = {
     res.json({success: true, failed})
   }),
 
+  updateFails: async(function (req, res) {
+    let failed = awaitFor(bugReportService.findOneFail(req.params.id))
+    failed.text = req.body.text
+    failed = awaitFor(bugReportService.updateFailed(failed))
+    res.json({success: true, failed})
+  }),
+
+  deleteFails: async(function (req, res) {
+    let failed = awaitFor(bugReportService.findOneFail(req.params.id))
+    failed.remove()
+    res.json({success: true, failed})
+  }),
+
+
   getId: async(function (req, res, next) {
       let bugReport = awaitFor(bugReportService.findOne(req.params.id))
       res.json({success: true, bugReport: bugReport})

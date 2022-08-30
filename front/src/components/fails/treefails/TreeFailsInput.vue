@@ -40,6 +40,9 @@
       },
       attribute: {
         type: String
+      },
+      father_id: {
+        type: String
       }
     },
     data () {
@@ -66,29 +69,26 @@
         if (!this.isUpdated) {
           return
         }
-        const payload = {
-          data: this.itemEditable
-        }
-        this.$store.dispatch('treefails/update', {
-          attribute: this.attribute,
-          payload: payload
-        })
-          .then((response) => {
-            this.$emit('update', response.data)
-            this.$snotifyWrapper.success('cambios guardados')
-            this.loader = false
-          })
-          .catch((error) => this.$snotifyWrapper.error(error))
+        console.log(this.itemEditable)
+        let data = this.itemEditable
+        this.$store.dispatch('bugReport/updateFails', data)
+            .then((response) => {
+              // const index = this.items.findIndex(e => e._id === data._id)
+              // this.items.splice(index, 1)
+              this.$emit('update', response.data)
+              this.$snotifyWrapper.success('cambios guardados')
+              this.loader = false
+            })
+            .catch(() => this.$snotifyWrapper.error('No se pudo actualizar la falla'))
       },
       remove () {
-        this.$store.dispatch('treefails/remove', {
-          attribute: this.attribute,
-          payload: this.itemEditable
-        })
-          .then(() => {
-            this.$emit('remove', this.itemEditable)
-          })
-          .catch((error) => this.$snotifyWrapper.error(error))
+        let vfather = (this.itemEditable !== null) ? this.itemEditable._id : null
+        this.$store.dispatch('bugReport/removeFail', {_id: vfather})
+            .then((response) => {
+              const index = this.$parent.items.findIndex(e => e._id === vfather)
+              this.$parent.items.splice(index, 1)
+            })
+            .catch(() => this.$snotifyWrapper.error('No se pudo eliminar el hijo'))
       },
       confirmRemove () {
         this.$modal.show('dialog', {
@@ -143,7 +143,7 @@
     },
     computed: {
       isUpdated () {
-        return this.item.value !== this.itemEditable.value
+        return this.item.text !== this.itemEditable.text
       }
     }
   }

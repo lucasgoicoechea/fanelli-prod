@@ -386,7 +386,7 @@
               },
               {
                 name: 'Solicitudes Reparacion',
-                type: 'bug-report-creation',
+                type: 'bug-report-repair',
                 route: {name: 'bug-report-solicitudes-reparacion'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
