@@ -80,6 +80,18 @@ const controller = {
     res.json({success: true, bugReports})
   }),
 
+  fetchActiveRelacionadas: async(function (req, res, next) {
+    let bugReports
+    bugReports = awaitFor(bugReportService.listAllPassRelated({
+        perPage: req.query.per_page,
+        page: req.query.page,
+        line: req.query.line,
+        sector: req.query.sector,
+        sub_sector: req.query.sub_sector,
+        equipo: req.query.equipo
+      }))
+    res.json({success: true, bugReports})
+  }),
   fetchPassFails: async(function (req, res, next) {
     let bugReports
     bugReports = awaitFor(bugReportService.listPassFails({

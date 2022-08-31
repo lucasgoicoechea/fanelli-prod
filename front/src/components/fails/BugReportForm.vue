@@ -34,7 +34,7 @@
         <div>
         <div class="col-xs-12">
           <h3>Selección de Equipo</h3>
-            <select v-model="bugReport.equipo" id="equipo"  @change="getFailsForFather(bugReport.equipo, 'group')">
+            <select v-model="bugReport.equipo" id="equipo"  @change="findRelatedAndFailsForFather(bugReport.equipo, 'group')">
               <option v-for="p in lineList['equipo']"  :value="p"> {{p.text}}</option>
           </select>
         </div>
@@ -212,6 +212,27 @@
       validate () {
         return {valid: true, msg: 'OK'}
       },
+      findRelatedAndFailsForFather: function (falla, lista) {
+        this.$parent.line = this.bugReport.line
+        this.$parent.sector = this.bugReport.sector
+        this.$parent.sub_sector = this.bugReport.sub_sector
+        this.$parent.equipo = this.bugReport.equipo
+        this.$emit('fetchRelations')
+        if (falla !== null && falla !== 'undefined') {
+          falla = falla._id
+        }
+        // console.log(falla)
+        this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
+          .then(r => {
+            this.lineList[lista] = r.faileds
+            this.bugReport[lista] = this.lineList[lista][0]
+            if (lista === 'sub_sector') {
+              // this.bugReport.equipo = null
+              this.lineList['equipo'] = null
+              this.bugReport.group = null
+            }
+          })
+      },
       getFailsForFather: function (falla, lista) {
         // console.dir(this.lineList)
         // console.log(falla)
@@ -234,7 +255,7 @@
     watch: {
       bugReport: {
         handler: function () {
-          this.$emit('update', {
+          this.$emit('fetchRelations', {
             validation: this.validate(),
             form: this.bugReport
           })

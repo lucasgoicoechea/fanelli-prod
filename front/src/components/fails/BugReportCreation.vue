@@ -25,6 +25,13 @@
       </div>
 
     </bottom-navbar>
+    
+    <bugReport-card
+      v-for="request in bugReportListDelivered"
+      :key="request._id"
+      :request="request">
+    </bugReport-card>
+
   </div>
 </template>
 
@@ -33,6 +40,7 @@
   import BottomNavbar from '@/components/BottomNavbar.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import FormComponent from '@/components/fails/BugReportForm'
+  import BugReportCard from '@/components/fails/BugReportCard'
 
   export default {
     name: 'BugReportCreation',
@@ -40,7 +48,8 @@
       BottomNavbar,
       Navigation,
       Spinner,
-      FormComponent
+      FormComponent,
+      BugReportCard
     },
     data () {
       return {
@@ -48,7 +57,12 @@
         form: {},
         validation: {},
         loading: false,
-        sendStoreAction: 'bugReport/create'
+        sendStoreAction: 'bugReport/create',        
+        bugReportListDelivered: [],
+        line: '',
+        sector: '',
+        sub_sector: '',
+        equipo: ''
       }
     },
     methods: {
@@ -81,6 +95,36 @@
         this.$store.dispatch(this.sendStoreAction, this.form)
           .then(this.successfulCreation)
           .catch(this.failedCreation)
+      },
+      fetchRelations () {
+        // this.bugReport.loading = true
+        this.bugReportListDelivered = []
+        const action = 'bugReport/fetchActiveRelacionadas'
+        this.$store.dispatch(action, 
+        {      
+          line: this.line,
+          sector: this.sector,
+          sub_sector: this.sub_sector,
+          equipo: this.equipo
+        })
+          .then(this.successFetchR)
+          .catch(this.failFetchR)
+      },
+      successFetchR (response) {
+        if (response.bugReports.length === 0) {
+          // this.bugReport.lastOne = true
+          console.log('vacio')
+        } else {
+          response.bugReports.forEach(e => {
+            this.bugReportListDelivered.push(e)
+          })
+          // this.bugReport.page += 1
+        }
+        // this.bugReport.loading = false
+      },
+      failFetchR (error) {
+        this.$snotifyWrapper.error(error)
+        // this.bugReport.loading = false
       },
       confirm () {
         if (this.loading) {
