@@ -57,7 +57,7 @@
         form: {},
         validation: {},
         loading: false,
-        sendStoreAction: 'bugReport/create',        
+        sendStoreAction: 'bugReport/create',
         bugReportListDelivered: [],
         line: '',
         sector: '',
@@ -100,13 +100,13 @@
         // this.bugReport.loading = true
         this.bugReportListDelivered = []
         const action = 'bugReport/fetchActiveRelacionadas'
-        this.$store.dispatch(action, 
-        {      
-          line: this.line,
-          sector: this.sector,
-          sub_sector: this.sub_sector,
-          equipo: this.equipo
-        })
+        this.$store.dispatch(action,
+          {
+            line: this.line,
+            sector: this.sector,
+            sub_sector: this.sub_sector,
+            equipo: this.equipo
+          })
           .then(this.successFetchR)
           .catch(this.failFetchR)
       },
