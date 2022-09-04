@@ -111,6 +111,22 @@ const actions = {
       .then(fetched)
       .catch(handleError)
   },
+  fetchActiveRelacionadas (context, payload) {
+    const fetched = (response) => {
+      return response.body
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    console.log(payload)
+
+    return Vue.http.get('bugReport/fetchActiveRelacionadas', {
+      params: payload
+    })
+      .then(fetched)
+      .catch(handleError)
+  },
   fetchManager (context, payload) {
     const fetched = (response) => {
       return response.body

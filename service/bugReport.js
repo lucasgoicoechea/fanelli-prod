@@ -44,8 +44,8 @@ const service = {
   listAllPassRelated : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      inconveniente: {$nin :["COMPLEJIDAD"]},
-      created_at:{$gte:new Date().getTime()-(48*60*60*1000)},
+      //inconveniente: {$nin :["COMPLEJIDAD"]},
+      //created_at:{$gte:new Date().getTime()-(48*60*60*1000)},
       estado: {$nin :["SOLUCIONADO"]},
       line: options.line,
       sector: options.sector,

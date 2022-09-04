@@ -4,8 +4,17 @@
       :title="title"></navigation>
 
     <form-component
-      @update="update"></form-component>
-
+      @update="update"
+      @fetchRelations="fetchRelations"
+       ></form-component>
+  <div :v-if="hayRelacionadas" sytle="margin-bottom: 100px;" >
+    REPORTES RELACIONADOS ACTIVOS
+      <bugReport-card
+        v-for="request in bugReportListDelivered"
+        :key="request._id"
+        :request="request">
+      </bugReport-card>
+    </div>
     <bottom-navbar>
       <div class="submit">
         <div
@@ -23,16 +32,10 @@
             :show="loading"></spinner>
         </div>
       </div>
-
     </bottom-navbar>
-    
-    <bugReport-card
-      v-for="request in bugReportListDelivered"
-      :key="request._id"
-      :request="request">
-    </bugReport-card>
-
+  
   </div>
+  
 </template>
 
 <script>
@@ -62,7 +65,8 @@
         line: '',
         sector: '',
         sub_sector: '',
-        equipo: ''
+        equipo: '',
+        hayRelacionadas: false
       }
     },
     methods: {
@@ -98,14 +102,16 @@
       },
       fetchRelations () {
         // this.bugReport.loading = true
+        console.log('buscando relacionadas')
         this.bugReportListDelivered = []
+        this.hayRelacionadas = false
         const action = 'bugReport/fetchActiveRelacionadas'
         this.$store.dispatch(action,
           {
-            line: this.line,
-            sector: this.sector,
-            sub_sector: this.sub_sector,
-            equipo: this.equipo
+            line: this.line.text,
+            sector: this.sector.text,
+            sub_sector: this.sub_sector.text,
+            equipo: this.equipo.text
           })
           .then(this.successFetchR)
           .catch(this.failFetchR)
@@ -115,6 +121,8 @@
           // this.bugReport.lastOne = true
           console.log('vacio')
         } else {
+          this.hayRelacionadas = true
+          console.log('tiene')
           response.bugReports.forEach(e => {
             this.bugReportListDelivered.push(e)
           })

@@ -217,6 +217,7 @@
         this.$parent.sector = this.bugReport.sector
         this.$parent.sub_sector = this.bugReport.sub_sector
         this.$parent.equipo = this.bugReport.equipo
+        console.log(this.$parent.equipo)
         this.$emit('fetchRelations')
         if (falla !== null && falla !== 'undefined') {
           falla = falla._id
@@ -253,7 +254,7 @@
       }
     },
     watch: {
-      bugReport: {
+      /* bugReport: {
         handler: function () {
           this.$emit('fetchRelations', {
             validation: this.validate(),
@@ -261,7 +262,7 @@
           })
         },
         deep: true
-      },
+      }, */
       lineList: {
         handler: function () {
           this.$emit('update', {
