@@ -244,11 +244,28 @@
         this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
           .then(r => {
             this.lineList[lista] = r.faileds
-            this.bugReport[lista] = this.lineList[lista][0]
+            if (r.faileds.lenght > 0) {
+              this.bugReport[lista] = this.lineList[lista][0]
+            }
+            if (lista === 'sector') {
+              this.bugReport['sub_sector'] = null
+              this.lineList['sub_sector'] = null
+              this.getFailsForFather(this.bugReport[lista], 'sub_sector')
+            }
             if (lista === 'sub_sector') {
-              // this.bugReport.equipo = null
+              this.bugReport['equipo'] = null
               this.lineList['equipo'] = null
-              this.bugReport.group = null
+              this.getFailsForFather(this.bugReport[lista], 'equipo')
+            }
+            if (lista === 'equipo') {
+              this.bugReport['group'] = null
+              this.lineList['group'] = null
+              this.getFailsForFather(this.bugReport[lista], 'group')
+            }
+            if (lista === 'group') {
+              this.bugReport['part'] = null
+              this.lineList['part'] = null
+              this.getFailsForFather(this.bugReport[lista], 'part')
             }
           })
       }
