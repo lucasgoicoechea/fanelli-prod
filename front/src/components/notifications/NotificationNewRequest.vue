@@ -33,7 +33,7 @@
         return 'red'
       },
       headerText: function () {
-        return 'NUEVA NOVEDAD'
+        return 'NOVEDAD'
       },
       secondaryHeaderShow: function () {
         return true
