@@ -7,6 +7,7 @@ export default {
     // Supervisor de sector
     SUPERVISOR: 'SUPERVISOR',
     PERSONAL: 'PERSONAL',
+    MECANICO_ELECTRICO: 'MECANICO_ELECTRICO',
     // Oficial de sector
     OFICIAL_EXTRUSORA: 'OFICIAL_EXTRUSORA',
     OFICIAL_APILADORA: 'OFICIAL_APILADORA',
@@ -42,6 +43,7 @@ export default {
     OFICIAL_EXTRUSORA_L3: 'Oficial Extrusora L3',
     OFICIAL_APILADORA_L3: 'Oficial Apiladora L3',
     OFICIAL_DESAPILADORA_L3: 'Oficial Desapiladora L3',
+    MECANICO_ELECTRICO: 'Mecanico Electrico de Turno',
     // Supervisor de higiene y seguridad
     HIGIENE_SEGURIDAD: 'Higiene y Seguridad',
     JEFE_PLANTA: 'Jefe de Planta',
@@ -64,6 +66,7 @@ export default {
     SUPERVISOR_PANOL: 'SUPERVISOR_PANOL',
     // Supervisor de sector
     SUPERVISOR: 'SUPERVISOR',
+    MECANICO_ELECTRICO: 'MECANICO_ELECTRICO',
     // Oficial de sector
     OFICIAL_EXTRUSORA: 'OFICIAL_EXTRUSORA',
     OFICIAL_APILADORA: 'OFICIAL_APILADORA',
@@ -683,6 +686,7 @@ export default {
     PARADA: 'Parada',
     TIEMPO: 'Tiempo',
     PERSONAL: 'Personal',
+    REPUESTO: 'Repuesto',
     FALTA_CONOCIMIENTO: 'Falta de Conocimiento'
   },
 

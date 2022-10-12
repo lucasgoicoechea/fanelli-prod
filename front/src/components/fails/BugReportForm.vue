@@ -217,36 +217,45 @@
         this.$parent.sector = this.bugReport.sector
         this.$parent.sub_sector = this.bugReport.sub_sector
         this.$parent.equipo = this.bugReport.equipo
-        console.log(this.$parent.equipo)
+        // console.log(this.$parent.equipo)
         this.$emit('fetchRelations')
-        if (falla !== null && falla !== 'undefined') {
-          falla = falla._id
-        }
-        // console.log(falla)
-        this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
-          .then(r => {
-            this.lineList[lista] = r.faileds
-            this.bugReport[lista] = this.lineList[lista][0]
-            if (lista === 'sub_sector') {
-              // this.bugReport.equipo = null
-              this.lineList['equipo'] = null
-              this.bugReport.group = null
-            }
-          })
+        this.getFailsForFather(falla, lista)
       },
       getFailsForFather: function (falla, lista) {
         // console.dir(this.lineList)
-        // console.log(falla)
-        if (falla !== null && falla !== 'undefined') {
+        console.log('Busca falla:' + falla)
+        console.log('Lista:' + lista)
+        if (falla !== null && falla !== 'undefined' && falla !== '') {
           falla = falla._id
         }
         // console.log(falla)
-        this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
+        if (lista !== 'line' && falla === null && falla === '' && falla === 'undefined') {
+          this.lineList[lista] = null
+          this.bugReport[lista] = null
+          if (lista === 'sector') {
+            this.bugReport['sub_sector'] = null
+            this.lineList['sub_sector'] = null
+            this.getFailsForFather(null, 'sub_sector')
+          }
+          if (lista === 'sub_sector') {
+            this.bugReport['equipo'] = null
+            this.lineList['equipo'] = null
+            this.getFailsForFather(null, 'equipo')
+          }
+          if (lista === 'equipo') {
+            this.bugReport['group'] = null
+            this.lineList['group'] = null
+            this.getFailsForFather(null, 'group')
+          }
+        }
+
+        if ((lista !== 'line' && falla !== 'undefined' && falla !== null && falla !== '') || (lista === 'line' && falla === null)) {
+          this.$store.dispatch('bugReport/getFailsForFather', {father: falla})
           .then(r => {
             this.lineList[lista] = r.faileds
-            if (r.faileds.lenght > 0) {
+            /* if (r.faileds.lenght > 0) {
               this.bugReport[lista] = this.lineList[lista][0]
-            }
+            } */
             if (lista === 'sector') {
               this.bugReport['sub_sector'] = null
               this.lineList['sub_sector'] = null
@@ -268,6 +277,7 @@
               this.getFailsForFather(this.bugReport[lista], 'part')
             }
           })
+        }
       }
     },
     watch: {

@@ -369,14 +369,14 @@
             name: 'Reporte de Fallas',
             img: '/static/img/icons-sidebar/news.svg',
             type: 'bugnews',
-            can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH),
+            can: authorize(ROLES.SUPERVISORES, ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH),
             routeName: 'bug-report-index',
             submenu: [
               {
                 name: 'Creacion',
                 type: 'bug-report-creation',
                 route: {name: 'bug-report-creation'},
-                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.SUPERVISORES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Resumen de Fallas',
@@ -400,10 +400,10 @@
                 name: 'Historial de Fallas',
                 type: 'bug-report-resume',
                 route: {name: 'bug-report-resume'},
-                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
-                name: 'Config de Fallas',
+                name: 'Configuracion de Fallas',
                 type: 'bug-report-config',
                 route: {name: 'bug-report-config'},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.RRHH)

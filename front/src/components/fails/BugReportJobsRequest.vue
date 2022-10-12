@@ -1,13 +1,24 @@
 <template>
   <div class="bug-report-jobs-request container-fluid">
-
+    <header class="navigation">
+      <nav>
+      <h2>{{title}}</h2>
+    </nav>
+    </header>
     <div class="spinner-container">
       <spinner
         class="spinner"
         :show="loadingActiveRequest"
         loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
-
+    <div class="row" >
+            <button class="redirect" @click="generateReport" style="color: black; background: gray">
+              <div>
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span class="text" >Generar reporte</span>
+              </div>
+            </button>
+    </div>
     <div class="empty" v-show="!loadingActiveRequest && bugReportList.length === 0">
       <p>No hay fallas para mostrar</p>
     </div>
@@ -48,7 +59,8 @@
     data () {
       return {
         date: '',
-        bugReportList: []
+        bugReportList: [],
+        title: 'Ordenes de Trabajo'
       }
     },
     created () {
@@ -57,6 +69,11 @@
     },
     destroyed: function () {},
     methods: {
+      generateReport () {
+        this.$store.dispatch('bugReport/getAllReportJobsRequest')
+          .then(this.successfulPrint)
+          .catch(this.errorPrint)
+      },
       fetch () {
         // this.bugReport.loading = true
         const action = 'bugReport/fetchActiveBetadas'
@@ -222,6 +239,37 @@
     }
   }
 
+  header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: $primary-color;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.26);
+    width: 100%;
+    height: $navigation-height;
+    z-index: $navbar-z-index;
+    display: flex;
+    align-items: center;
+  }
+
+  nav {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      font-size: 2.5vh;
+      font-weight: bold;
+      color: white;
+      padding: 0;
+      margin: 0;
+      display: inline;
+    }
+  }
   h3 {
     margin: 15px 0 0 0;
   }

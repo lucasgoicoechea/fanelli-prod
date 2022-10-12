@@ -7,10 +7,10 @@
         loadingMessage="Cargando fallas pendientes..."></spinner>
     </div>
     <div class="row" >
-            <button class="redirect" @click="generateReport">
+            <button class="redirect" @click="generateReport" style="color: black; background: gray">
               <div>
                 <span class="glyphicon glyphicon-download-alt"></span>
-                <span class="text">Generar reporte</span>
+                <span class="text" >Generar reporte</span>
               </div>
             </button>
     </div>

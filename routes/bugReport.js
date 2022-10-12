@@ -18,6 +18,7 @@ const ROLE = require(path.join(__dirname, '/../libs/const')).ROLE
  *
  */
 router.post('', bugReportController.create)
+router.get('/fetchAll', bugReportController.fetchAll)
 router.get('/fetchActive', bugReportController.fetchActive)
 router.get('/fetchNoActive', bugReportController.fetchNoActive)
 router.get('/fetchPassFails', bugReportController.fetchPassFails)
@@ -30,6 +31,8 @@ router.delete('/removeFails/:id', authorize([ROLE.JEFES, ROLE.RRHH]), bugReportC
 router.get('/:id', bugReportController.getId)
 router.put('/:id', bugReportController.edit)
 router.get('/excel/delivered', bugReportController.getReportDelivered)
+router.get('/excel/jobsRequest', bugReportController.getReportJobsRequest)
+router.get('/excel/all', bugReportController.getReportAll)
 router.post('/approval/:id', authorize([ROLE.JEFES, ROLE.RRHH]), bugReportController.approval)
 
 

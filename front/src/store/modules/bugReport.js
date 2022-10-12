@@ -292,6 +292,34 @@ const actions = {
       .then(success)
       .catch(handleError)
   },
+  getAllReportAll (context, day) {
+    const success = (response) => {
+      return new Blob([response.data], {type: response.headers.get['content-type']})
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get(`bugReport/excel/all`,
+      {responseType: 'arraybuffer'}
+    )
+      .then(success)
+      .catch(handleError)
+  },
+  getAllReportJobsRequest (context, day) {
+    const success = (response) => {
+      return new Blob([response.data], {type: response.headers.get['content-type']})
+    }
+
+    const handleError = (error) => {
+      return Promise.reject(error)
+    }
+    return Vue.http.get(`bugReport/excel/jobsRequest`,
+      {responseType: 'arraybuffer'}
+    )
+      .then(success)
+      .catch(handleError)
+  },
   cancel (context, bugReport) {
     const deleted = (response) => {
       return response.body
@@ -327,7 +355,7 @@ const actions = {
       return Promise.reject(error)
     }
 
-    return Vue.http.get('bugReport/to/' + payload.userId, {
+    return Vue.http.get('bugReport/fetchAll', {
       params: payload
     })
       .then(fetched)

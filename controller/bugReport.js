@@ -79,7 +79,17 @@ const controller = {
       }))
     res.json({success: true, bugReports})
   }),
-
+  fetchAll: async(function (req, res, next) {
+    let bugReports
+    bugReports = awaitFor(bugReportService.listAll({
+        perPage: req.query.per_page,
+        page: req.query.page,
+        date: req.query.date,
+        type: req.query.type,
+        frecuency: req.query.frecuency
+      }))
+    res.json({success: true, bugReports})
+  }),
   fetchActiveRelacionadas: async(function (req, res, next) {
     let bugReports
     bugReports = awaitFor(bugReportService.listAllPassRelated({
@@ -177,7 +187,45 @@ const controller = {
       next(error)
     }
   }),
-
+  getReportAll: async(function (req, res, next) {
+    try {
+      /*let date
+      if (req.params.day) {
+        date = new Date(new Date(req.params.day).getTime() + 1000 * 60 * 60 * 3)
+      } else {
+        date = new Date(new Date().toDateString())
+      }*/
+      const excel = awaitFor(generateReportAll())
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+      res.setHeader('Content-Disposition', 'attachment; filename=Report.xlsx')
+      console.log(excel)
+      awaitFor(excel.xlsx.write(res))
+      res.end()
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
+  }),
+  getReportJobsRequest: async(function (req, res, next) {
+    try {
+      /*let date
+      if (req.params.day) {
+        date = new Date(new Date(req.params.day).getTime() + 1000 * 60 * 60 * 3)
+      } else {
+        date = new Date(new Date().toDateString())
+      }*/
+      const excel = awaitFor(generateReportForJobsRequest(req))
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+      res.setHeader('Content-Disposition', 'attachment; filename=Report.xlsx')
+      console.log(excel)
+      awaitFor(excel.xlsx.write(res))
+      res.end()
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
+  }),
+  
   approval: async(function (req, res, next) {
     if (!ObjectId.isValid(req.params.id)) {
       next(Boom.notFound('ID inválido'))
@@ -194,8 +242,39 @@ const controller = {
   }),
 
 }
+const generateReportForJobsRequest = async(function (req) {
+  let bugReports
+  bugReports = awaitFor(bugReportService.listBetadas({
+    perPage: req.query.per_page,
+    page: req.query.page,
+    date: req.query.date,
+    type: req.query.type,
+    frecuency: req.query.frecuency
+  }))
+ 
+  /*const data = awaitFor(Bluebird.all([totalesMaterialExtrusora,totalesMaterialApiladora ,totalesMaterialDesapiladora])
+      .reduce(
+        (arr, events) => arr.concat(events),
+        []
+      ))*/
 
+  //totales = _.orderBy(totales,['sector','created_at'],['desc','desc']);
+  return excel.generateExcelBugReportJobsRequest(bugReports)
+})
 
+const generateReportAll = async(function () {
+  let bugReports
+  bugReports = awaitFor(bugReportService.listAll({ }))
+ 
+  /*const data = awaitFor(Bluebird.all([totalesMaterialExtrusora,totalesMaterialApiladora ,totalesMaterialDesapiladora])
+      .reduce(
+        (arr, events) => arr.concat(events),
+        []
+      ))*/
+
+  //totales = _.orderBy(totales,['sector','created_at'],['desc','desc']);
+  return excel.generateExcelBugReportDelivered(bugReports)
+})
 
 const generateReportForDelivered = async(function () {
   let bugReports

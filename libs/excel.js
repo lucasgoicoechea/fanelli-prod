@@ -293,5 +293,45 @@ module.exports = {
       horizontal: 'center'
     }*/
     return wb
+  },
+
+    /**
+   * @param {Object[]} data
+   * @param {Object[]} data[].events
+   * @param {Object[]} data[].collaborator
+   */
+  generateExcelBugReportJobsRequest: function (data) {
+    const wb = new Excel.Workbook()
+    let sheet = wb.addWorksheet('Reporte Ordenes de Trabajo')
+    sheet.columns = [
+      {header: 'Linea', key: 'line', width: 15},
+      {header: 'Sector', key: 'sector', width: 15},
+      {header: 'Sub_Sector', key: 'sub_sector', width: 25},
+      {header: 'Equipo', key: 'equipo', width: 15},
+      {header: 'Grupo', key: 'group', width: 20},
+      {header: 'Parte', key: 'part', width: 25, outlineLevel: 1},
+      {header: 'Estado', key: 'estado', width: 30, outlineLevel: 1},
+      {header: 'Inconveniente', key: 'inconveniente', width: 30, outlineLevel: 1},
+      {header: 'Detectado', key: 'detectado', width: 25, outlineLevel: 1},
+      {header: 'Resuelto', key: 'resuelto', width: 25, outlineLevel: 1},
+      {header: 'Resumen', key: 'resume', width: 25, outlineLevel: 1}
+    ]
+    this.colorRow(sheet.getRow(1), 'FFFFA420')
+    if (data.length > 0 ) {
+      data.forEach(d => {
+        sheet = this.addBugReportFilter(d, sheet)
+        })
+    }
+    
+    /*sheet.autoFilter = {
+      from: 'A1',
+      to: 'C1'
+    }
+    sheet.getColumn(2).alignment = {
+      vertical: 'center',
+      horizontal: 'center'
+    }*/
+    return wb
   }
+  
 }

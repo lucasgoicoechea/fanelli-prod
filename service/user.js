@@ -60,7 +60,7 @@ const service = {
         sector: 1,
         area: 1,
         'auth.username': 1
-      })
+      }) 
       .populate('shift', 'value')
   }),
   allWithDeactivated: async(function () {
