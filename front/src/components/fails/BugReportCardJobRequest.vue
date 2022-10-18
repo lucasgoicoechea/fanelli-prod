@@ -3,13 +3,18 @@
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
       <p slot="header">Estado de falla: {{ bugReportType(request) }}
         <span v-show="showObservationSection(request)"></span>
+        <img v-if="betada(request)" src="/static/img/checklists/tick.svg" alt="">
+        <img v-if="!betada(request)" src="/static/img/checklists/cross.svg" alt="">
       </p>
       <p slot="subHeader" v-if="approved(request)">Por {{ request.approved_by.lastname }}</p>
       <p slot="subHeader" v-if="denied(request)">Por {{ request.approved_by.lastname }}</p>
     </card-header>
     <card-section>
+
       <p slot="content">
         <span class="time">{{ request.updated_at | moment("DD/MM/YY - hh:mm a") }} - <span class="time">{{ request.line }}</span> - <span class="time">{{ request.sector }}</span> - <span class="time">{{ request.sub_sector }}</span> - <span class="time">{{ request.detectado }}</span> - <span class="time">{{ request.resuelto }}</span> </span></p>
+        <img v-if="betada(request)" src="/static/img/checklists/tick.svg" alt="">
+        <img v-if="!betada(request)" src="/static/img/checklists/cross.svg" alt="">
       <p slot="content">
         
          </p>
@@ -55,6 +60,9 @@
       },
       received (req) {
         return !req.hasOwnProperty('approved')
+      },
+      betada (req) {
+        return req.hasOwnProperty('betadas') && req.betadas
       },
       denied (req) {
         return req.hasOwnProperty('approved') && !req.approved
@@ -159,6 +167,11 @@
   p {
     margin: 0;
   }
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
 
   button {
     margin: 2px 0;

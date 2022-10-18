@@ -1098,7 +1098,7 @@ const router = new Router({
             name: 'bug-report-creation'
           },
           meta: {
-            permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+            permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
             fail: '/error'
           },
           children: [
@@ -1107,7 +1107,7 @@ const router = new Router({
               name: 'bug-report-creation',
               component: BugReportCreation,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
               }
             },
@@ -1125,7 +1125,7 @@ const router = new Router({
               name: 'bug-report-solicitudes-reparacion',
               component: BugReportHistoryPass,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
               }
             },
@@ -1143,7 +1143,7 @@ const router = new Router({
               name: 'bug-report-resume',
               component: BugReportResume,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
               }
             },

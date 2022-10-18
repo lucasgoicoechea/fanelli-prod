@@ -42,6 +42,7 @@
   import Spinner from '@/components/SpinnerWrapper.vue'
   import SpinnerLittle from '@/components/Spinner.vue'
   import BugReportCardJobRequest from '@/components/fails/BugReportCardJobRequest'
+  import pdf from '@/utils/pdf'
 
   export default {
     name: 'BugReportJobsRequest',
@@ -69,6 +70,13 @@
     },
     destroyed: function () {},
     methods: {
+      successfulPrint (blob) {
+        pdf.download(blob, 'report.xlsx')
+        this.fetch()
+      },
+      errorPrint () {
+        this.$snotifyWrapper.warning('Error de impresión. Intente nuevamente')
+      },
       generateReport () {
         this.$store.dispatch('bugReport/getAllReportJobsRequest')
           .then(this.successfulPrint)
@@ -87,7 +95,9 @@
           console.log('vacio')
         } else {
           response.bugReports.forEach(e => {
-            this.bugReportList.push(e)
+            if (e.estado === 'NO_SOLUCIONADO') {
+              this.bugReportList.push(e)
+            }
           })
           // this.bugReport.page += 1
         }

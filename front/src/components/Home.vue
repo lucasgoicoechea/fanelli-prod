@@ -4,7 +4,7 @@
     <div class="announcements">
       <widget-announcements></widget-announcements>
     </div>
-    <div class="widgets-container">
+    <div class="widgets-container" v-show="isWatchNews">
       <widget-availability></widget-availability>
       <widget-pending-exculpatory></widget-pending-exculpatory>
     </div>
@@ -42,6 +42,11 @@
       return {
         title: 'Inicio',
         currentView: ''
+      }
+    },
+    computed: {
+      isWatchNews () {
+        return this.currentView !== 'MECANICO_ELECTRICO'
       }
     },
     created () {

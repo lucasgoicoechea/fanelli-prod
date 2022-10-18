@@ -217,7 +217,7 @@ const controller = {
       const excel = awaitFor(generateReportForJobsRequest(req))
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
       res.setHeader('Content-Disposition', 'attachment; filename=Report.xlsx')
-      console.log(excel)
+      
       awaitFor(excel.xlsx.write(res))
       res.end()
     } catch (error) {
@@ -251,14 +251,10 @@ const generateReportForJobsRequest = async(function (req) {
     type: req.query.type,
     frecuency: req.query.frecuency
   }))
- 
-  /*const data = awaitFor(Bluebird.all([totalesMaterialExtrusora,totalesMaterialApiladora ,totalesMaterialDesapiladora])
-      .reduce(
-        (arr, events) => arr.concat(events),
-        []
-      ))*/
-
-  //totales = _.orderBy(totales,['sector','created_at'],['desc','desc']);
+  bugReports.forEach(c => {
+    c.betadas = false;  
+    c = awaitFor(bugReportService.edit(c, c._id));
+   });
   return excel.generateExcelBugReportJobsRequest(bugReports)
 })
 

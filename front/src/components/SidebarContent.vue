@@ -376,7 +376,7 @@
                 name: 'Creacion',
                 type: 'bug-report-creation',
                 route: {name: 'bug-report-creation'},
-                can: authorize(ROLES.SUPERVISORES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.SUPERVISORES, ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Resumen de Fallas',
