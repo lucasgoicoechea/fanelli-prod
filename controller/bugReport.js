@@ -34,7 +34,8 @@ const controller = {
       resuelto: req.body.bugReport.resuelto,
       resume: req.body.bugReport.resume,
       resolucion: req.body.bugReport.resolucion,
-      betadas: null
+      betadas: null,
+      descargado: false
     }
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
@@ -252,7 +253,7 @@ const generateReportForJobsRequest = async(function (req) {
     frecuency: req.query.frecuency
   }))
   bugReports.forEach(c => {
-    c.betadas = false;  
+    c.descargado = true;  
     c = awaitFor(bugReportService.edit(c, c._id));
    });
   return excel.generateExcelBugReportJobsRequest(bugReports)

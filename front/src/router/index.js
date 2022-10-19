@@ -1095,7 +1095,7 @@ const router = new Router({
           component: BugReportIndex,
           name: 'bug-report-index',
           redirect: {
-            name: 'bug-report-creation'
+            name: 'bug-report-history'
           },
           meta: {
             permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
@@ -1107,7 +1107,7 @@ const router = new Router({
               name: 'bug-report-creation',
               component: BugReportCreation,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
               }
             },
@@ -1116,7 +1116,7 @@ const router = new Router({
               name: 'bug-report-history',
               component: BugReportHistory,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'
               }
             },

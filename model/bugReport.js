@@ -51,6 +51,10 @@ const BugReportSchema = new Schema({
     betadas: {
         type: Boolean
     },
+    descargado: {
+        type: Boolean,
+        default: false
+    },
     }, {
         timestamps: {
           createdAt: 'created_at',

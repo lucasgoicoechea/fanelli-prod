@@ -80,7 +80,8 @@ const service = {
   listBetadas : async(function (options) {
     let bugReports = BugReportModel
     .find({
-      betadas: true
+      betadas: true,
+      descargado: false
     })
     .sort({
       created_at: -1

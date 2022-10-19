@@ -376,13 +376,13 @@
                 name: 'Creacion',
                 type: 'bug-report-creation',
                 route: {name: 'bug-report-creation'},
-                can: authorize(ROLES.SUPERVISORES, ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.SUPERVISORES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Resumen de Fallas',
                 type: 'bug-report-history',
                 route: {name: 'bug-report-history'},
-                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Solicitudes Reparacion',
@@ -400,7 +400,7 @@
                 name: 'Historial de Fallas',
                 type: 'bug-report-resume',
                 route: {name: 'bug-report-resume'},
-                can: authorize(ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               },
               {
                 name: 'Configuracion de Fallas',
