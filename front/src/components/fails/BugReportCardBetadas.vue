@@ -157,7 +157,7 @@
     },
     computed: {
       permission: function () {
-        return authorize(ROLES.JEFES)
+        return authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.RRHH)
       }
     }
   }
