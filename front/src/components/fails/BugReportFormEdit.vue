@@ -28,7 +28,12 @@
                <span  v-html="bugReport.resume"></span>
             </div>
        </div>
-
+ <div class="col-xs-12">
+          <h3>Inconveniente</h3>
+            <select v-model="bugReport.inconveniente" id="inconveniente">
+              <option v-for="(label, value) in inconvenienteList"  :key="value" :value="value"> {{label}}</option>
+          </select>
+        </div>
        <div class="col-xs-12">
           <h3>Resuelto por</h3>
             {{bugReport.resuelto}}

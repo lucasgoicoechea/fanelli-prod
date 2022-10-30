@@ -3,7 +3,7 @@
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
       <p slot="header">Estado de falla: {{ bugReportType(request) }}
         <span v-show="showObservationSection(request)"></span>
-        <img v-if="betada(request)" src="/static/img/checklists/tick.svg" alt="">
+        <span v-if="betada(request)"><img  src="/static/img/checklists/tick.svg" alt="">(OT)</span>
         <img v-if="!betada(request)" src="/static/img/checklists/cross.svg" alt="">
       </p>
       <p slot="subHeader" v-if="approved(request)">Por {{ request.approved_by.lastname }}</p>

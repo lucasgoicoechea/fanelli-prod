@@ -281,6 +281,21 @@ const constants = {
     MOLDE_COLUMNA: 'COLUMNA'
   },
 
+  BUG_REPORT_ESTADO: {
+    SOLUCIONADO: 'Solucionado',
+    SOLUCION_TEMPORAL: 'Solución Temporal',
+    NO_SOLUCIONADO: 'No Solucionado'
+  },
+
+  BUG_REPORT_ESTADO_NO_SOLUCIONADO: {
+    COMPLEJIDAD: 'Complejidad',
+    PARADA: 'Parada',
+    TIEMPO: 'Tiempo',
+    PERSONAL: 'Personal',
+    REPUESTO: 'Repuesto',
+    FALTA_CONOCIMIENTO: 'Falta de Conocimiento'
+  },
+
   STAFF_NEWS_TYPE: {
     ABSENT: 'ABSENT',
     LATE: 'LATE',

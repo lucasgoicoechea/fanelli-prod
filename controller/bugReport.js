@@ -37,6 +37,9 @@ const controller = {
       betadas: null,
       descargado: false
     }
+    if (bugReport.inconveniente === 'REPUESTO') {
+      bugReport.betadas = true;
+    }
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
   }),
@@ -163,6 +166,7 @@ const controller = {
       bugReport.estado = req.body.bugReport.estado
       bugReport.resuelto = req.body.bugReport.resuelto
       bugReport.resolucion = req.body.bugReport.resolucion
+      bugReport.inconveniente = req.body.bugReport.inconveniente
       bugReport.resume = req.body.bugReport.resume
     // let repeatEdit = req.body.bugReport.repeatEdit || false
     bugReport = awaitFor(bugReportService.edit(bugReport, req.params.id))
