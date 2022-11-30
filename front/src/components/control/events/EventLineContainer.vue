@@ -18,17 +18,20 @@
         v-show="permission && eventLineData.archived"
         @click="desarchiveTimeline()"> DESARCHIVAR </h5>  
     </div>
-
     <horizontal-scrolling-container ref="containerRef" class="horizontal-container">
-      <event-card-item v-for="eventData in eventLineData.events"
+      <event-card-item v-for="eventData in eventLast()"
                        :cardData="eventData"
                        :timelineId="eventLineData._id"
                        @click.native="showEventInformation(eventLineData, eventData)"
-                       :key="eventData.item._id"></event-card-item>
+                       :key="eventData.item._id"></event-card-item> 
       <event-card-add-item v-if="permission && getEventType() !== $constants.news_types.OBSERVATION"
                            :timeline="eventLineData._id"
                            :collaborator="eventLineData.collaborator._id"></event-card-add-item>
+      <event-cards-drop-vue  
+                          :timeline="eventLineData"
+                          :collaborator="eventLineData.collaborator._id" ></event-cards-drop-vue>
     </horizontal-scrolling-container>
+  
   </div>
 </template>
 
@@ -36,6 +39,7 @@
   import HorizontalScrollingContainer from '@/components/containers/HorizontalScrolling.vue'
   import EventCardItem from '@/components/control/events/EventCardItem.vue'
   import EventCardAddItem from '@/components/control/events/EventCardAddItem.vue'
+  import EventCardsDropVue from '@/components/control/events/EventCardsDrop.vue'
   import Constants from '../../../const.js'
   import authorize from '@/utils/authorize'
 
@@ -49,6 +53,7 @@
     components: {
       EventCardItem,
       EventCardAddItem,
+      EventCardsDropVue,
       HorizontalScrollingContainer
     },
     props: {
@@ -58,6 +63,13 @@
       }
     },
     methods: {
+      eventLast: function () {
+        if (window.innerWidth > 1950) return this.eventLineData.events
+        if (this.eventLineData.events[0] === undefined) {
+          return this.eventLineData.events
+        }
+        return [this.eventLineData.events[0]]
+      },
       getLineStyle: function () {
         let color
         if (this.eventLineData.events[0] !== undefined) {
@@ -198,7 +210,7 @@
       color: #d3d3d3;
     }
   }
-
+  
   .create-event {
     margin-right: 40px;
     font-size: 20px;
@@ -247,4 +259,5 @@
     }
 
   }
+  
 </style>
