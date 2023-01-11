@@ -1,0 +1,94 @@
+[
+  {
+    "code": "SUPERADMIN",
+    "name": "Superadmin"
+  },
+  {
+    "code": "SUPERVISOR_PRODUCCION",
+    "name": "Supervisor de producción"
+  },
+  {
+    "code": "SUPERVISOR_MANTENIMIENTO",
+    "name": "Supervisor de mantenimiento"
+  },
+  {
+    "code": "SUPERVISOR_PANOL",
+    "name": "Supervisor de pañol"
+  },
+  {
+    "code": "PERSONAL",
+    "name": "Personal"
+  },
+  {
+    "code": "SUPERVISOR",
+    "name": "Supervisor"
+  },
+  {
+    "code": "OFICIAL_EXTRUSORA",
+    "name": "Oficial Extrusora L2"
+  },
+  {
+    "code": "OFICIAL_APILADORA",
+    "name": "Oficial Apiladora L2"
+  },
+  {
+    "code": "OFICIAL_DESAPILADORA",
+    "name": "Oficial Desapiladora L2"
+  },
+  {
+    "code": "OFICIAL_EXTRUSORA_L3",
+    "name": "Oficial Extrusora L3"
+  },
+  {
+    "code": "OFICIAL_APILADORA_L3",
+    "name": "Oficial Apiladora L3"
+  },
+  {
+    "code": "OFICIAL_DESAPILADORA_L3",
+    "name": "Oficial Desapiladora L3"
+  },
+  {
+    "code": "MECANICO_ELECTRICO",
+    "name": "Mecanico Electrico de Turno"
+  },
+  {
+    "code": "HIGIENE_SEGURIDAD",
+    "name": "Higiene y Seguridad"
+  },
+  {
+    "code": "JEFE_PLANTA",
+    "name": "Jefe de Planta"
+  },
+  {
+    "code": "JEFE_LINEA",
+    "name": "Jefe de Linea"
+  },
+  {
+    "code": "JEFE_SECTOR",
+    "name": "Jefe de Sector"
+  },
+  {
+    "code": "COLABORADOR",
+    "name": "Colaborador"
+  },
+  {
+    "code": "PANOL",
+    "name": "Pañol"
+  },
+  {
+    "code": "RRHH",
+    "name": "RRHH"
+  },
+  {
+    "code": "JEFE_PERSONAL",
+    "name": "Jefe de Personal"
+  },
+  {
+    "code": "OFICINA_TECNICA",
+    "name": "Oficina Técnica"
+  },
+  {
+    "code": "JEFE_MANTENIMIENTO",
+    "name": "Jefe de Mantenimiento"
+  }
+]

@@ -1,0 +1,1 @@
+db.createCollection("roleperms", { capped : true, size : 5242222, max : 5000});

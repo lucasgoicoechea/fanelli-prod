@@ -805,7 +805,8 @@
           return '-'
         } else {
           if (this.bugReport.estado === 'SOLUCION_TEMPORAL') {
-            return '-'
+            // return '-'
+            return this.$constants.BUG_REPORT_ESTADO_NO_SOLUCIONADO
           } else {
             if (this.bugReport.estado === 'NO_SOLUCIONADO') {
               return this.$constants.BUG_REPORT_ESTADO_NO_SOLUCIONADO
