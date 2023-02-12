@@ -53,5 +53,11 @@ module.exports = {
   fail: require(path.join(__dirname, '/fail')),
   bugReport: require(path.join(__dirname, '/bugReport')),
   failed: require(path.join(__dirname, '/failed')),
-  checkLTres: require(path.join(__dirname, '/checkLTres'))  
+  checkLTres: require(path.join(__dirname, '/checkLTres')),
+  perm: require(path.join(__dirname, '/perm')),
+  permRole: require(path.join(__dirname, '/permRole')),
+  permUsuario: require(path.join(__dirname, '/permUsuario')),
+  role: require(path.join(__dirname, '/role'))
+  
+
 }

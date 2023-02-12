@@ -2,6 +2,7 @@ const path = require('path')
 const mongoose = require(path.join(__dirname, '/../mongoConnection')).getMongoose()
 const Schema = mongoose.Schema
 const constants = require(path.join(__dirname, '/../libs/const'))
+const _ = require('lodash')
 
 const RoleSchema = new Schema({
   code: {

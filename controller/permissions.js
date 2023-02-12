@@ -1,7 +1,7 @@
 const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 const path = require('path')
-const PermissionsService = require(path.join(__dirname, '../service')).permissions
+const permissionsService = require(path.join(__dirname, '../service')).permissions
 const controller = {
  
   addPermission: async(function (req, res) {
@@ -15,7 +15,7 @@ const controller = {
   }),
 
   listPermsForRole: async(function (req, res) {
-    const perrmissions = awaitFor(permissionsService.listPermsForRole())
+    const perrmissions = awaitFor(permissionsService.listPermsForRole(req.query.id))
     res.json({success: true, perrmissions})
   }),
 

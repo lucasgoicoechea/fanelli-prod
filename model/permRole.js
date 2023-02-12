@@ -1,8 +1,9 @@
 const path = require('path')
 const mongoose = require(path.join(__dirname, '/../mongoConnection')).getMongoose()
 const Schema = mongoose.Schema
+const _ = require('lodash')
 
-const RolePermSchema = new Schema({
+const PermRoleSchema = new Schema({
   role: {
     type: Schema.Types.ObjectId,
     ref: 'Role'
@@ -17,5 +18,5 @@ const RolePermSchema = new Schema({
     updatedAt: 'updated_at'
   }
 })
-const RolePermModel = mongoose.model('RolePerm', RolePermSchema)
-module.exports = RolePermModel
+const PermRoleModel = mongoose.model('permRole', PermRoleSchema)
+module.exports = PermRoleModel

@@ -2,6 +2,7 @@ const path = require('path')
 const mongoose = require(path.join(__dirname, '/../mongoConnection')).getMongoose()
 const Schema = mongoose.Schema
 const constants = require(path.join(__dirname, '/../libs/const'))
+const _ = require('lodash')
 
 const PermSchema = new Schema({
   code: {
@@ -17,5 +18,5 @@ const PermSchema = new Schema({
     updatedAt: 'updated_at'
   }
 })
-const PermModel = mongoose.model('Perm', RoleSchema)
+const PermModel = mongoose.model('Perm', PermSchema)
 module.exports = PermModel

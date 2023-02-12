@@ -68,6 +68,7 @@ const Router = {
     app.use('/api/supervisionpart', routes.supervisionpart)
     app.use('/api/supervisionpartLTres', routes.supervisionpartLTres)
     app.use('/api/bugReport', routes.bugReport)
+    app.use('/api/permissions', routes.permissions)
     app.use('/doc', express.static('apidoc'))
     errorHandler(app)
   }

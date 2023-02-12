@@ -362,7 +362,7 @@ supervisionpartLTresSchema.statics.getSupervisionPartForDay = function (date) {
     .lean()
 }
 
-//mongoose.set('debug', true)
+mongoose.set('debug', true)
 const SupervisionpartLTresModel = mongoose.model('SupervisionpartLTres', supervisionpartLTresSchema)
 
 module.exports = SupervisionpartLTresModel

@@ -53,5 +53,6 @@ module.exports = {
   report: require(path.join(__dirname, '/report')),
   supervisionpartLTres: require(path.join(__dirname, '/supervisionPartLTres')),
   supervisionpart: require(path.join(__dirname, '/supervisionPart')),
-  bugReport: require(path.join(__dirname, '/bugReport'))
+  bugReport: require(path.join(__dirname, '/bugReport')),
+  permissions: require(path.join(__dirname, '/permissions'))
 }
