@@ -3,6 +3,7 @@ const awaitFor = require('asyncawait/await')
 const path = require('path')
 const PermUsuarioModel = require(path.join(__dirname, '../model')).permUsuario
 const PermRoleModel = require(path.join(__dirname, '../model')).permRole
+const RoleModel = require(path.join(__dirname, '../model')).role
 const service = {
   addPermission: async(function (permUsuario) {
     permUsuario = awaitFor(permUsuarioModel.create(permUsuario))
@@ -18,10 +19,11 @@ const service = {
     .populate({path: 'perm', model: 'Perm'})
   }),
   listPermsForRole: async(function (id) {
+    const role = awaitFor(RoleModel.findOne({'code': id}));
     return PermRoleModel
-    .find({'role.code': id})
-    .populate('role')
-    .populate({path: 'perm', model: 'Perm'})
+      .find({'role': role._id})
+      .populate('role')
+      .populate({path: 'perm', model: 'Perm'})
   }),
   removePermission: async(function (id) {
     return PermUsuarioModel.remove({_id: id})

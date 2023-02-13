@@ -4,79 +4,87 @@
     <v-dialog></v-dialog>
     <div class="container-fluid">
       <div class="row" >
-        <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
-          <div v-if="!hasCredentials">
-            <p>
-              <button class="btn btn-block btn-lg btn-primary" @click="grantAccess()">Agregar</button>
-            </p>
-            <p class="text-muted text-center">
-              Este usuario no tiene permisos de acceso, presione "AGREGAR" para proporcionarle nombre de usuario y contraseña
-            </p>
+         <div v-if="!hasCredentials">
+            <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
+              <p>
+                <button class="btn btn-block btn-lg btn-primary" @click="grantAccess()">Agregar</button>
+              </p>
+              <p class="text-muted text-center">
+                Este usuario no tiene permisos de acceso, presione "AGREGAR" para proporcionarle nombre de usuario y contraseña
+              </p>
+           </div>
           </div>
           <div v-else>
             <form class="form-credentials">
-              <p v-if="error" class="error">
-                <b>{{ error }}</b>
-              </p>
-              <div class="input-group">
-                <label>Rol</label>
-                <div class="select-style">
-                  <select
-                    v-model="user_type"
-                    :class="{ 'has-error': $v.user_type.$error }">
-                    <option v-for="value, key in $constants.USER_TYPE_READABLE" :value="key">{{ value }}</option>
-                  </select>
-                </div>
-                <div class="validations" v-show="$v.user_type.$error">
-                  <p class="has-error">Se debe llenar este campo</p>
-                </div>
-              </div>
-              <div class="input-group">
-                <label for="username">Nombre de usuario</label>
-                <input id="username" v-model="username"
-                       autocomplete="off"
-                       :class="{ 'has-error': $v.username.$error }"
-                       @input="$v.username.$touch()"/>
-                <div class="validations" v-show="$v.username.$error">
-                  <p class="has-error">No se puede utilizar espacios ni caracteres especiales </p>
-                </div>
-              </div>
-              <div class="input-group">
-                <label>Nueva contraseña</label>
-                <password v-model="password"></password>
-              </div>
-              <p>
-                <blockable-button
-                                  title="guardar"
-                                  :clickMethod="changeAuth"
-                                  :isLoading="loading"
-                                  buttonRadius="30px"
-                                  buttonWidth="100%"
-                                  buttonHeight="auto"
-                                  buttonBackgroundColor="#6f99ee"
-                                  color="white"
-                                  class="print-button-resolved">Guardar</blockable-button>
-              </p>
-              <p>
-                <a class="btn btn-block text-center remove-button" @click="revokeAccess">
-                  <img src="/static/img/trashwht.svg" alt="Tacho de basura"/>
-                  Revocar acceso
-                </a>
-              </p>
-              <p class="text-muted text-center">
-                Para mantener la contraseña actual, debe dejar el campo sin completar
-              </p>
-            </form>
-          </div>
-
-        </div>
-        <P class = "perms">PERMISOS</P>
-        <div class = "perms" v-for="(value) in perms"
-              :key="value.perm.code">
+            <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
               
-          <label class = "check"> {{value.perm.description}} </label>
-          
-          </div>
+                <p v-if="error" class="error">
+                  <b>{{ error }}</b>
+                </p>
+                <div class="input-group">
+                  <label>Rol</label>
+                  <div class="select-style">
+                    <select
+                      v-model="user_type"
+                      :class="{ 'has-error': $v.user_type.$error }">
+                      <option v-for="value, key in $constants.USER_TYPE_READABLE" :value="key">{{ value }}</option>
+                    </select>
+                  </div>
+                  <div class="validations" v-show="$v.user_type.$error">
+                    <p class="has-error">Se debe llenar este campo</p>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label for="username">Nombre de usuario</label>
+                  <input id="username" v-model="username"
+                        autocomplete="off"
+                        :class="{ 'has-error': $v.username.$error }"
+                        @input="$v.username.$touch()"/>
+                  <div class="validations" v-show="$v.username.$error">
+                    <p class="has-error">No se puede utilizar espacios ni caracteres especiales </p>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <label>Nueva contraseña</label>
+                  <password v-model="password"></password>
+                </div>
+                <p>
+                  <blockable-button
+                                    title="guardar"
+                                    :clickMethod="changeAuth"
+                                    :isLoading="loading"
+                                    buttonRadius="30px"
+                                    buttonWidth="100%"
+                                    buttonHeight="auto"
+                                    buttonBackgroundColor="#6f99ee"
+                                    color="white"
+                                    class="print-button-resolved">Guardar</blockable-button>
+                </p>
+                <p>
+                  <a class="btn btn-block text-center remove-button" @click="revokeAccess">
+                    <img src="/static/img/trashwht.svg" alt="Tacho de basura"/>
+                    Revocar acceso
+                  </a>
+                </p>
+                <p class="text-muted text-center">
+                  Para mantener la contraseña actual, debe dejar el campo sin completar
+                </p>
+            </div>
+            <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
+                  <p class = "perms">PERMISOS </p>
+                  <div v-for="item in perms"   :key="item._id" > 
+                    <span class="checkmark"><input
+                      type="checkbox"
+                      :checked="item.checked"
+                      @click="updateItem(item._id)">
+                   </span>
+                    <span class="   ">{{ item.perm.description }}</span>
+                  </div>
+             </div> 
+              </form>
+           </div>
+        </div>
+      
       </div>
     </div>
   </div>
@@ -109,11 +117,13 @@
         this.dirtyData = false
         this.backup = null
       },
+      updateItem (id) {
+
+      },
       permss () {
-        Vue.http.get('permissions/listPermsForRole?id=' + this.backup.user_type,
-          {responseType: 'arraybuffer'}
-        ).then((response) => {
-          this.perms = response
+        Vue.http.get('permissions/listPermsForRole?id=' + this.backup.user_type)
+        .then((response) => {
+          this.perms = response.body.perrmissions
         })
       },
       revokeAccess () {
