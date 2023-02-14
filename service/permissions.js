@@ -1,6 +1,7 @@
 const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 const path = require('path')
+const PermRoleChecked = require('../model/permRoleChecked')
 const PermUsuarioModel = require(path.join(__dirname, '../model')).permUsuario
 const PermRoleModel = require(path.join(__dirname, '../model')).permRole
 const RoleModel = require(path.join(__dirname, '../model')).role
@@ -19,11 +20,34 @@ const service = {
     .populate({path: 'perm', model: 'Perm'})
   }),
   listPermsForRole: async(function (id) {
+   
     const role = awaitFor(RoleModel.findOne({'code': id}));
-    return PermRoleModel
+    const permsRole = awaitFor(PermRoleModel
       .find({'role': role._id})
       .populate('role')
       .populate({path: 'perm', model: 'Perm'})
+      .then( (permroled) => {
+        let permCheckd = [];
+        let permrolecheck = PermRoleChecked;
+        permroled.array.forEach(element => {
+          permrolecheck._id = element._id;
+          permrolecheck.perm._id = element.perm._id; 
+          permCheckd.push(permrolecheck);
+         });
+      }));
+    const permssUser =  awaitFor(PermUsuarioModel.find({user: idUser})
+    .populate({path: 'user', model: 'User'})
+    .populate({path: 'perm', model: 'Perm'})
+    .then( (permuser) => {
+      let permCheckd = [];
+      let permrolecheck = PermRoleChecked;
+       permuser.array.forEach(element => {
+        permrolecheck._id = element._id;
+        permrolecheck.perm._id = element.perm._id; 
+        permCheckd.push(permrolecheck);
+       });
+    })
+    );
   }),
   removePermission: async(function (id) {
     return PermUsuarioModel.remove({_id: id})

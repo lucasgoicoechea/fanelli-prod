@@ -57,7 +57,7 @@ module.exports = {
   perm: require(path.join(__dirname, '/perm')),
   permRole: require(path.join(__dirname, '/permRole')),
   permUsuario: require(path.join(__dirname, '/permUsuario')),
-  role: require(path.join(__dirname, '/role'))
-  
+  role: require(path.join(__dirname, '/role')),
+  permRoleChecked: require(path.join(__dirname, '/permRoleChecked'))
 
 }
