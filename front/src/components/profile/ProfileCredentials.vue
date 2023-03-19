@@ -72,11 +72,11 @@
             </div>
             <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
                   <p class = "perms">PERMISOS </p>
-                  <div v-for="item in perms"   :key="item._id" > 
+                  <div v-for="item in permsRol"   :key="item._id" > 
                     <span class="checkmark"><input
                       type="checkbox"
                       :checked="item.checked"
-                      @click="updateItem(item._id)">
+                      >
                    </span>
                     <span class="   ">{{ item.perm.description }}</span>
                   </div>
@@ -107,7 +107,7 @@
         showPassword: false,
         dirtyData: false,
         backup: null,
-        perms: []
+        permsRol: []
       }
     },
     methods: {
@@ -123,7 +123,7 @@
       permss () {
         Vue.http.get('permissions/listPermsForRole?id=' + this.backup.user_type)
         .then((response) => {
-          this.perms = response.body.perrmissions
+          this.permsRol = response.body.perrmissions
         })
       },
       revokeAccess () {
@@ -193,7 +193,8 @@
                     auth: {
                       username: this.user.auth.username,
                       password: this.user.auth.password,
-                      user_type: this.user.user_type
+                      user_type: this.user.user_type,
+                      perms: this.permsRol
                     }
                   }).then(
                     () => this.$snotify.success('Se actualizaron las credenciales exitosamente', {position: SnotifyPosition.centerTop}),

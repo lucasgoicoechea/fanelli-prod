@@ -90,7 +90,8 @@ const actions = {
       Vue.http.put('user/' + payload.id + '/credentials', {
         password: payload.auth.password,
         username: payload.auth.username,
-        user_type: payload.auth.user_type
+        user_type: payload.auth.user_type,
+        perms: payload.auth.perms
       })
         .then(
           (res) => {
