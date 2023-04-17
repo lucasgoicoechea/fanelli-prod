@@ -120,8 +120,8 @@
       updateItem (id) {
 
       },
-      permss () {
-        Vue.http.get('permissions/listPermsForRole?id=' + this.backup.user_type)
+      permss (value) {
+        Vue.http.get('permissions/listPermsForRole?id=' + value)
         .then((response) => {
           this.permsRol = response.body.perrmissions
         })
@@ -156,7 +156,6 @@
           user_type: this.user.user_type
         }
         console.log('No')
-        this.permss()
         this.dirtyData = true
       },
       grantAccess () {
@@ -247,6 +246,7 @@
         set (value) {
           this.onChange()
           this.$store.commit('users/setUserType', value)
+          this.permss(value)
         }
       }
     },
