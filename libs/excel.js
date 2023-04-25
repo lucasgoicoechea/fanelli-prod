@@ -20,7 +20,7 @@ module.exports = {
     return sheet.addRow([total.sector, total.fecha, total.turno, total.schedule,total.unidades, total.toneladas, total.material, total.machine])
   },
   addBugReport: function (total, sheet) {
-    return sheet.addRow([total.line,total.sector, total.sub_sector, total.equipo, total.group, total.part, total.estado,  total.inconveniente, total.detectado,total.resuelto, total.resume])
+    return sheet.addRow([total.line,total.sector, total.sub_sector, total.equipo, total.group, total.part, total.estado,  total.inconveniente, total.detectado,total.resuelto, total.resume, total.resolucion])
   },
   addEventsByDay: function (event, collaborator, sheet) {
     event.dates.forEach(day => {
@@ -47,7 +47,8 @@ module.exports = {
       inconveniente: '',
       detectado: '',
       resuelto: ' ',
-      resume: ''
+      resume: '',
+      resolucion: ''
     }
     excelObject.line = material.line
     excelObject.sector = material.sector
@@ -60,6 +61,7 @@ module.exports = {
     excelObject.detectado = material.detectado
     excelObject.resuelto = material.resuelto
     excelObject.resume = material.resume
+    excelObject.resolucion = material.resolucion
     return excelObject
   },
   toMaterialExcelObject: function (material) {
@@ -275,7 +277,8 @@ module.exports = {
       {header: 'Inconveniente', key: 'inconveniente', width: 30, outlineLevel: 1},
       {header: 'Detectado', key: 'detectado', width: 25, outlineLevel: 1},
       {header: 'Resuelto', key: 'resuelto', width: 25, outlineLevel: 1},
-      {header: 'Resumen', key: 'resume', width: 25, outlineLevel: 1}
+      {header: 'Resumen', key: 'resume', width: 25, outlineLevel: 1},
+      {header: 'Solución', key: 'resolucion', width: 30, outlineLevel: 1}
     ]
     this.colorRow(sheet.getRow(1), 'FFFFA420')
     if (data.length > 0 ) {
@@ -314,7 +317,8 @@ module.exports = {
       {header: 'Inconveniente', key: 'inconveniente', width: 30, outlineLevel: 1},
       {header: 'Detectado', key: 'detectado', width: 25, outlineLevel: 1},
       {header: 'Resuelto', key: 'resuelto', width: 25, outlineLevel: 1},
-      {header: 'Resumen', key: 'resume', width: 25, outlineLevel: 1}
+      {header: 'Resumen', key: 'resume', width: 25, outlineLevel: 1},
+      {header: 'Solución', key: 'resolucion', width: 30, outlineLevel: 1}
     ]
     this.colorRow(sheet.getRow(1), 'FFFFA420')
     if (data.length > 0 ) {

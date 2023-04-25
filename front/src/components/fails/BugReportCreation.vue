@@ -9,11 +9,11 @@
        ></form-component>
   <div :v-if="hayRelacionadas" sytle="margin-bottom: 100px;" >
     REPORTES RELACIONADOS ACTIVOS
-      <bugReport-card
+      <bugReport-card-new-tab
         v-for="request in bugReportListDelivered"
         :key="request._id"
         :request="request">
-      </bugReport-card>
+      </bugReport-card-new-tab>
     </div>
     <bottom-navbar>
       <div class="submit">
@@ -43,7 +43,7 @@
   import BottomNavbar from '@/components/BottomNavbar.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import FormComponent from '@/components/fails/BugReportForm'
-  import BugReportCard from '@/components/fails/BugReportCard'
+  import BugReportCardNewTab from '@/components/fails/BugReportCardNewTab'
 
   export default {
     name: 'BugReportCreation',
@@ -52,7 +52,7 @@
       Navigation,
       Spinner,
       FormComponent,
-      BugReportCard
+      BugReportCardNewTab
     },
     data () {
       return {
