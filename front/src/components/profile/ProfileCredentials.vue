@@ -3,72 +3,88 @@
     <h3>Credenciales de acceso</h3>
     <v-dialog></v-dialog>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4">
-          <div v-if="!hasCredentials">
-            <p>
-              <button class="btn btn-block btn-lg btn-primary" @click="grantAccess()">Agregar</button>
-            </p>
-            <p class="text-muted text-center">
-              Este usuario no tiene permisos de acceso, presione "AGREGAR" para proporcionarle nombre de usuario y contraseña
-            </p>
+      <div class="row" >
+         <div v-if="!hasCredentials">
+            <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
+              <p>
+                <button class="btn btn-block btn-lg btn-primary" @click="grantAccess()">Agregar</button>
+              </p>
+              <p class="text-muted text-center">
+                Este usuario no tiene permisos de acceso, presione "AGREGAR" para proporcionarle nombre de usuario y contraseña
+              </p>
+           </div>
           </div>
           <div v-else>
             <form class="form-credentials">
-              <p v-if="error" class="error">
-                <b>{{ error }}</b>
-              </p>
-              <div class="input-group">
-                <label>Rol</label>
-                <div class="select-style">
-                  <select
-                    v-model="user_type"
-                    :class="{ 'has-error': $v.user_type.$error }">
-                    <option v-for="value, key in $constants.USER_TYPE_READABLE" :value="key">{{ value }}</option>
-                  </select>
+            <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
+              
+                <p v-if="error" class="error">
+                  <b>{{ error }}</b>
+                </p>
+                <div class="input-group">
+                  <label>Rol</label>
+                  <div class="select-style">
+                    <select
+                      v-model="user_type"
+                      :class="{ 'has-error': $v.user_type.$error }">
+                      <option v-for="value, key in $constants.USER_TYPE_READABLE" :value="key">{{ value }}</option>
+                    </select>
+                  </div>
+                  <div class="validations" v-show="$v.user_type.$error">
+                    <p class="has-error">Se debe llenar este campo</p>
+                  </div>
                 </div>
-                <div class="validations" v-show="$v.user_type.$error">
-                  <p class="has-error">Se debe llenar este campo</p>
+                <div class="input-group">
+                  <label for="username">Nombre de usuario</label>
+                  <input id="username" v-model="username"
+                        autocomplete="off"
+                        :class="{ 'has-error': $v.username.$error }"
+                        @input="$v.username.$touch()"/>
+                  <div class="validations" v-show="$v.username.$error">
+                    <p class="has-error">No se puede utilizar espacios ni caracteres especiales </p>
+                  </div>
                 </div>
-              </div>
-              <div class="input-group">
-                <label for="username">Nombre de usuario</label>
-                <input id="username" v-model="username"
-                       autocomplete="off"
-                       :class="{ 'has-error': $v.username.$error }"
-                       @input="$v.username.$touch()"/>
-                <div class="validations" v-show="$v.username.$error">
-                  <p class="has-error">No se puede utilizar espacios ni caracteres especiales </p>
+                <div class="input-group">
+                  <label>Nueva contraseña</label>
+                  <password v-model="password"></password>
                 </div>
-              </div>
-              <div class="input-group">
-                <label>Nueva contraseña</label>
-                <password v-model="password"></password>
-              </div>
-              <p>
-                <blockable-button
-                                  title="guardar"
-                                  :clickMethod="changeAuth"
-                                  :isLoading="loading"
-                                  buttonRadius="30px"
-                                  buttonWidth="100%"
-                                  buttonHeight="auto"
-                                  buttonBackgroundColor="#6f99ee"
-                                  color="white"
-                                  class="print-button-resolved">Guardar</blockable-button>
-              </p>
-              <p>
-                <a class="btn btn-block text-center remove-button" @click="revokeAccess">
-                  <img src="/static/img/trashwht.svg" alt="Tacho de basura"/>
-                  Revocar acceso
-                </a>
-              </p>
-              <p class="text-muted text-center">
-                Para mantener la contraseña actual, debe dejar el campo sin completar
-              </p>
-            </form>
-          </div>
+                <p>
+                  <blockable-button
+                                    title="guardar"
+                                    :clickMethod="changeAuth"
+                                    :isLoading="loading"
+                                    buttonRadius="30px"
+                                    buttonWidth="100%"
+                                    buttonHeight="auto"
+                                    buttonBackgroundColor="#6f99ee"
+                                    color="white"
+                                    class="print-button-resolved">Guardar</blockable-button>
+                </p>
+                <p>
+                  <a class="btn btn-block text-center remove-button" @click="revokeAccess">
+                    <img src="/static/img/trashwht.svg" alt="Tacho de basura"/>
+                    Revocar acceso
+                  </a>
+                </p>
+                <p class="text-muted text-center">
+                  Para mantener la contraseña actual, debe dejar el campo sin completar
+                </p>
+            </div>
+            <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
+                  <p class = "perms">PERMISOS </p>
+                  <div v-for="item in permsRol"   :key="item._id" > 
+                    <span class="checkmark"><input
+                      type="checkbox"
+                      :checked="item.checked"
+                      >
+                   </span>
+                    <span class="   ">{{ item.perm.description }}</span>
+                  </div>
+             </div> 
+              </form>
+           </div>
         </div>
+      
       </div>
     </div>
   </div>
@@ -80,6 +96,7 @@
   import { SnotifyPosition } from 'vue-snotify'
   import BlockableButton from '@/components/buttons/blockableButton'
   import empty from '@/utils/empty'
+  import Vue from 'vue'
 
   export default {
     name: 'ProfileCredentials',
@@ -89,7 +106,8 @@
         repeatPassword: '',
         showPassword: false,
         dirtyData: false,
-        backup: null
+        backup: null,
+        permsRol: []
       }
     },
     methods: {
@@ -98,6 +116,15 @@
         this.showPassword = false
         this.dirtyData = false
         this.backup = null
+      },
+      updateItem (id) {
+
+      },
+      permss (value) {
+        Vue.http.get('permissions/listPermsForRole?id=' + value)
+        .then((response) => {
+          this.permsRol = response.body.perrmissions
+        })
       },
       revokeAccess () {
         this.dirtyData = false
@@ -124,8 +151,12 @@
             password: this.user.auth.password,
             user_type: this.user.user_type
           }
-          this.dirtyData = true
         }
+        this.backup = {
+          user_type: this.user.user_type
+        }
+        console.log('No')
+        this.dirtyData = true
       },
       grantAccess () {
         this.dirtyData = true
@@ -161,7 +192,8 @@
                     auth: {
                       username: this.user.auth.username,
                       password: this.user.auth.password,
-                      user_type: this.user.user_type
+                      user_type: this.user.user_type,
+                      perms: this.permsRol
                     }
                   }).then(
                     () => this.$snotify.success('Se actualizaron las credenciales exitosamente', {position: SnotifyPosition.centerTop}),
@@ -214,6 +246,7 @@
         set (value) {
           this.onChange()
           this.$store.commit('users/setUserType', value)
+          this.permss(value)
         }
       }
     },
@@ -263,11 +296,31 @@
   @import "../../assets/styles/variables";
 
   .save-button {
-    background-color: #6f99ee;
+    background-color: #ee6f79;
     color: #FFF;
     border-radius: 30px;
     padding: 10px;
     font-weight: bold;
+  }
+
+  .perms {
+    background-color: white;
+    display : flex;
+    margin-right: 40%;
+    margin-top: 3%;
+    margin-left: 35%;
+    color: #909090;
+  }
+
+  .check {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #dadada;
+    border-radius: 3px;
   }
 
   .remove-button {

@@ -97,27 +97,35 @@
             can: authorize(ROLES.RRHH, ROLES.SUPERVISORES)
           },
           {
+            name: 'Partes Historico',
+            type: 'control-supervisionparts',
+            routeName: 'control-supervisionparts-historico',
+            route: {name: 'control-supervisionparts-historico'},
+            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
+            name: 'Partes Control',
+            type: 'control-oficial-supervisionpart',
+            routeName: 'control-oficial-control',
+            route: {name: 'control-oficial-control'},
+            can: authorize(ROLES.OFICIALES, ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
             name: 'Panel de Control',
             img: '/static/img/icons-sidebar/controlpanel.svg',
             type: 'controlpanel',
             routeName: 'control-panel',
             submenu: [
               {
-                name: 'Checklists',
-                type: 'control-checklists',
-                route: {name: 'control-checklists'},
-                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
-              },
-              {
-                name: 'Partes',
-                type: 'control-supervisionparts',
-                route: {name: 'control-supervisionparts'},
-                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
-              },
-              {
                 name: 'Novedades',
                 type: 'control-novedades',
                 route: {name: 'control-novedades'},
+                can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
+              },
+              {
+                name: 'Novedades Archivadas',
+                type: 'control-novedades',
+                route: {name: 'control-novedades-archivadas'},
                 can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
               },
               {
@@ -154,26 +162,92 @@
             can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
           },
           {
-            name: 'Checklist',
+            name: 'Control Linea 2',
+            img: '/static/img/icons-sidebar/controlpanel.svg',
+            type: 'controlpanellinea2',
+            routeName: 'control-panel-linea2',
+            submenu: [
+              {
+                name: 'Checklists L2',
+                type: 'control-checklists',
+                route: {name: 'control-checklists'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes L2',
+                type: 'control-supervisionparts',
+                route: {name: 'control-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Control L2',
+                type: 'control-resume-supervisionparts',
+                route: {name: 'control-resume-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Totales L2',
+                type: 'control-totales-supervisionparts',
+                route: {name: 'control-totales-supervisionparts'},
+                can: authorize(ROLES.OFICIALES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              }
+            ],
+            can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
+          },
+          {
+            name: 'Control Linea 3',
+            img: '/static/img/icons-sidebar/controlpanel.svg',
+            type: 'controlpanellinea3',
+            routeName: 'control-panel-linea3',
+            submenu: [
+              {
+                name: 'Checklists L3',
+                type: 'control-checklists-LTres',
+                route: {name: 'control-checklists-LTres'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes L3',
+                type: 'control-supervisionparts-LTres',
+                route: {name: 'control-supervisionparts-LTres'},
+                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Control L3',
+                type: 'control-resume-supervisionparts-LTres',
+                route: {name: 'control-resume-supervisionparts-LTres'},
+                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Partes Totales L3',
+                type: 'control-totales-supervisionparts-LTres',
+                route: {name: 'control-totales-supervisionparts-LTres'},
+                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              }
+            ],
+            can: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.ADMINISTRACION)
+          },
+          {
+            name: 'Checklist L2',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'checklist',
             can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'checklistsIndex',
             submenu: [
               {
-                name: 'Extrusora',
+                name: 'Extrusora L2',
                 type: 'extrusora',
                 route: {name: 'checklist', params: {sector: 'EXTRUSORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Apiladora',
+                name: 'Apiladora L2',
                 type: 'apiladora',
                 route: {name: 'checklist', params: {sector: 'APILADORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Desapiladora',
+                name: 'Desapiladora L2',
                 type: 'desapiladora',
                 route: {name: 'checklist', params: {sector: 'DESAPILADORA'}},
                 can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
@@ -181,29 +255,83 @@
             ]
           },
           {
-            name: 'Partes',
+            name: 'Partes L2',
             img: '/static/img/icons-sidebar/checklist.svg',
             type: 'checklist',
             can: authorize(ROLES.OFICIALES, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
             routeName: 'supervisionpartsIndex',
             submenu: [
               {
-                name: 'Extrusora',
+                name: 'Extrusora L2',
                 type: 'extrusora',
                 route: {name: 'supervisionpart', params: {sector: 'EXTRUSORA'}},
                 can: authorize(ROLES.OFICIAL_EXTRUSORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Apiladora',
+                name: 'Apiladora L2',
                 type: 'apiladora',
                 route: {name: 'supervisionpart', params: {sector: 'APILADORA'}},
                 can: authorize(ROLES.OFICIAL_APILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               },
               {
-                name: 'Desapiladora',
+                name: 'Desapiladora L2',
                 type: 'desapiladora',
                 route: {name: 'supervisionpart', params: {sector: 'DESAPILADORA'}},
                 can: authorize(ROLES.OFICIAL_DESAPILADORA, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              }
+            ]
+          },
+          {
+            name: 'Checklist L3',
+            img: '/static/img/icons-sidebar/checklist.svg',
+            type: 'checklistsL3',
+            can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
+            routeName: 'checklistsL3Index',
+            submenu: [
+              {
+                name: 'Extrusora L3',
+                type: 'extrusora',
+                route: {name: 'checklistL3', params: {sector: 'EXTRUSORA'}},
+                can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              },
+              {
+                name: 'Apiladora L3',
+                type: 'apiladora',
+                route: {name: 'checklistL3', params: {sector: 'APILADORA'}},
+                can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              },
+              {
+                name: 'Desapiladora L3',
+                type: 'desapiladora',
+                route: {name: 'checklistL3', params: {sector: 'DESAPILADORA'}},
+                can: authorize(ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              }
+            ]
+          },
+          {
+            name: 'Partes L3',
+            img: '/static/img/icons-sidebar/checklist.svg',
+            type: 'supervisionpartsL3',
+            can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION),
+            routeName: 'supervisionpartsL3Index',
+            submenu: [
+              {
+                name: 'Extrusora L3',
+                type: 'extrusora',
+                route: {name: 'supervisionpart-linea3', params: {sector: 'EXTRUSORA'}},
+                can: authorize(ROLES.OFICIAL_EXTRUSORA_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              },
+              {
+                name: 'Apiladora L3',
+                type: 'apiladora',
+                route: {name: 'supervisionpart-linea3', params: {sector: 'APILADORA'}},
+                can: authorize(ROLES.OFICIAL_APILADORA_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
+              },
+              {
+                name: 'Desapiladora L3',
+                type: 'desapiladora',
+                route: {name: 'supervisionpart-linea3', params: {sector: 'DESAPILADORA'}},
+                can: authorize(ROLES.OFICIAL_DESAPILADORA_L3, ROLES.JEFE_LINEA, ROLES.JEFE_PLANTA, ROLES.SUPERVISOR_PRODUCCION)
               }
             ]
           },
@@ -238,6 +366,51 @@
             ]
           },
           {
+            name: 'Reporte de Fallas',
+            img: '/static/img/icons-sidebar/news.svg',
+            type: 'bugnews',
+            can: authorize(ROLES.SUPERVISORES, ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH),
+            routeName: 'bug-report-index',
+            submenu: [
+              {
+                name: 'Creacion',
+                type: 'bug-report-creation',
+                route: {name: 'bug-report-creation'},
+                can: authorize(ROLES.SUPERVISORES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Resumen de Fallas',
+                type: 'bug-report-history',
+                route: {name: 'bug-report-history'},
+                can: authorize(ROLES.SUPERVISORES, ROLES.MECANICO_ELECTRICO, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Solicitudes Reparacion',
+                type: 'bug-report-repair',
+                route: {name: 'bug-report-solicitudes-reparacion'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Orden de Trabajo',
+                type: 'bug-report-jobs-request',
+                route: {name: 'bug-report-jobs-request'},
+                can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Historial de Fallas',
+                type: 'bug-report-resume',
+                route: {name: 'bug-report-resume'},
+                can: authorize(ROLES.SUPERVISORES, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
+              },
+              {
+                name: 'Configuracion de Fallas',
+                type: 'bug-report-config',
+                route: {name: 'bug-report-config'},
+                can: authorize(ROLES.JEFE_LINEA, ROLES.RRHH)
+              }
+            ]
+          },
+          {
             name: 'Reuniones',
             img: '/static/img/icons-sidebar/staffRequests.svg',
             type: 'meeting',
@@ -263,6 +436,27 @@
                 img: '/static/img/icons-sidebar/staffRequests.svg',
                 type: 'meeting-history',
                 route: {name: 'meeting-history'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Control',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-manager',
+                route: {name: 'meeting-manager'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Sectores',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-sector',
+                route: {name: 'meeting-sector'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              },
+              {
+                name: 'Calendario',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'meeting-calendar',
+                route: {name: 'meeting-calendar'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
               }
             ]

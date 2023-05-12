@@ -182,7 +182,7 @@ const supervisionpartSchema = new Schema({
   totalUnitsMachine: {
     type: Number,
     default: 0
-  },
+  }, 
   totalDownloadedEstanterias: {
     type: Number,
     default: 0
@@ -216,6 +216,70 @@ const supervisionpartSchema = new Schema({
     default: 0
   },
   totalVacuum: {
+    type: Number,
+    default: 0
+  },
+  countVagon: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_8: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_12_6A: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_12_8A: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_18: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_P12: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_P18: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_L11: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_C: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM20: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM27: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM24 :{
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DM4: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DIN18: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_DIN27: {
+    type: Number,
+    default: 0
+  },
+  total_MOLDE_COLUMNA: {
     type: Number,
     default: 0
   },
@@ -274,8 +338,30 @@ supervisionpartSchema.statics.getSupervisionPartForDayAndSector = function (date
     .populate('hours.comments.supervisor', ['name', 'lastname'])
     .populate('observations.supervisor', ['name', 'lastname'])
     .populate('hours.stoppings.supervisor', ['name', 'lastname'])
+    //.sort({created_at: 1})
+    .lean()
+    
+}
+
+supervisionpartSchema.statics.getSupervisionPartForDay = function (date) {
+  // we can't search by date. We must query between beginning of the day and the end of the day
+  const beginning = new Date(date.getTime())
+  // Adding 24 hs
+  const ending = new Date(beginning.getTime() + (24 * 60 * 60 * 1000))
+  return this.find({date: {$gte: beginning, $lt: ending}})
+    .populate({path: 'hours.hour', model: 'Hour'})
+    .populate({path: 'hours.stoppings.fail', model: 'Fail'})
+    //.populate('checks.comments.supervisor', ['name', 'lastname'])
+    .populate('hours.hour', ['text','ordertime'])
+    .populate('supervisorShift', ['name', 'lastname'])
+    .populate('hours.supervisor', ['name', 'lastname'])
+    .populate('creator', ['name', 'lastname'])
+    .populate('hours.comments.supervisor', ['name', 'lastname'])
+    .populate('observations.supervisor', ['name', 'lastname'])
+    .populate('hours.stoppings.supervisor', ['name', 'lastname'])
     .lean()
 }
+
 // mongoose.set('debug', true)
 const SupervisionpartModel = mongoose.model('Supervisionpart', supervisionpartSchema)
 

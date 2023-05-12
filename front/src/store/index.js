@@ -5,7 +5,9 @@ import notifications from './modules/notifications'
 import catalog from './modules/catalog'
 import requests from './modules/requests'
 import checklists from './modules/checklists'
+import checklistsLTres from './modules/checklistsLTres'
 import supervisionparts from './modules/supervisionparts'
+import supervisionpartsLTres from './modules/supervisionpartsLTres'
 import collaborators from './modules/collaborators'
 import users from './modules/users'
 import news from './modules/news'
@@ -19,6 +21,7 @@ import sanctions from './modules/sanctions'
 import occurrences from './modules/occurrences'
 import fabric from './modules/fabric'
 import meetings from './modules/meetings'
+import bugReport from './modules/bugReport'
 
 Vue.use(Vuex)
 
@@ -32,7 +35,9 @@ export const modules = {
   catalog,
   requests,
   checklists,
+  checklistsLTres,
   supervisionparts,
+  supervisionpartsLTres,
   collaborators,
   users,
   tasksQueue,
@@ -45,7 +50,8 @@ export const modules = {
   sanctions,
   occurrences,
   fabric,
-  meetings
+  meetings,
+  bugReport
 }
 
 const actions = {

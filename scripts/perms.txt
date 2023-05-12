@@ -1,0 +1,167 @@
+db.createCollection("perms", { capped : true, size : 5242222, max : 5000});
+db.getCollection('perms').insertMany([ { "code" : "Creación-de-Anuncios","description":"Creación de Anuncios"}
+  ,{ "code" : "Borrado-de-Anuncios","description":"Borrado de Anuncios"}
+  ,{ "code" : "Creación-de-Area","description":"Creación de Area"}
+  ,{ "code" : "Listar-Areas","description":"Listar Areas"}
+  ,{ "code" : "Borrado-de-Area","description":"Borrado de Area"}
+  ,{ "code" : "Actualizar-Area","description":"Actualizar Area"}
+  ,{ "code" : "Crear-Falla","description":"Crear Falla"}
+  ,{ "code" : "Actualizar-Falla","description":"Actualizar Falla"}
+  ,{ "code" : "Borrar-Falla","description":"Borrar Falla"}
+  ,{ "code" : "Aprobar-Reporte-de-Falla","description":"Aprobar Reporte de Falla"}
+  ,{ "code" : "Listar-Catalogo-Pañol","description":"Listar Catalogo Pañol"}
+  ,{ "code" : "Crear-Catalogo-Pañol","description":"Crear Catalogo Pañol"}
+  ,{ "code" : "Actualizar-Catalogo-Pañol","description":"Actualizar Catalogo Pañol"}
+  ,{ "code" : "Borrar-Catalogo-Pañol","description":"Borrar Catalogo Pañol"}
+  ,{ "code" : "Agregar-Check-[Checklist]","description":"Agregar Check [Checklist]"}
+  ,{ "code" : "Agregar-Comentario-[Checklist]","description":"Agregar Comentario [Checklist]"}
+  ,{ "code" : "Agregar-Observacion-[Checklist]","description":"Agregar Observacion [Checklist]"}
+  ,{ "code" : "Listar-actual-[Checklist]","description":"Listar actual [Checklist]"}
+  ,{ "code" : "Lista-de-Fechas-[Checklist]","description":"Lista de Fechas [Checklist]"}
+  ,{ "code" : "Busca-por-ID-[Checklist]","description":"Busca por ID [Checklist]"}
+  ,{ "code" : "Busca-por-ID-Revisión-[Checklist]","description":"Busca por ID Revisión [Checklist]"}
+  ,{ "code" : "Busca-por-ID-Correccion-[Checklist]","description":"Busca por ID Correccion [Checklist]"}
+  ,{ "code" : "Resumen-[Checklist]","description":"Resumen [Checklist]"}
+  ,{ "code" : "Buscar-actual-Sector-[Checklist]","description":"Buscar actual Sector [Checklist]"}
+  ,{ "code" : "Comparativo-Sector-[Checklist]","description":"Comparativo Sector [Checklist]"}
+  ,{ "code" : "Sector-en-PDF-[Checklist]","description":"Sector en PDF [Checklist]"}
+  ,{ "code" : "Actuales-por-Sector-[Checklist]","description":"Actuales por Sector [Checklist]"}
+  ,{ "code" : "Agregar-Check-[Checklist-L3]","description":"Agregar Check [Checklist L3]"}
+  ,{ "code" : "Agregar-Comentario-[[Checklist-L3]]","description":"Agregar Comentario [[Checklist L3]]"}
+  ,{ "code" : "Agregar-Observacion-[Checklist]","description":"Agregar Observacion [Checklist]"}
+  ,{ "code" : "Listar-actual-[[Checklist-L3]]","description":"Listar actual [[Checklist L3]]"}
+  ,{ "code" : "Lista-de-Fechas-[[Checklist-L3]]","description":"Lista de Fechas [[Checklist L3]]"}
+  ,{ "code" : "Busca-por-ID-[[Checklist-L3]]","description":"Busca por ID [[Checklist L3]]"}
+  ,{ "code" : "Busca-por-ID-Revisión-[[Checklist-L3]]","description":"Busca por ID Revisión [[Checklist L3]]"}
+  ,{ "code" : "Busca-por-ID-Correccion-[[Checklist-L3]]","description":"Busca por ID Correccion [[Checklist L3]]"}
+  ,{ "code" : "Resumen-[[Checklist-L3]]","description":"Resumen [[Checklist L3]]"}
+  ,{ "code" : "Buscar-actual-Sector-[[Checklist-L3]]","description":"Buscar actual Sector [[Checklist L3]]"}
+  ,{ "code" : "Comparativo-Sector-[[Checklist-L3]]","description":"Comparativo Sector [[Checklist L3]]"}
+  ,{ "code" : "Sector-en-PDF-[[Checklist-L3]]","description":"Sector en PDF [[Checklist L3]]"}
+  ,{ "code" : "Actuales-por-Sector-[[Checklist-L3]]","description":"Actuales por Sector [[Checklist L3]]"}
+  ,{ "code" : "Listar-Eventos-Linea-de-Tiempo","description":"Listar Eventos Linea de Tiempo"}
+  ,{ "code" : "Listar-Archivados-Linea-de-Tiempo","description":"Listar Archivados Linea de Tiempo"}
+  ,{ "code" : "Archivar-Evento-Linea-de-Tiempo","description":"Archivar Evento Linea de Tiempo"}
+  ,{ "code" : "DesArchivar-Evento-Linea-de-Tiempo","description":"DesArchivar Evento Linea de Tiempo"}
+  ,{ "code" : "Borrar-Evento-Linea-de-Tiempo","description":"Borrar Evento Linea de Tiempo"}
+  ,{ "code" : "Crear-Linea","description":"Crear Linea "}
+  ,{ "code" : "Listar-Lineas","description":"Listar Lineas"}
+  ,{ "code" : "Borrar-Linea","description":"Borrar Linea "}
+  ,{ "code" : "Actualizar-Linea","description":"Actualizar Linea "}
+  ,{ "code" : "Listar-Pendientes-Novedades","description":"Listar Pendientes Novedades"}
+  ,{ "code" : "Listar-Resueltas-Novedades","description":"Listar Resueltas Novedades"}
+  ,{ "code" : "Crear-Novedades","description":"Crear Novedades"}
+  ,{ "code" : "Listar-No-Archivadas-Novedades","description":"Listar No Archivadas Novedades"}
+  ,{ "code" : "Buscar-por-ID-Novedad","description":"Buscar por ID Novedad"}
+  ,{ "code" : "Buscar-Archivada-por-ID-Novedad","description":"Buscar Archivada por ID Novedad"}
+  ,{ "code" : "Cancelar-por-ID-Novedad","description":"Cancelar por ID Novedad"}
+  ,{ "code" : "Resolver-por-ID-Novedad","description":"Resolver por ID Novedad"}
+  ,{ "code" : "PDF-por-ID-Novedad","description":"PDF por ID Novedad"}
+  ,{ "code" : "Listar-Resueltas-por-mi-Novedades","description":"Listar Resueltas por mi Novedades"}
+  ,{ "code" : "Listar-Pendientes-por-mi-Novedades","description":"Listar Pendientes por mi Novedades"}
+  ,{ "code" : "Listar-hechas-a-mi-Novedades","description":"Listar hechas a mi Novedades"}
+  ,{ "code" : "Actualizar-Novedad","description":"Actualizar Novedad"}
+  ,{ "code" : "Estadisticas-por-ID-Novedad","description":"Estadisticas por ID Novedad"}
+  ,{ "code" : "Crear-Posicion","description":"Crear Posicion"}
+  ,{ "code" : "Listar-Posicion","description":"Listar Posicion"}
+  ,{ "code" : "Borrar-Posicion","description":"Borrar Posicion"}
+  ,{ "code" : "Actualizar-Posicion","description":"Actualizar Posicion"}
+  ,{ "code" : "Reporte-colaboradores-por-ID","description":"Reporte colaboradores por ID"}
+  ,{ "code" : "Reporte-personal-por-Day","description":"Reporte personal por Day"}
+  ,{ "code" : "Reporte-todos","description":"Reporte todos"}
+  ,{ "code" : "Crear-Sancion","description":"Crear Sancion"}
+  ,{ "code" : "PDF-por-ID-Sancion","description":"PDF por ID Sancion"}
+  ,{ "code" : "Buscar-por-ID-Sancion","description":"Buscar por ID Sancion"}
+  ,{ "code" : "Listar-Sancion","description":"Listar Sancion"}
+  ,{ "code" : "Listar-mis-Sanciones","description":"Listar mis Sanciones"}
+  ,{ "code" : "Borrar-Sancion","description":"Borrar Sancion"}
+  ,{ "code" : "Actualizar-Sancion","description":"Actualizar Sancion"}
+  ,{ "code" : "Crear-Sector","description":"Crear Sector"}
+  ,{ "code" : "Listar-Sector","description":"Listar Sector"}
+  ,{ "code" : "Borrar-Sector","description":"Borrar Sector"}
+  ,{ "code" : "Actualizar-Sector","description":"Actualizar Sector"}
+  ,{ "code" : "Listar-Elemento-Seguridad","description":"Listar Elemento Seguridad"}
+  ,{ "code" : "Pedido-por-ID-Elemento-Seguridad","description":"Pedido por ID Elemento Seguridad"}
+  ,{ "code" : "Listar-pendiente-resolucion-Elemento-Seguridad-","description":"Listar pendiente resolucion Elemento Seguridad "}
+  ,{ "code" : "Listar-Guardados-Elemento-Seguridad","description":"Listar Guardados Elemento Seguridad"}
+  ,{ "code" : "PDF-por-ID-Elemento-Seguridad","description":"PDF por ID Elemento Seguridad"}
+  ,{ "code" : "Listar-Entregados-Elemento-Seguridad","description":"Listar Entregados Elemento Seguridad"}
+  ,{ "code" : "Listar-activos-por-mi-Elemento-Seguridad","description":"Listar activos por mi Elemento Seguridad"}
+  ,{ "code" : "Listar-historicos-por-mi-Elemento-Seguridad","description":"Listar historicos por mi Elemento Seguridad"}
+  ,{ "code" : "Listar-dados-a-mi-Elemento-Seguridad","description":"Listar dados a mi Elemento Seguridad"}
+  ,{ "code" : "Listar-activos-Elemento-Seguridad","description":"Listar activos Elemento Seguridad"}
+  ,{ "code" : "Entregado-por-ID-Elemento-Seguridad","description":"Entregado por ID Elemento Seguridad"}
+  ,{ "code" : "Actualizar-por-ID-Elemento-Seguridad","description":"Actualizar por ID Elemento Seguridad"}
+  ,{ "code" : "Crear-pedido-Elemento-Seguridad","description":"Crear pedido Elemento Seguridad"}
+  ,{ "code" : "Aprobados-por-ID-Elemento-Seguridad","description":"Aprobados por ID Elemento Seguridad"}
+  ,{ "code" : "Crear-Cambio-horario","description":"Crear Cambio horario"}
+  ,{ "code" : "Listar-Cambio-horario","description":"Listar Cambio horario"}
+  ,{ "code" : "Borrar-Cambio-horario","description":"Borrar Cambio horario"}
+  ,{ "code" : "Actualizar-Cambio-horario","description":"Actualizar Cambio horario"}
+  ,{ "code" : "Crear-Novedad-Personal","description":"Crear Novedad Personal"}
+  ,{ "code" : "Agregar-justificacion-Novedad-Personal","description":"Agregar justificacion Novedad Personal"}
+  ,{ "code" : "Actualizar-Novedad-Personal","description":"Actualizar Novedad Personal"}
+  ,{ "code" : "Listar-sin-Justificacion-Novedad-Personal","description":"Listar sin Justificacion Novedad Personal"}
+  ,{ "code" : "Listar-finalizadas-Novedad-Personal","description":"Listar finalizadas Novedad Personal"}
+  ,{ "code" : "PDF-por-ID-Novedad-Personal","description":"PDF por ID Novedad Personal"}
+  ,{ "code" : "Listar-para-mi-Novedad-Personal","description":"Listar para mi Novedad Personal"}
+  ,{ "code" : "Carga-licencia-Personal","description":"Carga licencia Personal"}
+  ,{ "code" : "Edita-licencia-Personal","description":"Edita licencia Personal"}
+  ,{ "code" : "Carga-horas-extra-Personal","description":"Carga horas extra Personal"}
+  ,{ "code" : "Carga-cambio-turno-Personal","description":"Carga cambio turno Personal"}
+  ,{ "code" : "Carga-salida-anticipada-Personal","description":"Carga salida anticipada Personal"}
+  ,{ "code" : "Aprueba-hora-extra-Personal","description":"Aprueba hora extra Personal"}
+  ,{ "code" : "Aprueba-cambio-turno-Personal","description":"Aprueba cambio turno Personal"}
+  ,{ "code" : "Aprueba-salida-anticipada-Personal","description":"Aprueba salida anticipada Personal"}
+  ,{ "code" : "Lista-pedidos-Personal","description":"Lista pedidos Personal"}
+  ,{ "code" : "Lista-pedidos-resueltos-Personal","description":"Lista pedidos resueltos Personal"}
+  ,{ "code" : "Lista-pedidos-pendientes-Personal","description":"Lista pedidos pendientes Personal"}
+  ,{ "code" : "Lista-pedidos-mios-pendientes-Personal","description":"Lista pedidos mios pendientes Personal"}
+  ,{ "code" : "Lista-pedidos-mios-resueltos-Personal","description":"Lista pedidos mios resueltos Personal"}
+  ,{ "code" : "Lista-pedidos-a-mi-de-Personal","description":"Lista pedidos a mi de Personal"}
+  ,{ "code" : "Archiva-Horas-Extras-de-Personal","description":"Archiva Horas Extras de Personal"}
+  ,{ "code" : "Archiva-Cambio-turno-de-Personal","description":"Archiva Cambio turno de Personal"}
+  ,{ "code" : "Archiva-Salida-Anticipada-de-Personal","description":"Archiva Salida Anticipada de Personal"}
+  ,{ "code" : "Lista-no-archivadas-de-Personal","description":"Lista no archivadas de Personal"}
+  ,{ "code" : "PDF-de-horas-extras-de-Personal","description":"PDF de horas extras de Personal"}
+  ,{ "code" : "PDF-de-cambio-de-turno-de-Personal","description":"PDF de cambio de turno de Personal"}
+  ,{ "code" : "PDF-de-salida-temprano-de-Personal","description":"PDF de salida temprano de Personal"}
+  ,{ "code" : "Ver-Novedades","description":"Ver Novedades"}
+  ,{ "code" : "Cancelar-Novedad","description":"Cancelar Novedad"}
+  ,{ "code" : "Partes-de-Supervision-(editar)","description":"Partes de Supervision (editar)"}
+  ,{ "code" : "Partes-de-Supervision-(ver)","description":"Partes de Supervision (ver)"}
+  ,{ "code" : "Partes-de-Supervision-(excel)","description":"Partes de Supervision (excel)"}
+  ,{ "code" : "Partes-de-Supervision-(sector)","description":"Partes de Supervision (sector)"}
+  ,{ "code" : "control-checklists","description":"Control Checklists [MENU]"}
+  ,{ "code" : "control-supervisionparts","description":"Control Partes [MENU]"}
+  ,{ "code" : "control-novedades","description":"Control Novedades [MENU]"}
+  ,{ "code" : "control-personal","description":"Control Personal [MENU]"}
+  ,{ "code" : "control-epp","description":"Control Solicitudes de epp [MENU] "}
+  ,{ "code" : "control-staff-request","description":"Solicitudes de epp [MENU]"}
+  ,{ "code" : "control-ocurrence","description":"Acontecimientos [MENU]"}
+  ,{ "code" : "fabric-management","description":"Config. de personal [MENU]"}
+  ,{ "code" : "checklistsIndex","description":"Checklist [MENU]"}
+  ,{ "code" : "checklist-sector-EXTRUSORA","description":"Extrusora [MENU]"}
+  ,{ "code" : "checklist-sector-APILADORA","description":"Apiladora [MENU]"}
+  ,{ "code" : "checklist-sector-DESAPILADORA","description":"Desapiladora [MENU]"}
+  ,{ "code" : "supervisionpartsIndex","description":"Partes [MENU]"}
+  ,{ "code" : "supervisionpart-sector-EXTRUSORA","description":"Parte Extrusora [MENU]"}
+  ,{ "code" : "supervisionpar-sector-APILADORA","description":"Parte Apiladora [MENU]"}
+  ,{ "code" : "supervisionpart-sector-DESAPILADORA","description":"Parte Desapiladora [MENU]"}
+  ,{ "code" : "news","description":"Novedades"}
+  ,{ "code" : "staff-request","description":"Solicitudes de epp [MENU]"}
+  ,{ "code" : "control-staff-request","description":"Mis solicitudes [MENU]"}
+  ,{ "code" : "control-ocurrence","description":"Mis acontecimientos [MENU]"}
+  ,{ "code" : "meeting-index","description":"Reuniones [MENU]"}
+  ,{ "code" : "meeting-creation","description":"Creacion Reuniones [MENU]"}
+  ,{ "code" : "meeting-list","description":"Reuniones [MENU]"}
+  ,{ "code" : "meeting-history","description":"Reuniones [MENU]"}
+  ,{ "code" : "epp","description":"EPP [MENU]"}
+  ,{ "code" : "epp-my-request","description":"Mis EPP [MENU]"}
+  ,{ "code" : "panol-request","description":"Pañol [MENU]"}
+  ,{ "code" : "panol-history","description":"Pañol [MENU]"}
+  ,{ "code" : "panol-catalogo","description":"Pañol [MENU]"}
+  ,{ "code" : "personal-staff-request","description":"Personal [MENU]"}
+  ,{ "code" : "personal-ocurrence","description":"Personal [MENU]"}
+  ,{ "code" : "ocurrence-creation","description":"Seguridad [MENU]"}
+  ,{ "code" : "control-ocurrence","description":"Seguridad [MENU]"}]);

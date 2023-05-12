@@ -16,6 +16,7 @@
       display: none;
     }
   }
+    //::-webkit-scrollbar:vertical 
 
   .card {
     flex: 0 0 auto;

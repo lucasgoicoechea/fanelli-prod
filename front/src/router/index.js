@@ -26,16 +26,41 @@ import ChecklistsList from '@/components/checklists/ChecklistsList'
 import ChecklistHistory from '@/components/checklists/ChecklistHistory'
 import ChecklistForm from '@/components/checklists/ChecklistForm'
 import ChecklistsControl from '@/components/checklists/ChecklistsControl'
+// Checklist
+import ChecklistsL3Index from '@/components/checklistsLTres/ChecklistsIndex'
+import ChecklistsL3List from '@/components/checklistsLTres/ChecklistsList'
+import ChecklistL3History from '@/components/checklistsLTres/ChecklistHistory'
+import ChecklistL3Form from '@/components/checklistsLTres/ChecklistForm'
+import ChecklistsL3Control from '@/components/checklistsLTres/ChecklistsControl'
 // Supervisionparts
 import SupervisionpartIndex from '@/components/supervisionParts/SupervisionpartIndex'
 import SupervisionpartList from '@/components/supervisionParts/SupervisionpartList'
 import SupervisionpartHistory from '@/components/supervisionParts/SupervisionpartHistory'
 import SupervisionpartForm from '@/components/supervisionParts/SupervisionpartForm'
 import SupervisionpartsControl from '@/components/supervisionParts/SupervisionpartControl'
+import SupervisionpartTotal from '@/components/supervisionParts/SupervisionpartTotal'
+import SupervisionpartTotales from '@/components/supervisionParts/SupervisionpartTotales'
+import SupervisionpartsResumen from '@/components/supervisionParts/SupervisionpartResumen'
+import SupervisionpartResume from '@/components/supervisionParts/SupervisionpartResume'
+import SupervisionpartResumeHistoryTotal from '@/components/supervisionParts/SupervisionpartResumeHistoryTotal'
+// Supervisionparts
+import SupervisionpartL3Index from '@/components/supervisionPartsL3/SupervisionpartIndex'
+import SupervisionpartL3List from '@/components/supervisionPartsL3/SupervisionpartList'
+import SupervisionpartL3History from '@/components/supervisionPartsL3/SupervisionpartHistory'
+import SupervisionpartL3Form from '@/components/supervisionPartsL3/SupervisionpartForm'
+import SupervisionpartsL3Control from '@/components/supervisionPartsL3/SupervisionpartControl'
+import SupervisionpartL3Total from '@/components/supervisionPartsL3/SupervisionpartTotal'
+import SupervisionpartL3Totales from '@/components/supervisionPartsL3/SupervisionpartTotales'
+import SupervisionpartsL3Resumen from '@/components/supervisionPartsL3/SupervisionpartResumen'
+import SupervisionpartL3Resume from '@/components/supervisionPartsL3/SupervisionpartResume'
+import SupervisionpartResumeHistoryL3Total from '@/components/supervisionPartsL3/SupervisionpartResumeHistoryTotal'
 // Panel de control
 import ControlPanel from '@/components/control/ControlPanel'
 import ControlPanelIndex from '@/components/control/ControlPanelIndex'
+import ControlL2Index from '@/components/control/ControlL2Index'
+import ControlL3Index from '@/components/control/ControlL3Index'
 import EventsIndex from '@/components/control/events/EventsIndex'
+import EventsIndexArchivadas from '@/components/control/events/EventsIndexArchivadas'
 import NewsKanban from '@/components/news/NewsKanban'
 import StaffRequestsControlIndex from '@/components/control/staffRequests/Index'
 
@@ -95,6 +120,17 @@ import OccurrenceEdition from '@/components/occurrences/OccurrenceEdition'
 // Administracion fabrica
 import FabricManagement from '@/components/fabric/FabricManagement'
 
+// Reporte de fallas
+import BugReportIndex from '@/components/fails/BugReportIndex'
+import BugReportCreation from '@/components/fails/BugReportCreation'
+import BugReportHistory from '@/components/fails/BugReportHistory'
+import BugReportResume from '@/components/fails/BugReportResume'
+import BugReportView from '@/components/fails/BugReportView'
+import BugReportVisualization from '@/components/fails/BugReportVisualization'
+import BugReportEdit from '@/components/fails/BugReportEdit'
+import BugReportHistoryPass from '@/components/fails/BugReportHistoryPass'
+import BugReportJobsRequest from '@/components/fails/BugReportJobsRequest'
+
 // Reuniones
 import MeetingIndex from '@/components/meeting/MeetingIndex'
 import MeetingCreation from '@/components/meeting/MeetingCreation'
@@ -102,6 +138,10 @@ import MeetingEdition from '@/components/meeting/MeetingEdition'
 import MeetingList from '@/components/meeting/MeetingList'
 import MeetingHistory from '@/components/meeting/MeetingHistory'
 import MeetingVisualization from '@/components/meeting/MeetingVisualization'
+import MeetingManager from '@/components/meeting/MeetingManager'
+import MeetingSector from '@/components/meeting/MeetingSector'
+import MeetingCalendar from '@/components/meeting/MeetingCalendar'
+import treeFailsManagement from '@/components/fails/treefails/TreeFailsManagement'
 
 const { ROLES } = Const
 
@@ -277,9 +317,9 @@ const router = new Router({
         {
           path: 'control',
           component: ControlPanel,
-          name: 'control-panel',
+          name: 'control-panel-linea3',
           redirect: {
-            name: 'control-panel-index'
+            name: 'control-panel-index-linea3'
           },
           meta: {
             permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SUPERVISORES),
@@ -288,8 +328,67 @@ const router = new Router({
           children: [
             {
               path: '',
-              name: 'control-panel-index',
-              component: ControlPanelIndex,
+              name: 'control-panel-index-linea3',
+              component: ControlL3Index,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'checklistsLTres',
+              name: 'control-checklists-LTres',
+              component: ChecklistsL3Control,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionpartsLTres',
+              name: 'control-supervisionparts-LTres',
+              component: SupervisionpartsL3Control,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-resume-LTres',
+              name: 'control-resume-supervisionparts-LTres',
+              component: SupervisionpartsL3Resumen,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-totals-LTres',
+              name: 'control-totales-supervisionparts-LTres',
+              component: SupervisionpartL3Totales,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'control',
+          component: ControlPanel,
+          name: 'control-panel-linea2',
+          redirect: {
+            name: 'control-panel-index-linea2'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SUPERVISORES),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'control-panel-index-linea2',
+              component: ControlL2Index,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
                 fail: '/error'
@@ -314,9 +413,77 @@ const router = new Router({
               }
             },
             {
+              path: 'supervisionparts-resume',
+              name: 'control-resume-supervisionparts',
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-totals',
+              name: 'control-totales-supervisionparts',
+              component: SupervisionpartTotales,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts',
+              name: 'control-supervisionparts-historico',
+              component: SupervisionpartsControl,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-resume',
+              name: 'control-oficial-control',
+              component: SupervisionpartsResumen,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'control',
+          component: ControlPanel,
+          name: 'control-panel',
+          redirect: {
+            name: 'control-panel-index'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SUPERVISORES),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'control-panel-index',
+              component: ControlPanelIndex,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
+                fail: '/error'
+              }
+            },
+            {
               path: 'novedades',
               name: 'control-novedades',
               component: EventsIndex,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'novedadesas',
+              name: 'control-novedades-archivadas',
+              component: EventsIndexArchivadas,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.RRHH),
                 fail: '/error'
@@ -492,7 +659,34 @@ const router = new Router({
               name: 'supervisionpartsHistory',
               component: SupervisionpartHistory,
               meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume-total/:date',
+              name: 'supervisionpartResumeHistoryTotal',
+              component: SupervisionpartResumeHistoryTotal,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-totales-total/:date',
+              name: 'supervisionpartTotalesView',
+              component: SupervisionpartTotal,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume/:date',
+              name: 'supervisionpartsResumen',
+              component: SupervisionpartResume,
+              meta: {
+                permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             },
@@ -502,6 +696,115 @@ const router = new Router({
               component: SupervisionpartForm,
               meta: {
                 permission: authorize(ROLES.OFICIALES, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'checkL3',
+          component: ChecklistsL3Index,
+          name: 'checklistsL3Index',
+          redirect: {
+            name: 'checklistsL3'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'checklistsL3',
+              component: ChecklistsL3List,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial/:date',
+              name: 'checklistsL3History',
+              component: ChecklistL3History,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':sector',
+              name: 'checklistL3',
+              component: ChecklistL3Form,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'supervisionpartL3',
+          component: SupervisionpartL3Index,
+          name: 'supervisionpartsL3Index',
+          redirect: {
+            name: 'supervisionpartsL3'
+          },
+          meta: {
+            permission: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'supervisionpartsL3',
+              component: SupervisionpartL3List,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-linea3/:date',
+              name: 'supervisionpartsHistory-linea3',
+              component: SupervisionpartL3History,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume-total-linea3/:date',
+              name: 'supervisionpartResumeHistoryTotal-linea3',
+              component: SupervisionpartResumeHistoryL3Total,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-totales-total-linea3/:date',
+              name: 'supervisionpartTotalesView-linea3',
+              component: SupervisionpartL3Total,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-resume-linea3/:date',
+              name: 'supervisionpartsResumen-linea3',
+              component: SupervisionpartL3Resume,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':sector',
+              name: 'supervisionpart-linea3',
+              component: SupervisionpartL3Form,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.SUPERVISOR_PRODUCCION),
                 fail: '/error'
               }
             }
@@ -788,6 +1091,102 @@ const router = new Router({
           }
         },
         {
+          path: 'fallas',
+          component: BugReportIndex,
+          name: 'bug-report-index',
+          redirect: {
+            name: 'bug-report-history'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: 'creacion',
+              name: 'bug-report-creation',
+              component: BugReportCreation,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'historial-fallas',
+              name: 'bug-report-history',
+              component: BugReportHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'posibles-solicitudes-reparacion',
+              name: 'bug-report-solicitudes-reparacion',
+              component: BugReportHistoryPass,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'solicitudes-trabajo',
+              name: 'bug-report-jobs-request',
+              component: BugReportJobsRequest,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'resumen-fallas',
+              name: 'bug-report-resume',
+              component: BugReportResume,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.MECANICO_ELECTRICO, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'bug-report-config',
+              name: 'bug-report-config',
+              component: treeFailsManagement,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':id',
+              name: 'bugReport-request',
+              component: BugReportVisualization,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':id/edicion',
+              name: 'bugReport-edition',
+              component: BugReportView,
+              props: { edition: true },
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'edicion/:id',
+              name: 'bug-report-edit',
+              component: BugReportEdit,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
           path: 'reuniones',
           component: MeetingIndex,
           name: 'meeting-index',
@@ -812,6 +1211,33 @@ const router = new Router({
               path: 'listado',
               name: 'meeting-list',
               component: MeetingList,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'control',
+              name: 'meeting-manager',
+              component: MeetingManager,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'sectores',
+              name: 'meeting-sector',
+              component: MeetingSector,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'calendario',
+              name: 'meeting-calendar',
+              component: MeetingCalendar,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
                 fail: '/error'

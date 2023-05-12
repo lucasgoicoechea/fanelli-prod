@@ -4,6 +4,7 @@
       <card-header :headerBackground="getTitleBackgroundColor">
         <p slot="header">
           <span>{{ requestType }}</span>
+          <span style="float: right;"  @click="desarchiveTimeline()"> DESARCHIVAR</span>
         </p>
         <p slot="subHeader" class="subheader">
           por {{ creatorName }}
@@ -49,6 +50,30 @@
     methods: {
       hasMedicalReport () {
         return this.request.medicalOrderPath !== undefined
+      },
+      closeModal () {
+        this.$modal.hide('dialog')
+      },
+      desarchiveTimeline: function () {
+        this.$modal.show('dialog', {
+          text: '¿Desea desarchivar los eventos en el historial permanente del colaborador?',
+          buttons: [
+            {
+              title: 'Si',
+              handler: () => {
+                this.$store.dispatch('events/desarchiveTimeline', {timeline: this.request._id})
+                  .then(() => {
+                  })
+                  .catch(() => {
+                  })
+                this.closeModal()
+              }
+            },
+            {
+              title: 'No'
+            }
+          ]
+        })
       }
     },
     computed: {

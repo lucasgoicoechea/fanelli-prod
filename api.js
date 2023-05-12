@@ -49,6 +49,7 @@ const Router = {
     app.use('/api/security-element', routes.securityElement)
     app.use('/api/user', routes.user)
     app.use('/api/checklist', routes.checklist)
+    app.use('/api/checklistLTres', routes.checklistLTres)
     app.use('/api/staff-news', routes.staffNews)
     app.use('/api/staff-request', routes.staffRequest)
     app.use('/api/events-timeline', routes.eventsTimeline)
@@ -65,6 +66,9 @@ const Router = {
     app.use('/api/sector', routes.sector)
     app.use('/api/line', routes.line)
     app.use('/api/supervisionpart', routes.supervisionpart)
+    app.use('/api/supervisionpartLTres', routes.supervisionpartLTres)
+    app.use('/api/bugReport', routes.bugReport)
+    app.use('/api/permissions', routes.permissions)
     app.use('/doc', express.static('apidoc'))
     errorHandler(app)
   }

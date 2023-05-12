@@ -25,8 +25,8 @@ const discounter = {
 const Const = require(path.join(__dirname, '/../libs/const'))
 
 const sendCreateNotification = async(function (collaborator, creator, news) {
-  const payload = new notification.Payload('Nueva novedad', '/control/novedades', NOTIFICATION_TYPE.NOVEDAD,
-    {
+  const payload = new notification.Payload('Novedad', '/control/novedades', NOTIFICATION_TYPE.NOVEDAD,
+    { 
       subType: news.type,
       creator: {name: creator.name, lastname: creator.lastname},
       collaborator: {name: collaborator.name, lastname: collaborator.lastname},

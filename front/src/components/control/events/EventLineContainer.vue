@@ -1,4 +1,4 @@
-<template>
+<template>  
   <div class="line-container" :style="getLineStyle()">
     <div class="top-text">
       <h2 class="line-title">
@@ -10,20 +10,28 @@
       <h5
         class="archive"
         title="Archivar evento"
-        v-show="permission"
+        v-show="permission && !eventLineData.archived"
         @click="archiveTimeline()"> ARCHIVAR </h5>
+      <h5
+        class="archive"
+        title="Archivar evento"
+        v-show="permission && eventLineData.archived"
+        @click="desarchiveTimeline()"> DESARCHIVAR </h5>  
     </div>
-
     <horizontal-scrolling-container ref="containerRef" class="horizontal-container">
-      <event-card-item v-for="eventData in eventLineData.events"
+      <event-card-item v-for="eventData in eventLast()"
                        :cardData="eventData"
                        :timelineId="eventLineData._id"
                        @click.native="showEventInformation(eventLineData, eventData)"
-                       :key="eventData.item._id"></event-card-item>
+                       :key="eventData.item._id"></event-card-item> 
       <event-card-add-item v-if="permission && getEventType() !== $constants.news_types.OBSERVATION"
                            :timeline="eventLineData._id"
                            :collaborator="eventLineData.collaborator._id"></event-card-add-item>
+      <event-cards-drop-vue  
+                          :timeline="eventLineData"
+                          :collaborator="eventLineData.collaborator._id" ></event-cards-drop-vue>
     </horizontal-scrolling-container>
+  
   </div>
 </template>
 
@@ -31,6 +39,7 @@
   import HorizontalScrollingContainer from '@/components/containers/HorizontalScrolling.vue'
   import EventCardItem from '@/components/control/events/EventCardItem.vue'
   import EventCardAddItem from '@/components/control/events/EventCardAddItem.vue'
+  import EventCardsDropVue from '@/components/control/events/EventCardsDrop.vue'
   import Constants from '../../../const.js'
   import authorize from '@/utils/authorize'
 
@@ -44,6 +53,7 @@
     components: {
       EventCardItem,
       EventCardAddItem,
+      EventCardsDropVue,
       HorizontalScrollingContainer
     },
     props: {
@@ -53,28 +63,37 @@
       }
     },
     methods: {
+      eventLast: function () {
+        if (window.innerWidth > 1950) return this.eventLineData.events
+        if (this.eventLineData.events[0] === undefined) {
+          return this.eventLineData.events
+        }
+        return [this.eventLineData.events[0]]
+      },
       getLineStyle: function () {
         let color
-        switch (this.eventLineData.events[0].item.type) {
-          case Constants.news_types.ABSENT:
-            color = '#4672a3'
-            break
-          case Constants.news_types.ACCIDENT:
-            color = '#ff5453'
-            break
-          case Constants.news_types.EARLY:
-            color = '#ed8d47'
-            break
-          case Constants.news_types.LATE:
-            color = '#33547a'
-            break
-          default:
-            color = '#6b6b6b'
-        }
-
+        if (this.eventLineData.events[0] !== undefined) {
+          switch (this.eventLineData.events[0].item.type) {
+            case Constants.news_types.ABSENT:
+              color = '#4672a3'
+              break
+            case Constants.news_types.ACCIDENT:
+              color = '#ff5453'
+              break
+            case Constants.news_types.EARLY:
+              color = '#ed8d47'
+              break
+            case Constants.news_types.LATE:
+              color = '#33547a'
+              break
+            default:
+              color = '#6b6b6b'
+          }
+        } else { color = '#6b6b6b' }
         return {'background-color': color}
       },
       getTypeText () {
+        if (this.eventLineData.events[0] === undefined) { return 'OBSERVATION' }
         return Constants.news_types_text[this.eventLineData.events[0].item.type]
       },
       showEventInformation: function (timelineData, eventData) {
@@ -84,6 +103,7 @@
         this.$modal.hide('dialog')
       },
       getEventType () {
+        if (this.eventLineData.events[0] === undefined) { return 'OBSERVATION' }
         return this.eventLineData.events[0].item.type
       },
       archiveTimeline: function () {
@@ -94,6 +114,27 @@
               title: 'Si',
               handler: () => {
                 this.$store.dispatch('events/archiveTimeline', {timeline: this.eventLineData._id})
+                  .then(() => {
+                  })
+                  .catch(() => {
+                  })
+                this.closeModal()
+              }
+            },
+            {
+              title: 'No'
+            }
+          ]
+        })
+      },
+      desarchiveTimeline: function () {
+        this.$modal.show('dialog', {
+          text: '¿Desea desarchivar los eventos en el historial permanente del colaborador?',
+          buttons: [
+            {
+              title: 'Si',
+              handler: () => {
+                this.$store.dispatch('events/desarchiveTimeline', {timeline: this.eventLineData._id})
                   .then(() => {
                   })
                   .catch(() => {
@@ -143,7 +184,7 @@
 
   .line-container {
     width: 100%;
-    height: 250px;
+    height: 200px;
     padding: 5px 0 50px 0;
   }
 
@@ -169,7 +210,7 @@
       color: #d3d3d3;
     }
   }
-
+  
   .create-event {
     margin-right: 40px;
     font-size: 20px;
@@ -218,4 +259,5 @@
     }
 
   }
+  
 </style>

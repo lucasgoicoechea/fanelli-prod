@@ -10,6 +10,7 @@ const AppError = require(path.join(__dirname, '/../libs/error')).AppError
 const s3 = require(path.join(__dirname, '/../libs/s3'))
 const _ = require('lodash')
 const Boom = require('boom')
+const PermRoleChecked = require('../model/permRoleChecked')
 const constants = require(path.join(__dirname, '../libs/const'))
 
 const controller = {
@@ -83,7 +84,6 @@ const controller = {
         return
       }
     }
-
     if (req.body.password) {
       if (req.body.password !== '') {
         awaitFor(user.setPassword(req.body.password))
@@ -100,7 +100,17 @@ const controller = {
         return next(new AppError('user type non-existent', 'Tipo de usuario inexistente'))
       }
     }
-
+    let perms = req.body.perms
+    if(perms){
+      perms.array.forEach(perm => {
+        if(perm.checked){
+          let permUser = new PermUsuarioModel()
+          permUser.user = perm.user
+          permUser.perm = perm.perm
+          PermUsuarioModel.save(permUser)
+        }
+      });
+    }
     user = awaitFor(user.save())
     res.json({success: true, message: 'Credenciales modificadas exitosamente', user: user})
   }),

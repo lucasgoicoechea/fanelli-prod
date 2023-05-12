@@ -107,51 +107,6 @@ const service = {
         collaborator
       })
     })
-   /*
-   let realFrom = dateFns.endOfDay(dateFns.subDays(day, 1))
-   let realTo = dateFns.startOfDay(dateFns.addDays(day, 1))
-   
-   collaborators.forEach(collaborator => {
-      const staffNews = StaffNewsModel.find({
-        collaborator: collaborator.id,
-        created_at: realFrom
-      })
-     const staffRequests = StaffRequestModel.find({
-        collaborator: collaborator.id,
-        initialDate: day
-      })
-      const sanctions = SanctionModel.find({
-        collaborators: collaborator.id,
-      })
-      sanctions = sanctions.filter(a => dateFns.areRangesOverlapping(a.dateRange.from, a.dateRange.to, realFrom, realTo))
-     
-      const leaveRequests = LeaveRequestModel.find({
-        collaborators: collaborator.id,
-        state: Const.STAFF_REQUEST_STATE.APPROVED,
-        archived: true,
-        days :
-        {
-          "$elemMatch": {  "$gte": realFrom, "$lt": realTo  }
-        }
-      })
-      
-      const occurrences = OccurrenceModel.find({
-        collaborators: collaborator.id,
-        state: Const.OCCURRENCE_STATE.APPROVED,
-        archived: true,
-        created_at: day
-      })
-      const collaboratorEvents = awaitFor(Bluebird.all([staffNews, staffRequests, sanctions, leaveRequests, occurrences])
-      .reduce(
-        (arr, events) => arr.concat(events),
-        []
-      ))
-      data.push({
-        events: collaboratorEvents,
-        collaborator
-      })
-    }) */
-    //console.log('llegue')
     return excel.generateExcelMultipleCollaboratorsByDay(data, day)
   })
 }

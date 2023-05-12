@@ -69,6 +69,12 @@
     }
   }
 
+  @media (min-width: 700px) and (orientation: landscape) {
+    .widget-availability {
+       width: 70%;
+    }
+  }
+
   .selector {
     position: relative;
     background-color: #777;

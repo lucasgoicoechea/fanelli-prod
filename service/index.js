@@ -36,5 +36,7 @@ module.exports = {
   area: require(path.join(__dirname, '/area')),
   line: require(path.join(__dirname, '/line')),
   sector: require(path.join(__dirname, '/sector')),
-  report: require(path.join(__dirname, '/report'))
+  report: require(path.join(__dirname, '/report')),
+  bugReport: require(path.join(__dirname, '/bugReport')),
+  permissions: require(path.join(__dirname, '/permissions'))
 }

@@ -4,7 +4,7 @@
     <div class="announcements">
       <widget-announcements></widget-announcements>
     </div>
-    <div class="widgets-container">
+    <div class="widgets-container" v-show="isWatchNews">
       <widget-availability></widget-availability>
       <widget-pending-exculpatory></widget-pending-exculpatory>
     </div>
@@ -44,6 +44,11 @@
         currentView: ''
       }
     },
+    computed: {
+      isWatchNews () {
+        return this.currentView !== 'MECANICO_ELECTRICO'
+      }
+    },
     created () {
       // agrego evento si cierra navegador mata session token
       // window.addEventListener('beforeunload', auth.logout());
@@ -73,6 +78,16 @@
       }
       if (auth.getUser().user_type === 'OFICIAL_DESAPILADORA') {
         this.$router.push({name: 'supervisionpart', params: {sector: 'DESAPILADORA'}})
+      }
+       // DESVIO EL HOME HACIA LOS PARTES OFICIALES linea 3
+      if (auth.getUser().user_type === 'OFICIAL_EXTRUSORA_L3') {
+        this.$router.push({name: 'supervisionpart-linea3', params: {sector: 'EXTRUSORA'}})
+      }
+      if (auth.getUser().user_type === 'OFICIAL_APILADORA_L3') {
+        this.$router.push({name: 'supervisionpart-linea3', params: {sector: 'APILADORA'}})
+      }
+      if (auth.getUser().user_type === 'OFICIAL_DESAPILADORA_L3') {
+        this.$router.push({name: 'supervisionpart-linea3', params: {sector: 'DESAPILADORA'}})
       }
       /* setTimeout(function () {
         auth.logout();

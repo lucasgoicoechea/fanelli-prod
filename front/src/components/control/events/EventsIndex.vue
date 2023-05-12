@@ -10,6 +10,7 @@
       </div>
       <div v-else>
         <new-event-modal></new-event-modal>
+        <list-event-modal></list-event-modal>
         <event-information-modal></event-information-modal>
         <v-dialog></v-dialog>
       </div>
@@ -21,6 +22,7 @@
   import EventLineContainer from '@/components/control/events/EventLineContainer.vue'
   import NewEventModal from '@/components/control/events/modals/NewEvent.vue'
   import EventInformationModal from '@/components/control/events/modals/EventInformation.vue'
+  import ListEventModal from '@/components/control/events/modals/ListEvent.vue'
   import Spinner from '@/components/SpinnerWrapper.vue'
   import { mapState } from 'vuex'
 
@@ -30,7 +32,8 @@
       EventLineContainer,
       Spinner,
       NewEventModal,
-      EventInformationModal
+      EventInformationModal,
+      ListEventModal
     },
     created: function () {
       this.$store.dispatch('events/fetchEventLines')

@@ -1,6 +1,7 @@
 const async = require('asyncawait/async')
 const awaitFor = require('asyncawait/await')
 const path = require('path')
+const scheduler = require('node-schedule')
 const meetingService = require(path.join(__dirname, '../service')).meeting
 const AppError = require(path.join(__dirname, '../libs/error')).AppError
 const Const = require(path.join(__dirname, '/../libs/const'))
@@ -76,13 +77,17 @@ const controller = {
   getAllPassMe: async(function (req, res, next) {
     let meetings
     var idus = req.user.id;
-    meetings = awaitFor(meetingService.listMyMeetingsAllPass(idus, {
+    if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {
+      meetings = awaitFor(meetingService.list({perPage: req.query.per_page, page: req.query.page, teamOf: req.user.id}))
+    }else {
+     meetings = awaitFor(meetingService.listMyMeetingsAllPass(idus, {
         perPage: req.query.per_page,
         page: req.query.page,
         date: req.query.date,
         type: req.query.type,
         frecuency: req.query.frecuency
-      }))
+        })) 
+    }
     res.json({success: true, meetings})
   }),
   getById: async(function (req, res) {
@@ -100,6 +105,134 @@ const controller = {
       }))
     }
     res.json({success: true, meetings})
+  }),
+  listMyMeetingsCalendar: async(function (req, res, next) {
+    let meetings
+    let mes = Const.MEETING_MONTH_READBLE[req.query.month]
+    let anio = req.query.year
+    if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {
+      meetings = awaitFor(meetingService.listMyMeetingsMonth(null, mes, anio, {
+        perPage: req.query.per_page, 
+        page: req.query.page, 
+        teamOf: req.user.id
+      }))
+    } else {
+      meetings = awaitFor(meetingService.listMyMeetingsMonth(req.user.id, mes, anio, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    }
+
+    let resList = []
+    for (var n = 1; n < 32; n++) {
+      resList[n]={
+        day : n,
+        meetings: []
+      }
+    }
+    meetings.forEach(c => {
+      let meetingrepro = awaitFor(meetingService.getByIdOrigin(c._id))
+      if (c.type === 'FRECUENCY'){
+        let frecuentcia = c.type === 'FRECUENCY'?Const.MEETING_FRECUENCY[c.frecuency]:Const.READABLE_MEETING_TYPE[c.type]
+        let description = frecuentcia + '-' + c.names
+        resList[c.date.getUTCDate()].meetings.push(
+          { 
+            _id: c._id,
+            state: c.state,
+            type: c.type,
+            frecuency: frecuentcia,
+            date: c.date,
+            time: c.time,
+            creator: c.creator,
+            dateFrom: c.dateFrom,
+            description: description,
+            names: c.names,
+            weeklys: c.weeklys,
+            recommendations: c.recommendations,
+            collaborators: c.collaborators,
+            repro: meetingrepro
+          }
+        )  
+      }
+    })
+    res.json({success: true, meetings: resList})
+  }),
+  listMyMeetingsSector: async(function (req, res, next) {
+    let meetings
+    let mes = Const.MEETING_MONTH_READBLE[req.query.month]
+    let anio = req.query.year
+    if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {
+      meetings = awaitFor(meetingService.listMyMeetingsMonth(null, mes, anio, {
+        perPage: req.query.per_page, 
+        page: req.query.page, 
+        teamOf: req.user.id
+      }))
+    } else {
+      meetings = awaitFor(meetingService.listMyMeetingsMonth(req.user.id, mes, anio, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    }
+    let resList = []
+    meetings.forEach(c => {
+      let meetingrepro = awaitFor(meetingService.getByIdOrigin(c._id))
+      if (c.type === 'FRECUENCY'){
+        let frecuentcia = c.type === 'FRECUENCY'?Const.MEETING_FRECUENCY[c.frecuency]:Const.READABLE_MEETING_TYPE[c.type]
+        resList.push(
+          {
+            _id: c._id,
+            state: c.state,
+            type: c.type,
+            frecuency: frecuentcia,
+            date: c.date,
+            time: c.time,
+            creator: c.creator,
+            dateFrom: c.dateFrom,
+            description: c.description,
+            names: c.names,
+            weeklys: c.weeklys,
+            recommendations: c.recommendations,
+            collaborators: c.collaborators,
+            repro: meetingrepro
+          }
+        )  
+      }
+    })
+    res.json({success: true, meetings: resList})
+  }),
+  listMyMeetingsManager: async(function (req, res, next) {
+    let meetings
+    if (Const.ROLE.JEFES.includes(req.user.user_type) || req.user.user_type === Const.USER_TYPE.RRHH) {
+      meetings = awaitFor(meetingService.list({perPage: req.query.per_page, page: req.query.page, teamOf: req.user.id}))
+    } else {
+      meetings = awaitFor(meetingService.listMyMeetings(req.user.id, {
+        perPage: req.query.per_page,
+        page: req.query.page
+      }))
+    }
+    let resList = []
+    meetings.forEach(c => {
+      let meetingrepro = awaitFor(meetingService.getByIdOrigin(c._id))
+      let frecuentcia = c.type === 'FRECUENCY'?Const.MEETING_FRECUENCY[c.frecuency]:Const.READABLE_MEETING_TYPE[c.type]
+      resList.push(
+        {
+          _id: c._id,
+          state: c.state,
+          type: c.type,
+          frecuency: frecuentcia,
+          date: c.date,
+          creator: c.creator,
+          dateFrom: c.dateFrom,
+          description: c.description,
+          names: c.names,
+          weeklys: c.weeklys,
+          recommendations: c.recommendations,
+          collaborators: c.collaborators,
+          repro: meetingrepro
+        }
+      )
+    })
+    res.json({success: true, meetings: resList})
   }),
   getActiveByMe: async(function (req, res) {
     const meetings = awaitFor(meetingService.getActiveByUser(req.user.id, {
@@ -149,7 +282,9 @@ const controller = {
     if (!Const.ROLE.JEFES.includes(req.user.user_type) && !Const.USER_TYPE.RRHH === req.user.user_type && !meetingService.isCreator(req.user.id, req.params.id)) {
       return next(new AppError('Impossible to edit', 'No se puede editar', Const.ERROR.DOCUMENT_CANT_BE_EDITED))
     }
-
+    if (req.body.meeting.state == null){
+      req.body.meeting.state = 2
+    }
     let meeting = {
       collaborators: req.body.meeting.collaborators,
       editors: req.body.meeting.editors,
@@ -162,6 +297,7 @@ const controller = {
       dateFrom: req.body.meeting.dateFrom,
       weeklys: req.body.meeting.weeklys,
       names: req.body.meeting.names,
+      state: req.body.meeting.state,
       time: req.body.meeting.time
     }
     let repeatEdit = req.body.meeting.repeatEdit || false
@@ -169,4 +305,22 @@ const controller = {
     res.json({success: true, meeting})
   })
 }
+
+function initExecuted () {
+  return async(function () {
+    let meetingss = awaitFor(meetingService.listAllPass({}))
+    //filtramos las programadas = 0 
+    meetingss = meetingss.where('state').equals(0)
+    //las pasamos a ejecutadas  = 1
+    meetingss.forEach(meeting => {
+      meeting.state = 1
+      meeting = awaitFor(meetingService.edit(meeting._id, meeting,false))
+    })
+  })
+}
+
+
+//  Run this scripts at 24:00
+scheduler.scheduleJob('0 24 * * *', initExecuted())
+
 module.exports = controller

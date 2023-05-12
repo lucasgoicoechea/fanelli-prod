@@ -1,0 +1,2 @@
+evalString = 'db.getCollection("meetings").update({"date": {"$lte": new Date()},"state":"0"}, {$set: {"state":"1"}}   , {"multi": true})'
+mongo localhost:27017/fanelli_prod -u root -p iYVvV6Cb4fkn --eval $evalString

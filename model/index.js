@@ -30,6 +30,7 @@ module.exports = {
   securityElement: require(path.join(__dirname, '/securityElement')),
   check: require(path.join(__dirname, '/check')),
   checklist: require(path.join(__dirname, '/checklist')),
+  checklistLTres: require(path.join(__dirname, '/checklistLTres')),
   staffNews: require(path.join(__dirname, '/staffNews')),
   eventsTimeline: require(path.join(__dirname, '/eventsTimeline')),
   staffRequest: require(path.join(__dirname, '/staffRequest')),
@@ -47,6 +48,16 @@ module.exports = {
   area: require(path.join(__dirname, '/area')),
   occurrence: require(path.join(__dirname, '/occurrence')),
   supervisionPart: require(path.join(__dirname, '/supervisionPart')),
+  supervisionPartLTres: require(path.join(__dirname, '/supervisionPartLTres')),
   hour: require(path.join(__dirname, '/hour')),
-  fail: require(path.join(__dirname, '/fail'))
+  fail: require(path.join(__dirname, '/fail')),
+  bugReport: require(path.join(__dirname, '/bugReport')),
+  failed: require(path.join(__dirname, '/failed')),
+  checkLTres: require(path.join(__dirname, '/checkLTres')),
+  perm: require(path.join(__dirname, '/perm')),
+  permRole: require(path.join(__dirname, '/permRole')),
+  permUsuario: require(path.join(__dirname, '/permUsuario')),
+  role: require(path.join(__dirname, '/role')),
+  permRoleChecked: require(path.join(__dirname, '/permRoleChecked'))
+
 }

@@ -42,6 +42,19 @@ const service = {
       })
       .populate('creator', 'name lastname legajo s3Key'))
   }),
+  getByIdOrigin: async(function (meetingId) {
+    let meetings = MeetingModel
+      .find({
+        _originId: meetingId
+      })
+      .populate({
+        path: 'collaborators',
+        populate: {path: 'shift', select: 'value'},
+        select: {name: 1, lastname: 1, legajo: 1}
+      })
+      .populate('creator', 'name lastname legajo')
+      return meetings
+  }),
   list: async(function (options) {
     let meetings = MeetingModel.find({
       date:{$gte:new Date(new Date().getTime()-(2*24*60*60*1000))}
@@ -69,7 +82,25 @@ const service = {
       .populate('creator', 'name lastname legajo')
     return paginateAndSort(meetings, options)
   }),
+  listMyMeetingsMonth: async(function (id, month, year, options) {
+    var start = new Date(new Date(year+"-"+month+"-01").getTime()-(24*60*60*1000))
+    var end = new Date(new Date(year+"-"+month+"-30").getTime()+(24*60*60*1000))
+    var conditions = id==null?{date:{$gte: start, $lt: end}}:{
+      date:{$gte: start, $lt: end},
+      $or: [{creator: id}, {collaborators: id}]
+    }
 
+    console.dir(conditions)
+    let meetings = MeetingModel
+      .find(conditions)
+      .populate({
+        path: 'collaborators',
+        populate: {path: 'shift', select: 'value'},
+        select: {name: 1, lastname: 1, legajo: 1}
+      })
+      .populate('creator', 'name lastname legajo')
+    return paginateAndSort(meetings, options)
+  }),
   listMyMeetings: async(function (id, options) {
     let meetings = MeetingModel
       .find({
@@ -112,6 +143,20 @@ const service = {
       .populate('creator', 'name lastname legajo')
       meetings = filterMeeting(meetings,options)
     return paginateAndSort(meetings, options,-1)
+  }),
+  listAllPass : async(function (options) {
+    let meetings = MeetingModel
+    .find({
+      date:{$lte:new Date(new Date().getTime()+(24*60*60*1000))}
+    })
+    .populate({
+      path: 'collaborators',
+      populate: {path: 'shift', select: 'value'},
+      select: {name: 1, lastname: 1, legajo: 1}
+    })
+    .populate('creator', 'name lastname legajo')
+    meetings = filterMeeting(meetings,options)
+  return paginateAndSort(meetings, options,-1)
   }),
   edit: async(function (id, meeting,repeatEdit) {
     awaitFor(MeetingModel.update({_id: id}, {$set: meeting}))
@@ -158,6 +203,9 @@ function filterMeeting (meetingss, filters) {
   }
   if (filters.frecuency) {
     meetingss = meetingss.where('frecuency').equals(filters.frecuency)
+  }
+  if (filters.state) {
+    meetingss = meetingss.where('state').equals(filters.state)
   }
   /*if (filters.teamOf) {
     eppCursor = awaitFor(eppCursor.teamOf(filters.teamOf)).query
