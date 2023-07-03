@@ -1,0 +1,670 @@
+<template>
+  <div class="productivity-visualization">
+    <navigation
+      :title="title"></navigation>
+
+    <section class="box-section productivity-detail">
+      <figure class="icon-container">
+        <img :src="icon" alt="reunión">
+      </figure>
+
+      <div class="info-container">
+        <h2>{{ titleComponent }}</h2>
+        <p class="created">
+          Realizada el
+          <span class="monospace">{{ createdAt }}</span>
+        </p>
+        <p>{{ creator }}</p>
+
+        <div class="recommendations">
+          <h4>
+            <span>{{ productivityType }}   {{ productivityName }}</span>
+          </h4>
+        </div>
+
+        <div class="recommendations">
+          <h4>
+            <span>Tipo:</span>
+            {{ recommendationTypes }}</h4>
+        </div>
+        <div class="recommendations">
+          <h4>
+            <span>ESTADO:</span>
+            <span :class="productivityStateClass"> {{ productivityState }}</span></h4>
+            <blockable-button
+            v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+            class="margin"
+            icon="/static/img/icon-forms/checklists-form.svg"
+            title="Pasar a REALIZADA"
+            :clickMethod="doneModalAll"
+            :isLoading="loaderCancelAll"
+            buttonBackgroundColor="rgb(55, 235, 92)"
+            iconPadding="10px"
+            buttonRadius="50px"
+            buttonWidth="120px"
+            buttonHeight="50px">
+            </blockable-button>
+        </div>
+
+        <div class="reason">
+          <h4>Resumen</h4>
+          <div class="visor" >
+            <div  v-html="productivity.description"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="box-section collaborator-list">
+      <h4 class="collaborator-title">Participantes: </h4>
+      <!-- <router-link -->
+        <div
+        v-for="c in productivity.collaborators"
+        :key="c._id"
+        class="collaborator"
+        :to="{ name: 'profile-information', params: {id: c._id} }"> 
+        <card-collaborator-full
+          :collaborator="c"></card-collaborator-full>
+        </div> 
+      <!-- </router-link> -->
+    </div>
+    <div class="box-section buttons-container">
+      <blockable-button
+        class="margin"
+        icon="/static/img/icons-kanban/print.svg"
+        title="Imprimir"
+        :clickMethod="askPrint"
+        :isLoading="loaderPrint"
+        buttonBackgroundColor="#4257b3"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px"></blockable-button>
+
+      <blockable-button
+        class="margin"
+        icon="/static/img/pencilwhite.svg"
+        title="editar"
+        v-show="editPermission"
+        :clickMethod="edit"
+        :isLoading="false"
+        buttonBackgroundColor="#4CAF50"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px"></blockable-button>
+    </div>
+    <div class="box-section buttons-container">
+      <blockable-button
+        v-show="$can($constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH)"
+        class="margin"
+        icon="/static/img/checklists/cross.svg"
+        title="eliminar"
+        :clickMethod="cancelModal"
+        :isLoading="loaderCancel"
+        buttonBackgroundColor="#F44336"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px"></blockable-button>
+  
+      <blockable-button
+        v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) &&  productivity.hasOwnProperty('_originId')"
+        class="margin"
+        icon="/static/img/checklists/cross-repeat.svg"
+        title="eliminar con repeticiones"
+        :clickMethod="cancelModalAll"
+        :isLoading="loaderCancelAll"
+        buttonBackgroundColor="#F44336"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px"></blockable-button>
+
+        <blockable-button
+        v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+        class="margin"
+        title="Pasar a NO REALIZADA"
+        :clickMethod="noRealizeModalAll"
+        :isLoading="loaderCancelAll"
+        buttonBackgroundColor="#F44336"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="100px"
+        buttonHeight="50px">Cancelar
+        </blockable-button>
+        
+        <blockable-button
+        v-show="$can($constants.ROLES.JEFE_PLANTA + '|' + $constants.ROLES.PERSONAL + '|' + $constants.ROLES.JEFES + '|' + $constants.ROLES.RRHH) "
+        class="margin"
+        title="Pasar a REPROGRAMADA"
+        :clickMethod="reProgramedModalAll"
+        :isLoading="loaderCancelAll"
+        buttonBackgroundColor="rgb(55, 96, 162)"
+        iconPadding="10px"
+        buttonRadius="50px"
+        buttonWidth="120px"
+        buttonHeight="50px">Reprograma
+        </blockable-button>
+    </div>
+
+  </div>
+</template>
+
+<script>
+  import Navigation from '@/components/Navigation.vue'
+  import dateAndTime from '@/utils/dateAndTime'
+  import BlockableButton from '@/components/buttons/blockableButton'
+  import CardCollaboratorFull from '@/components/cards/CardCollaboratorFull'
+  import Spinner from '@/components/SpinnerWrapper'
+  import pdf from '@/utils/pdf'
+  import { VueEditor } from 'vue2-editor'
+  import { mapState } from 'vuex'
+
+  export default {
+    name: 'productivityVisualization',
+    components: {
+      Navigation,
+      VueEditor,
+      BlockableButton,
+      CardCollaboratorFull,
+      Spinner
+    },
+    data () {
+      return {
+        title: 'Detalle de desempeño',
+        productivity: {
+          names: []
+        },
+        loaderPrint: false,
+        loaderCancel: false,
+        loaderCancelAll: false,
+        editorSettings: {
+          modules: {
+            toolbar: false
+          }
+        },
+        editorConfig: [ ]
+      }
+    },
+    created () {
+      this.getDetails()
+    },
+    methods: {
+      getDetails () {
+        return this.$store.dispatch('productivitys/getDetail', {
+          id: this.$route.params.id
+        })
+          .then((res) => { this.productivity = res.productivity; this.productivity.names = res.productivity.names })
+          .catch(() => { this.$snotifyWrapper.error('Se produjo un error al obtener el detalle de desempeño') })
+      },
+      edit () {
+        this.$router.push({
+          name: 'productivity-edition',
+          params: {id: this.productivity._id}
+        })
+      },
+      successfulPrint (blob) {
+        pdf.download(blob, 'desempeño.pdf')
+        this.loaderPrint = false
+      },
+      errorPrint () {
+        this.loaderPrint = false
+        this.$snotifyWrapper.warning('Error de impresión. Intente nuevamente')
+      },
+      print () {
+        this.loaderPrint = true
+        this.$store.dispatch('productivitys/print', this.productivity)
+          .then(this.successfulPrint)
+          .catch(this.errorPrint)
+      },
+      askPrint () {
+        this.$modal.show('dialog', {
+          title: 'Confirmación',
+          text: '¿Desea imprimir la desempeño?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.print()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      successfulCancellation (res) {
+        this.loaderCancel = false
+        this.$snotifyWrapper.success('Se eliminó correctamente la desempeño')
+        this.$router.push({name: 'productivity-list'})
+      },
+      failedCancellation () {
+        this.loaderCancel = false
+        this.$snotifyWrapper.error('No se pudo eliminar la desempeño')
+      },
+      successfulNoRealize (res) {
+        this.loaderCancel = false
+        this.$snotifyWrapper.success('Se canceló correctamente la desempeño')
+        this.$router.push({name: 'productivity-list'})
+      },
+      successfulReProgramed (res) {
+        this.loaderCancel = false
+        this.$snotifyWrapper.success('Pasara a Reprogramar la desempeño')
+        this.$router.push({
+          name: 'productivity-edition',
+          params: {id: this.productivity._id}
+        })
+      },
+      failedNoRealize () {
+        this.loaderCancel = false
+        this.$snotifyWrapper.error('No se pudo cancelar la desempeño')
+      },
+      failedReProgramed () {
+        this.loaderCancel = false
+        this.$snotifyWrapper.error('No se pudo reprogramar la desempeño')
+      },
+      cancel () {
+        this.loaderCancel = true
+        return this.$store.dispatch('productivitys/cancel', this.productivity)
+          .then(this.successfulCancellation)
+          .catch(this.failedCancellation)
+      },
+      cancelAll () {
+        this.loaderCancel = true
+        return this.$store.dispatch('productivitys/cancelAll', this.productivity)
+          .then(this.successfulCancellation)
+          .catch(this.failedCancellation)
+      },
+      cancelModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Eliminación',
+          text: '¿Esta seguro de eliminar esta desempeño y sus repeticiones?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.cancelAll()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      done () {
+        this.loaderCancel = true
+        // paso a estado REalizada
+        this.productivity.state = 2
+        return this.$store.dispatch('productivitys/edit', this.productivity)
+          .then(this.successfulNoRealize)
+          .catch(this.failedReProgramed)
+      },
+      reProgramed () {
+        this.loaderCancel = true
+        // paso a estado REPROGRAMADA
+        this.productivity.state = 4
+        return this.$store.dispatch('productivitys/edit', this.productivity)
+          .then(this.successfulReProgramed)
+          .catch(this.failedReProgramed)
+      },
+      noRealize () {
+        this.loaderCancel = true
+        // paso a estado NO REALIZADA
+        this.productivity.state = 3
+        return this.$store.dispatch('productivitys/edit', this.productivity)
+          .then(this.successfulNoRealize)
+          .catch(this.failedNoRealize)
+      },
+      doneModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Realizada',
+          text: '¿Esta seguro que fue REALIZADA esta desempeño?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.done()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      reProgramedModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Reprogramacion',
+          text: '¿Esta seguro de Reprogramar esta desempeño?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.reProgramed()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      noRealizeModalAll () {
+        this.$modal.show('dialog', {
+          title: 'Cancelacion',
+          text: '¿Esta seguro de Cancelar esta desempeño?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.noRealize()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      },
+      cancelModal () {
+        this.$modal.show('dialog', {
+          title: 'Eliminación',
+          text: '¿Esta seguro de eliminar esta desempeños?',
+          buttons: [
+            {
+              title: 'Aceptar',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.cancel()
+              }
+            },
+            {
+              title: 'Cancelar',
+              handler: () => {
+                this.$modal.hide('dialog')
+              }
+            }
+          ]
+        })
+      }
+    },
+    computed: {
+      ...mapState('auth', [
+        'user'
+      ]),
+      titleComponent () {
+        return 'desempeño'
+      },
+      icon () {
+        return '/static/img/productivity.svg'
+      },
+      createdAt () {
+        return (this.productivity.hasOwnProperty('date')
+          ? dateAndTime.dateDayAndMonth(new Date(this.productivity.date))
+          : '') +
+         (this.productivity.hasOwnProperty('time')
+          ? (' HORA:' + this.productivity.time)
+          : '')
+      },
+      creator () {
+        return this.productivity.hasOwnProperty('creator')
+          ? `Por ${this.productivity.creator.lastname}`
+          : ''
+      },
+      productivityType () {
+        return (this.productivity.hasOwnProperty('type')
+          ? `${this.$constants.MEETING_TYPE_READABLE[this.productivity.type]}`
+          : '') +
+          (this.productivity.frecuency
+          ? ` -  ${this.$constants.MEETING_FRECUENCY[this.productivity.frecuency]}`
+          : '')
+      },
+      productivityState () {
+        return (this.productivity.hasOwnProperty('state')
+          ? `${this.$constants.MEETING_STATE_READABLE[this.productivity.state]}`
+          : '')
+      },
+      productivityStateClass () {
+        return (this.productivity.hasOwnProperty('state')
+          ? this.productivity.state === 0 ? 'name-subheader-text'
+          : 'visor'
+          : '')
+      },
+      applyNames () {
+        return this.productivity.names
+          .join(', ')
+      },
+      productivityName () {
+        return (this.productivity.hasOwnProperty('names') && this.productivity.type === 'FRECUENCY'
+          ? `
+          de  ${this.applyNames}`
+          : '')
+      },
+      recommendationTypes () {
+        if (!this.productivity.hasOwnProperty('recommendations')) {
+          return ''
+        }
+        return this.productivity.recommendations.map(e => this.$constants.RECOMMENDATION_MEETING_READABLE[e]).join(', ')
+      },
+      editPermission () {
+        if (!this.productivity.hasOwnProperty('creator')) {
+          return false
+        }
+        return this.$can(this.$constants.ROLES.JEFES + '|' + this.$constants.ROLES.RRHH) ||
+          this.productivity.creator.id === this.user.id ||
+          this.productivity.creator.id === this.user._id ||
+          this.productivity.editors.includes(this.user.id)
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  @import "~@/assets/styles/_variables.scss";
+  @import "~@/assets/styles/_mixins.scss";
+
+  #editor1 .ql-toolbar .ql-snow{
+    display: none;
+  }
+
+  .visor{
+    position: relative;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border-style: solid;
+    border-color: gray;
+  }
+  .productivity-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .box-section {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .icon-container {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background-color: $secondary-color;
+    padding: 8px;
+  }
+
+  .info-container {
+    margin: 0 15px;
+    flex-grow: 1;
+
+    p {
+      margin: 0;
+      padding: 0;
+      color: #212121;
+      font-size: medium;
+    }
+
+    span {
+      font-size: large;
+      color: #555555;
+    }
+
+    h2 {
+      margin: 0 0 8px 0;
+      padding: 0;
+      font-size: x-large;
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    .range {
+      margin-top: 8px;
+      color: #555555;
+    }
+
+    .reason {
+      margin: 6px 0;
+
+      h4 {
+        margin: 4px 0;
+        font-weight: bold;
+        font-size: medium;
+        color: #555555;
+      }
+
+      p {
+        font-size: medium;
+        color: #555555;
+      }
+    }
+  }
+
+  .name-subheader-text {
+    color: #3e09d1;
+    background: #d3def7;
+    float: right;
+  }
+
+  .monospace {
+    font-family: monospace;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .collaborator-list {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .collaborator {
+    margin: 10px 20px 10px 0 !important;
+  }
+
+  .collaborator-title {
+    width: 100%;
+    padding: 0;
+    font-weight: bold;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    margin: 2px 0;
+    padding: 4px 16px;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    height: 50px;
+    font-size: large;
+
+    &.accept {
+      background-color: #65c25a;
+      margin-left: 25px;
+    }
+
+    &.reject {
+      background-color: #f86567;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .margin {
+    margin: 0 5px;
+  }
+
+  .fix-width {
+    width: 125px;
+  }
+
+  .recommendations {
+    margin: 20px 0;
+    color: #4a4a4a;
+
+    span {
+      margin: 4px 0;
+      font-weight: bold;
+    }
+  }
+
+  @media screen and (min-width: 980px) {
+    .box-section {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .collaborator {
+      width: calc(50% - 30px) !important;
+    }
+  }
+
+  @media screen and (max-width: 321px) {
+    .icon-container {
+      display: none;
+    }
+  }
+
+  a {
+    color: inherit;
+  }
+
+</style>

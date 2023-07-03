@@ -29,13 +29,13 @@ const sendPushNotification = async(function (receivers, notification, ttl) {
         } catch (error) {
           // NotRegistered
           if (error.statusCode === 410) {
-            winston.log('debug', 'Subscription not registered')
+            // winston.log('debug', 'Subscription not registered')
             userModel.removeSubscription(u._id, subscription._id)
           }
         }
       })
     })
-    winston.log('debug', 'Push notification sent', notification)
+    // winston.log('debug', 'Push notification sent', notification)
   }
 })
 
@@ -62,7 +62,7 @@ const notification = {
       })
     awaitFor(userModel.update(receivers, {$push: {notifications: payload}}, {multi: true}))
     awaitFor(sendPushNotification(receivers, payload, ttl))
-    winston.log('debug', 'Notification saved ', payload)
+    // winston.log('debug', 'Notification saved ', payload)
   })
 
 }

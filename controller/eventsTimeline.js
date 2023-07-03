@@ -26,7 +26,7 @@ const controller = {
       awaitFor(EventsTimelineService.archive(req.body.eventsTimelineId))
       res.send({success: true, eventsTimeline: awaitFor(EventsTimelineService.get())})
     } catch (error) {
-      winston.log('debug', 'error', error)
+      // winston.log('debug', 'error', error)
       next(error)
     }
   }),
@@ -35,7 +35,7 @@ const controller = {
       awaitFor(EventsTimelineService.desarchive(req.body.eventsTimelineId))
       res.send({success: true, eventsTimeline: awaitFor(EventsTimelineService.get())})
     } catch (error) {
-      winston.log('debug', 'error', error)
+      // winston.log('debug', 'error', error)
       next(error)
     }
   }),
@@ -44,7 +44,7 @@ const controller = {
       const eventsTimeline = awaitFor(EventsTimelineService.removeEvent(req.body.eventId, req.body.eventsTimelineId))
       res.send({success: true, eventsTimeline})
     } catch (error) {
-      winston.log('debug', 'error', error)
+      // winston.log('debug', 'error', error)
       next(error)
     }
   })

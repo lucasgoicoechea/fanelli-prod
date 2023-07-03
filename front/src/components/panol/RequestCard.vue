@@ -8,15 +8,29 @@
           <h5>Nº de solicitud: {{ request.global_request_counter }}</h5>
 
         </div>
-        <blockable-button v-if="request.resolved && showPrintButton"
+       <blockable-button v-if="request.resolved && request.printed && showPrintButton"
+                          icon="/static/img/icons-kanban/print.svg"
+                          title="ImprimirIMPRESO"
+                          :clickMethod="print.bind(this, {moveToSolved: false})"
+                          :isLoading="loading"
+                          buttonBackgroundColor="#e0d395"
+                          buttonBackgroundHoverColor="#236098"
+                          class="printed-button-resolved"></blockable-button>
+        <blockable-button v-if="request.resolved && !request.printed && showPrintButton"
                           icon="/static/img/icons-kanban/print.svg"
                           title="Imprimir"
                           :clickMethod="print.bind(this, {moveToSolved: false})"
                           :isLoading="loading"
                           buttonBackgroundColor="#4257b3"
                           buttonBackgroundHoverColor="#236098"
-                          class="print-button-resolved"></blockable-button>
-
+                          class="print-button-resolved"></blockable-button>                          
+        <blockable-button v-if="!request.resolved && showApprovadedButton"
+                          icon="/static/img/checklists/tick.svg"
+                          title="Imprimir"
+                          buttonBackgroundColor="#1a4407"
+                          :clickMethod="nonprint.bind(this, {moveToSolved: true})"
+                          :isLoading="loading"
+                          class="nonprint-button-pending"></blockable-button>
         <img v-if="request.resolved && !request.delivered" src="/static/img/icons-kanban/tick.svg"
              v-bind:class="imgStyle(request)" @click.stop @click="deliver">
         <img v-else-if="request.delivered" src="/static/img/icons-kanban/reestablecer.svg"
@@ -62,6 +76,10 @@
       showPrintButton: {
         type: Boolean,
         default: false
+      },
+      showApprovadedButton: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -77,9 +95,29 @@
       more () {
         this.seeMore = !this.seeMore
       },
+      nonprint (props) {
+        this.loading = true
+        const self = this
+        Vue.http.get('security-element/get-pdf/' + this.request._id,
+          {responseType: 'arraybuffer'}
+        ).then(function (response) {
+          /* var blob = new Blob([response.data], {type: response.headers.get['content-type']})
+          var link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = `${self.request.collaborator.lastname} - ${self.request.global_request_counter}.pdf`
+          link.click() */
+
+          if (props.moveToSolved) {
+            self.$store.commit('requests/pendingToSolved', {request: self.request})
+          }
+
+          self.loading = false
+        })
+      },
       print (props) {
         this.loading = true
         const self = this
+        this.request.printed = true
         Vue.http.get('security-element/get-pdf/' + this.request._id,
           {responseType: 'arraybuffer'}
         ).then(function (response) {
@@ -157,6 +195,11 @@
           return ''
         }
         return `${this.request.collaborator.lastname} ${this.request.collaborator.name}`
+      },
+      printButtonColor () {
+        return (this.printed)
+          ? '#4257b3'
+          : '#2b3775'
       }
     }
   }
@@ -172,6 +215,16 @@
     cursor: pointer;
   }
 
+  .printed-button-resolved {
+    margin-left: auto;
+    position: relative;
+    background-color: #e0d395;
+    right: 5%;
+    &:hover {
+      background-color: $secondary-darker;
+    }
+  }
+
   .print-button-resolved {
     margin-left: auto;
     position: relative;
@@ -185,6 +238,13 @@
 
   .print-button-pending {
     margin-left: auto;
+  }
+
+  .nonprint-button-pending {
+    margin-left: auto;
+    position: relative;
+    right: 5%;
+    background-color: #1a4407;
   }
 
   article {

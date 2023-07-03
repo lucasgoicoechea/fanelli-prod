@@ -12,7 +12,8 @@
                 <transition-group name="list-complete">
                   <request-card v-for="request in pendingResolution.requests" :key="request._id"
                                 :request="request"
-                                :showPrintButton="true"
+                                :showPrintButton="false"
+                                :showApprovadedButton="true"
                                 class="list-complete-item"></request-card>
                 </transition-group>
                 <p class="clarification" v-show="pendingResolution.requests.length === 0">

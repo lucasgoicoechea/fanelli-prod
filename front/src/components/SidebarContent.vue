@@ -108,7 +108,28 @@
             type: 'control-oficial-supervisionpart',
             routeName: 'control-oficial-control',
             route: {name: 'control-oficial-control'},
-            can: authorize(ROLES.OFICIALES, ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+            can: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
+            name: 'Partes Historico L3',
+            type: 'control-supervisionparts',
+            routeName: 'control-supervisionparts-historico-LTres',
+            route: {name: 'control-supervisionparts-historico-LTres'},
+            can: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
+            name: 'Partes Control L3',
+            type: 'control-oficial-control-LTres',
+            routeName: 'control-oficial-control-LTres',
+            route: {name: 'control-oficial-control-LTres'},
+            can: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
+          },
+          {
+            name: 'Partes Totales L3',
+            type: 'control-totales-supervisionparts-LTres',
+            routeName: 'control-totales-supervisionparts-LTres',
+            route: {name: 'control-totales-supervisionparts-LTres'},
+            can: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR)
           },
           {
             name: 'Panel de Control',
@@ -205,27 +226,9 @@
                 type: 'control-checklists-LTres',
                 route: {name: 'control-checklists-LTres'},
                 can: authorize(ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
-              },
-              {
-                name: 'Partes L3',
-                type: 'control-supervisionparts-LTres',
-                route: {name: 'control-supervisionparts-LTres'},
-                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
-              },
-              {
-                name: 'Partes Control L3',
-                type: 'control-resume-supervisionparts-LTres',
-                route: {name: 'control-resume-supervisionparts-LTres'},
-                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
-              },
-              {
-                name: 'Partes Totales L3',
-                type: 'control-totales-supervisionparts-LTres',
-                route: {name: 'control-totales-supervisionparts-LTres'},
-                can: authorize(ROLES.OFICIAL_L3, ROLES.JEFE_PLANTA, ROLES.JEFE_LINEA, ROLES.JEFE_MANTENIMIENTO, ROLES.RRHH)
               }
             ],
-            can: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.ADMINISTRACION)
+            can: authorize(ROLES.JEFES, ROLES.ADMINISTRACION)
           },
           {
             name: 'Checklist L2',
@@ -458,6 +461,57 @@
                 type: 'meeting-calendar',
                 route: {name: 'meeting-calendar'},
                 can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD)
+              }
+            ]
+          },
+          {
+            name: 'Desempeño',
+            img: '/static/img/icons-sidebar/staffRequests.svg',
+            type: 'productivity',
+            routeName: 'productivity-index',
+            can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+            submenu: [
+              {
+                name: 'Creación',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'productivity-creation',
+                route: {name: 'productivity-creation'},
+                can: authorize(ROLES.JEFES, ROLES.RRHH)
+              },
+              {
+                name: 'Mis Desempeños',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'productivity-list',
+                route: {name: 'productivity-list'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH)
+              },
+              {
+                name: 'Mis Desempeños Historico',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'productivity-history',
+                route: {name: 'productivity-history'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH)
+              },
+              {
+                name: 'Control',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'productivity-manager',
+                route: {name: 'productivity-manager'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH)
+              },
+              {
+                name: 'Sectores',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'productivity-sector',
+                route: {name: 'productivity-sector'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH)
+              },
+              {
+                name: 'Calendario',
+                img: '/static/img/icons-sidebar/staffRequests.svg',
+                type: 'productivity-calendar',
+                route: {name: 'productivity-calendar'},
+                can: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH)
               }
             ]
           },

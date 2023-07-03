@@ -321,6 +321,10 @@ const controller = {
       )
       securityElement.save()
     }
+    else {
+      securityElement.set({printed: true})
+      securityElement.save()
+    }
     res.contentType('application/pdf')
     pdfStream.end()
   }),

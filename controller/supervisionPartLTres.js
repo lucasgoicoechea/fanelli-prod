@@ -58,7 +58,7 @@ const controller = {
     //  if it's the first value of the checklist
     if (supervisionpartTmp.supervisor === undefined) {
       supervisionpartTmp.set({supervisor: req.user.id})
-      winston.log('debug', 'Primer valor de la supervision', supervisionpartTmp.sector)
+      // winston.log('debug', 'Primer valor de la supervision', supervisionpartTmp.sector)
       notification.clearNotification(supervisionpartTmp.sector + '-must-create-reminder')
     }
 
@@ -723,7 +723,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'date it s:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'date it s:', {date: date, localDate: date.toLocaleString()})
     SECTORS.forEach(s => {
       summaries.push(summaryForSector(date, s))
     })
@@ -738,7 +738,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'supervisionpart date it s:', {date: date, localDate: date.toLocaleString()})
 
     let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
     const hours = awaitFor(HourModel.find().lean())
@@ -780,7 +780,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'vengo por los totales fecha:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'vengo por los totales fecha:', {date: date, localDate: date.toLocaleString()})
     const sector =  'DESAPILADORA'   
     let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
     //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
@@ -804,7 +804,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'supervisionpart totalesExtrusora:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'supervisionpart totalesExtrusora:', {date: date, localDate: date.toLocaleString()})
     const sector =  'EXTRUSORA'   
     let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
     //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
@@ -844,7 +844,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'supervisionpart totalesApiladora:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'supervisionpart totalesApiladora:', {date: date, localDate: date.toLocaleString()})
     const sector =  'APILADORA'   
     let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
     //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
@@ -884,7 +884,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'supervisionpart totalesDesapiladora :', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'supervisionpart totalesDesapiladora :', {date: date, localDate: date.toLocaleString()})
     const sector =  'DESAPILADORA'   
     let supervisionparts = awaitFor(SupervisionpartModel.getSupervisionPartForDayAndSector(date, sector))
     //ARMO ARREGLO CLAVE=MATEIRAL Y VALOR=TONELADAS PALLETS
@@ -972,7 +972,7 @@ const updateReminders = async(function (hours) {
   //const someCheckIsFalse = _.some(lastVersions, v => v.value === false)
   const someCheckIsFalse = false
   if (someCheckIsFalse && !awaitFor(notification.notificationExists('something-bad'))) {
-    winston.log('debug', 'Hay algo que corregir y no hay reminder')
+    // winston.log('debug', 'Hay algo que corregir y no hay reminder')
     notification.pushNotificationEvery(
       config.CHECKLIST_REMINDER,
       {user_type: USER_TYPE.SUPERVISOR_PRODUCCION},
@@ -983,14 +983,14 @@ const updateReminders = async(function (hours) {
 
     // if there is a notification reminder already set it sets it to null, because there is nothing bad
   } else if (!someCheckIsFalse) {
-    winston.log('debug', 'Todo esta bien')
+    // winston.log('debug', 'Todo esta bien')
     notification.clearNotification('something-bad')
   }
 
   // let missingChecks = _.some(lastVersions, c => c.value === undefined)
   let missingChecks = false
   if (missingChecks && !awaitFor(notification.notificationExists('must-complete'))) {
-    winston.log('debug', 'Faltan campos que completar del parte de supervision y no hay un reminder')
+    // winston.log('debug', 'Faltan campos que completar del parte de supervision y no hay un reminder')
     notification.pushNotificationEvery(
       config.CHECKLIST_REMINDER,
       {user_type: USER_TYPE.SUPERVISOR_PRODUCCION},
@@ -999,7 +999,7 @@ const updateReminders = async(function (hours) {
       'must-complete'
     )
   } else if (!missingChecks) {
-    winston.log('debug', 'Todo el parte de supervision esta completo')
+    // winston.log('debug', 'Todo el parte de supervision esta completo')
     notification.clearNotification('must-complete')
   }
 })
@@ -1187,15 +1187,15 @@ function getLastOrCreate (user_id, sector) {
     let schedule = shift.getSchedule(new Date())
     //  First supervisionpart ever
     if (supervisionpart === null) {
-      winston.log('debug', 'First supervisionpart ever')
+      // winston.log('debug', 'First supervisionpart ever')
       return awaitFor(createSupervisionpart(user_id, sector, schedule, now))
     }
     let diff = (now - supervisionpart.date)
     if (diff > SHIFT_DURATION_MS) {
-      winston.log('debug', 'First supervisionpart of shift:'+diff+'-'+SHIFT_DURATION_MS)
+      // winston.log('debug', 'First supervisionpart of shift:'+diff+'-'+SHIFT_DURATION_MS)
       return awaitFor(createSupervisionpart(user_id, sector, schedule, now))
     } 
-    winston.log('debug', 'update hours ')
+    // winston.log('debug', 'update hours ')
     // return supervisionpart
     return awaitFor(updateHoursSupervisionpart(supervisionpart, schedule, user_id, now))
   })()

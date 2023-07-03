@@ -31,6 +31,7 @@ module.exports = {
   occurrence: require(path.join(__dirname, '/occurrence')),
   announcement: require(path.join(__dirname, '/announcement')),
   meeting: require(path.join(__dirname, '/meeting')),
+  productivity: require(path.join(__dirname, '/productivity')),
   position: require(path.join(__dirname, '/position')),
   user: require(path.join(__dirname, '/user')),
   area: require(path.join(__dirname, '/area')),

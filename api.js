@@ -62,6 +62,7 @@ const Router = {
     app.use('/api/report', routes.report)
     app.use('/api/announcement', routes.announcement)
     app.use('/api/meeting', routes.meeting)
+    app.use('/api/productivity', routes.productivity)
     app.use('/api/position', routes.position)
     app.use('/api/sector', routes.sector)
     app.use('/api/line', routes.line)
@@ -90,7 +91,7 @@ function errorHandler (app) {
       })
     } else {
       winston.log('error', 'unhandled error', {error: err.toString()})
-      winston.log('info', 'unhandled error ', {error: err.toString()})
+      // winston.log('info', 'unhandled error ', {error: err.toString()})
       res.status(500).send('Something broke!')
     }
   })
