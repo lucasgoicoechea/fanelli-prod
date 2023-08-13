@@ -1059,25 +1059,32 @@ const generateReportForDay = async(function (date) {
   return excel.generateExcelSupervisionPartByDay(totales)
 })
 
+
 function updateHoursSupervisionpart (supervisionPart, schedule, user_id, now) {
   let diff = 0
   let cantHoras = 0
-  // console.log(`date${now}`)
+  //winston.log('info',`date${now}`)
+  //winston.log('info', 'Schedule ' + schedule.value)
+  //winston.log('info', 'parte persistido ' + supervisionPart)
+  //winston.log('info', 'Schedule ' + supervisionPart.schedule.value)
   if (schedule.value === 'NOCHE' && now.getHours() < 6) {
     now.setDate(now.getDate() - 1)
     cantHoras = now.getHours() + 3
   }
   let date = new Date(now.toDateString()).setHours(schedule.begins)
+  //winston.log('info', 'Fecha hora begin ' + date)
   if (cantHoras == 0) {
     diff = (now - date)
     cantHoras = Math.floor((diff / (1000 * 60 * 60)) % 24) + 1
   }
-  //chequeamos si esta dentro del chagui de 5 minutos
+  //winston.log('info', 'Cantidad de hs ' + cantHoras)
+  //chequeamos si esta dentro del changui de 5 minutos
   if (cantHoras < 9 ) {      
 
     // let hours = []
     let found = null
     let hoursKey = _.map(supervisionPart.hours)
+    //winston.log('info', 'hoursKey (horas q ya tiene el parte)' + hoursKey)
     awaitFor(HourModel.find({schedule: schedule.value}).sort({ordertime: 1}).lean())
       .forEach(c => {
         if (cantHoras > 0) {
@@ -1108,7 +1115,7 @@ function updateHoursSupervisionpart (supervisionPart, schedule, user_id, now) {
                 //value.totals[value.totals.length - 1].number = 0
               }  */
             }
-            
+            //winston.log('info', 'nueva hora ' + value)
             supervisionPart.hours.push(value)
             //console.log('pongo en 0 totales')
             /*if (value.totals && value.totals.length > 0) {
@@ -1127,6 +1134,8 @@ function updateHoursSupervisionpart (supervisionPart, schedule, user_id, now) {
   // notification.clearNotification('something-bad')
   // notification.clearNotification(sector + '-must-create-reminder')
   //console.log('estoy por guardar update hours')
+  //winston.log('info', 'parte persistido ' + supervisionPart)
+  //winston.log('info', 'Schedule ' + supervisionPart.schedule.value)
   let supervisionpart = awaitFor(supervisionPart.save())
   //console.log('guardo y devuelvo')
   supervisionpart = awaitFor(SupervisionpartModel
@@ -1187,17 +1196,29 @@ function getLastOrCreate (user_id, sector) {
     let schedule = shift.getSchedule(new Date())
     //  First supervisionpart ever
     if (supervisionpart === null) {
-      // winston.log('debug', 'First supervisionpart ever')
+      //winston.log('info', 'First supervisionpart ever')
       return awaitFor(createSupervisionpart(user_id, sector, schedule, now))
     }
     let diff = (now - supervisionpart.date)
     if (diff > SHIFT_DURATION_MS) {
-      // winston.log('debug', 'First supervisionpart of shift:'+diff+'-'+SHIFT_DURATION_MS)
+      //winston.log('info', 'First supervisionpart of shift:'+diff+'-'+SHIFT_DURATION_MS)
       return awaitFor(createSupervisionpart(user_id, sector, schedule, now))
     } 
-    // winston.log('debug', 'update hours ')
+    //winston.log('info', 'update hours ')
+    let scheduleTMP;
+    switch (supervisionpart.schedule) {
+      case ('MANIANA'):
+        scheduleTMP = shift.SCHEDULE.MANIANA
+        break
+      case ('NOCHE'):
+        scheduleTMP = shift.SCHEDULE.NOCHE
+        break
+      case ('TARDE'):
+        scheduleTMP = shift.SCHEDULE.TARDE
+        break
+    }
     // return supervisionpart
-    return awaitFor(updateHoursSupervisionpart(supervisionpart, schedule, user_id, now))
+    return awaitFor(updateHoursSupervisionpart(supervisionpart, scheduleTMP, user_id, now))
   })()
 }
 

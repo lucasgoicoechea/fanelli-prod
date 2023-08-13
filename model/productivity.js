@@ -88,8 +88,8 @@ productivitySchema.methods.printableDetails = function () {
   const details = []
 
   details.push({
-    key: `Reunion ${this.type === 'FRECUENCY'?Const.MEETING_FRECUENCY[this.frecuency]:Const.READABLE_MEETING_TYPE[this.type]}: `,
-    value: this.recommendations.map(t => Const.READABLE_RECOMMENDATION_MEETING[t]).join(', ')
+    key: `Evaluación de Desempeño`,
+    value: `Reunión de notificación`
   })
 
   details.push({
@@ -106,6 +106,7 @@ productivitySchema.methods.printableDetails = function () {
   html = html.replace(/<\/p>/ig, '\n');
   html = html.replace(/<br\s*[\/]?>/gi, "\n");
   html = html.replace(/<[^>]+>/ig, '');
+  html = html.replace('&nbsp;', '');
   details.push({
     key: 'Temas: ',
     value: html

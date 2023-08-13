@@ -40,7 +40,7 @@
     },
     methods: {
       updateInput (e) {
-        this.$store.commit('supervisionparts/updateAuxExtra', {sector: this.item.hour.sector, value: e.target.value})
+        this.$store.commit('supervisionpartsLTres/updateAuxExtra', {sector: this.item.hour.sector, value: e.target.value})
       }
     },
     computed: {

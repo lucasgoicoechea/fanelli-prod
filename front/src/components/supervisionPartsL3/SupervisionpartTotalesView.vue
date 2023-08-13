@@ -341,16 +341,16 @@
         this.supervisionpartTotales = []
         if (this.validateDate) {
           this.loading = true
-          this.$store.dispatch('supervisionparts/totales', {date: this.convertedDate})
+          this.$store.dispatch('supervisionpartsLTres/totales', {date: this.convertedDate})
             .then(this.successFetch)
             .catch(this.catchError)
-          this.$store.dispatch('supervisionparts/totalesApiladora', {date: this.convertedDate})
+          this.$store.dispatch('supervisionpartsLTres/totalesApiladora', {date: this.convertedDate})
             .then(this.successApiladoraFetch)
             .catch(this.catchError)
-          this.$store.dispatch('supervisionparts/totalesDesapiladora', {date: this.convertedDate})
+          this.$store.dispatch('supervisionpartsLTres/totalesDesapiladora', {date: this.convertedDate})
             .then(this.successDesapiladoraFetch)
             .catch(this.catchError)
-          this.$store.dispatch('supervisionparts/totalesExtrusora', {date: this.convertedDate})
+          this.$store.dispatch('supervisionpartsLTres/totalesExtrusora', {date: this.convertedDate})
             .then(this.successExtrusoraFetch)
             .catch(this.catchError)
           this.current = Const.currentSchedule().value
@@ -380,7 +380,7 @@
         return Promise.reject()
       },
       generateReport () {
-        this.$store.dispatch('supervisionparts/getAllReportDay', this.convertedDate)
+        this.$store.dispatch('supervisionpartsLTres/getAllReportDay', this.convertedDate)
           .then(this.successfulPrint)
           .catch(this.errorPrint)
       }

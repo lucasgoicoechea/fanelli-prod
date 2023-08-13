@@ -90,6 +90,7 @@ import ReportNewsEarly from '@/components/news/ReportNewsEarly.vue'
 import ReportNewsAccident from '@/components/news/ReportNewsAccident.vue'
 import ReportNewsObservation from '@/components/news/ReportNewsObservation.vue'
 import ReportNewsScheduled from '@/components/news/ReportNewsScheduled.vue'
+import ReportNewsScheduledPrev from '@/components/news/ReportNewsScheduledPrev.vue'
 import ControlPersonal from '@/components/control/ControlPersonal.vue'
 import PersonalManager from '@/components/personal/PersonalManager.vue'
 import PersonalStaffRequest from '@/components/personal/PersonalStaffRequest.vue'
@@ -452,6 +453,15 @@ const router = new Router({
                 fail: '/error'
               }
             },
+            /* {
+              path: 'supervisionpartsLTres',
+              name: 'control-supervisionparts-LTres',
+              component: SupervisionpartsL3Control,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            }, */
             {
               path: 'supervisionparts-resume-LTres',
               name: 'control-oficial-control-LTres',
@@ -989,6 +999,15 @@ const router = new Router({
               component: ReportNewsObservation,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.PERSONAL, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'novedad-personal-prev',
+              name: 'report-news-scheduled-prev',
+              component: ReportNewsScheduledPrev,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.PERSONAL, ROLES.RRHH),
                 fail: '/error'
               }
             },
