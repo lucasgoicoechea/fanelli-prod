@@ -101,8 +101,8 @@ const controller = {
       }
     }
     let perms = req.body.perms
-    if(perms){
-      perms.array.forEach(perm => {
+    if(perms && perms !== undefined ){
+      perms.forEach(perm => {
         if(perm.checked){
           let permUser = new PermUsuarioModel()
           permUser.user = perm.user
@@ -126,7 +126,7 @@ const controller = {
     let name = req.query.q
     let currentShift = getShift()
     let currentWorkersShift
-    winston.log('debug', 'current shift', {'shift': currentShift})
+    // winston.log('debug', 'current shift', {'shift': currentShift})
     if (name !== undefined) {
       currentWorkersShift = awaitFor(UserModel.find({
         shift: currentShift,
@@ -142,7 +142,7 @@ const controller = {
   searchEmployees: async(function (req, res) {
     let name = req.query.q
     let currentShift = getShift()
-    winston.log('debug', 'current shift', {'shift': currentShift})
+    // winston.log('debug', 'current shift', {'shift': currentShift})
     let employees = awaitFor(UserModel.find({
       $or: [
         {name: new RegExp('.*' + name + '.*', 'i')},
@@ -224,7 +224,7 @@ const controller = {
       awaitFor(user.save())
       res.send({success: true, picture: user.picture})
     } catch (error) {
-      winston.log('debug', 'Error sending image to s3', {error: error})
+      // winston.log('debug', 'Error sending image to s3', {error: error})
       next(new AppError('Something went wrong', 'Hubo un error al intentar guardar la foto', 500))
     }
   }),

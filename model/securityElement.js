@@ -62,6 +62,10 @@ const SecurityElementSchema = new Schema({
     type: Boolean,
     default: false
   },
+  printed: {
+    type: Boolean,
+    default: false
+  },
   // How many requests the employee did to get security elements
   collaborator_request: {
     type: Number

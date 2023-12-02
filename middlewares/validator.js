@@ -10,7 +10,7 @@ function validatorMiddleware (req, res, next) {
     validationResult(req).throw()
     next()
   } catch (err) {
-    winston.log('debug', 'Missing required data: ', {err: err.mapped()})
+    // winston.log('debug', 'Missing required data: ', {err: err.mapped()})
     let errorMessages = _.map(err.mapped(), error => error.msg)
     let message = _.reduce(errorMessages,
       (acc, msg) => acc + ' ' + msg + ',',

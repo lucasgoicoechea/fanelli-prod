@@ -37,9 +37,9 @@ const controller = {
       betadas: null,
       descargado: false
     }
-    if (bugReport.inconveniente === 'REPUESTO') {
+    /*if (bugReport.inconveniente === 'REPUESTO') {
       bugReport.betadas = true;
-    }
+    }*/
     bugReport = awaitFor(bugReportService.create(bugReport))
     res.json({success: true, bugReport})
   }),

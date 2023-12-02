@@ -21,7 +21,7 @@ let reloadToken = async(function (req, res, next) {
             }
             req.decoded = decoded;
         });
-        winston.log('debug', 'New refresh login from', {user: req.decoded.user.name})
+        // winston.log('debug', 'New refresh login from', {user: req.decoded.user.name})
         let user = req.decoded.user
         let token = jwt.sign({
             user_type: user.user_type,

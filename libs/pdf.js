@@ -480,8 +480,73 @@ const pdf = {
       pageMargins: [30, 140, 30, 30],
       pageOrientation: 'portrait'
     }
-  }
+  },
 
+  getProductivityContent: function (meeting) {
+    const content = []
+    const header = {
+      image: path.join(Const.PDF_IMAGES_PATH, 'DESEMPENIO' + '.jpg'),
+      width: 600,
+      height: 120
+    }
+
+    content.push({text: 'Participantes: \n', style: {bold: true}})
+
+    meeting.collaborators.forEach((collaborator) => {
+      content.push([
+        {text: `${collaborator.legajo} - ${collaborator.name} ${collaborator.lastname}`}
+      ])
+    })
+    content.push([
+      {text: `${meeting.creator.legajo} - ${meeting.creator.name} ${meeting.creator.lastname}`}
+    ])
+    const printableContent = meeting.printableDetails()
+    const detailList = []
+    printableContent.forEach((content) => {
+      detailList.push({text: [{text: content.key, bold: true}, `\n ${content.value}`], margin: [0, 20, 0, 0]})
+    })
+    content.push(detailList)
+    content.push({text: '', pageBreak: 'before'})
+    content.push(`Desempeño del ${dateFns.format(meeting.date, 'DD/MM/YYYY')} a hora ${meeting.time}`)
+    const notificationList = [{text: 'Notificado', bold: true, alignment: 'left'}]
+    const nameList = [{text: 'Apellido', bold: true}]
+    const presentList = [{text: 'Presente', bold: true}]
+    const signatureList = [{text: 'Firma', bold: true}]
+
+    meeting.collaborators.forEach(c => {
+      nameList.push({text: `${c.legajo} - ${c.lastname}`, margin: [0, 20, 0, 0]})
+      notificationList.push({text: '_____', margin: [0, 20, 0, 0]})
+      presentList.push({text: '_____', margin: [0, 20, 0, 0]})
+      signatureList.push({text: '_______________', margin: [0, 20, 0, 0]})
+    })
+
+    nameList.push({text: `${meeting.creator.legajo} - ${meeting.creator.lastname}`, margin: [0, 20, 0, 0]})
+    notificationList.push({text: '_____', margin: [0, 20, 0, 0]})
+    presentList.push({text: '_____', margin: [0, 20, 0, 0]})
+    signatureList.push({text: '_______________', margin: [0, 20, 0, 0]})
+
+    const assistanceList = {
+      columns: [
+        nameList,
+        notificationList,
+        presentList,
+        signatureList
+      ],
+      margin: [0, 20, 0, 0],
+      alignment: 'center'
+    }
+
+    content.push(assistanceList)
+    return {
+      header,
+      content,
+      styles: {
+        header: HEADER_STYLE
+      },
+      pageMargins: [30, 140, 30, 30],
+      pageOrientation: 'portrait'
+    }
+  }
 }
 
 function checkAsStringArray (check) {

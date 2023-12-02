@@ -15,7 +15,7 @@ const controller = {
       .populate('shift')
     )
     if (user !== null && awaitFor(user.comparePassword(req.body.password))) {
-      winston.log('debug', 'New login from', {user: req.body.username})
+      // winston.log('debug', 'New login from', {user: req.body.username})
       let token = jwt.sign({
         user_type: user.user_type,
         id: user._id,
@@ -40,7 +40,7 @@ const controller = {
       }
       res.json({success: true, user: userResponse, token: token})
     } else {
-      winston.log('debug', 'Incorrect login from ', {username: req.body.username, password: req.body.password})
+      // winston.log('debug', 'Incorrect login from ', {username: req.body.username, password: req.body.password})
       next(new AppError('Invalid credentials', 'Nombre de usuario o contraseña incorrectos'))
     }
   }),

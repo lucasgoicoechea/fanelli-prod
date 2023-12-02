@@ -72,6 +72,9 @@
             </div>
             <div class="col-xs-12 col-md-6 col-md-push-3 col-lg-4 col-lg-push-4" style="position : unset">
                   <p class = "perms">PERMISOS </p>
+                  <div v-if="permsRol == null || permsRol.lenght == 0" >
+                    SIN PERMISOS PARA ESE ROL
+                  </div>
                   <div v-for="item in permsRol"   :key="item._id" > 
                     <span class="checkmark"><input
                       type="checkbox"

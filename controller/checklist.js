@@ -52,7 +52,7 @@ const controller = {
     //  if it's the first value of the checklist
     if (checklist.supervisor === undefined) {
       checklist.set({supervisor: req.user.id})
-      winston.log('debug', 'Primer valor de la checklist', checklist.sector)
+      // winston.log('debug', 'Primer valor de la checklist', checklist.sector)
       notification.clearNotification(checklist.sector + '-must-create-reminder')
     }
 
@@ -242,7 +242,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'date it s:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'date it s:', {date: date, localDate: date.toLocaleString()})
     SECTORS.forEach(s => {
       summaries.push(summaryForSector(date, s))
     })
@@ -310,7 +310,7 @@ const controller = {
     } else {
       date = new Date(new Date().toDateString())
     }
-    winston.log('debug', 'date it s:', {date: date, localDate: date.toLocaleString()})
+    // winston.log('debug', 'date it s:', {date: date, localDate: date.toLocaleString()})
 
     let checklists = awaitFor(ChecklistModel.getChecklistsForDayAndSector(date, sector))
     const checks = awaitFor(CheckModel.find({sector: sector.toUpperCase()}).lean())
@@ -376,7 +376,7 @@ const updateReminders = async(function (checks) {
   // if there is a notification reminder already set it doesn't create another
   const someCheckIsFalse = _.some(lastVersions, v => v.value === false)
   if (someCheckIsFalse && !awaitFor(notification.notificationExists('something-bad'))) {
-    winston.log('debug', 'Hay algo que corregir y no hay reminder')
+    // winston.log('debug', 'Hay algo que corregir y no hay reminder')
     notification.pushNotificationEvery(
       config.CHECKLIST_REMINDER,
       {user_type: USER_TYPE.SUPERVISOR_PRODUCCION},
@@ -387,13 +387,13 @@ const updateReminders = async(function (checks) {
 
     // if there is a notification reminder already set it sets it to null, because there is nothing bad
   } else if (!someCheckIsFalse) {
-    winston.log('debug', 'Todo esta bien')
+    // winston.log('debug', 'Todo esta bien')
     notification.clearNotification('something-bad')
   }
 
   let missingChecks = _.some(lastVersions, c => c.value === undefined)
   if (missingChecks && !awaitFor(notification.notificationExists('must-complete'))) {
-    winston.log('debug', 'Faltan campos que completar del checklist y no hay un reminder')
+    // winston.log('debug', 'Faltan campos que completar del checklist y no hay un reminder')
     notification.pushNotificationEvery(
       config.CHECKLIST_REMINDER,
       {user_type: USER_TYPE.SUPERVISOR_PRODUCCION},
@@ -402,7 +402,7 @@ const updateReminders = async(function (checks) {
       'must-complete'
     )
   } else if (!missingChecks) {
-    winston.log('debug', 'Todo el checklist esta completo')
+    // winston.log('debug', 'Todo el checklist esta completo')
     notification.clearNotification('must-complete')
   }
 })
@@ -442,12 +442,12 @@ function getLastOrCreate (sector) {
     let schedule = shift.getSchedule(new Date())
     //  First checklist ever
     if (checklist === null) {
-      winston.log('debug', 'First checklist ever')
+      // winston.log('debug', 'First checklist ever')
       return awaitFor(createChecklist(sector, schedule, now))
     }
     let diff = (now - checklist.date)
     if (diff > SHIFT_DURATION_MS) {
-      winston.log('debug', 'First checklist of shift')
+      // winston.log('debug', 'First checklist of shift')
       return awaitFor(createChecklist(sector, schedule, now))
     } else {
       return checklist

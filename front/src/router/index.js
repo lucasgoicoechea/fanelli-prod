@@ -78,6 +78,7 @@ import ProfileArchiveStaffRequests from '@/components/profile/ProfileArchiveStaf
 import ProfileArchiveSanctions from '@/components/profile/ProfileArchiveSanctions'
 import ProfileArchiveOccurrences from '@/components/profile/ProfileArchiveOccurrences'
 import ProfileArchiveMeeting from '@/components/profile/ProfileArchiveMeetings'
+import ProfileArchiveProductivity from '@/components/profile/ProfileArchiveProductivitys'
 
 // Personal
 import PersonalIndex from '@/components/personal/PersonalIndex'
@@ -89,6 +90,7 @@ import ReportNewsEarly from '@/components/news/ReportNewsEarly.vue'
 import ReportNewsAccident from '@/components/news/ReportNewsAccident.vue'
 import ReportNewsObservation from '@/components/news/ReportNewsObservation.vue'
 import ReportNewsScheduled from '@/components/news/ReportNewsScheduled.vue'
+import ReportNewsScheduledPrev from '@/components/news/ReportNewsScheduledPrev.vue'
 import ControlPersonal from '@/components/control/ControlPersonal.vue'
 import PersonalManager from '@/components/personal/PersonalManager.vue'
 import PersonalStaffRequest from '@/components/personal/PersonalStaffRequest.vue'
@@ -141,6 +143,18 @@ import MeetingVisualization from '@/components/meeting/MeetingVisualization'
 import MeetingManager from '@/components/meeting/MeetingManager'
 import MeetingSector from '@/components/meeting/MeetingSector'
 import MeetingCalendar from '@/components/meeting/MeetingCalendar'
+
+// Desempeño
+import ProductivityIndex from '@/components/productivity/ProductivityIndex'
+import ProductivityCreation from '@/components/productivity/ProductivityCreation'
+import ProductivityEdition from '@/components/productivity/ProductivityEdition'
+import ProductivityList from '@/components/productivity/ProductivityList'
+import ProductivityHistory from '@/components/productivity/ProductivityHistory'
+import ProductivityVisualization from '@/components/productivity/ProductivityVisualization'
+import ProductivityManager from '@/components/productivity/ProductivityManager'
+import ProductivitySector from '@/components/productivity/ProductivitySector'
+import ProductivityCalendar from '@/components/productivity/ProductivityCalendar'
+
 import treeFailsManagement from '@/components/fails/treefails/TreeFailsManagement'
 
 const { ROLES } = Const
@@ -300,6 +314,15 @@ const router = new Router({
                     permission: 'any',
                     fail: '/error'
                   }
+                },
+                {
+                  path: 'desempenios',
+                  name: 'profile-archive-productivitys',
+                  component: ProfileArchiveProductivity,
+                  meta: {
+                    permission: 'any',
+                    fail: '/error'
+                  }
                 }
               ]
             }
@@ -313,65 +336,6 @@ const router = new Router({
             permission: 'any',
             fail: '/error'
           }
-        },
-        {
-          path: 'control',
-          component: ControlPanel,
-          name: 'control-panel-linea3',
-          redirect: {
-            name: 'control-panel-index-linea3'
-          },
-          meta: {
-            permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SUPERVISORES),
-            fail: '/error'
-          },
-          children: [
-            {
-              path: '',
-              name: 'control-panel-index-linea3',
-              component: ControlL3Index,
-              meta: {
-                permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION),
-                fail: '/error'
-              }
-            },
-            {
-              path: 'checklistsLTres',
-              name: 'control-checklists-LTres',
-              component: ChecklistsL3Control,
-              meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
-                fail: '/error'
-              }
-            },
-            {
-              path: 'supervisionpartsLTres',
-              name: 'control-supervisionparts-LTres',
-              component: SupervisionpartsL3Control,
-              meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
-                fail: '/error'
-              }
-            },
-            {
-              path: 'supervisionparts-resume-LTres',
-              name: 'control-resume-supervisionparts-LTres',
-              component: SupervisionpartsL3Resumen,
-              meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
-                fail: '/error'
-              }
-            },
-            {
-              path: 'supervisionparts-totals-LTres',
-              name: 'control-totales-supervisionparts-LTres',
-              component: SupervisionpartL3Totales,
-              meta: {
-                permission: authorize(ROLES.JEFES, ROLES.RRHH),
-                fail: '/error'
-              }
-            }
-          ]
         },
         {
           path: 'control',
@@ -445,6 +409,74 @@ const router = new Router({
               component: SupervisionpartsResumen,
               meta: {
                 permission: authorize(ROLES.OFICIALES, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'control',
+          component: ControlPanel,
+          name: 'control-panel-linea3',
+          redirect: {
+            name: 'control-panel-index-linea3'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.ADMINISTRACION, ROLES.SUPERVISORES),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: '',
+              name: 'control-panel-index-linea3',
+              component: ControlL3Index,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.ADMINISTRACION),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'checklistsLTres',
+              name: 'control-checklists-LTres',
+              component: ChecklistsL3Control,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionpartsLTres',
+              name: 'control-supervisionparts-historico-LTres',
+              component: SupervisionpartsL3Control,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            /* {
+              path: 'supervisionpartsLTres',
+              name: 'control-supervisionparts-LTres',
+              component: SupervisionpartsL3Control,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            }, */
+            {
+              path: 'supervisionparts-resume-LTres',
+              name: 'control-oficial-control-LTres',
+              component: SupervisionpartsL3Resumen,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'supervisionparts-totals-LTres',
+              name: 'control-totales-supervisionparts-LTres',
+              component: SupervisionpartL3Totales,
+              meta: {
+                permission: authorize(ROLES.OFICIAL_L3, ROLES.SUPERVISOR_PRODUCCION, ROLES.SUPERVISOR, ROLES.JEFES, ROLES.RRHH),
                 fail: '/error'
               }
             }
@@ -971,6 +1003,15 @@ const router = new Router({
               }
             },
             {
+              path: 'novedad-personal-prev',
+              name: 'report-news-scheduled-prev',
+              component: ReportNewsScheduledPrev,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.PERSONAL, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
               path: 'novedad-personal',
               name: 'report-news-scheduled',
               component: ReportNewsScheduled,
@@ -1267,6 +1308,92 @@ const router = new Router({
               component: MeetingEdition,
               meta: {
                 permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.ADMINISTRACION, ROLES.HIGIENE_SEGURIDAD),
+                fail: '/error'
+              }
+            }
+          ]
+        },
+        {
+          path: 'productivity',
+          component: ProductivityIndex,
+          name: 'productivity-index',
+          redirect: {
+            name: 'productivity-creation'
+          },
+          meta: {
+            permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+            fail: '/error'
+          },
+          children: [
+            {
+              path: 'creacion',
+              name: 'productivity-creation',
+              component: ProductivityCreation,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'listado',
+              name: 'productivity-list',
+              component: ProductivityList,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'control',
+              name: 'productivity-manager',
+              component: ProductivityManager,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'sectores',
+              name: 'productivity-sector',
+              component: ProductivitySector,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'calendario',
+              name: 'productivity-calendar',
+              component: ProductivityCalendar,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: 'productivity-historial',
+              name: 'productivity-history',
+              component: ProductivityHistory,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':id',
+              name: 'productivity-detail',
+              component: ProductivityVisualization,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
+                fail: '/error'
+              }
+            },
+            {
+              path: ':id/edicion',
+              name: 'productivity-edition',
+              component: ProductivityEdition,
+              meta: {
+                permission: authorize(ROLES.JEFES, ROLES.SUPERVISORES, ROLES.RRHH),
                 fail: '/error'
               }
             }

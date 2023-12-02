@@ -1,7 +1,7 @@
 <template>
   <card-container @click.native="goToRequest(request)">
     <card-header :headerBackground="bugReportTypeColor(request)" :subHeaderBackground="bugReportTypeSubColor(request)">
-      <p slot="header">Estado de falla: {{ bugReportType(request) }}
+      <p style="color: black" slot="header">Estado de falla: {{ bugReportType(request) }}
         <span v-show="showObservationSection(request)"></span>
         <span v-if="betada(request)"><img  src="/static/img/checklists/tick.svg" alt="">(OT)</span>
         <img v-if="!betada(request)" src="/static/img/checklists/cross.svg" alt="">
@@ -96,7 +96,13 @@
       // ACOMODAR LOS COLORES DE LA PRIORIDAD
       bugReportTypeColor (request) {
         if (request.estado === 'SOLUCIONADO') return '#65c25a'
-        if (request.estado === 'NO_SOLUCIONADO') return '#f86567'
+        if (request.estado === 'NO_SOLUCIONADO') {
+          if (this.betada(request)) {
+            return '#c7b032'
+          } else {
+            return '#f86567'
+          }
+        }
         if (request.estado === 'SOLUCION_TEMPORAL') return '#e28c44'
       },
       bugReportTypeSubColor (request) {

@@ -3,7 +3,7 @@
     <input
       :type="typeInput"
       :value="val"
-    
+      v-model="checked"
       :disabled="disabled"
       @change="onChange">
     <span class="checkmark"></span>

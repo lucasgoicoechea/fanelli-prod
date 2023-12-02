@@ -40,7 +40,7 @@ app.use('/api', idempotencyChecker(mongooseIdempotencyHandler))
 api.init(app)
 notification.init()
 server.start(config, app)
-winston.level = config.logLevel
+winston.level = 'info'//config.logLevel
 winston.log('info', 'App ready')
 
 module.exports = app
