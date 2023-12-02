@@ -106,7 +106,8 @@ productivitySchema.methods.printableDetails = function () {
   html = html.replace(/<\/p>/ig, '\n');
   html = html.replace(/<br\s*[\/]?>/gi, "\n");
   html = html.replace(/<[^>]+>/ig, '');
-  html = html.replace('&nbsp;', '');
+  html = html.replace(/\u00a0/g, " ");
+  html = html.replace(/&nbsp;/g, " ");
   details.push({
     key: 'Temas: ',
     value: html

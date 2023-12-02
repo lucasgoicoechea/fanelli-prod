@@ -8,7 +8,7 @@ const unless = require('express-unless')
 
 let validateUser = async(function (req, res, next) {
   if (!ObjectId.isValid(req.user.id)) {
-    next(Boom.unauthorized('Token invalido o mal formado - RE002'))
+    next(Boom.unauthorized('Token invalido o mal formado'))
     return
   }
   let user = awaitFor(userModel.findOne({_id: req.user.id, 'auth.username': {$exists: true}, 'auth.password': {$exists: true}}, {user_type: 1}))
@@ -16,7 +16,7 @@ let validateUser = async(function (req, res, next) {
     req.user.user_type = user.user_type
     next()
   } else {
-    next(Boom.unauthorized('Token invalido o mal formado - RE003'))
+    next(Boom.unauthorized('Token invalido o mal formado'))
   }
 })
 

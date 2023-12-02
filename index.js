@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', expressJWT({secret: config.jwtSecret}).unless({path: ['/api/login']}))
 
-app.use('/api', reloadToken.unless({path: ['/api/login']})) 
+//app.use('/api', reloadToken.unless({path: ['/api/login']})) 
 
 app.use('/api', validateUser.unless({path: ['/api/login']}))
 
@@ -40,7 +40,7 @@ app.use('/api', idempotencyChecker(mongooseIdempotencyHandler))
 api.init(app)
 notification.init()
 server.start(config, app)
-winston.level = 'info'//config.logLevel
+winston.level = config.logLevel
 winston.log('info', 'App ready')
 
 module.exports = app
