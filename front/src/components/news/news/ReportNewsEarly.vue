@@ -8,19 +8,8 @@
             <h3>Selección del colaborador</h3>
             <collaborator-selector></collaborator-selector>
           </div>
-          <div class="col-xs-12" v-if="$can($constants.ROLES.PERSONAL + '|' + $constants.ROLES.RRHH)">
-            <h3>Fecha del Evento</h3>
-            <div class="calendar">
-              <div class="picker">
-                <flat-pickr
-                  v-model="date"
-                  :config="confPicker"
-                  ref="_flatpickr"
-                  placeholder="Seleccione una fecha"></flat-pickr>
-              </div>
-              <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
-            </div>
-            <h3>Hora de ingreso</h3>
+          <div class="col-xs-12">
+            <h3>Hora de salida</h3>
             <input type="time" v-model="enterTime">
           </div>
           <div class="col-xs-12">
@@ -49,13 +38,24 @@
       </div>
     </section>
     <bottom-navbar>
-      <div class="action" @click="sendReport">
-        <div class="text-action ta-right">
-          <h5>Enviar</h5>
-          <h5>reporte</h5>
+      <div class="submit">
+        <div class="msg pointer" :class="notAllow" @click="sendReport" v-show="!loaderSubmit">
+          <h5 class="items">Enviar reporte</h5>
+          <span class="glyphicon glyphicon-send items icon-action"></span>
         </div>
-        <div class="icon-action">
-          <span class="glyphicon glyphicon-send"></span>
+        <div class="msg pointer" v-show="loaderSubmit">
+          <h5 class="items">Enviando</h5>
+          <spinner class="items" :show="loaderSubmit"></spinner>
+        </div>
+      </div>
+      <div class="print" v-show="submitedRequest !== null">
+        <div class="msg pointer" @click="modalPrint" v-show="!loaderPrint">
+          <span class="glyphicon glyphicon-print items icon-action"></span>
+          <h5 class="items">Imprimir reporte</h5>
+        </div>
+        <div class="msg pointer" v-show="loaderPrint">
+          <spinner class="items" :show="loaderPrint"></spinner>
+          <h5 class="items">Imprimiendo</h5>
         </div>
       </div>
     </bottom-navbar>
@@ -68,25 +68,33 @@
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
   import Constants from '../../const.js'
   import { mapState, mapGetters } from 'vuex'
+  import Vue from 'vue'
+  import Spinner from '@/components/SpinnerWrapper.vue'
 
   export default {
-    name: 'ReportNewsTarde',
+    name: 'ReportNewsEarly',
     components: {
       BottomNavbar,
       Navigation,
-      CollaboratorSelector
+      CollaboratorSelector,
+      Spinner
     },
     data () {
       return {
-        title: 'Reportar ingreso tarde',
+        title: 'Reportar salida temprana',
         observation: '',
-        withNotice: false,
-        date: new Date(),
-        enterTime: this.getTime()
+        withNotice: true,
+        enterTime: this.getTime(),
+        submitedRequest: null,
+        loaderSubmit: false,
+        loaderPrint: false
       }
     },
     methods: {
       sendReport () {
+        if (this.submitedRequest !== null) {
+          return
+        }
         if (!this.hasSelected) {
           this.$modal.show('dialog', {
             title: 'Información',
@@ -106,23 +114,25 @@
             {
               title: 'Si',
               handler: () => {
-                this.$router.replace({name: 'home'})
                 const news = {
                   collaborator: this.collaboratorSelected,
                   observation: this.observation,
                   time: this.enterTime,
                   withNotice: this.withNotice,
-                  type: Constants.news_types.LATE,
-                  request_date: this.date // new Date()
+                  type: Constants.news_types.EARLY,
+                  request_date: new Date()
                 }
                 const successMessage = this.$t('news_create_success')
-
+                this.loaderSubmit = true
                 this.$store.dispatch('news/sendReport', {news})
                   .then(
-                    () => {
+                    (res) => {
                       this.$snotifyWrapper.success(successMessage)
+                      this.submitedRequest = res.body.staffNews
+                      this.loaderSubmit = false
                     },
                     () => {
+                      this.loaderSubmit = false
                     }
                   )
                 this.$modal.hide('dialog')
@@ -134,6 +144,27 @@
           ]
         })
       },
+      modalPrint () {
+        this.$modal.show('dialog', {
+          text: `¿Desea imprimir este parte?`,
+          buttons: [
+            {
+              title: 'Si',
+              handler: () => {
+                this.print()
+                this.$modal.hide('dialog')
+              }
+            },
+            {
+              title: 'No',
+              handler: () => {
+                this.$modal.hide('dialog')
+                this.$router.replace({name: 'home'})
+              }
+            }
+          ]
+        })
+      },
       getTime () {
         const d = new Date()
         let h = d.getHours()
@@ -141,6 +172,23 @@
         if (h < 10) h = '0' + h
         if (m < 10) m = '0' + m
         return h + ':' + m
+      },
+      print () {
+        this.loaderPrint = true
+        Vue.http.get('staff-news/pdf/' + this.submitedRequest._id,
+          {responseType: 'arraybuffer'}
+        )
+          .then(
+            (response) => {
+              var blob = new Blob([response.data], {type: response.headers.get['content-type']})
+              var link = document.createElement('a')
+              link.href = window.URL.createObjectURL(blob)
+              link.download = `parte-de-salida.pdf`
+              link.click()
+              this.loaderPrint = false
+              this.$router.replace({name: 'home'})
+            },
+            () => { this.loaderPrint = false })
       }
     },
     computed: {
@@ -149,7 +197,15 @@
       ]),
       ...mapState('collaborators', [
         'collaboratorSelected'
-      ])
+      ]),
+      notAllow () {
+        return {
+          'not-allow': this.submitedRequest !== null
+        }
+      }
+    },
+    destroyed () {
+      this.submitedRequest = null
     }
   }
 </script>
@@ -176,41 +232,31 @@
     min-height: 100px;
   }
 
-  .action {
-    cursor: pointer;
-    flex-grow: 0;
-    flex-shrink: 0;
-    padding: 10px;
-    position: relative;
-    font-size: 36px;
-    color: #fff;
-    float: left;
-
-    > .text-action {
-      display: inline-block;
-
-      > h4 {
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      > h4, h5 {
-        font-weight: bold;
-        margin: 4px;
-      }
-    }
-
-    > .icon-action {
-      display: inline;
-      margin: auto 4px;
-    }
-  }
-
   .ta-left {
     text-align: left;
   }
 
   .ta-right {
     text-align: right;
+  }
+
+  .msg {
+    display: flex;
+    flex-direction: row;
+    padding: 18px;
+
+    &.pointer {
+      cursor: pointer;
+    }
+
+    .items {
+      padding: 0 5px;
+      font-weight: bold;
+    }
+
+    .icon-action {
+      font-size: 34px;
+    }
   }
 
   ul {
@@ -288,6 +334,11 @@
     .container-fluid {
       width: 100%;
     }
+  }
+
+  .not-allow {
+    color: #b2b2b2;
+    cursor: not-allowed !important;
   }
 
 </style>

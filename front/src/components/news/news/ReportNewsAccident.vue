@@ -8,32 +8,48 @@
             <h3>Selección del colaborador</h3>
             <collaborator-selector></collaborator-selector>
           </div>
-          <div class="col-xs-12" v-if="$can($constants.ROLES.PERSONAL + '|' + $constants.ROLES.RRHH)">
-            <h3>Fecha del Evento</h3>
-            <div class="calendar">
-              <div class="picker">
-                <flat-pickr
-                  v-model="date"
-                  :config="confPicker"
-                  ref="_flatpickr"
-                  placeholder="Seleccione una fecha"></flat-pickr>
-              </div>
-              <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
-            </div>
-            <h3>Hora de ingreso</h3>
-            <input type="time" v-model="enterTime">
-          </div>
           <div class="col-xs-12">
-            <h3>Indique si avisó</h3>
+            <h3>Indique si fue denunciado</h3>
             <ul>
               <li>
-                <input type="radio" id="sin-aviso-option" name="aviso" :value="true" v-model="withNotice">
-                <label for="sin-aviso-option">Con aviso</label>
+                <input type="radio" id="informed-option" name="inform" :value="true" v-model="informed">
+                <label for="informed-option">Denunciado</label>
                 <div class="check"></div>
               </li>
               <li>
-                <input type="radio" id="con-aviso-option" name="aviso" :value="false" v-model="withNotice">
-                <label for="con-aviso-option">Sin aviso</label>
+                <input type="radio" id="not-informed-option" name="inform" :value="false" v-model="informed">
+                <label for="not-informed-option">No denunciado</label>
+                <div class="check"></div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-12">
+            <h3>Indique el lugar donde se produjo</h3>
+            <ul>
+              <li>
+                <input type="radio" id="inplant-option" name="inplant" :value="false" v-model="inPlant">
+                <label for="inplant-option">In itinere</label>
+                <div class="check"></div>
+              </li>
+              <li>
+                <input type="radio" id="not-inplant-option" name="inplant" :value="true" v-model="inPlant">
+                <label for="not-inplant-option">En Planta</label>
+                <div class="check"></div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-12">
+            <h3>Indique si se ausenta o se retira antes</h3>
+            <ul>
+              <li>
+                <input type="radio" id="left-option" name="left" :value="false" v-model="left">
+                <label for="left-option">Falta</label>
+                <div class="check"></div>
+              </li>
+              <li>
+                <input type="radio" id="not-left-option" name="left" :value="true" v-model="left">
+                <label class="left-label" for="not-left-option">Se retira antes</label>
+                <input v-show="left" class="time" type="time" v-model="leftTime">
                 <div class="check"></div>
               </li>
             </ul>
@@ -70,7 +86,7 @@
   import { mapState, mapGetters } from 'vuex'
 
   export default {
-    name: 'ReportNewsTarde',
+    name: 'ReportNewsAccident',
     components: {
       BottomNavbar,
       Navigation,
@@ -78,11 +94,12 @@
     },
     data () {
       return {
-        title: 'Reportar ingreso tarde',
+        title: 'Reportar accidente',
         observation: '',
-        withNotice: false,
-        date: new Date(),
-        enterTime: this.getTime()
+        informed: true,
+        inPlant: false,
+        left: false,
+        leftTime: this.getTime()
       }
     },
     methods: {
@@ -107,13 +124,18 @@
               title: 'Si',
               handler: () => {
                 this.$router.replace({name: 'home'})
+
                 const news = {
                   collaborator: this.collaboratorSelected,
                   observation: this.observation,
-                  time: this.enterTime,
-                  withNotice: this.withNotice,
-                  type: Constants.news_types.LATE,
-                  request_date: this.date // new Date()
+                  type: Constants.news_types.ACCIDENT,
+                  request_date: new Date(),
+                  inPlant: this.inPlant,
+                  informed: this.informed,
+                  left: this.left
+                }
+                if (this.left) {
+                  news.time = this.leftTime
                 }
                 const successMessage = this.$t('news_create_success')
 
@@ -157,6 +179,25 @@
 <style lang="scss" scoped>
   @import "../../assets/styles/variables";
   @import "../../assets/styles/mixins";
+
+  .left-label {
+    display: inline-block;
+  }
+
+  .time {
+    width: 90px;
+    border: 1px solid #ebcccc;
+    display: block;
+    margin-left: 62px;
+  }
+
+  input[type=time]::-webkit-inner-spin-button,
+  input[type=time]::-webkit-clear-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
 
   h3 {
     flex-grow: 1;

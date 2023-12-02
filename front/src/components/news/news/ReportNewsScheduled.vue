@@ -1,5 +1,5 @@
 <template>
-  <div class="report-news-tarde">
+  <div class="scheduled-news-container">
     <navigation :title="title"></navigation>
     <section>
       <div class="container-fluid">
@@ -8,55 +8,31 @@
             <h3>Selección del colaborador</h3>
             <collaborator-selector></collaborator-selector>
           </div>
-          <div class="col-xs-12" v-if="$can($constants.ROLES.PERSONAL + '|' + $constants.ROLES.RRHH)">
-            <h3>Fecha del Evento</h3>
-            <div class="calendar">
-              <div class="picker">
-                <flat-pickr
-                  v-model="date"
-                  :config="confPicker"
-                  ref="_flatpickr"
-                  placeholder="Seleccione una fecha"></flat-pickr>
-              </div>
-              <button class="button" @click="clearDatePicker('_flatpickr')">Borrar</button>
-            </div>
-            <h3>Hora de ingreso</h3>
-            <input type="time" v-model="enterTime">
-          </div>
           <div class="col-xs-12">
-            <h3>Indique si avisó</h3>
+            <h3>Tipo de novedad de personal</h3>
             <ul>
-              <li>
-                <input type="radio" id="sin-aviso-option" name="aviso" :value="true" v-model="withNotice">
-                <label for="sin-aviso-option">Con aviso</label>
-                <div class="check"></div>
-              </li>
-              <li>
-                <input type="radio" id="con-aviso-option" name="aviso" :value="false" v-model="withNotice">
-                <label for="con-aviso-option">Sin aviso</label>
+              <li v-for="event in eventTypes">
+                <input type="radio" :id="event.type" name="inform" :value="event.type"
+                       v-model="news_type" @change="changeNewsType(event.type)">
+                <label :for="event.type">{{event.name}}</label>
                 <div class="check"></div>
               </li>
             </ul>
           </div>
           <div class="col-xs-12">
-            <h3>Observaciones</h3>
-            <textarea
-              class="textarea"
-              v-model="observation"
-              placeholder="Escriba aquí una observación"></textarea>
+            <component :is="news_type"></component>
           </div>
         </div>
       </div>
     </section>
     <bottom-navbar>
-      <div class="action" @click="sendReport">
-        <div class="text-action ta-right">
-          <h5>Enviar</h5>
-          <h5>reporte</h5>
-        </div>
-        <div class="icon-action">
-          <span class="glyphicon glyphicon-send"></span>
-        </div>
+      <div class="msg pointer" @click="addNews" v-if="!$loading.isLoading('events createNews')">
+        <h5 class="items">Enviar novedad</h5>
+        <span class="glyphicon glyphicon-send items icon-send"></span>
+      </div>
+      <div class="msg" v-else>
+        <h5 class="items">Enviando novedad</h5>
+        <spinner class="items" :show="$loading.isLoading('events createNews')"></spinner>
       </div>
     </bottom-navbar>
   </div>
@@ -66,31 +42,77 @@
   import Navigation from '@/components/Navigation.vue'
   import BottomNavbar from '@/components/BottomNavbar.vue'
   import CollaboratorSelector from '@/components/selectors/collaborator/CollaboratorSelector.vue'
+  import MedicOrder from '@/components/news/NewsMedicOrderControl.vue'
+  import MedicInform from '@/components/news/NewsMedicInformControl.vue'
+  import GenericLicense from '@/components/news/NewsGenericLicenseControl.vue'
   import Constants from '../../const.js'
-  import { mapState, mapGetters } from 'vuex'
+  import Spinner from '@/components/SpinnerWrapper.vue'
+  import { mapGetters, mapState } from 'vuex'
 
   export default {
-    name: 'ReportNewsTarde',
+    name: 'ReportNewsScheduled',
     components: {
       BottomNavbar,
       Navigation,
-      CollaboratorSelector
+      CollaboratorSelector,
+      Spinner,
+      MEDICAL_ORDER: MedicOrder,
+      MEDICAL_REPORT: MedicInform,
+      LICENSE: GenericLicense
     },
     data () {
       return {
-        title: 'Reportar ingreso tarde',
-        observation: '',
-        withNotice: false,
-        date: new Date(),
-        enterTime: this.getTime()
+        title: 'Novedad de Personal',
+        news_type: ''
       }
     },
     methods: {
-      sendReport () {
+      changeNewsType (type) {
+        this.$store.commit('events/resetDataToSubmit')
+        this.$store.commit('events/updateSelectedEventType', {event: type})
+      },
+      checkEmptyFields: function () {
         if (!this.hasSelected) {
+          return false
+        }
+        if (!this.dataToSubmit.type) {
+          return false
+        }
+        switch (this.dataToSubmit.type) {
+          case Constants.event_types.UNION_LICENSE:
+          case Constants.event_types.BIRTH_LICENSE:
+          case Constants.event_types.DEATH_LICENSE:
+          case Constants.event_types.SINDICAL_LICENSE:
+            if (this.dataToSubmit.exculpatory === undefined ||
+              this.dataToSubmit.time === undefined ||
+              this.dataToSubmit.type === undefined) {
+              return false
+            }
+            break
+          case Constants.event_types.MEDICAL_ORDER:
+            if (this.dataToSubmit.medicalAppointment === undefined) {
+              return false
+            }
+            break
+          case Constants.event_types.MEDICAL_REPORT:
+            if (this.dataToSubmit.medicalDischarge === undefined) {
+              return false
+            }
+
+            if (this.dataToSubmit.date === '') {
+              return false
+            }
+            break
+          case Constants.event_types.LICENSE:
+            return false
+        }
+        return true
+      },
+      addNews: function () {
+        if (!this.checkEmptyFields()) {
           this.$modal.show('dialog', {
             title: 'Información',
-            text: 'Por favor seleccione un colaborador para continuar',
+            text: 'Por favor rellene los campos necesarios',
             buttons: [
               {
                 title: 'Aceptar'
@@ -100,29 +122,28 @@
           return
         }
 
+        this.$store.commit('events/updateToSubmitField', {
+          field: 'collaboratorId',
+          value: this.collaboratorSelected._id
+        })
+
         this.$modal.show('dialog', {
           text: `¿Desea agregar la novedad para el colaborador "${this.collaboratorSelected.name} ${this.collaboratorSelected.lastname}"?`,
           buttons: [
             {
               title: 'Si',
               handler: () => {
-                this.$router.replace({name: 'home'})
-                const news = {
-                  collaborator: this.collaboratorSelected,
-                  observation: this.observation,
-                  time: this.enterTime,
-                  withNotice: this.withNotice,
-                  type: Constants.news_types.LATE,
-                  request_date: this.date // new Date()
-                }
                 const successMessage = this.$t('news_create_success')
+                const failureMessage = this.$t('news_create_failure')
 
-                this.$store.dispatch('news/sendReport', {news})
+                this.$store.dispatch('events/addEventToTimeline', {eventType: this.news_type})
                   .then(
                     () => {
                       this.$snotifyWrapper.success(successMessage)
+                      this.$router.replace({name: 'home'})
                     },
                     () => {
+                      this.$snotifyWrapper.error(failureMessage)
                     }
                   )
                 this.$modal.hide('dialog')
@@ -133,14 +154,6 @@
             }
           ]
         })
-      },
-      getTime () {
-        const d = new Date()
-        let h = d.getHours()
-        let m = d.getMinutes()
-        if (h < 10) h = '0' + h
-        if (m < 10) m = '0' + m
-        return h + ':' + m
       }
     },
     computed: {
@@ -149,6 +162,10 @@
       ]),
       ...mapState('collaborators', [
         'collaboratorSelected'
+      ]),
+      ...mapState('events', [
+        'dataToSubmit',
+        'eventTypes'
       ])
     }
   }
@@ -158,8 +175,22 @@
   @import "../../assets/styles/variables";
   @import "../../assets/styles/mixins";
 
+  .time {
+    width: 90px;
+    border: 1px solid #ebcccc;
+    display: block;
+    margin-left: 62px;
+  }
+
+  input[type=time]::-webkit-inner-spin-button,
+  input[type=time]::-webkit-clear-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
   h3 {
-    flex-grow: 1;
     width: 100%;
     font-weight: bold;
     border-bottom: 3px solid $primary-color;
@@ -205,12 +236,23 @@
     }
   }
 
-  .ta-left {
-    text-align: left;
-  }
+  .msg {
+    display: flex;
+    flex-direction: row;
+    padding: 18px;
 
-  .ta-right {
-    text-align: right;
+    &.pointer {
+      cursor: pointer;
+    }
+
+    .items {
+      padding: 0 5px;
+      font-weight: bold;
+    }
+
+    .icon-send {
+      font-size: 34px;
+    }
   }
 
   ul {
@@ -284,10 +326,13 @@
     width: 80%;
   }
 
+  .scheduled-news-container {
+    padding-bottom: 100px;
+  }
+
   @media (max-width: 599px) {
     .container-fluid {
       width: 100%;
     }
   }
-
 </style>
