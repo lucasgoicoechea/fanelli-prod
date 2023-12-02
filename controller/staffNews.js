@@ -7,6 +7,7 @@ const eventsTimelineService = require(path.join(__dirname, '../service')).events
 
 const controller = {
   create: async(function (req, res) {
+    //console.log('va date'+req.body.news.request_date)
     const news = {
       type: req.body.news.type,
       withNotice: req.body.news.withNotice,
@@ -15,7 +16,8 @@ const controller = {
       time: req.body.news.time,
       informed: req.body.news.informed,
       inPlant: req.body.news.inPlant,
-      left: req.body.news.left
+      left: req.body.news.left,
+      created_at: req.body.news.request_date != null? req.body.news.request_date : new Date() 
     }
     let newStaffNews = awaitFor(staffNewsService.create(req.body.news.collaborator, req.user.id, news))
     let newEventsTimeline
