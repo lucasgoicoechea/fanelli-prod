@@ -3,7 +3,7 @@ module.exports = function (config) {
   config.logLevel = process.env.LOG_LEVEL || 'silly'
   config.jwtSecret = 'secret'
   config.db.port = 27017
-  config.db.name = 'fanelli_prod'
+  config.db.name = 'fanelli'
   config.db.host = 'localhost'
   config.db.uri = 'mongodb://' + config.db.host + ':' + config.db.port + '/' + config.db.name
   // In development we send notifications 1 second after because we are very anxious
