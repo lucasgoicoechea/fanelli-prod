@@ -77,7 +77,9 @@ sanctionSchema.methods.printableDetails = function () {
       value: `Desde: ${dateFns.format(this.dateRange.from, 'DD/MM/YYYY')} - Hasta: ${dateFns.format(this.dateRange.to, 'DD/MM/YYYY')}`
     })
   }
+  console.log(this)
   details.push({key: '', value: this.reason})
+  details.push({key:'', value: `Fecha carga: ${dateFns.format(this.created_at, 'DD/MM/YYYY')}`})
 
   if (this.type === Const.SANCTION_TYPE.SUSPENSION) {
     details.push({
