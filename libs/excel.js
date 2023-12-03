@@ -211,6 +211,7 @@ module.exports = {
         })
       })
     }
+    console.log('llegue3')
     sheet.autoFilter = {
       from: 'A1',
       to: 'C1'

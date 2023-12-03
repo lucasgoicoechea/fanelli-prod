@@ -84,6 +84,11 @@ StaffNewsSchema.methods.generateAvailability = function (availability) {
         from: this.time
       }
     }
+    if (availabilityDocument.from > availabilityDocument.to) {
+      let fromd = availabilityDocument.from;
+      availabilityDocument.from = availabilityDocument.to;
+      availabilityDocument.to = fromd;
+    }
     availability.addUnavailability(availabilityDocument, this.collaborator)
   }
 }
