@@ -20,9 +20,12 @@ const controller = {
       const excel = awaitFor(reportService.generateReportForDay(req.params.day))
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
       res.setHeader('Content-Disposition', 'attachment; filename=Report.xlsx')
+      console.log('llegue5')
       awaitFor(excel.xlsx.write(res))
+      console.log('llegue6')
       res.end()
     } catch (error) {
+      console.dir(error)
       next(error)
     }
   }),
